@@ -1,0 +1,53 @@
+$color_s1: #305e91;
+$color_s2: #1ca6fe;
+$color_s3: #1557c4;
+$color_s4: #149e41;
+$color_s5: #6144a8;
+$color_k1: #347ed1;
+$color_k2: #1ca6fe;
+
+$color_s1_hover: #347ed0;
+$color_s2_hover: #51bbff;
+$color_s3_hover: #4784e9;
+$color_s4_hover: #1ec15c;
+$color_s5_hover: #9865b6;
+$color_k1_hover: #347ed1;
+$color_k2_hover: #1ca6fe;
+
+$img_color_s1: linear-gradient(0deg, #347ed1 0%, #305e91 100%);
+$img_color_s2: #1ca6fe;
+$img_color_s3: linear-gradient(0deg, #4885ea 0%, #1557c4 100%);
+$img_color_s4: linear-gradient(0deg, #1fc35d 0%, #149e41 100%);
+$img_color_s5: linear-gradient(0deg, #9966b6 0%, #6144a8 100%);
+$img_color_k1: linear-gradient(0deg, #347ed1 0%, #305e91 100%);
+$img_color_k2: linear-gradient(0deg, #347ed1 0%, #305e91 100%);
+
+$myColor: $color_s1;
+$myImgColor: $img_color_s1;
+$myColorHover: $color_s1_hover;
+
+@mixin set_base_color($color, $img_color, $color_hover) {
+    $myColor: $color !global;
+    $myImgColor: $img_color !global;
+    $myColorHover: $color_hover !global;
+}
+.lg-skin-s2 {
+    // $myColor: $color_s2 !global;
+    // $myImgColor: $img_color_s2 !global;
+    @include set_base_color($color_s2, $img_color_s2, $color_s2_hover);
+}
+.lg-skin-s3 {
+    @include set_base_color($color_s3, $img_color_s3, $color_s3_hover);
+}
+.lg-skin-s4 {
+    @include set_base_color($color_s4, $img_color_s4, $color_s4_hover);
+}
+.lg-skin-s5 {
+    @include set_base_color($color_s5, $img_color_s5, $color_s5_hover);
+}
+.lg-skin-k1 {
+    @include set_base_color($color_k1, $img_color_k1, $color_k1_hover);
+}
+.lg-skin-k2 {
+    @include set_base_color($color_k2, $img_color_k2, $color_k2_hover);
+}
