@@ -1,7 +1,9 @@
 import {
   Home,
   Personal,
-  About
+  About,
+  Pagination,
+  CheckBox
 } from '../pages'
 
 export type RouterType = {
@@ -26,11 +28,23 @@ const AboutRouter: RouterType = {
   component: About,
   root: [],
 }
+const PaginationRouter: RouterType = {
+  path: '/pagination',
+  component: Pagination,
+  root: [],
+}
+const CheckBoxRouter: RouterType = {
+  path: '/checkBox',
+  component: CheckBox,
+  root: [],
+}
 // 总路由
 const Routers: RouterType[] = ([
   HomeRouter,
   PersonalRouter,
-  AboutRouter
+  AboutRouter,
+  PaginationRouter,
+  CheckBoxRouter
 ])
 
 export {
