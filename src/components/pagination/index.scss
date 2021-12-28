@@ -50,55 +50,6 @@
 .lg_page_cur_page {
     cursor: default;
 }
-.lg-skin-s1 {
-    .lg_page_number, .lg_page_input {
-        color: $color_s1;
-    }
-    .lg_page_number, .lg_page_input:hover {
-        border-color: $color_s1;
-    }
-    .lg_page_cur_page, .lg_page_number:hover {
-        background-image: linear-gradient(0deg, #347ed1 0%, #305e91 100%);
-    }
-}
-.lg-skin-s2 {
-    .lg_page_cur_page, .lg_page_number:hover {
-        background-color: $color_s2;
-    }
-}
-.lg-skin-s3 {
-    .lg_page_number, .lg_page_input {
-        color: $color_s3;
-    }
-    .lg_page_number, .lg_page_input:hover {
-        border-color: $color_s3;
-    }
-    .lg_page_cur_page, .lg_page_number:hover {
-        background-image: linear-gradient(0deg, #4885ea 0%, #1557c4 100%);
-    }
-}
-.lg-skin-s4 {
-    .lg_page_number, .lg_page_input {
-        color: $color_s4;
-    }
-    .lg_page_number, .lg_page_input:hover {
-        border-color: $color_s4;
-    }
-    .lg_page_cur_page, .lg_page_number:hover {
-        background-image: linear-gradient(0deg, #1fc35d 0%, #149e41 100%)
-    }
-}
-.lg-skin-s5 {
-    .lg_page_number, .lg_page_input {
-        color: $color_s5;
-    }
-    .lg_page_number, .lg_page_input:hover {
-        border-color: $color_s5;
-    }
-    .lg_page_cur_page, .lg_page_number:hover {
-        background-image: linear-gradient(0deg, #9966b6 0%, #6144a8 100%);
-    }
-}
 .lg_page_warp_B {
     .lg_page_number {
         width: 16px;
@@ -140,33 +91,21 @@
         margin: 0 6px;
     }
 }
-// .lg-skin-s1 {
-//     .lg_page_cur_page_c {
-//         background-color: $color_s1;
-//     }
-// }
-// .lg-skin-s2 {
-//     .lg_page_cur_page_c {
-//         background-color: $color_s2;
-//     }
-// }
-// .lg-skin-s3 {
-//     .lg_page_cur_page_c {
-//         background-color: $color_s3;
-//     }
-// }
-// .lg-skin-s4 {
-//     .lg_page_cur_page_c {
-//         background-color: $color_s4;
-//     }
-// }
-// .lg-skin-s5 {
-//     .lg_page_cur_page_c {
-//         background-color: $color_s5;
-//     }
-// }
-.lg_page_cur_page_c {
-    background-color: $myColor;
+@each $skin, $color, $imgColor in $all_colors {
+    #{$skin} {
+        .lg_page_number, .lg_page_input {
+            color: $color;
+        }
+        .lg_page_number, .lg_page_input:hover {
+            border-color: $color;
+        }
+        .lg_page_cur_page, .lg_page_number:hover {
+            background-image: $imgColor;
+        }
+        .lg_page_cur_page_c {
+            background-color: $color;
+        }
+    }
 }
 .lg_page_ban_btn, .lg_page_ban_btn:hover {
     color: #fff!important;
