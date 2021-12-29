@@ -3,7 +3,8 @@ import {
   Personal,
   About,
   Pagination,
-  CheckBox
+  CheckBox,
+  Search
 } from '../pages'
 
 export type RouterType = {
@@ -38,13 +39,20 @@ const CheckBoxRouter: RouterType = {
   component: CheckBox,
   root: [],
 }
+
+const SearchRouter: RouterType = {
+  path: '/search',
+  component: Search,
+  root: [],
+}
 // 总路由
 const Routers: RouterType[] = ([
   HomeRouter,
   PersonalRouter,
   AboutRouter,
   PaginationRouter,
-  CheckBoxRouter
+  CheckBoxRouter,
+  SearchRouter
 ])
 
 export {
