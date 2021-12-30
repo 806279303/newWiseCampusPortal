@@ -6,6 +6,7 @@ export type RouterType = {
   root: string[],
   notExect?: boolean
 }
+
 // 总路由
 const Routers: RouterType[] = ([
   {
@@ -28,6 +29,10 @@ const Routers: RouterType[] = ([
     path: '/checkBox',
     component: lazy(() => import('../pages/checkBox')),
     root: []
+  }, {
+    path: '/search',
+    component: lazy(() => import('../pages/search')),
+    root: [],
   }
 ])
 export {
