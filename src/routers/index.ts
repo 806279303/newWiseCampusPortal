@@ -1,52 +1,35 @@
-import {
-  Home,
-  Personal,
-  About,
-  Pagination,
-  CheckBox
-} from '../pages'
+import { lazy } from 'react'
 
 export type RouterType = {
   path: string,
   component: React.LazyExoticComponent<any>,
   root: string[],
-  notExect?: boolean,
-}
-
-const HomeRouter: RouterType = {
-  path: '/home',
-  component: Home,
-  root: [],
-}
-const PersonalRouter: RouterType = {
-  path: '/Personal',
-  component: Personal,
-  root: [],
-}
-const AboutRouter: RouterType = {
-  path: '/About',
-  component: About,
-  root: [],
-}
-const PaginationRouter: RouterType = {
-  path: '/pagination',
-  component: Pagination,
-  root: [],
-}
-const CheckBoxRouter: RouterType = {
-  path: '/checkBox',
-  component: CheckBox,
-  root: [],
+  notExect?: boolean
 }
 // 总路由
 const Routers: RouterType[] = ([
-  HomeRouter,
-  PersonalRouter,
-  AboutRouter,
-  PaginationRouter,
-  CheckBoxRouter
+  {
+    path: '/home',
+    component: lazy(() => import('../pages/home')),
+    root: []
+  }, {
+    path: '/Personal',
+    component: lazy(() => import('../pages/personal')),
+    root: []
+  }, {
+    path: '/About',
+    component: lazy(() => import('../pages/about')),
+    root: []
+  }, {
+    path: '/pagination',
+    component: lazy(() => import('../pages/pagination')),
+    root: []
+  }, {
+    path: '/checkBox',
+    component: lazy(() => import('../pages/checkBox')),
+    root: []
+  }
 ])
-
 export {
   Routers
 }
