@@ -1,9 +1,9 @@
-.lg-loading-demo{
- margin-top: 20px;
- margin-left: 20px;
- display: flex;
+.lg-loading-demo {
+  margin-top: 20px;
+  margin-left: 20px;
+  display: flex;
 
- &:first-child{
-  margin-right: 20px;
- }
+  [class^='lg-skin-'] {
+    margin-right: 20px;
+  }
 }
