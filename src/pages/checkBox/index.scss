@@ -1,0 +1,14 @@
+.lg_checkbox_typeA, .lg_checkbox_typeB, .lg_checkbox_typeC {
+    margin: 10px;
+}
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+.clear::before, .clear::after {
+    display: block;
+    content: "";
+    clear: both;
+}

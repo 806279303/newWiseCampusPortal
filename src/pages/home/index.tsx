@@ -10,6 +10,7 @@ export default () => {
             <div><Link to='/richEditor'>富文本编辑器</Link></div>
             <div><Link to='/breadcrumb'>面包屑</Link></div>
             <div><Link to='/loading'>加载/进度条</Link></div>
+            <div><Link to='/search'>搜索条</Link></div>
         </>
     )
 }
