@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 export default () => {
     return (
         <>
@@ -7,6 +7,9 @@ export default () => {
             <div><Link to='/about'>列表</Link></div>
             <div><Link to='/pagination'>页码</Link></div>
             <div><Link to='/checkBox'>选择框</Link></div>
+            <div><Link to='/richEditor'>富文本编辑器</Link></div>
+            <div><Link to='/breadcrumb'>面包屑</Link></div>
+            <div><Link to='/loading'>加载/进度条</Link></div>
         </>
     )
 }

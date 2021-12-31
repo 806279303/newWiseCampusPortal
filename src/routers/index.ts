@@ -3,9 +3,11 @@ import {
   Personal,
   About,
   Pagination,
-  CheckBox
+  CheckBox,
+  RichEditor,
 } from '../pages'
 
+import {lazy} from "react";
 export type RouterType = {
   path: string,
   component: React.LazyExoticComponent<any>,
@@ -38,13 +40,33 @@ const CheckBoxRouter: RouterType = {
   component: CheckBox,
   root: [],
 }
+const RichEditorRouter: RouterType = {
+  path: '/richEditor',
+  component: RichEditor,
+  root: [],
+}
+const BreadcrumbRouter: RouterType = {
+  path: '/breadcrumb',
+  component: lazy(() => import(`../pages/breadcrumb`)),
+  root: [],
+}
+
+const LoadingRouter: RouterType = {
+  path: '/loading',
+  component: lazy(() => import(`../pages/loading`)),
+  root: [],
+}
+
 // 总路由
 const Routers: RouterType[] = ([
   HomeRouter,
   PersonalRouter,
   AboutRouter,
   PaginationRouter,
-  CheckBoxRouter
+  CheckBoxRouter,
+  RichEditorRouter,
+  BreadcrumbRouter,
+  LoadingRouter
 ])
 
 export {
