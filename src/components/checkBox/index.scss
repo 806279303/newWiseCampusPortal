@@ -2,39 +2,95 @@
 * {
     box-sizing: border-box;
 }
-.lg_checkbox_typeA {
+.lg_checkbox_typeA, .lg_checkbox_typeB {
+    display: inline-block;
     height: 30px;
     line-height: 30px;
     cursor: pointer;
     .lg_checkbox_btn {
         vertical-align: middle;
         display: inline-block;
-        width: 12px;
-        height: 12px;
+        width: 14px;
+        height: 14px;
         margin-right: 5px;
+        padding: 6px;
         border: 1px solid #999;
+        transition: padding 0.1s;
+        div {
+            width: 0;
+            height: 0;
+        }
+    }
+}
+.lg_checkbox_typeA {
+    .lg_checkbox_btn {
         border-radius: 50%;
     }
 }
-.lg_checkbox1.lg_checkbox_typeA {
+.lg_checkbox1.lg_checkbox_typeA, .lg_checkbox2.lg_checkbox_typeB, .lg_checkbox1.lg_checkbox_typeB {
     .lg_checkbox_btn {
         padding: 2px;
-        overflow: hidden;
         div {
             width: 100%;
             height: 100%;
+        }
+    }
+}
+.lg_checkbox1.lg_checkbox_typeB {
+    .lg_checkbox_btn {
+        padding: 0;
+        div {
+            background: url('./check-box.svg') center center/10px 10px no-repeat;
+        }
+    }
+}
+.lg_checkbox1.lg_checkbox_typeA {
+    cursor: default;
+    .lg_checkbox_btn {
+        div {
             border-radius: 50%;
+        }
+    }
+}
+.lg_checkbox_typeC {
+    display: inline-block;
+    min-width: 56px;
+    padding: 0 15px;
+	height: 28px;
+    line-height: 26px;
+    border: 1px solid #b8b8b8;
+	border-radius: 2px;
+    cursor: pointer;
+}
+.lg_checkbox1.lg_checkbox_typeC {
+    box-sizing: border-box;
+    position: relative;
+    .lg_checkbox_btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 0;
+        height: 0;
+        border: 10px solid;
+        div {
+            box-sizing: border-box;
+            position: absolute;
+            top: -9px;
+            right: -9px;
+            width: 10px;
+            height: 10px;
+            background: url('./check-box.svg') center center/10px 10px no-repeat;
         }
     }
 }
 @each $skin, $color, $imgColor, $colorHover in $all_colors {
     #{$skin} {
-        .lg_checkbox_typeA:hover {
+        .lg_checkbox_typeA:hover, .lg_checkbox_typeB:hover {
             .lg_checkbox_btn {
                 border-color: $color;
             }
         }
-        .lg_checkbox1.lg_checkbox_typeA {
+        .lg_checkbox1.lg_checkbox_typeA, .lg_checkbox2.lg_checkbox_typeB, .lg_checkbox1.lg_checkbox_typeB {
             .lg_checkbox_btn {
                 border-color: $color;
                 div {
@@ -42,13 +98,39 @@
                 }
             }
         }
-        .lg_checkbox1.lg_checkbox_typeA:hover {
+        .lg_checkbox1.lg_checkbox_typeA:hover, .lg_checkbox2.lg_checkbox_typeB:hover, .lg_checkbox1.lg_checkbox_typeB:hover {
             .lg_checkbox_btn {
                 border-color: $colorHover;
                 div {
                     background-color: $colorHover;
                 }
             }
+        }
+        .lg_checkbox_typeC:hover {
+            border-color: $color;
+        }
+        .lg_checkbox1.lg_checkbox_typeC {
+            border-color: $color;
+            color: $color;
+            background-color: fade-out($color, 0.92);
+            .lg_checkbox_btn {
+                border-color: $color $color transparent transparent;
+            }
+        }
+        .lg_checkbox1.lg_checkbox_typeC:hover {
+            border-color: $colorHover;
+            color: $colorHover;
+            background-color: fade-out($colorHover, 0.92);
+        }
+    }
+}
+.lg_checkbox_disable, .lg_checkbox_disable:hover {
+    cursor: default;
+    .lg_checkbox_btn {
+        border-color: #b5b5b5 !important;
+        background-color: rgba(181, 181, 181, 0.2);
+        div {
+            background-color: #b5b5b5 !important;
         }
     }
 }
