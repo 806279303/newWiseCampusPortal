@@ -7,6 +7,8 @@ export default () => {
             <div><Link to='/about'>列表</Link></div>
             <div><Link to='/pagination'>页码</Link></div>
             <div><Link to='/checkBox'>选择框</Link></div>
+            <div><Link to='/popLayer'>弹出层</Link></div>
+            <div><Link to='/alert'>提示</Link></div>
         </>
     )
 }
