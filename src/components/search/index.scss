@@ -1,0 +1,60 @@
+@import "../index.scss";
+
+@each $skin, $color, $imgColor, $colorHover in $all_colors {
+    #{$skin} {
+        .lg-search-input-area {
+            margin-top: 12px;
+            margin-bottom: 12px;
+            display: block;
+        }
+        // 输入框样式
+        .lg-search-input {
+            width: 240px;
+            height: 30px;
+            border-radius: 3px;
+            background-color: "#ffffff";
+            border: 1px solid $color;
+        }
+        // 搜索符号
+        .lg-search-input-icon{
+            background-image: url(./images/search_img.png);
+            display: inline-block;
+            background-position: -27px 0px;
+            width: 17px;
+            height: 16px;
+            position: relative;
+            top: 3px;
+            left: -25px;
+        }
+        //清除搜索
+        .lg-search-input-clear{
+            background-image: url(./images/search_img.png);
+            display: inline-block;
+            background-position: -25px -26px;
+            width: 15px;
+            height: 15px;
+            position: relative;
+            top: 3px;
+            left: -63px;
+            cursor: pointer;
+        }
+        .lg-search-input-clear:hover{
+            background-position: 0px -26px;
+        }
+        
+        //焦点处理
+        .lg-search-input:focus {
+            outline: none;
+        }
+        
+        .lg-search-input:focus {
+            outline: 1px solid $color;
+        }
+
+        .lg-search-input-area:focus-within {
+            .lg-search-input-icon{
+                background-position: 0px 0px;
+            }
+        }
+    }
+}
