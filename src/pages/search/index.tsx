@@ -8,7 +8,7 @@ export default () => {
           allSkinClassName.map(className => {
             return (
               <div className={className}>
-                <Search/>
+                <Search onSearch={(e) => {console.log(e)}}/>
               </div>
             )
           })
