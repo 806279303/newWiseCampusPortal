@@ -3,9 +3,8 @@
 @each $skin, $color, $imgColor, $colorHover in $all_colors {
     #{$skin} {
         .lg-search-input-area {
-            margin-top: 12px;
-            margin-bottom: 12px;
-            display: block;
+            display: inline-block;
+            position: relative;
         }
         // 输入框样式
         .lg-search-input {
@@ -14,6 +13,7 @@
             border-radius: 3px;
             background-color: "#ffffff";
             border: 1px solid $color;
+            
         }
         // 搜索符号
         .lg-search-input-icon{
@@ -22,9 +22,10 @@
             background-position: -27px 0px;
             width: 17px;
             height: 16px;
-            position: relative;
-            top: 3px;
-            left: -25px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 10px;
         }
         //清除搜索
         .lg-search-input-clear{
@@ -33,9 +34,10 @@
             background-position: -25px -26px;
             width: 15px;
             height: 15px;
-            position: relative;
-            top: 3px;
-            left: -63px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 33px;
             cursor: pointer;
         }
         .lg-search-input-clear:hover{

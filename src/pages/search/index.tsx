@@ -3,7 +3,7 @@ import {allSkinClassName} from "@/components/index";
 import {Search} from "@/components/search";
 export default () => {
     return (
-        <div className="lg-loading-demo">
+        <div>
         {
           allSkinClassName.map(className => {
             return (
