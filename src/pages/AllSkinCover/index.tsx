@@ -1,9 +1,9 @@
-import {Component, CSSProperties} from "react";
+import {Component} from "react";
 import {allSkinClassName} from "@/components/index";
+import {BaseProps} from "../../type/BaseProps";
 
-export class AllSkinCoverProps{
-  className?: string
-  style?: CSSProperties
+export interface AllSkinCoverProps extends BaseProps{
+
 }
 
 export class AllSkinCover extends Component<AllSkinCoverProps, {}>{
