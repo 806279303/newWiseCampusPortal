@@ -32,7 +32,15 @@ const Routers: RouterType[] = ([
   }, {
     path: '/search',
     component: lazy(() => import('../pages/search')),
-    root: [],
+    root: []
+  }, {
+    path: '/topBar',
+    component: lazy(() => import('../pages/topBar')),
+    root: []
+  }, {
+    path: '/firstPage',
+    component: lazy(() => import('../pages/firstPage')),
+    root: []
   }
 ])
 export {

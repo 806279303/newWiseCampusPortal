@@ -9,6 +9,8 @@ export default () => {
             <div><Link to='/pagination'>页码</Link></div>
             <div><Link to='/checkBox'>选择框</Link></div>
             <div><Link to='/search'>搜索条</Link></div>
+            <div><Link to='/topBar'>顶部栏</Link></div>
+            <div><Link to='/firstPage'>首页</Link></div>
         </>
     )
 }
