@@ -29,3 +29,6 @@ $all_colors: (".lg-skin-s1", $color_s1, $img_color_s1, $color_s1_hover),
             (".lg-skin-s5", $color_s5, $img_color_s5, $color_s5_hover),
             (".lg-skin-k1", $color_k1, $img_color_k1, $color_k1_hover),
             (".lg-skin-k2", $color_k2, $img_color_k2, $color_k2_hover);
+:export{
+  allSkin: ["lg-skin-s1", "lg-skin-s2", "lg-skin-s3", "lg-skin-s4","lg-skin-s5","lg-skin-k1", "lg-skin-k2"];
+}
