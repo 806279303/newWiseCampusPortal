@@ -50,10 +50,10 @@
   }
 }
 
-@include UpDownAnime('top')
-@include UpDownAnime('right')
-@include UpDownAnime('left')
-@include UpDownAnime('bottom')
+@include UpDownAnime('top');
+@include UpDownAnime('right');
+@include UpDownAnime('left');
+@include UpDownAnime('bottom');
 
 
 $animationDuration: 5.6s;
