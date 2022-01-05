@@ -57,6 +57,11 @@ const Routers: RouterType[] = ([
         component: lazy(() => import('../pages/alert')),
         root: []
     }, 
+    {
+        path: '/timeline',
+        component: lazy(() => import('../pages/timeline')),
+        root: []
+    }
 ])
 export {
     Routers
