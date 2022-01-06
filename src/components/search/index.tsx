@@ -2,7 +2,8 @@
 import './index.scss';
 import React ,{Component, useState} from 'react';
 
-interface SearchProps {
+export interface SearchProps {
+    type?: "default" | "A",
     onChange?: (value: string) => void,
     onSearch?: (value: string) => void,
     className?: string,
@@ -33,10 +34,15 @@ export function Search(props: SearchProps) {
         }
     }
 
+    let wappClassName = 'lg-search-input-area'
+    let inputClassName = 'lg-search-input'
+    if(props.type === "A"){
+        wappClassName =  'lg-search-input-area-typeA'
+        inputClassName = 'lg-search-input-typeA'
+    }
     return (
-        <div className='lg-search-input-area'>
-          
-            <input className='lg-search-input' 
+        <div className={wappClassName}>
+            <input className={inputClassName} 
                 value={searchValue} 
                 onChange={changeSearch}
             />
