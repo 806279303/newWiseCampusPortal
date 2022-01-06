@@ -91,7 +91,7 @@ class LgBreadcrumbB extends BaseComponent<LgBreadcrumbCommonProps> {
         <div className={` lg-breadcrumb-container`}>
           {
             this.props.itemList.length ? this.props.itemList.map((item, index) =>
-              <div onClick={() => this.onClick(index)}
+              <div key={index} onClick={() => this.onClick(index)}
                    className={`lg-breadcrumb-item ${selectedIndex === index ? "selected" : ""}`}><div className="text">{item}</div></div>) : ''
           }
         </div>

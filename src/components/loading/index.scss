@@ -30,21 +30,21 @@
   }
 }
 
-@mixin UpDownAnime($position){
+@mixin UpDownAnime($position) {
   @keyframes upDown-#{$position} {
-    0%{
+    0% {
       #{$position}: 0;
     }
-    17%{
+    17% {
       #{$position}: 0;
     }
-    50%{
+    50% {
       #{$position}: 50%;
     }
-    83%{
+    83% {
       #{$position}: 0;
     }
-    100%{
+    100% {
       #{$position}: 0;
     }
   }
@@ -56,78 +56,98 @@
 @include UpDownAnime('bottom');
 
 
+
+$largeContainerSideLength: 30px;
+
+
+
 $animationDuration: 5.6s;
-
-.lg-loading-root {
-  width: 30px;
-  height: 30px;
-  //border: 1px dotted red;
-  //border-radius: 50%;
-  position: relative;
-  box-sizing: border-box;
-  animation-name: loopCircle;
-  animation-duration: $animationDuration;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  display: inline-block;
-
-  $sideLength: 10px;
-  @mixin loadingDot{
-    position: absolute;
-    width: $sideLength;
-    height: $sideLength;
-    border-radius: 50%;
-    background: $color_s1;
-    animation-duration: $animationDuration * 0.25;
+.lg-loading-a-root {
+  .lg-loading-anime {
+    width: 30px;
+    height: 30px;
+    position: relative;
+    box-sizing: border-box;
+    animation-name: loopCircle;
+    animation-duration: $animationDuration;
+    animation-timing-function: linear;
     animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    $sideLength: 10px;
+    @mixin loadingDot {
+      position: absolute;
+      width: $sideLength;
+      height: $sideLength;
+      border-radius: 50%;
+      background: $color_s1;
+      animation-duration: $animationDuration * 0.25;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+    }
+
+    $marginLength: -$sideLength / 2;
+
+    .lg-loading-dot-top {
+      @include loadingDot;
+      left: 50%;
+      top: 0;
+      margin-left: $marginLength;
+      margin-top: $marginLength;
+      animation-name: upDown-top;
+    }
+
+    .lg-loading-dot-right {
+      @include loadingDot;
+      right: 0;
+      top: 50%;
+      margin-top: $marginLength;
+      margin-right: $marginLength;
+      animation-name: upDown-right;
+      opacity: 0.8;
+    }
+
+    .lg-loading-dot-bottom {
+      @include loadingDot;
+      left: 50%;
+      bottom: 0;
+      margin-bottom: $marginLength;
+      margin-left: $marginLength;
+      animation-name: upDown-bottom;
+      opacity: 0.7;
+    }
+
+    .lg-loading-dot-left {
+      @include loadingDot;
+      left: 0;
+      top: 50%;
+      margin-top: $marginLength;
+      margin-left: $marginLength;
+      animation-name: upDown-left;
+      opacity: 0.6;
+    }
   }
 
-  $marginLength: -$sideLength / 2;
-
-  .lg-loading-dot-top {
-    @include loadingDot;
-    left: 50%;
-    top: 0;
-    margin-left: $marginLength;
-    margin-top: $marginLength;
-    animation-name: upDown-top;
-  }
-  .lg-loading-dot-right {
-    @include loadingDot;
-    right: 0;
-    top: 50%;
-    margin-top: $marginLength;
-    margin-right: $marginLength;
-    animation-name: upDown-right;
-    opacity: 0.8;
-  }
-  .lg-loading-dot-bottom {
-    @include loadingDot;
-    left: 50%;
-    bottom: 0;
-    margin-bottom: $marginLength;
-    margin-left: $marginLength;
-    animation-name: upDown-bottom;
-    opacity: 0.7;
-  }
-
-  .lg-loading-dot-left {
-    @include loadingDot;
-    left: 0;
-    top: 50%;
-    margin-top: $marginLength;
-    margin-left: $marginLength;
-    animation-name: upDown-left;
-    opacity: 0.6;
+  .lg-loading-tip {
+    color: $color_s1;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-left: -6px;
   }
 }
 
 @each $skin, $color, $imgColor, $colorHover in $all_colors {
   #{$skin} {
-    .lg-loading-root{
-      .lg-loading-dot-top, .lg-loading-dot-right, .lg-loading-dot-bottom, .lg-loading-dot-left{
-        background: $imgColor;
+    .lg-loading-a-root {
+      .lg-loading-anime {
+        .lg-loading-dot-top, .lg-loading-dot-right, .lg-loading-dot-bottom, .lg-loading-dot-left {
+          background: $color;
+        }
+      }
+      .lg-loading-tip {
+        color: $color;
       }
     }
   }

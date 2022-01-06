@@ -1,30 +1,19 @@
 import "./index.scss"
-import {Component} from "react";
-import E from 'wangeditor'
+import {BaseProps} from "../../type/BaseProps";
+import ReactWEditor from 'wangeditor-for-react';
+import {ReactWEProps} from "wangeditor-for-react/src/type";
 
-export interface LgRichEditorProps {
-
+if(!Object.values){
+  debugger
+ Object.values = function (obj: { [x: string]: any; }){
+   return Object.keys(obj).map(e => obj[e])
+ }
 }
 
-
-export class LgRichEditor extends Component<LgRichEditorProps, {}> {
-
-  constructor(props: LgRichEditorProps | Readonly<LgRichEditorProps>) {
-    super(props);
-  }
-
-  componentDidMount() {
-    const editor = new E("#div1");
-    editor.config.uploadImgServer = '/upload-img'
-    editor.config.showLinkImg = false
-    editor.config.uploadVideoServer = '/upload-img'
-    editor.config.showLinkVideo = false
-    editor.create();
-  }
-
-  render() {
-    return (
-      <div id="div1"/>
-    )
-  }
+export const LgRichEditor = (props: ReactWEProps & BaseProps) => {
+  return(
+    <div className={props.className} style={props.style}>
+      <ReactWEditor {...props} />
+    </div>
+  )
 }
