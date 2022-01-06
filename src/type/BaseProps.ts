@@ -1,7 +1,9 @@
 import {CSSProperties, ReactNode} from "react";
 
-export interface BaseProps {
+export interface BaseProps{
   className?: string
   style?: CSSProperties | undefined
   children?: ReactNode | undefined
+  onRef?: (ref: any) => void
+
 }

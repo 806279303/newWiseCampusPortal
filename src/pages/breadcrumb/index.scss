@@ -1,3 +1,17 @@
-.breadcrumb-demo-page{
+.lg-breadcrumb-demo-page{
   display: flex;
+  flex-direction: column;
+  .lg-breadcrumb-demo-a{
+    display: flex;
+    & > :nth-child(n){
+      margin: 10px;
+    }
+  }
+  .lg-breadcrumb-demo-b{
+    margin-top: 10px;
+    display: flex;
+    & > :nth-child(n){
+      margin: 10px 28px;
+    }
+  }
 }
