@@ -16,6 +16,8 @@
 // // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 // reportWebVitals();
 import "react-app-polyfill/ie11";
+import 'core-js/stable';
+// import 'regenerator-runtime/runtime';
 
 import { Suspense } from 'react'
 import ReactDOM from 'react-dom'

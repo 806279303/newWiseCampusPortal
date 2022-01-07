@@ -1,5 +1,6 @@
 import { Redirect, Route, Switch, withRouter } from 'react-router-dom'
 import { Routers } from './routers'
+import 'element-theme-default';
 function App () {
   return (
       <Switch>

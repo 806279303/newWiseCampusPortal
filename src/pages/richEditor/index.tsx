@@ -4,7 +4,7 @@ import {LgRichEditor} from "@/components/richEditor";
 export default class Index extends Component{
     render() {
         return(
-            <LgRichEditor />
+            <LgRichEditor config={{showLinkImg: false, showLinkVideo: false, uploadVideoServer: "http://localhost:3000/api", excludeMenus: ['video']}} />
         )
     }
 }

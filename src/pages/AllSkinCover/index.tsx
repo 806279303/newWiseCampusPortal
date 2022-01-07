@@ -11,8 +11,8 @@ export class AllSkinCover extends Component<AllSkinCoverProps, {}>{
     return(
       <>
         {
-          allSkinClassName.map(className =>
-            <div className={`${className} ${this.props.className || ''}`} style={this.props.style}>
+          allSkinClassName.map((className, index) =>
+            <div key={index} className={`${className} ${this.props.className || ''}`} style={this.props.style}>
               {
                 this.props.children
               }

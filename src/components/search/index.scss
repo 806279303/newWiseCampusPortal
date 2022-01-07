@@ -6,6 +6,27 @@
             display: inline-block;
             position: relative;
         }
+
+        .lg-search-input-area-typeA {
+            display: inline-block;
+            position: relative;
+            .lg-search-input-typeA {
+                width: 455px;
+                height: 42px;
+                border-radius: 22px;
+                background-color: "#ffffffff";
+                border: 1px solid $color;
+                font-size: 18px;
+                padding-left: 22px;
+            }
+            .lg-search-input-icon{
+                right: 20px;
+            }
+            .lg-search-input-clear{
+                right: 44px;
+            }
+        }
+
         // 输入框样式
         .lg-search-input {
             width: 240px;
@@ -13,7 +34,6 @@
             border-radius: 3px;
             background-color: "#ffffff";
             border: 1px solid $color;
-            
         }
         // 搜索符号
         .lg-search-input-icon{
