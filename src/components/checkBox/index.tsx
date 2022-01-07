@@ -8,8 +8,8 @@ interface BoxProps {
     onClick?: (status: number, backData?: any) => void,
     backData?: any,
     className?: string,
-    style?: object
-    onRef?: (ref: any) => void;
+    style?: object,
+    onRef?: (ref: any) => void
 }
 const CheckBox = (props: BoxProps) => {
     if (props.onRef) props.onRef(this);

@@ -7,9 +7,11 @@ interface LgPaginationProps {
     currentPage: number,
     onClick: (value: number) => void,
     className?: string,
-    style?: object
+    style?: object,
+    onRef?: (ref: any) => void
 }
 const Pagination = (props: LgPaginationProps) => {
+    if (props.onRef) props.onRef(this);
     if (props.type == "B") 
         return <PaginationB {...props}/>
     else if (props.type == "C" || props.type == "C1") 

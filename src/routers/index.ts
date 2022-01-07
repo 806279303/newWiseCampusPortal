@@ -39,6 +39,14 @@ const Routers: RouterType[] = ([
         component: lazy(() => import('../pages/richEditor')),
         root: [],
     }, {
+      path: '/topBar',
+      component: lazy(() => import('../pages/topBar')),
+      root: []
+    }, {
+      path: '/firstPage',
+      component: lazy(() => import('../pages/firstPage')),
+      root: []
+    }, {
         path: '/breadcrumb',
         component: lazy(() => import('../pages/breadcrumb')),
         root: [],
@@ -60,6 +68,11 @@ const Routers: RouterType[] = ([
     {
         path: '/timeline',
         component: lazy(() => import('../pages/timeline')),
+        root: []
+    },
+    {
+        path: '/steps',
+        component: lazy(() => import('../pages/steps')),
         root: []
     }
 ])

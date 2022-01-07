@@ -1,0 +1,116 @@
+@import "../index.scss";
+
+.lg_top_bar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 64px;
+	width: 100%;
+	color:rgba(255, 255, 255, 0.72);
+	padding-right: 30px;
+}
+.lg_logo {
+	height: 60px;
+	width: 49px;
+	// background: url("../images/logo.png") left bottom no-repeat;
+}
+.lg_version {
+    height: 20px;
+    padding: 0 10px;
+    margin-top: 22px;
+    border-radius: 10px;
+    line-height: 20px;
+    background-color: rgba(0, 0, 0, 0.24);
+}
+.lg_top_time {
+	line-height: 64px;
+	color:rgba(255, 255, 255, 0.82);
+    margin-right: 10px;
+}
+.lg_top_hover_btn {
+    float: left;
+	margin-top: 23px;
+	z-index: 2;
+    cursor: pointer;
+}
+.lg_top_help {
+    float: left;
+	height: 24px;
+	line-height: 24px;
+	padding-left: 25px;
+	margin-top: 20px;
+    margin-right: 10px;
+	background: url("./images/top_help.png") 7px center no-repeat;
+	border-radius: 12px;
+	cursor: pointer;
+}
+.lg_top_main_page {
+	background-image: url("./images/top_jump.png");
+}
+.lg_top_notice {
+    padding-left: 0;
+    background: none;
+}
+.lg_top_notice::before {
+    content: "";
+    display: inline-block;
+    height: 24px;
+    width: 20px;
+    vertical-align: middle;
+    background: url("./images/infoCenterBell.png") 0 center/auto 18px no-repeat;
+    opacity: 0.8;
+}
+.lg_top_node {
+    position: relative;
+}
+.lg_top_node::after {
+    position: absolute;
+    top: 0;
+    left: 12px;
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: red;
+}
+.lg_top_content_split {
+	float: left;
+	width: 1px;
+	height: 16px;
+	margin: 25px 15px 0 5px;
+	background-color: rgba(198, 215, 228, 0.32);
+}
+.lg_top_icon {
+	height: 28px;
+	width: 28px;
+	margin: -5px 5px 0 0;
+	border-radius: 50%;
+}
+.lg_top_name {
+	height: 20px;
+	line-height: 20px;
+}
+.lg_top_help:hover, .lg_top_hover_btn:hover {
+    color: #fff;
+}
+.lg_top_quit {
+	height: 20px;
+	padding-right: 20px;
+	background: url("./images/top_quit.png") right center no-repeat;
+}
+.lg_top_user_type {
+    width: 80px;
+    height: 20px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    padding: 2px 0 0 20px;
+    font-size: 12px;
+}
+@each $skin, $color, $imgColor in $all_colors {
+    #{$skin} {
+        .lg_top_bar {
+            background: url("./images/bag#{$skin}.png") center center/100% 100% no-repeat;
+        }
+    }
+}
