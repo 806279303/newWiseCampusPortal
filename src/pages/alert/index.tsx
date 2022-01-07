@@ -33,13 +33,14 @@ export default class alert extends Component<{}, AlertState> {
         }, 1000 * 3)
     }
     alertMsg2() {
-        let alert = lgAlert.show({ tipType: this.state.successLoading ? 'success' : 'loading', duration: 0, position: { xAxis: 'center', yAxis: 'top' } });
+        let alert = lgAlert.show({ tipType: this.state.successLoading ? 'success' : 'loading', duration: 0, showCloseBtn: true, position: { xAxis: 'center', yAxis: 'top' } });
+        console.log(alert)
         setTimeout(() => {
             lgAlert.show({ tipType: 'success', content: "加载成功", duration: 0, }, alert.index);
         }, 1000 * 3)
     }
     alertMsg3() {
-        let alert = lgAlert.show({ tipType: this.state.successLoading ? 'success' : 'loading', duration: 0, position: { xAxis: 'right', yAxis: 'top' } });
+        let alert = lgAlert.show({ tipType: 'question', duration: 0, position: { xAxis: 'right', yAxis: 'top' } });
         setTimeout(() => {
             lgAlert.show({ tipType: 'success', content: "加载成功", duration: 1000, }, alert.index);
         }, 1000 * 3)
@@ -86,6 +87,10 @@ export default class alert extends Component<{}, AlertState> {
             lgAlert.show({ tipType: 'error', content: "加载失败~", duration: 1000 * 2, showCloseBtn: false, }, alert.index);
         }, 1000 * 3)
     }
+    clearAlertMsgCustom() {
+        lgAlert.show({ tipType: 'closeAll' })
+    }
+
     componentDidMount() { }
     render() {
         return (
@@ -100,6 +105,7 @@ export default class alert extends Component<{}, AlertState> {
                 <input type="button" value="下中" onClick={this.alertMsg8} className='comment_position alert_position_left_top' />
                 <input type="button" value="下右" onClick={this.alertMsg9} className='comment_position alert_position_left_top' />
                 <input type="button" value="自定义位置" onClick={this.alertMsgCustom} className='comment_position alert_position_left_top' />
+                <input type="button" value="清除所有的弹窗" onClick={this.clearAlertMsgCustom} className='comment_position alert_position_left_top' />
             </>
         )
     }

@@ -1,49 +1,32 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
 import "./index.scss";
-let alertMessageList: LgAlertShowProps[] = [];//记录全局的提示信息
-let alertMessageList1: LgAlertShowProps[] = [];//记录全局的提示信息
-let alertMessageList2: LgAlertShowProps[] = [];//记录全局的提示信息
-let alertMessageList3: LgAlertShowProps[] = [];//记录全局的提示信息
-let alertMessageList4: LgAlertShowProps[] = [];//记录全局的提示信息
-let alertMessageList5: LgAlertShowProps[] = [];//记录全局的提示信息
-let alertMessageList6: LgAlertShowProps[] = [];//记录全局的提示信息
-let alertMessageList7: LgAlertShowProps[] = [];//记录全局的提示信息
-let alertMessageList8: LgAlertShowProps[] = [];//记录全局的提示信息
-let alertMessageList9: LgAlertShowProps[] = [];//记录全局的提示信息
-
-// const alertMessageMap: Map<string, LgAlertShowProps[]> = new Map()
-
-// alertMessageMap.set('11', alertMessageList)
-
-
-// alertMessageMap.get('11')?.push()
-
 type TipType = "info" | "error" | "waring" | "success" | "loading" | "question" | "closeAll";
 let globalState: (state: any, callback?: () => void) => void;
 interface lgAlert {
     showIdNumber: number;//
     showIdName: string;//
     show: (e?: LgAlertShowProps, showIdIndex?: string) => { index: string, options: LgAlertShowProps };//返回一个数字用于关闭已经打开的弹窗
-    close: (e: number) => any;//关闭一个提示框
+    close: (e: string) => any;//关闭一个提示框
     closeAll: () => any;//关闭所有的提示框
 }
 type xOffsetType = "left" | "center" | "right" | undefined
 type yOffsetType = "top" | "center" | "bottom" | undefined
 type showDirection = "top" | 'center' | 'bottom';
 type showAlign = "left" | 'center' | 'right';
-export interface LgAlertPropsPosition {
-    xAxis?: xOffsetType | number | string;//在X轴上的相对位置 "left" | "center" | "right" | undefined(默认值)
-    yAxis?: yOffsetType | number | string;//在y轴上的相对位置 "top" | "center" | "bottom" | undefined(默认值)
-    xOffset?: number | string;//在x轴上的偏移量
-    yOffset?: number | string;//在y轴上的偏移量
-    showDirection?: showDirection;//数据展示的起始方向 "top"(默认值) | 'bottom' 
-    showAlign?: showAlign;//数据展示的对齐方向 "top"(默认值) | 'center' 
-}
 
 export interface LgAlertParams {
     showIdNumber?: number;//标示单个提示框的数字
     showIdName?: string;//标示单个提示框的id类名
+    closeTip?: (type: number, positionIndex: string) => void;//关闭提示框
+}
+export interface LgAlertPropsPosition {
+    xAxis?: xOffsetType | number | string;//提示框在X轴上的相对位置 "left" | "center" | "right" | undefined(默认值)
+    yAxis?: yOffsetType | number | string;//提示框在y轴上的相对位置 "top" | "center" | "bottom" | undefined(默认值)
+    xOffset?: number | string;//提示框在x轴上的偏移量
+    yOffset?: number | string;//提示框在y轴上的偏移量
+    showDirection?: showDirection;//提示框数据展示的起始方向 "top"(默认值) | 'bottom' 
+    showAlign?: showAlign;//提示框数据展示的对齐方向 "top"(默认值) | 'center' 
 }
 
 // 使用的提示框时需要传的参数
@@ -55,11 +38,8 @@ export interface LgAlertProps extends LgAlertParams {
     isShowIcon?: boolean;//是否显示小图标
     duration?: number;//展示的时间 | 0:未关闭
     position?: LgAlertPropsPosition;//设置弹出的位置
-    className?: string;//
+    className?: string;//单个提示框的类名
     positionIndex?: number
-
-    closeTip?: (type: number, positionIndex: number, tipIndex: number) => void;//关闭提示框
-
     customIcon?: React.ReactDOM | React.ReactElement;//自定义的小图标
     customClose?: React.ReactDOM | React.ReactElement;//自定义关闭的Dom
 }
@@ -78,19 +58,24 @@ interface LgAlertCloseProps {
 function initTipType(tipType: string = 'info') {
     let type: number = -1;
     switch (tipType) {
-        case 'info': type = 0; break;//
-        case 'error': type = 1; break;//
-        case 'waring': type = 2; break;//
-        case 'success': type = 3; break;//
-        case 'loading': type = 4; break;//
-        case 'question': type = 5; break;//
-        case 'closeAll': type = 6; break;//
+        case 'info': type = 0; break;//展示信息
+        case 'error': type = 1; break;//报错信息
+        case 'waring': type = 2; break;//警告提示框
+        case 'success': type = 3; break;//成功提示框
+        case 'loading': type = 4; break;//加载提示框
+        case 'question': type = 5; break;//询问提示框
+        case 'closeAll': type = 6; break;//关闭所有提示框
         default: type = 7; break;//
     };
     if (type == -1) { type = 6 };
     return type;
 }
 let zIndexNumber = 19000;
+/**
+ * @msg 初始化弹出提示框的位置
+ * @param LgAlertPropsPosition 
+ * @returns 
+ */
 function initContainerPosition(LgAlertPropsPosition?: LgAlertPropsPosition): { style: React.CSSProperties, type: string, positionType: number } {
     let style = {}; let tipPositionXType: string = ''; let tipPositionYType: string = '';
     switch (LgAlertPropsPosition?.xAxis) {
@@ -200,12 +185,24 @@ export const lgAlert: lgAlert = {
         // 设置对象的默认值
         let alertPositionStylePosition: React.CSSProperties[] = mapList.get('alertPositionStylePosition') || mapList.set('alertPositionStylePosition', [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]).get('alertPositionStylePosition');
         let alertMessageListPosition: LgAlertShowProps[][] = mapList.get('alertMessageListPosition') || mapList.set('alertMessageListPosition', [[], [], [], [], [], [], [], [], [], []]).get('alertMessageListPosition');
+        let closeTimeoutMap: NodeJS.Timeout[] = timeoutMap.get('closeTimeoutMap') || timeoutMap.set('closeTimeoutMap', []).get('closeTimeoutMap');
         let positionIndex: number = 0;//弹窗的位置
         let showIdNumber: number = 0;//弹窗的位置上的第几条数据
         let tipItemOption: LgAlertShowProps = e as LgAlertShowProps;
         let initOptions: LgAlertShowProps = { tipType: "info", isShow: true, duration: 3000, isShowIcon: true, content: '提示框~' };
         tipItemOption = Object.assign(initOptions, tipItemOption);
-        let returnOptionsIndex: string = (showIdNumber + '-' + positionIndex).toString()
+        let returnOptionsIndex: string = (showIdNumber + '-' + positionIndex).toString();
+        // 关闭所有的
+        if (e?.tipType == 'closeAll') {
+            lgAlert.closeAll();
+            closeTimeoutMap.forEach((o, i) => {
+                clearTimeout(o);
+            })
+            mapList.set('closeTimeoutMap', [])
+            alertMessageListPosition = [[], [], [], [], [], [], [], [], [], []]
+            globalState({ alertMessageListPosition })
+            return { index: null as any, options: null as any };
+        }
         if (showIdIndex) {
             clearTimeout(timeoutMap.get(showIdIndex));
             let positionIndexClose: number = parseInt(showIdIndex.split('-')[1]);//关闭弹窗的位置
@@ -214,10 +211,7 @@ export const lgAlert: lgAlert = {
             if (alertMessageListPosition[positionIndexClose] && alertMessageListPosition[positionIndexClose].length) {
                 alertMessageListPosition[positionIndexClose].forEach((o, i) => {
                     if (o.showIdNumber == showIdNumberClose) {
-                        tipItemOption = Object.assign(initOptions, tipItemOption);
-                        o = Object.assign(o, tipItemOption);
-                        tipItemOption = o;
-                        replaceIndex = i
+                        tipItemOption = Object.assign(initOptions, tipItemOption); o = Object.assign(o, tipItemOption); tipItemOption = o; replaceIndex = i;
                     }
                 })
             };
@@ -255,6 +249,7 @@ export const lgAlert: lgAlert = {
                 alertMessageListPosition = alertMessageListPosition as LgAlertShowProps[][];
                 alertPositionStylePosition[positionIndex] = alertPositionOptions.style;
             }
+
             if (initTipType(tipItemOption.tipType) == 4) {
                 tipItemOption.duration = 0
             }
@@ -280,7 +275,9 @@ export const lgAlert: lgAlert = {
                     })
                 }, tipItemOption?.duration);
                 timeoutMap.set(returnOptionsIndex, timeoutId);
-
+                console.log(timeoutId)
+                closeTimeoutMap.push(timeoutId);
+                console.log(closeTimeoutMap)
             })
         };
 
@@ -288,18 +285,34 @@ export const lgAlert: lgAlert = {
         let option: { index: string, options: LgAlertShowProps } = { index: returnOptionsIndex, options: tipItemOption };
         return option;
     },
-    close: (index: number) => {
-        let spliceIndex = null
-        alertMessageList.forEach((o, i) => { if (o.showIdNumber == index) { spliceIndex = i; } })
-        if (spliceIndex != null) { alertMessageList.splice(spliceIndex, 1); }
-        globalState({ alertMessageList });
+    close: (showIdIndex: string) => {
+        let positionIndexClose: number = parseInt(showIdIndex.split('-')[1]);//关闭弹窗的位置
+        let showIdNumberClose: number = parseInt(showIdIndex.split('-')[0]);//关闭弹窗的位置上的第几条数据
+        let alertMessageListPosition: LgAlertShowProps[][] = mapList.get('alertMessageListPosition') || mapList.set('alertMessageListPosition', [[], [], [], [], [], [], [], [], [], []]).get('alertMessageListPosition');
+        let replaceIndex: number | null = null;
+        if (alertMessageListPosition[positionIndexClose] && alertMessageListPosition[positionIndexClose].length) {
+            alertMessageListPosition[positionIndexClose].forEach((o, i) => {
+                if (o.showIdNumber == showIdNumberClose) {
+                    replaceIndex = i
+                }
+            })
+        };
+        if (replaceIndex != null) {
+            alertMessageListPosition[positionIndexClose].splice(replaceIndex, 1)
+        }
+        globalState({ alertMessageListPosition })
     },
     closeAll: () => {
-        let alertMessageList: LgAlertShowProps[] = []
-        globalState({ alertMessageList })
+        let alertMessageListPosition: LgAlertShowProps[][] = [[], [], [], [], [], [], [], [], []];
+        let alertPositionStylePosition: React.CSSProperties[] = []
+        timeoutMap.set('closeTimeoutMap', [])
+        globalState({ alertMessageListPosition, alertPositionStylePosition }, () => {
+            mapList.delete('alertMessageListPosition')
+            mapList.delete('alertPositionStylePosition')
+        })
     },
 }
-interface LgAlertContainerProps {
+interface LgAlertContainerProps extends LgAlertProps {
     content?: string
 }
 interface LgAlertContainerState {
@@ -320,24 +333,38 @@ export class LgAlertContainer extends Component<LgAlertContainerProps, LgAlertCo
     positionZIndex: number = 19000;
     initAlertDom(type: number, alertMessageList: LgAlertShowProps[]) {
         return alertMessageList.map((o, i) => {
-            o.closeTip = this.closeTip;
+            o.closeTip = this.closeTip
             return (<LgAlert {...o} key={i} />)
         })
     }
-
-    closeTip(type: number, positionIndex: number, tipIndex: number) {
-        let spliceIndex = null;
-        let alertMessageListPosition = this.state.alertMessageListPosition;
-        if (type) {
-            alertMessageListPosition[positionIndex].forEach((o, i) => {
-                if (o.showIdNumber == tipIndex) { spliceIndex = i; };
-            })
-            if (spliceIndex != null) { alertMessageListPosition[positionIndex].splice(spliceIndex, 1); }
-        } else {
-            alertMessageListPosition[positionIndex] = []
+    closeTip(type: number = 1, tipIndex?: string) {
+        let alertMessageListPosition: LgAlertShowProps[][] = mapList.get('alertMessageListPosition') || mapList.set('alertMessageListPosition', [[], [], [], [], [], [], [], [], [], []]).get('alertMessageListPosition');
+        if (type == 1 && !tipIndex) {
+            return
         }
-
-        this.setState({ alertMessageListPosition })
+        if (type) {
+            let positionIndexClose: number = parseInt((tipIndex as string).split('-')[1]);//关闭弹窗的位置
+            let showIdNumberClose: number = parseInt((tipIndex as string).split('-')[0]);//关闭弹窗的位置上的第几条数据
+            let replaceIndex: number | null = null;
+            if (alertMessageListPosition[positionIndexClose] && alertMessageListPosition[positionIndexClose].length) {
+                alertMessageListPosition[positionIndexClose].forEach((o, i) => {
+                    if (o.showIdNumber == showIdNumberClose) {
+                        replaceIndex = i
+                    }
+                })
+            };
+            if (replaceIndex != null) {
+                alertMessageListPosition[positionIndexClose].splice(replaceIndex, 1)
+            }
+            this.setState({ alertMessageListPosition })
+        } else {
+            let alertMessageListPosition: LgAlertShowProps[][] = [[], [], [], [], [], [], [], [], []];
+            let alertPositionStylePosition: React.CSSProperties[] = []
+            this.setState({ alertMessageListPosition, alertPositionStylePosition }, () => {
+                mapList.delete('alertMessageListPosition')
+                mapList.delete('alertPositionStylePosition')
+            })
+        }
     }
     componentDidUpdate() { }
     /**
@@ -352,7 +379,7 @@ export class LgAlertContainer extends Component<LgAlertContainerProps, LgAlertCo
             <>
                 {this.state.alertMessageListPosition.map((o, i) => {
                     return (
-                        <div style={{ display: o.length ? 'block' : 'none' }} data-index={i} key={i} >
+                        <div style={{ display: o.length ? 'block' : 'none' }} data-index={i} key={i} className={''}>
                             <div id='' className='lg_alert_container_box lg_alert_container_box_right_bottom' style={this.state.alertPositionStylePosition[i] as React.CSSProperties}>
                                 {this.initAlertDom(i, o)}
                             </div>
@@ -379,12 +406,13 @@ export class LgAlert extends Component<LgAlertProps, LgAlertState> {
         let parentNode = e.currentTarget.parentNode as HTMLElement;
         let index = parseInt(parentNode.getAttribute('data-index') as string);
         let positionIndex = parseInt(parentNode.getAttribute('data-position-index') as string);
-        this.props.closeTip && this.props.closeTip(1, positionIndex, index);
+        let spliceIndex = (index + '-' + positionIndex)
+        this.props.closeTip && this.props.closeTip(1, spliceIndex);
     }
     render() {
         const { state, props } = this;
         return (
-            <div className='lg_alert_body ' id={this.props.showIdName as string + this.props.showIdNumber} data-index={props.showIdNumber} data-position-index={props.positionIndex} >
+            <div className={'lg_alert_body ' + props.className} id={this.props.showIdName as string + this.props.showIdNumber} data-index={props.showIdNumber} data-position-index={props.positionIndex} >
                 <div className='lg_alert_body_box'>
                     <div className={'lg_alert_body_icon tip_icon_type_item tip_icon_type' + initTipType(props?.tipType)} style={{ display: props.isShowIcon ? 'block' : 'none' }}><div className='lg_alert_body_icon_small'></div>{props.customIcon}</div>
                     <div className='lg_alert_body_title'>{props?.content}</div>
