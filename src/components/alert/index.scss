@@ -83,7 +83,7 @@
                 .tip_icon_type6 {
                     background-color: rgb(214, 214, 214);
                 }
-                .tip_icon_type6 {
+                .tip_icon_type7 {
                     background-color: rgb(214, 214, 214);
                 }
             }
@@ -92,7 +92,7 @@
                 width: 15px;
                 height: 15px;
                 border-radius: 50%;
-                background-color: rgba(0, 0, 0, 0.2);
+                background-color: rgba(0, 0, 0, 0.014);
                 position: relative;
                 cursor: pointer;
                 &::after {
@@ -117,23 +117,5 @@
                 }
             }
         }
-    }
-    .lg_alert_container_box_left_top {
-    }
-    .lg_alert_container_box_center_top {
-    }
-    .lg_alert_container_box_right_top {
-    }
-    .lg_alert_container_box_left_center {
-    }
-    .lg_alert_container_box_center_center {
-    }
-    .lg_alert_container_box_right_center {
-    }
-    .lg_alert_container_box_left_bottom {
-    }
-    .lg_alert_container_box_center_bottom {
-    }
-    .lg_alert_container_box_right_bottom {
     }
 }
