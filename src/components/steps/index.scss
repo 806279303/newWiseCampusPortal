@@ -1,0 +1,322 @@
+@import "../index.scss";
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+.clear::before,
+.clear::after {
+    display: block;
+    content: "";
+    clear: both;
+}
+.oneline {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.step_item {
+    display: flex;
+    .step_li {
+        .step_li_bg {
+            position: relative;
+            height: 39px;
+            width: 39px;
+            line-height: 39px;
+            font-family: PangMenZhengDao;
+            font-size: 18px;
+            color: #999999;
+            text-align: center;
+            background: url("./images/stepA/step_bg_0.png") no-repeat 100% 100%;
+            .step_complete {
+                position: absolute;
+                bottom: 0;
+                right: 0px;
+                height: 17px;
+                width: 17px;
+                background: url("./images/stepA/complete.png") no-repeat;
+            }
+        }
+        .step_name {
+            margin-top: 5px;
+            font-size: 12px;
+            width: 39px;
+            text-align: center;
+            color: #999999;
+        }
+        .at_present {
+            background: url("./images/stepA/at_present.png") no-repeat 100% 100%;
+            color: #ffffff;
+        }
+        .stepNameColor {
+            color: #ff6600 !important;
+        }
+    }
+    .step_allow {
+        margin: 14px 5px;
+        width: 36px;
+        height: 10px;
+        background: url("./images/stepA/allow_0.png") no-repeat;
+    }
+}
+@each $skin, $color, $imgColor in $all_colors {
+    #{$skin} {
+        .step_li_bg {
+            color: #ffffff !important;
+            background: url("./images/stepA/step#{$skin}.png") no-repeat 100% 100% !important;
+        }
+        .step_name {
+            color: $color !important;
+        }
+        .step_allow {
+            background: url("./images/stepA/allow#{$skin}.png") no-repeat !important;
+        }
+    }
+}
+
+.step_itemB {
+    padding: 0 20px;
+    .stepB_li {
+        .stepB_li_bg {
+            display: flex;
+            align-items: center;
+            height: 24px;
+            margin: auto;
+            .stepB_poit {
+                width: 10px;
+                height: 10px;
+                border-radius: 10px;
+            }
+            .stepB_line {
+                width: 104px;
+                height: 2px;
+            }
+        }
+        .stepB_name {
+            margin-left: -12px;
+            margin-top: 5px;
+        }
+    }
+}
+@each $skin, $color, $imgColor in $all_colors {
+    #{$skin} {
+        .stepB_poit,
+        .stepB_line {
+            background: $imgColor;
+        }
+        .stepB_name {
+            color: $color;
+        }
+        .at_present {
+            width: 24px !important;
+            height: 24px !important;
+            background: url("./images/stepB/precent#{$skin}.png") no-repeat !important;
+        }
+        .at_after,
+        .afterB_line {
+            background: $imgColor;
+            opacity: 0.4;
+        }
+        .presentB_name {
+            font-weight: bold;
+        }
+        .afterB_name {
+            color: #999999;
+        }
+    }
+}
+.step_itemC {
+    display: flex;
+    .stepC_li {
+        position: relative;
+        height: 30px;
+        width: 200px;
+        line-height: 30px;
+        text-align: center;
+        color: #333333;
+        .stepC_left,
+        .stepC_right {
+            height: 30px;
+            width: 15px;
+        }
+        .stepC_center {
+            width: 170px;
+            height: 30px;
+        }
+        .stepC_Name {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+        }
+    }
+    .stepC_bg_last {
+        .stepC_left {
+            border-top: 15px solid #e9e9e9;
+            border-bottom: 15px solid #e9e9e9;
+            border-left: 15px solid transparent;
+        }
+        .stepC_center {
+            background: #e9e9e9;
+        }
+        .stepC_right {
+            background: #e9e9e9;
+        }
+    }
+    .stepC_bg_after {
+        .stepC_left {
+            border-top: 15px solid #e9e9e9;
+            border-bottom: 15px solid #e9e9e9;
+            border-left: 15px solid transparent;
+        }
+        .stepC_center {
+            background: #e9e9e9;
+        }
+        .stepC_right {
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 15px solid #e9e9e9;
+        }
+    }
+}
+@each $skin, $color, $imgColor in $all_colors {
+    #{$skin} {
+        .stepC_bg_stepIndex1 {
+            .stepC_left {
+                background: $color;
+            }
+            .stepC_center {
+                background: $color;
+            }
+            .stepC_right {
+                border-top: 15px solid transparent;
+                border-bottom: 15px solid transparent;
+                border-left: 15px solid $color;
+            }
+        }
+        .stepC_bg_first {
+            .stepC_left,
+            .stepC_center {
+                background: $color;
+                opacity: 0.65;
+            }
+            .stepC_right {
+                border-top: 15px solid transparent;
+                border-bottom: 15px solid transparent;
+                border-left: 15px solid $color;
+                opacity: 0.65;
+            }
+        }
+        .stepC_bg_last_cur {
+            .stepC_left {
+                border-top: 15px solid $color;
+                border-bottom: 15px solid $color;
+                border-left: 15px solid transparent;
+            }
+            .stepC_center {
+                background: $color;
+            }
+            .stepC_right {
+                background: $color;
+            }
+        }
+        .stepC_bg_before {
+            .stepC_left {
+                border-top: 15px solid $color;
+                border-bottom: 15px solid $color;
+                border-left: 15px solid transparent;
+                opacity: 0.65;
+            }
+            .stepC_center {
+                background: $color;
+                opacity: 0.65;
+            }
+            .stepC_right {
+                border-top: 15px solid transparent;
+                border-bottom: 15px solid transparent;
+                border-left: 15px solid $color;
+                opacity: 0.65;
+            }
+        }
+        .stepC_bg_precent {
+            .stepC_left {
+                border-top: 15px solid $color;
+                border-bottom: 15px solid $color;
+                border-left: 15px solid transparent;
+            }
+            .stepC_center {
+                background: $color;
+            }
+            .stepC_right {
+                border-top: 15px solid transparent;
+                border-bottom: 15px solid transparent;
+                border-left: 15px solid $color;
+            }
+        }
+    }
+}
+.step_itemD {
+    display: table;
+    position: relative;
+    .stepD_li {
+        width: 240px;
+        height: 46px;
+        padding-left: 20px;
+        margin-top: 8px;
+        display: flex;
+        align-items: center;
+        .stepD_left {
+            width: 30px;
+            height: 16px;
+            background: url("./images/stepD/未经过.png") center center no-repeat;
+        }
+        .stepD_left_before{
+            z-index: 1;
+            background: url("./images/stepD/完成.png") center center no-repeat;
+        }
+        .stepD_left_precent{
+            z-index: 1;
+            background: url("./images/stepD/当前.png") center center no-repeat;
+        }
+        .stepD_right {
+            max-width: 170px;
+            padding: 0 10px;
+            height: 32px;
+            line-height: 32px;
+            color: #333333;
+            background: #ffffff;
+        }
+    }
+    .stepD_bg_line{
+        position: absolute;
+        top: 0;
+        left: 25px;
+        width: 2px;
+        height: 200px;
+        background: url('./images/stepD/步骤线.png');
+    }
+    .stepD_right_add{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        color: #4270a3;
+        width: 95px;
+        height: 32px;
+        background: url('./images/stepD/新建框.png') no-repeat;
+    }
+    .add_icon{
+        font-size: 22px;
+        margin-top: -1px;
+    }
+    .stepD_right_add:hover{
+        opacity: 0.8;
+    }
+    .stepD_li:hover {
+        background-color: rgba(192, 216, 243, 0.42);
+    }
+}

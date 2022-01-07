@@ -13,8 +13,10 @@ export default () => {
             <div><Link to='/breadcrumb'>面包屑</Link></div>
             <div><Link to='/loading'>加载/进度条</Link></div>
             <div><Link to='/search'>搜索条</Link></div>
+            <div><Link to='/timeline'>时间线</Link></div>
             <div><Link to='/topBar'>顶部栏</Link></div>
             <div><Link to='/firstPage'>首页</Link></div>
+            <div><Link to='/steps'>步骤条</Link></div>
             <div><Link to='/datePicker'>时间选择</Link></div>
         </>
     )
