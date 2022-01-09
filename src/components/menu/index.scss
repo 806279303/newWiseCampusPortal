@@ -1,0 +1,18 @@
+@import "../index";
+
+@each $skin,
+$color,
+$imgColor,
+$colorHover in $all_colors {
+    #{$skin} {
+        .lg-loading-root {
+
+            .lg-loading-dot-top,
+            .lg-loading-dot-right,
+            .lg-loading-dot-bottom,
+            .lg-loading-dot-left {
+                background: $imgColor;
+            }
+        }
+    }
+}

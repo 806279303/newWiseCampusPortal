@@ -1,12 +1,12 @@
 import { lazy } from 'react'
-
+ 
 export type RouterType = {
     path: string,
     component: React.LazyExoticComponent<any>,
     root: string[],
     notExect?: boolean
 }
-
+ 
 // 总路由
 const Routers: RouterType[] = ([
     {
