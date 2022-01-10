@@ -57,12 +57,53 @@
 
 
 
-$largeContainerSideLength: 30px;
+$mediumParam: "medium", 15px, 5px;
+$largeParam: "large", 30px, 10px;
 
+$allSize: ($mediumParam), ($largeParam);
 
 
 $animationDuration: 5.6s;
 .lg-loading-a-root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  @each $sizeName, $squareSideLength, $dotRadius in $allSize {
+    &.lg-loading-size-#{$sizeName}{
+      .lg-loading-anime{
+        width: $squareSideLength;
+        height: $squareSideLength;
+      }
+      $marginLength: -$dotRadius / 2;
+      .lg-loading-dot-top{
+        width: $dotRadius;
+        height: $dotRadius;
+        margin-left: $marginLength;
+        margin-top: $marginLength;
+      }
+      .lg-loading-dot-right{
+        width: $dotRadius;
+        height: $dotRadius;
+        margin-top: $marginLength;
+        margin-right: $marginLength;
+      }
+      .lg-loading-dot-bottom{
+        width: $dotRadius;
+        height: $dotRadius;
+        margin-bottom: $marginLength;
+        margin-left: $marginLength;
+      }
+      .lg-loading-dot-left{
+        width: $dotRadius;
+        height: $dotRadius;
+        margin-top: $marginLength;
+        margin-left: $marginLength;
+      }
+    }
+  }
+
   .lg-loading-anime {
     width: 30px;
     height: 30px;
@@ -76,11 +117,8 @@ $animationDuration: 5.6s;
     justify-content: center;
     align-items: center;
 
-    $sideLength: 10px;
     @mixin loadingDot {
       position: absolute;
-      width: $sideLength;
-      height: $sideLength;
       border-radius: 50%;
       background: $color_s1;
       animation-duration: $animationDuration * 0.25;
@@ -88,14 +126,10 @@ $animationDuration: 5.6s;
       animation-timing-function: ease-in-out;
     }
 
-    $marginLength: -$sideLength / 2;
-
     .lg-loading-dot-top {
       @include loadingDot;
       left: 50%;
       top: 0;
-      margin-left: $marginLength;
-      margin-top: $marginLength;
       animation-name: upDown-top;
     }
 
@@ -103,8 +137,6 @@ $animationDuration: 5.6s;
       @include loadingDot;
       right: 0;
       top: 50%;
-      margin-top: $marginLength;
-      margin-right: $marginLength;
       animation-name: upDown-right;
       opacity: 0.8;
     }
@@ -113,8 +145,6 @@ $animationDuration: 5.6s;
       @include loadingDot;
       left: 50%;
       bottom: 0;
-      margin-bottom: $marginLength;
-      margin-left: $marginLength;
       animation-name: upDown-bottom;
       opacity: 0.7;
     }
@@ -123,8 +153,6 @@ $animationDuration: 5.6s;
       @include loadingDot;
       left: 0;
       top: 50%;
-      margin-top: $marginLength;
-      margin-left: $marginLength;
       animation-name: upDown-left;
       opacity: 0.6;
     }
@@ -134,7 +162,6 @@ $animationDuration: 5.6s;
     color: $color_s1;
     font-size: 14px;
     margin-top: 10px;
-    margin-left: -6px;
   }
 }
 
