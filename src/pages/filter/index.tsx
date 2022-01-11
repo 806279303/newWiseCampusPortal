@@ -5,7 +5,7 @@ export default () => {
     return (
         <div>
         {
-          allSkinClassName.map(className => {
+          allSkinClassName.map((className,index) => {
             return (
               <div className={className}>
                 <Filter/>
