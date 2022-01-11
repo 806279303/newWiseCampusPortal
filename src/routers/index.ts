@@ -83,6 +83,11 @@ const Routers: RouterType[] = ([
         path: '/datePicker',
         component: lazy(() => import('../pages/datePicker')),
         root: []
+    },
+    {
+        path: '/drawer',
+        component: lazy(() => import('../pages/drawer')),
+        root: []
     }
 ])
 export {

@@ -8,6 +8,8 @@ interface Props {
     type: 'A' | 'B' | 'C' | 'D',
     stepList: any[],
     stepIndex: number,//当前步骤
+    colorType?:string
+    onClick?: () => void,
 }
 const LgStep = (props: Props): any => {
     //console.log(props)
@@ -22,12 +24,12 @@ const LgStep = (props: Props): any => {
 }
 function StepA(props: Props) {
     return (
-        <div className='step_item'>
+        <div className={`step_item ${props.className || ""}`} style={props.style || {}}>
             {
                 props.stepList.map((item, index) => {
                     var stepLiBg: any = "", stepNameColor: any = ""
                     if (index < props.stepIndex - 1) {
-                        stepLiBg = props.className
+                        stepLiBg = props.colorType
                     } else if (index == props.stepIndex - 1) {
                         stepLiBg = "at_present"; stepNameColor = "stepNameColor"
                     }
@@ -50,7 +52,7 @@ function StepA(props: Props) {
 }
 function StepB(props: Props) {
     return (
-        <div className={'step_itemB clear ' + props.className}>
+        <div className={`step_itemB clear ${props.colorType} ${props.className}`} style={props.style || {}}>
             {
                 props.stepList.map((item, index) => {
                     var stepLiBg: any = "", stepBline: any = "", stepBname: any = ""
@@ -77,7 +79,7 @@ function StepB(props: Props) {
 }
 function StepC(props: Props) {
     return (
-        <div className={'step_itemC clear ' + props.className}>
+        <div className={`step_itemC clear ${props.colorType} ${props.className}`} style={props.style || {}}>
             {
                 props.stepList.map((item, index) => {
                     var stepLiBg: any = ""
@@ -111,25 +113,24 @@ function StepC(props: Props) {
     )
 }
 function StepD(props: Props) {
-    const addLink = (e: any) => {
-        var num = parseInt(e.target.dataset.index);
-        console.log(props.stepList[num])
+    const addLink = () => {
+        props.onClick&&props.onClick()
     }
     return (
-        <div className='step_itemD clear'>
-            <div className='stepD_bg_line' style={{ height: (props.stepList.length+1) * 54 - 27 }}></div>
+        <div className={`step_itemD clear ${props.className}`} style={props.style || {}}>
+            <div className='stepD_bg_line' style={{ height: (props.stepList.length + 1) * 54 - 27 }}></div>
             {
                 props.stepList.map((item, index) => {
-                    var stepLeft=""
-                    if(index<props.stepIndex - 1){
-                        stepLeft="stepD_left_before"
-                    }else if(index==props.stepIndex - 1){
-                        stepLeft="stepD_left_precent"
+                    var stepLeft = ""
+                    if (index < props.stepIndex - 1) {
+                        stepLeft = "stepD_left_before"
+                    } else if (index == props.stepIndex - 1) {
+                        stepLeft = "stepD_left_precent"
                     }
                     return (
                         <div data-index={index} key={"stepD" + index} className='stepD_li'>
                             <div className={`stepD_left ${stepLeft}`}></div>
-                            <div className='stepD_right oneline' title={item} style={{color:index==props.stepIndex - 1?"#ff6600":"",fontWeight:index==props.stepIndex - 1?"bold":""}}>{item}</div>
+                            <div className='stepD_right oneline' title={item} style={{ color: index == props.stepIndex - 1 ? "#ff6600" : "", fontWeight: index == props.stepIndex - 1 ? "bold" : "" }}>{item}</div>
 
                         </div>
                     )
@@ -137,7 +138,7 @@ function StepD(props: Props) {
             }
             <div className='stepD_li'>
                 <div className='stepD_left'></div>
-                <div className='stepD_right_add'>
+                <div className='stepD_right_add' onClick={addLink}>
                     <span className='add_icon'>+</span>
                     <span>新建环节</span>
                 </div>
