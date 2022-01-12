@@ -1,10 +1,10 @@
-@mixin flexCenter{
+@mixin flexCenter {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-@mixin flexStart{
+@mixin flexStart {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -17,9 +17,10 @@
   flex-direction: column;
 
   .type-a-loading-frame {
-    &:first-child{
+    &:first-child {
       margin-top: 0;
     }
+
     margin-top: 20px;
     display: flex;
     width: 665px;
@@ -29,19 +30,21 @@
     border: 1px solid #eee;
     box-sizing: border-box;
     padding: 20px 25px;
-    .title{
+
+    .title {
       @include flexStart;
       height: 40px;
       width: 100%;
     }
-    .subtitle{
+
+    .subtitle {
       @include flexStart;
       height: 20px;
       width: 100%;
       color: #666;
     }
 
-    .split-line{
+    .split-line {
       height: 10px;
       width: 100%;
       border-bottom: 1px dashed #eee;
@@ -52,34 +55,59 @@
       display: flex;
       align-items: center;
       height: 100px;
+      width: 100%;
+
       [class^='lg-skin-'] {
         margin-right: 20px;
       }
     }
   }
 
-  .size-demo{
-    .loading-size-list{
+  .normal-use{
+    .loading-list {
+      align-items: center;
+      justify-content: space-evenly;
+    }
+  }
+
+  .size-demo {
+    .loading-size-list {
       height: fit-content;
       display: flex;
       align-items: flex-end;
       justify-content: space-evenly;
       width: 100%;
-      .lg-loading-a-root{
+
+      .lg-loading-a-root {
         margin: 0 10px;
       }
     }
   }
 
-  .align-demo{
-    .loading-align-list{
+  .align-demo {
+    .loading-align-list {
       height: fit-content;
       display: flex;
-      //justify-content: flex-start;
+      justify-content: space-evenly;
       align-items: flex-start;
       width: 100%;
-      .lg-loading-a-root{
+
+      .lg-loading-a-root {
         margin: 0 10px;
+      }
+    }
+  }
+
+  .type-b-demo {
+    .loading-align-list {
+      height: 100%;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      width: 100%;
+
+      .lg-loading-b-root {
+        margin: 0 30px;
       }
     }
   }

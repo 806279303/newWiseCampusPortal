@@ -32,6 +32,8 @@ export default class Loading extends Component<{}, {}> {
         <TypeLoadingFrame className="type-b-demo" title="B款" subtitle="B款有三种，纯文字款，带动画自旋，带动画长度变动">
           <div className="loading-align-list">
             <LgLoading type="B"/>
+            <LgLoading type="B" showIcon tip=""/>
+            <LgLoading type="B" showIcon tip="" animeType="B"/>
           </div>
         </TypeLoadingFrame>
       </div>

@@ -195,28 +195,54 @@ $animationDuration: 5.6s;
   }
 }
 
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35
+  }
+  to {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124
+  }
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(1turn)
+  }
+}
+
 .lg-loading-b-root {
-  width: 100px;
-  height: 100px;
+
+  display: flex;
+  flex-direction: column;
+  //justify-content: center;
+  align-items: center;
 
   .lg-loading-tip {
+    margin-left: 5px;
+    margin-top: 5px;
     color: $color_s1;
     font-size: 14px;
   }
 
-  .left-start-color-0{
+  .left-start-color-0 {
     stop-color: $color_s1;
   }
 
-  .left-start-color-1{
+  .left-start-color-1 {
     stop-color: lighten($color_s1, 40%);
   }
 
-  .right-start-color-0{
+  .right-start-color-0 {
     stop-color: #fff;
   }
 
-  .right-start-color-1{
+  .right-start-color-1 {
     stop-color: lighten($color_s1, 40%);
   }
 
@@ -228,9 +254,31 @@ $animationDuration: 5.6s;
     animation: load 1s linear infinite;
     transform-origin: center center;
   }
+
+  .lg-loading-anime-b-wrapper {
+    position: relative;
+    .circular {
+      animation: rotate 2s linear infinite;
+      height: 30px;
+      width: 30px;
+      transform-origin: center center;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+
+    .lg-loading-anime-b {
+      stroke-dasharray: 1, 200;
+      stroke-dashoffset: 0;
+      animation: dash 1.5s ease-in-out infinite;
+      stroke-linecap: round;
+      stroke: $color_s1;
+    }
+  }
 }
-
-
 
 
 @each $skin, $color, $imgColor, $colorHover in $all_colors {
@@ -247,29 +295,36 @@ $animationDuration: 5.6s;
       }
     }
 
-    .lg-loading-b-root{
+    .lg-loading-b-root {
       .lg-loading-tip {
         color: $color;
       }
 
-      .left-start-color-0{
+      .left-start-color-0 {
         stop-color: $color;
       }
 
-      .left-start-color-1{
+      .left-start-color-1 {
         stop-color: lighten($color, 40%);
       }
 
-      .right-start-color-0{
+      .right-start-color-0 {
         stop-color: #fff;
       }
 
-      .right-start-color-1{
+      .right-start-color-1 {
         stop-color: lighten($color, 40%);
       }
 
       .top {
         fill: $color;
+      }
+
+      .lg-loading-anime-b-wrapper {
+
+        .lg-loading-anime-b {
+          stroke: $color;
+        }
       }
     }
   }
