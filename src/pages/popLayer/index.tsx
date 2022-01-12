@@ -1,6 +1,6 @@
 import { LgPopLayer, PopLayerProps } from '@/components/popLayer'
 import React, { Component } from 'react'
-
+import './index.scss'
 interface PopLayerState {
     isOpenPopLayer: boolean;
     name?: string | null;
@@ -51,14 +51,33 @@ export default class popLayer extends Component<{}, PopLayerState> {
     }
     initDom1() {
         return (
-            <div>
-                1111111111111111111111111111111111111111111
+            <div className='open_1'>
+                dfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfh
+                dfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfh
+                dfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfh
+                dfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfh
+                dfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfh
+                dfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfh
+                dfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfh
+                dfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfh
+                dfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfh
+                dfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfh
+                dfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfh
+                dfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfh
+                dfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfh
+                dfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfhdfjashkdfhasjdfh
             </div>)
     }
     initDom2() {
         return (
             <div>
-                2222222222222222222222222222222222222222222
+                福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就
+                福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就
+                福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就
+                福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就
+                福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就
+                福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就
+                福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就福的故事预覆盖是的回复就
             </div>)
     }
     initDom3() {
@@ -75,6 +94,9 @@ export default class popLayer extends Component<{}, PopLayerState> {
     }
 
     showPopLayerFun1(isOpen: boolean) {
+        console.log('====================================');
+        console.log(isOpen);
+        console.log('====================================');
         this.setState({
             isOpen1: isOpen
         })
@@ -97,18 +119,18 @@ export default class popLayer extends Component<{}, PopLayerState> {
         })
     }
     componentDidMount() {
-        setTimeout(() => {
-            this.showPopLayerFun1(!this.state.isOpen1)
-        }, 1000)
-        setTimeout(() => {
-            this.showPopLayerFun3(!this.state.isOpen3)
-        }, 2000)
-        setTimeout(() => {
-            this.showPopLayerFun4(!this.state.isOpen4)
-        }, 3000)
-        setTimeout(() => {
-            this.showPopLayerFun2(!this.state.isOpen2)
-        }, 4000)
+        // setTimeout(() => {
+        //     this.showPopLayerFun1(!this.state.isOpen1)
+        // }, 1000)
+        // setTimeout(() => {
+        //     this.showPopLayerFun3(!this.state.isOpen3)
+        // }, 2000)
+        // setTimeout(() => {
+        //     this.showPopLayerFun4(!this.state.isOpen4)
+        // }, 3000)
+        // setTimeout(() => {
+        //     this.showPopLayerFun2(!this.state.isOpen2)
+        // }, 4000)
     }
     closePop1(isOpen: boolean) {
         this.setState({
@@ -125,15 +147,13 @@ export default class popLayer extends Component<{}, PopLayerState> {
     render() {
         return (
             <>
-                <input type="button" value="打开弹窗1" onClick={() => { this.showPopLayerFun1(!this.state.isOpen1) }} />
-                <br />
-                <input type="button" value="打开弹窗2" onClick={() => { this.showPopLayerFun2(!this.state.isOpen2) }} />
-                <br />
-                <input type="button" value="打开弹窗3" onClick={() => { this.showPopLayerFun3(!this.state.isOpen3) }} />
-                <br />
-                <input type="button" value="打开弹窗4" onClick={() => { this.showPopLayerFun4(!this.state.isOpen4) }} />
-                <br />
-                <LgPopLayer isOpen={this.state.isOpen1} onShowLayer={this.showPopLayerFun1} title='打开弹窗1' onClose={this.closePop1} showCoverLayer={false}>{this.initDom1()}</LgPopLayer>
+                <div className='open_layer'>
+                    <input type="button" value="打开弹窗1" onClick={() => { this.showPopLayerFun1(!this.state.isOpen1) }} />
+                    <input type="button" value="打开弹窗2" onClick={() => { this.showPopLayerFun2(!this.state.isOpen2) }} />
+                    <input type="button" value="打开弹窗3" onClick={() => { this.showPopLayerFun3(!this.state.isOpen3) }} />
+                    <input type="button" value="打开弹窗4" onClick={() => { this.showPopLayerFun4(!this.state.isOpen4) }} />
+                </div>
+                <LgPopLayer isOpen={this.state.isOpen1} width={400} height={500} onShowLayer={this.showPopLayerFun1} title='打开弹窗1' onClose={this.closePop1} showCoverLayer={false}>{this.initDom1()}</LgPopLayer>
                 <LgPopLayer isOpen={this.state.isOpen2} onShowLayer={this.showPopLayerFun2} title='打开弹窗2' >{this.initDom2()}</LgPopLayer>
                 <LgPopLayer isOpen={this.state.isOpen3} onShowLayer={this.showPopLayerFun3} title='打开弹窗3'>{this.initDom3()}</LgPopLayer>
                 <LgPopLayer isOpen={this.state.props4?.isOpen as boolean} {...this.state.props4} onShowLayer={this.showPopLayerFun3}>{this.initDom4()}</LgPopLayer>

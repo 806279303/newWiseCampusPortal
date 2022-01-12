@@ -5,18 +5,15 @@
     background-color: transparent;
 
     .lg_popLayer_container {
-        animation-duration: 0.3s;
         position: fixed;
-        min-width: 400px;
-        min-height: 200px;
-        max-width: 1200px;
-        max-height: 700px;
+        height: fit-content;
+        width: fit-content;
+        height: 0;
         top: 50%;
         left: 50%;
         background-color: #fff;
-        transform: scale(0);
-        opacity: 0;
-        transition: transform 0.5s;
+        transition: height 0.5s;
+        overflow: hidden;
         .lg_popLayer_top {
             display: flex;
             justify-content: space-between;
@@ -46,6 +43,20 @@
                 background-position: 0 0;
             }
         }
+        .lg_popLayer_main {
+            height: calc(100% - 48px);
+            width: 100%;
+            overflow: hidden;
+            overflow-y: scroll;
+            box-sizing: border-box;
+            word-break: break-word;
+            white-space: normal;
+            &::-webkit-scrollbar {
+                width: 0;
+                height: 0;
+            }
+        }
+
         .lg_popLayer_bottom {
             position: absolute;
             width: 100%;
@@ -103,8 +114,19 @@
         }
     }
     .lg_popLayer_container_show {
-        transform: scale(1);
-        opacity: 1;
+        height: fit-content;
+    }
+    .lg_popLayer_main_hasBottom {
+        .lg_popLayer_main {
+            height: calc(100% - 105px);
+            box-sizing: border-box;
+        }
+    }
+    .lg_popLayer_main_noHasBottom {
+        .lg_popLayer_main {
+            padding-bottom: 0px;
+            box-sizing: border-box;
+        }
     }
     .lg_popLayer_container_coverLayer {
         position: fixed;
