@@ -1,4 +1,3 @@
-import { stat } from 'fs';
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
 import "./index.scss";
@@ -43,6 +42,8 @@ export interface PopLayerState {
 let popLayerCreateNumIndex = 0;//创建弹窗实例的次数
 let popLayerZIndex = 1000;//弹出成是否拥有遮罩层
 let _hasPopLayerOpen: number[] = [];
+let _popLayerLeft = 0;
+let _popLayerTop = 0;
 export class LgPopLayer extends Component<PopLayerProps, PopLayerState, { isOpen: boolean }> {
     constructor(props: PopLayerProps | Readonly<PopLayerProps>) {
         super(props);
@@ -69,8 +70,8 @@ export class LgPopLayer extends Component<PopLayerProps, PopLayerState, { isOpen
         confirmText: '确认',//确认按钮需要显示的文本
         closeText: '取消',//关闭按钮需要显示的文本
         zIndex: popLayerZIndex,//弹窗的层级
-        width: 500,//弹窗的总宽度 | 默认值: 500
-        height: 400,//弹窗的总高度 | 默认值: 400
+        width: 400,//弹窗的总宽度 | 默认值: 500
+        height: 300,//弹窗的总高度 | 默认值: 400
 
     }
     /**
@@ -80,6 +81,9 @@ export class LgPopLayer extends Component<PopLayerProps, PopLayerState, { isOpen
      * @param fun 点击确认时需要触发的函数
      */
     closePopLayer(type = 0, fun?: () => any) {
+        console.log('=================isOpen===================');
+        console.log(this.props.isOpen);
+        console.log('====================================');
         this.setState({
             isOpen: false
         }, () => {
@@ -97,9 +101,8 @@ export class LgPopLayer extends Component<PopLayerProps, PopLayerState, { isOpen
         if (this.props.isOpen == nextProps.isOpen) return;
         let initCoverLayerType: number = nextProps.isOpen ? 1 : 0;// 0: 无弹窗 1:有弹窗
         this.setState({ isOpen: nextProps.isOpen }, () => {
-            let popLayerMainClassName = nextProps.isOpen ? 'lg_popLayer_container_show ' : ' ';
+            let popLayerMainClassName = nextProps.isOpen ? 'lg_popLayer_container_show lg_popLayer_main_hasBottom ' : 'lg_popLayer_main_noHasBottom ';
             let coverLayerMainClassName = nextProps.isOpen ? 'lg_popLayer_container_coverLayer_show ' : ' ';
-
             setTimeout(() => {
                 this.setState({
                     popLayerMainClassName,
@@ -202,18 +205,10 @@ export class LgPopLayer extends Component<PopLayerProps, PopLayerState, { isOpen
             let parentNode = this.parentNode as ParentNode as HTMLElement;
             let left = e.pageX - this.divLeftWidth;
             let top = e.pageY - this.divTopHeight;
-            if (left <= 0) {
-                left = 1;
-            }
-            if (left >= this.maxMoveWidth) {
-                left = this.maxMoveWidth - 2
-            }
-            if (top <= 0) {
-                top = 1;
-            }
-            if (top >= this.maxMoveHeight) {
-                top = this.maxMoveHeight - 1
-            }
+            if (left <= 0) { left = 1; }
+            if (left >= this.maxMoveWidth) { left = this.maxMoveWidth - 2 }
+            if (top <= 0) { top = 1; }
+            if (top >= this.maxMoveHeight) { top = this.maxMoveHeight - 1 }
             parentNode.style.left = left.toString() + 'px';
             parentNode.style.top = top.toString() + 'px';
 
@@ -227,10 +222,12 @@ export class LgPopLayer extends Component<PopLayerProps, PopLayerState, { isOpen
         popLayerZIndex = popLayerZIndex + 2;
         this.popLayerZIndex = popLayerZIndex;
         this.popLayerCreateNumIndex = popLayerCreateNumIndex++;
-        console.log('componentDidMount')
-        setTimeout(() => {
+        this.initPopLayerPosition(this.popLayerCreateNumIndex);
+        window.onresize = () => {
             this.initPopLayerPosition(this.popLayerCreateNumIndex);
-        }, 1000 * 1.1);
+        }
+        setTimeout(() => {
+        }, 1000 * 2);
     }
     getStyle(obj: any, name: string) {
         if (obj.currentStyle) {
@@ -244,31 +241,16 @@ export class LgPopLayer extends Component<PopLayerProps, PopLayerState, { isOpen
     private popLayerLeft = 0;//弹窗相对窗口左侧的位置
     private popLayerTop = 0;//弹窗相对窗口顶部的位置
     initPopLayerPosition(popLayerCreateNumIndex: number) {
-        let currentDom = document.getElementById('lg_popLayer_container' + popLayerCreateNumIndex) as HTMLElement;
-        console.log(parseFloat(currentDom.style.width))
-        currentDom.style.left = ((document.documentElement.clientWidth / 2) - (parseFloat(currentDom.style.width) / 2)) + 'px';
-        currentDom.style.top = ((document.documentElement.clientHeight / 2) - (parseFloat(currentDom.style.height) / 2)) + 'px';
-    }
-    componentDidUpdate() {
-        return true
+        this.popLayerLeft = ((document.documentElement.clientWidth / 2) - (parseFloat(this.props.width as any) / 2));
+        this.popLayerTop = ((document.documentElement.clientHeight / 2) - (parseFloat(this.props.height as any) / 2));
     }
     render() {
         const { props, state } = this;
-        let coverLayerClassName = true ? 'lg_popLayer_container_coverLayer lg_popLayer_container_coverLayer_show' : 'lg_popLayer_container_coverLayer_show'
         return ReactDOM.createPortal(
             <div className='lg_popLayer_big_container ' onMouseUp={this.popLayerMouseUp} onMouseMove={this.popLayerMouseMove} style={{ zIndex: this.popLayerZIndex, display: state.isOpen ? 'block' : 'none' }}>
                 {/* 弹窗的窗体 */}
-                <div
-                    className={'lg_popLayer_container ' + state.popLayerMainClassName + (props.className || '')}
-                    style={{ left: this.popLayerLeft, top: this.popLayerTop, width: props.width, height: props.height, zIndex: this.popLayerZIndex + 1 }}
-                    id={'lg_popLayer_container' + this.popLayerCreateNumIndex}
-                >
-                    <div
-                        className='lg_popLayer_top'
-                        onMouseDown={this.popLayerMouseDown}
-                        onMouseMove={this.popLayerMouseMove}
-                        onMouseUp={this.popLayerMouseUp}
-                    >
+                <div className={'lg_popLayer_container ' + state.popLayerMainClassName + (props.className || '')} style={{ left: this.popLayerLeft, top: this.popLayerTop, width: props.width, height: state.isOpen ? props.height : 0, zIndex: this.popLayerZIndex + 1 }} id={'lg_popLayer_container' + this.popLayerCreateNumIndex}>
+                    <div className='lg_popLayer_top' onMouseDown={this.popLayerMouseDown} onMouseMove={this.popLayerMouseMove} onMouseUp={this.popLayerMouseUp}>
                         <div className='lg_popLayer_top_title'>{props.title}</div>
                         <div className='lg_popLayer_top_close' onClick={() => { this.closePopLayer() }}></div>
                     </div>
