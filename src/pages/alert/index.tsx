@@ -24,21 +24,16 @@ export default class alert extends Component<{}, AlertState> {
         this.alertMsgCustom = this.alertMsgCustom.bind(this)
     }
     alertMsg() {
-        let alert = lgAlert.show({
-            isShowCloseBtn: true,
-            tipType: this.state.successLoading ? 'success' : 'loading',
-            position: { xAxis: 'left', yAxis: 'top' }
-        });
+        let alert = lgAlert.show({ isShowCloseBtn: true, tipType: this.state.successLoading ? 'success' : 'loading', position: { xAxis: 'left', yAxis: 'top' } });
         setTimeout(() => {
             lgAlert.show({ tipType: 'success', content: "加载成功", duration: 1000 * 2 }, alert.index);
-        }, 1000 * 3)
+        }, 1000 * 3);
     }
     alertMsg2() {
         let alert = lgAlert.show({ tipType: this.state.successLoading ? 'success' : 'loading', duration: 0, isShowCloseBtn: true, position: { xAxis: 'center', yAxis: 'top' } });
-        console.log(alert)
         setTimeout(() => {
             lgAlert.show({ tipType: 'success', content: "加载成功", duration: 0, customClose: (<div className='custom_close_dom'>关闭</div>) }, alert.index);
-        }, 1000 * 3)
+        }, 1000 * 3);
     }
     alertMsg3() {
         let alert = lgAlert.show({ tipType: 'question', duration: 0, position: { xAxis: 'right', yAxis: 'top' } });
@@ -59,13 +54,13 @@ export default class alert extends Component<{}, AlertState> {
         }, 1000 * 3)
     }
     alertMsg6() {
-        let alert = lgAlert.show({ tipType: this.state.successLoading ? 'success' : 'loading', duration: 0, position: { xAxis: 'right', yAxis: 'center' } });
+        let alert = lgAlert.show({ tipType: this.state.successLoading ? 'success' : 'loading', duration: 0, position: { xAxis: 'right', yAxis: 'center' }, description: '实时通讯的智子制造过程' });
         setTimeout(() => {
-            lgAlert.show({ tipType: 'success', content: "加载成功", duration: 0, isShowCloseBtn: true }, alert.index);
+            lgAlert.show({ tipType: 'success', content: "加载成功", duration: 0, isShowCloseBtn: true, description: "How do you spell color? You’ll see other writers do it two ways—the one we’ve already used in this paragraph, and another one—colour. Neither of the spellings is wrong, and they both mean exactly the same thing. Still, the two spellings are slightly different, so there has to be something to it, right? Let’s see. " }, alert.index);
         }, 1000 * 3)
     }
     alertMsg7() {
-        let alert = lgAlert.show({ isShowCloseBtn: true, tipType: this.state.successLoading ? 'success' : 'loading', duration: 0, position: { xAxis: 'left', yAxis: 'bottom' } });
+        let alert = lgAlert.show({ isShowCloseBtn: true, tipType: this.state.successLoading ? 'success' : 'loading', duration: 0, position: { xAxis: 'left', yAxis: 'bottom' }, });
         setTimeout(() => {
             lgAlert.show({ tipType: 'success', content: "加载成功", duration: 1000 }, alert.index);
         }, 1000 * 3)
@@ -99,20 +94,18 @@ export default class alert extends Component<{}, AlertState> {
     }
     alertInfo() {
         let alert = lgAlert.show({ tipType: 'info', tipMouldType: 'E', duration: 0, isShowIcon: false });
-
     }
     alertError() {
         let alert = lgAlert.show({
             tipType: 'error', tipMouldType: 'E', isShowCloseBtn: true, description: `There are a couple of ways you can choose which spelling to use. You can, for example, choose the spelling that’s prevalent in the country you’re from—if you’re an American, use color. If you’re from any of the Commonwealth countries, use colour. If English is not your first language, use the spelling you were taught.
-
         You can also choose to conform to the spelling that’s preferred by your audience. If you’re writing for Americans, use the spelling they prefer. If you’re writing something for Brits, Australians, or Canadians, use the spelling they prefer.
         If you’re still not sure which to choose, or if you’re writing for an international audience, the best thing to do is choose one of the spellings and stick with it. In other words, choose consistency. ` });
     }
     alertASuccess() {
-        let alert = lgAlert.show({ tipType: 'success', tipSize: 'mini', tipMouldType: 'A', duration: 0, closable: true, closeText: "关闭", description: "全市各社区(村)、西安急救中心和各医疗机构均不得以查验核酸48小时阴性证明作为进出小区就医、转送病人和接诊的限制。全文2331字，阅读约需4分钟 据央视新闻消息，陕西西安1... " });
+        let alert = lgAlert.show({ tipType: 'success', tipSize: 'mini', tipMouldType: 'A', duration: 0, isShowCloseBtn: true });
     }
     alertAWarning() {
-        let alert = lgAlert.show({ tipType: 'warning', tipSize: 'small', tipMouldType: 'A', containerClassName: 'weishoujiong', duration: 0, description: "How do you spell color? You’ll see other writers do it two ways—the one we’ve already used in this paragraph, and another one—colour. Neither of the spellings is wrong, and they both mean exactly the same thing. Still, the two spellings are slightly different, so there has to be something to it, right? Let’s see. " });
+        let alert = lgAlert.show({ tipType: 'warning', tipSize: 'small', tipMouldType: 'A', containerClassName: 'weishoujiong', duration: 0, description: "How do you spell color? You’ll see other writers do it two ways—the one we’ve already used in this paragraph, and another one—colour. " });
     }
     alertAInfo() {
         let alert = lgAlert.show({ tipType: 'info', reverse: true, tipMouldType: 'A', duration: 0 });
@@ -120,9 +113,8 @@ export default class alert extends Component<{}, AlertState> {
     }
     alertAError() {
         let alert = lgAlert.show({
-            tipType: 'error', tipMouldType: 'A', tipSize: 'big', isShowCloseBtn: true, description: `There are a couple of ways you can choose which spelling to use. You can, for example, choose the spelling that’s prevalent in the country you’re from—if you’re an American, use color. If you’re from any of the Commonwealth countries, use colour. If English is not your first language, use the spelling you were taught.
-        You can also choose to conform to the spelling that’s preferred by your audience. If you’re writing for Americans, use the spelling they prefer. If you’re writing something for Brits, Australians, or Canadians, use the spelling they prefer.
-        If you’re still not sure which to choose, or if you’re writing for an international audience, the best thing to do is choose one of the spellings and stick with it. In other words, choose consistency. ` });
+            tipType: 'error', tipMouldType: 'A', tipSize: 'big', isShowCloseBtn: true, duration: 0, description: `There are a couple of ways you can choose which spelling to use.`
+        });
     }
     alertAQuestion() {
         let alert = lgAlert.show({
