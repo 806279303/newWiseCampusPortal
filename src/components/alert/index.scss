@@ -31,20 +31,62 @@
             margin-bottom: 10px;
         }
         .lg_alert_body {
+            max-width: 100%;
             position: relative;
             width: fit-content;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 5px 10px;
+            padding: 10px 20px;
             border-radius: 5px;
             background-color: #fff;
             box-shadow: 0 3px 6px 0px rgba(0, 0, 0, 0.315);
             margin-bottom: 10px;
+            &:last-child {
+                margin-bottom: 0;
+            }
             .lg_alert_body_box {
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                .lg_alert_body_text_container {
+                    display: flex;
+                    flex-direction: column;
+                    flex: 1;
+                    .lg_alert_body_title {
+                        display: flex;
+                        align-items: center;
+                        font-size: 16px;
+                        color: #000;
+                        margin-bottom: 5px;
+                        line-height: 1;
+                    }
+                    .lg_alert_body_title_default {
+                        margin-bottom: 0;
+                    }
+                    .lg_alert_body_description {
+                        font-size: 14px;
+                        max-width: 500px;
+                        color: #999;
+                        word-break: break-all;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 4;
+                        overflow: hidden;
+                    }
+                    .lg_alert_body_description_show {
+                        font-size: 14px;
+                        max-width: 500px;
+                        color: #999;
+                        word-break: break-all;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 4;
+                        overflow: hidden;
+                    }
+                }
                 .lg_alert_body_icon {
                 }
                 .tip_icon_type_item {
@@ -54,7 +96,10 @@
                     background-color: pink;
                     margin-right: 10px;
                 }
-
+                .tip_icon_type_item_has_description {
+                    width: 30px;
+                    height: 30px;
+                }
                 .tip_icon_type0 {
                     background-color: rgb(33, 33, 255);
                 }
@@ -96,8 +141,15 @@
                 }
             }
             .lg_alert_body_close_container_box {
+                display: flex;
                 margin-left: 10px;
+                width: fit-content;
+                height: fit-content;
+                min-width: 15px;
+                min-height: 15px;
+                flex: 1;
                 cursor: pointer;
+                box-sizing: border-box;
                 .lg_alert_body_close_box {
                     width: 15px;
                     height: 15px;
@@ -126,6 +178,17 @@
                         transform: translate(-50%, -50%) rotate(-45deg);
                     }
                 }
+                .lg_alert_body_close_box_description {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                }
+            }
+            .lg_alert_body_text_box {
+                display: flex;
+                flex-direction: column;
+                .lg_alert_body_description {
+                }
             }
         }
         .lg_alert_body_A {
@@ -138,17 +201,14 @@
             .lg_alert_body_box {
                 display: flex;
                 flex-direction: column;
-                .lg_alert_body_icon {
-                    background: url("./images/query.png") center no-repeat;
-                    width: 100%;
-                    height: 100px;
-                }
                 .lg_alert_body_title {
                     padding: 0 30px;
                     text-align: center;
                     font-size: 18px;
                     color: #333333;
                     box-sizing: border-box;
+                    display: flex;
+                    align-items: center;
                 }
 
                 .lg_alert_body_description {
@@ -160,6 +220,12 @@
                     /* white-space: nowrap; */
                     /* text-overflow: ellipsis; */
                     line-height: 24px;
+                }
+                .lg_alert_body_icon {
+                    background: url("./images/query.png") center no-repeat;
+                    background-size: cover;
+                    width: 100%;
+                    height: 100px;
                 }
                 .tip_icon_type_A0 {
                     background: url("./images/warningB.png") center no-repeat;
@@ -177,13 +243,13 @@
                     background: url("./images/query.png") center no-repeat;
                 }
             }
-            .lg_alert_body_box_row {
+            .lg_alert_body_box_mini {
                 flex-direction: row;
                 .lg_alert_body_icon {
-                    min-width: 50px;
-                    min-height: 50px;
-                    width: 50px;
-                    height: 50px;
+                    min-width: 54px;
+                    min-height: 49px;
+                    width: 54px;
+                    height: 49px;
                 }
                 .lg_alert_body_title {
                     white-space: nowrap;
@@ -243,6 +309,9 @@
                 top: 20px;
                 right: 20px;
             }
+        }
+        .lg_alert_body_A_size_mini {
+            padding: 10px;
         }
     }
 }

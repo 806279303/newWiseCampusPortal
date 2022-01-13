@@ -2,16 +2,18 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
 import "./index.scss";
 
+// 使用的弹出层传入的props
 export interface PopLayerProps {
     // coverLayer
     showCoverLayer?: boolean;//是否展示遮罩层 | 默认值：true
     coverLayerClass?: string;//遮罩层类名
+    isCoverLayerClose?: boolean;//是否点击遮罩层关闭弹窗
 
     // popLayerBox
     isOpen: boolean;//是否打开弹窗
     width?: number;//弹窗的总宽度 | 默认值: 500
     height?: number;//弹窗的总高度 | 默认值: 400
-    title?: string;//弹窗头部的标题 | 默认值:
+    title?: string;//弹窗头部的标题 | 默认值: ————
     className?: string;//弹窗最外层的类名
 
     // top
@@ -27,12 +29,16 @@ export interface PopLayerProps {
     confirmClass?: string;//确认按钮元素上的类名
     closeClass?: string;//关闭按钮元素上的类名
 
-
+    // 触发的函数
     onConfirm?: () => void;//点击确认按钮的函数
-    onClose?: (isOpen: boolean) => void;//点击关闭按钮的函数
-    onShowLayer: (isOpen: boolean) => void;
-    customOfHeader?: React.ReactDOM | React.ReactChild | React.ReactElement;//弹窗中间部分添加的自定义Dom
-    children?: (React.ReactDOM | React.ReactChild | React.ReactElement) | (() => React.ReactElement);//弹窗头部添加的自定义Dom
+    onClose?: () => void;//点击关闭按钮的函数
+    onShowLayer: () => void;//必传的弹窗开关函数打开和关闭都必须执行的 | 可以在打开前和关闭后触发一定的函数
+
+    // 自定义的Dom
+    customOfHeader?: (React.ReactDOM | React.ReactChild | React.ReactElement) | (() => React.ReactElement);//弹窗头部添加的自定义Dom
+    children?: (React.ReactDOM | React.ReactChild | React.ReactElement) | (() => React.ReactElement);// 弹窗中部添加的自定义Dom
+    customOfBottom?: (React.ReactDOM | React.ReactChild | React.ReactElement) | (() => React.ReactElement);//弹窗低部添加的自定义Dom
+
 }
 export interface PopLayerState {
     isOpen: boolean;//弹窗是否打开
@@ -42,27 +48,24 @@ export interface PopLayerState {
 let popLayerCreateNumIndex = 0;//创建弹窗实例的次数
 let popLayerZIndex = 1000;//弹出成是否拥有遮罩层
 let _hasPopLayerOpen: number[] = [];
-let _popLayerLeft = 0;
-let _popLayerTop = 0;
+
 export class LgPopLayer extends Component<PopLayerProps, PopLayerState, { isOpen: boolean }> {
     constructor(props: PopLayerProps | Readonly<PopLayerProps>) {
         super(props);
-        this.state = {
-            isOpen: false,
-            popLayerMainClassName: '',
-            coverLayerMainClassName: ''
-        }
+        this.state = { isOpen: false, popLayerMainClassName: '', coverLayerMainClassName: '' };
         this.initCoverLayer = this.initCoverLayer.bind(this);
         this.popLayerMouseDown = this.popLayerMouseDown.bind(this);
         this.popLayerMouseMove = this.popLayerMouseMove.bind(this);
         this.popLayerMouseUp = this.popLayerMouseUp.bind(this);
         this.closePopLayer = this.closePopLayer.bind(this);
         this.confirmPopLayer = this.confirmPopLayer.bind(this);
+        this.isCoverLayerClose = this.isCoverLayerClose.bind(this);
     }
     private popLayerZIndex = 0;//弹出层默认层级数
     private popLayerCreateNumIndex = 0//弹窗实例创建的次数
     // 给props设置默认值
     static defaultProps = {
+        isCoverLayerClose: false,//是否点击遮罩层关闭弹窗
         showCoverLayer: true,//是否展示遮罩层 | 默认值：true
         title: 'Lg弹出层-默认标题',//弹窗头部的标题 | 默认值:
         isShowTopClose: false,//是否显示头部的关闭按钮 | 默认值:false
@@ -72,7 +75,6 @@ export class LgPopLayer extends Component<PopLayerProps, PopLayerState, { isOpen
         zIndex: popLayerZIndex,//弹窗的层级
         width: 400,//弹窗的总宽度 | 默认值: 500
         height: 300,//弹窗的总高度 | 默认值: 400
-
     }
     /**
      * @name closePopLayer
@@ -81,16 +83,13 @@ export class LgPopLayer extends Component<PopLayerProps, PopLayerState, { isOpen
      * @param fun 点击确认时需要触发的函数
      */
     closePopLayer(type = 0, fun?: () => any) {
-        console.log('=================isOpen===================');
-        console.log(this.props.isOpen);
-        console.log('====================================');
         this.setState({
             isOpen: false
         }, () => {
-            this.initCoverLayer(0, this.popLayerCreateNumIndex)
+            this.props.onShowLayer && this.props.onShowLayer();
+            this.initCoverLayer(0, this.popLayerCreateNumIndex);
             if (type == 0) { fun && fun(); return };
-            this.props.onShowLayer && this.props.onShowLayer(this.props.isOpen)
-            this.props.onClose && this.props.onClose(false);
+            this.props.onClose && this.props.onClose();
         })
     }
     // 打开当前弹窗
@@ -101,12 +100,10 @@ export class LgPopLayer extends Component<PopLayerProps, PopLayerState, { isOpen
         if (this.props.isOpen == nextProps.isOpen) return;
         let initCoverLayerType: number = nextProps.isOpen ? 1 : 0;// 0: 无弹窗 1:有弹窗
         this.setState({ isOpen: nextProps.isOpen }, () => {
-            let popLayerMainClassName = nextProps.isOpen ? 'lg_popLayer_container_show lg_popLayer_main_hasBottom ' : 'lg_popLayer_main_noHasBottom ';
-            let coverLayerMainClassName = nextProps.isOpen ? 'lg_popLayer_container_coverLayer_show ' : ' ';
+            let popLayerMainClassName = nextProps.isOpen ? ' lg_popLayer_container_show lg_popLayer_main_hasBottom ' : ' lg_popLayer_main_noHasBottom ';
             setTimeout(() => {
                 this.setState({
                     popLayerMainClassName,
-                    coverLayerMainClassName
                 })
             }, 200);
             this.initCoverLayer(initCoverLayerType, this.popLayerCreateNumIndex, nextProps.showCoverLayer);
@@ -163,16 +160,18 @@ export class LgPopLayer extends Component<PopLayerProps, PopLayerState, { isOpen
                     let coverNumIndex = o.getAttribute('data-cover-index');
                     let zIndex = o.style.zIndex;
                     if (coverNumIndex == popLayerCreateNumIndex) {
-                        o.style.opacity = '0.6'
-                        o.style.filter = 'alpha(opacity=60)'
-                        o.style.display = showCoverLayer ? 'block' : 'none'
-                        o.style.zIndex = 10000;
-                        o.previousElementSibling.style.zIndex = 10000 + (this.popLayerCreateNumIndex + 1);
-                        o.parentNode.style.zIndex = 10000;
-                        _hasPopLayerOpen.push(parseInt(coverNumIndex))
+                        setTimeout(() => {
+                            o.style.opacity = '0.6'
+                            o.style.filter = 'alpha(opacity=60)'
+                            o.style.zIndex = 10000;
+                            o.style.class = 'lg_popLayer_container_coverLayer lg_popLayer_container_coverLayer_show'
+                            o.previousElementSibling.style.zIndex = 10000 + (this.popLayerCreateNumIndex + 1);
+                            o.parentNode.style.zIndex = 10000;
+                            _hasPopLayerOpen.push(parseInt(coverNumIndex))
+                        }, 100);
                     } else {
-                        o.style.display = 'none'
                         o.style.opacity = '0'
+                        o.style.class = 'lg_popLayer_container_coverLayer'
                         o.style.filter = 'alpha(opacity=0)'
                         o.style.zIndex = this.popLayerZIndex;;
                         o.previousElementSibling.style.zIndex = this.popLayerZIndex + (this.popLayerCreateNumIndex + 1);
@@ -207,11 +206,10 @@ export class LgPopLayer extends Component<PopLayerProps, PopLayerState, { isOpen
             let top = e.pageY - this.divTopHeight;
             if (left <= 0) { left = 1; }
             if (left >= this.maxMoveWidth) { left = this.maxMoveWidth - 2 }
-            if (top <= 0) { top = 1; }
+            if (top <= 0) { top = 0; }
             if (top >= this.maxMoveHeight) { top = this.maxMoveHeight - 1 }
             parentNode.style.left = left.toString() + 'px';
             parentNode.style.top = top.toString() + 'px';
-
         }
     }
     popLayerMouseUp(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
@@ -228,6 +226,13 @@ export class LgPopLayer extends Component<PopLayerProps, PopLayerState, { isOpen
         }
         setTimeout(() => {
         }, 1000 * 2);
+        document.body.addEventListener('mouseout', (evt: MouseEvent) => {
+            if (!evt) evt = window.event as any
+            let to = evt.relatedTarget || (evt as any).toElement
+            if (!to || to.nodeName == "HTML") {
+                this.isPopLayerMove = false
+            }
+        })
     }
     getStyle(obj: any, name: string) {
         if (obj.currentStyle) {
@@ -235,7 +240,7 @@ export class LgPopLayer extends Component<PopLayerProps, PopLayerState, { isOpen
         }
         else {
             return getComputedStyle(obj)[name as any]; /*w3c 标准*/
-            //兼容IE和火狐  return window.getComputedStyle.getPropertyValue(name);   
+            //兼容IE和火狐  return window.getComputedStyle.getPropertyValue(name);
         }
     }
     private popLayerLeft = 0;//弹窗相对窗口左侧的位置
@@ -244,6 +249,7 @@ export class LgPopLayer extends Component<PopLayerProps, PopLayerState, { isOpen
         this.popLayerLeft = ((document.documentElement.clientWidth / 2) - (parseFloat(this.props.width as any) / 2));
         this.popLayerTop = ((document.documentElement.clientHeight / 2) - (parseFloat(this.props.height as any) / 2));
     }
+    isCoverLayerClose() { if (this.props.isCoverLayerClose) { this.closePopLayer() } }
     render() {
         const { props, state } = this;
         return ReactDOM.createPortal(
@@ -251,19 +257,23 @@ export class LgPopLayer extends Component<PopLayerProps, PopLayerState, { isOpen
                 {/* 弹窗的窗体 */}
                 <div className={'lg_popLayer_container ' + state.popLayerMainClassName + (props.className || '')} style={{ left: this.popLayerLeft, top: this.popLayerTop, width: props.width, height: state.isOpen ? props.height : 0, zIndex: this.popLayerZIndex + 1 }} id={'lg_popLayer_container' + this.popLayerCreateNumIndex}>
                     <div className='lg_popLayer_top' onMouseDown={this.popLayerMouseDown} onMouseMove={this.popLayerMouseMove} onMouseUp={this.popLayerMouseUp}>
-                        <div className='lg_popLayer_top_title'>{props.title}</div>
-                        <div className='lg_popLayer_top_close' onClick={() => { this.closePopLayer() }}></div>
+                        <div className='lg_popLayer_top_title' style={{ display: !this.props.customOfHeader ? 'block' : 'none' }}>{props.title}</div>
+                        <div className='lg_popLayer_top_close' onClick={() => { this.closePopLayer() }} style={{ display: !this.props.customOfHeader ? 'block' : 'none' }}></div>
+                        <div className='lg_popLayer_top_custom_header' style={{ display: this.props.customOfHeader ? 'block' : 'none' }}>{props.customOfHeader}</div>
                     </div>
                     <div className={'lg_popLayer_main ' + (props.mainClass || '')}>{props.children}</div>
                     <div className='lg_popLayer_bottom ' style={{ display: props?.isShowBottom ? "flex" : "none" }}>
-                        <div className='lg_popLayer_bottom_cho_box'>
+                        <div className='lg_popLayer_bottom_cho_box' style={{ display: !props.customOfBottom ? 'flex' : 'none' }}>
                             <div className={'lg_popLayer_bottom_confirm_box ' + (props.confirmClass || '')}><input onClick={() => { this.confirmPopLayer() }} className='lg_popLayer_bottom_confirm_input input_item' value={props.confirmText} type={'button'} /></div>
                             <div className={'lg_popLayer_bottom_close_box ' + (props.closeClass || '')}><input onClick={() => { this.closePopLayer(1) }} className='lg_popLayer_bottom_close_input input_item' value={props.closeText} type={'button'} /></div>
+                        </div>
+                        <div className='lg_popLayer_bottom_cho_box_custom_bottom' style={{ display: props.customOfBottom ? 'block' : 'none' }}>
+                            {props.customOfBottom}
                         </div>
                     </div>
                 </div>
                 {/* 遮罩层 */}
-                <div className={'lg_popLayer_container_coverLayer ' + state.coverLayerMainClassName} data-index={this.popLayerZIndex} data-cover-index={this.popLayerCreateNumIndex} style={{ zIndex: this.popLayerZIndex, display: props.showCoverLayer ? 'block' : 'none' }}></div>
+                <div className={'lg_popLayer_container_coverLayer '} data-index={this.popLayerZIndex} data-cover-index={this.popLayerCreateNumIndex} style={{ zIndex: this.popLayerZIndex, }} onClick={this.isCoverLayerClose}></div>
             </div>,
             document.getElementById('Lg_popLayer_root') as any
         )
@@ -276,21 +286,16 @@ export class LgPopLayer extends Component<PopLayerProps, PopLayerState, { isOpen
 let popLayerCreateIndex = 0;
 ; (() => {
     /**
-     * @msg 创建传送门的根节点
-     * @popLayerCreateIndex 创建的根节点的次数
-     */
+        * @msg 创建传送门的根节点
+        * @popLayerCreateIndex 创建的根节点的次数
+        */
     if (popLayerCreateIndex) return;
     let popLayer = document.getElementById('Lg_popLayer_root');
-    if (popLayer) {
-        document.removeChild(popLayer)
-    }
+    if (popLayer) { document.removeChild(popLayer); }
     let popLayerDom = document.createElement('div');
     popLayerDom.style.display = 'none';
     popLayerDom.setAttribute('id', 'Lg_popLayer_root');
     document.body.appendChild(popLayerDom);
-    ++popLayerCreateIndex
-    setTimeout(() => {
-        let popLayer = document.getElementById('Lg_popLayer_root') as HTMLElement;
-        popLayer.style.display = 'block';
-    }, 1000 * 1.5);
+    ++popLayerCreateIndex;
+    setTimeout(() => { let popLayer = document.getElementById('Lg_popLayer_root') as HTMLElement; popLayer.style.display = 'block'; }, 1000 * 1.5);
 })();
