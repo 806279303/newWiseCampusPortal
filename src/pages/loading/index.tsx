@@ -5,6 +5,10 @@ import {AllSkinCover} from "../AllSkinCover";
 import {BaseProps} from "../../type/BaseProps";
 
 export default class Loading extends Component<{}, {}> {
+
+  componentDidMount() {
+  }
+
   render() {
     return (
       <div className="lg-loading-demo">
@@ -36,6 +40,27 @@ export default class Loading extends Component<{}, {}> {
             <LgLoading type="B" showIcon tip="" animeType="B"/>
           </div>
         </TypeLoadingFrame>
+
+        <TypeLoadingFrame className="type-c-demo" title="C款" subtitle="C款线条款，百分比外置">
+          <div className="loading-list-c">
+            <LgLoading percentage={50} type="C"/>
+            <LgLoading percentage={100} type="C"/>
+            <LgLoading percentage={100} type="C" status="success"/>
+            <LgLoading percentage={100} type="C" status="warning"/>
+            <LgLoading percentage={50} type="C" status="exception"/>
+          </div>
+        </TypeLoadingFrame>
+
+        <TypeLoadingFrame className="type-c-demo-inner" title="C款" subtitle="C款线条款，百分比内置">
+          <div className="loading-list-c">
+            <LgLoading innerText percentage={50} type="C"/>
+            <LgLoading innerText percentage={100} type="C"/>
+            <LgLoading innerText percentage={100} type="C" status="success"/>
+            <LgLoading innerText percentage={100} type="C" status="warning"/>
+            <LgLoading innerText percentage={50} type="C" status="exception"/>
+          </div>
+        </TypeLoadingFrame>
+
       </div>
     )
   }
