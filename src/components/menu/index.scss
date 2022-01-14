@@ -1,5 +1,12 @@
 @import "../index";
 
+
+.lg_menu_root{
+    width: 100%;
+    .el-menu{
+        background-color: rgba(0, 0, 0, 0);
+    }
+}
 @each $skin,
 $color,
 $imgColor,

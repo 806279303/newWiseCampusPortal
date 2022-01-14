@@ -18,6 +18,7 @@ export default () => {
             <div><Link to='/firstPage'>首页</Link></div>
             <div><Link to='/steps'>步骤条</Link></div>
             <div><Link to='/datePicker'>时间选择</Link></div>
+            <div><Link to='/menu'>菜单</Link></div>
         </>
     )
 }
