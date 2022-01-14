@@ -1,48 +1,49 @@
-import React, { Component } from 'react'
+import './index.scss';
+
+import { Alert } from 'element-react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Alert } from 'element-react'
-import "./index.scss";
-//提示框使用的工具
+
 import { initAlertParams, initAlertParamsA, initContainerPosition, initLgAlertTypeAClass, initTipType } from './util';
 
+//提示框使用的工具
 let globalState: (state: any, callback?: () => void) => void;//将tip的容器的setState转变到外部函数
 let zIndexNumber = 19000;
-let mapList = new Map();//
-let timeoutMap = new Map();//
+let mapList = new Map();//存储10个不同位置上的数据
+let timeoutMap = new Map();//存储销毁提示的定时器标识
 
-export type TipType = "info" | "error" | "warning" | "success" | "loading" | "question" | "closeAll";
-export type typeModel_A = 'success' | 'info' | 'warning' | 'error' | "question";
-export type typeModel_E = 'success' | 'info' | 'warning' | "error";
-export type tipModel = 'A' | 'E' | undefined;//提示框的款式
-export type xOffsetType = "left" | "center" | "right" | undefined;
-export type yOffsetType = "top" | "center" | "bottom" | undefined;
-export type showAlign = "top" | 'center' | 'bottom';
-export type showDirection = "left" | 'center' | 'right';
-export type tipMouldType = 'A' | 'E' | undefined;
-export type tipSize = 'big' | 'small' | 'mini' | undefined;
+export type TipType = "info" | "error" | "warning" | "success" | "loading" | "question" | "closeAll";//默认的款式的提示类型
+export type typeModel_A = 'success' | 'info' | 'warning' | 'error' | "question";//A款的提示类型
+export type typeModel_E = 'success' | 'info' | 'warning' | "error";//B款的提示类型
+export type tipModel = 'A' | 'E' | undefined;//提示框的提示模式
+export type xOffsetType = "left" | "center" | "right" | undefined;//X轴上偏移的位置 0点在屏幕左上角
+export type yOffsetType = "top" | "center" | "bottom" | undefined;//Y轴上偏移的位置 0点在屏幕左上角
+export type showAlign = "top" | 'center' | 'bottom';//Y轴方向上的flex布局方式
+export type showDirection = "left" | 'center' | 'right';//X轴方向上的flex布局方式
+export type tipMouldType = 'A' | 'E' | undefined;//提示框的提示模式
+export type tipSize = 'big' | 'small' | 'mini' | undefined;//A款提示框的大小
 
 
 export interface LgAlertProps extends LgAlertParams, ElementAlert, LgAlertTypeA {
     content?: string;//展示的内容 || 兼容款式：default | A | E 
-    isShow?: boolean;//是否展示弹框 
+    isShow?: boolean;//是否展示弹框 || 兼容款式：default | A | E 
     tipType?: TipType | typeModel_A;//弹窗展示的类型 || 兼容款式：default | A | E 
     isShowCloseBtn?: boolean;//是否展示关闭按钮 || 兼容款式：default | A | E 
-    isShowIcon?: boolean;//是否显示小图标 
-    duration?: number;//展示的时间 | 0:未关闭 || 兼容款式：default | A | E 
-    position?: LgAlertPropsPosition;//设置弹出的位置 
-    containerClassName?: string;//单个提示框的类名
+    isShowIcon?: boolean;//是否显示小图标 || 兼容款式：default | A | E 
+    duration?: number;//展示后消失的时间 | 0:长时间停留在屏幕上面不消失 || 兼容款式：default | A | E 
+    position?: LgAlertPropsPosition;//设置弹出的位置 || 兼容款式：default | A | E 
+    containerClassName?: string;//单个提示框的类名 || 兼容款式：default | A | E 
     containerStyle?: React.CSSProperties;//
-    positionIndex?: number//
+    positionIndex?: number//执行show函数时返回每个提示实例的下标，用于关闭单个弹窗
     customIcon?: React.ReactDOM | React.ReactElement;//自定义的小图标
     customClose?: React.ReactDOM | React.ReactElement;//自定义关闭的Dom
-    closeText?: string;//自定义关闭的文本
-    tipMouldType?: tipMouldType;//提示框的款式
+    tipMouldType?: tipMouldType;//提示框的款式 
 }
 export interface lgAlert {
     showIdNumber: number;//
     showIdName: string;//
     show: (e?: LgAlertShowProps, showIdIndex?: string) => { index: string, options: LgAlertShowProps };//返回一个数字用于关闭已经打开的弹窗
-    close: (e: string) => any;//关闭一个提示框
+    close: (index: string) => any;//关闭一个提示框
     closeAll: () => any;//关闭所有的提示框
 }
 
@@ -86,14 +87,14 @@ export interface LgAlertContainerState {
 }
 // elementUI中需要传入的变量
 export interface ElementAlert {
-    onClose?(): void
-    title?: string
-    description?: string
-    closable?: boolean
-    closeText?: string
-    showIcon?: boolean
-    className?: string
-    style?: React.CSSProperties
+    onClose?(): void//关闭alert时触发的事件
+    title?: string//标题，必选参数
+    description?: string//	辅助性文字
+    closable?: boolean//是否可关闭
+    closeText?: string//关闭按钮自定义文本
+    showIcon?: boolean//是否显示图标
+    className?: string//
+    style?: React.CSSProperties//
 }
 export interface LgAlertState {
 }
@@ -303,6 +304,9 @@ export class LgAlertContainer extends Component<LgAlertContainerProps, LgAlertCo
     }
 }
 
+/**
+ * @msg 默认使用的提示
+ */
 export class LgAlert extends Component<LgAlertProps, LgAlertState> {
     constructor(props: LgAlertProps | Readonly<LgAlertProps>) {
         super(props);
@@ -312,6 +316,12 @@ export class LgAlert extends Component<LgAlertProps, LgAlertState> {
     componentWillReceiveProps(nextProps: any) {
         if (nextProps == this.props) return;
     }
+    /**
+     * @description: 
+     * @param {React} e
+     * @param {*} MouseEvent
+     * @return {*}
+     */
     closeTip(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
         let parentNode = e.currentTarget.parentNode as HTMLElement;
         let index = parseInt(parentNode.getAttribute('data-index') as string);

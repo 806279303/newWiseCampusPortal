@@ -1,12 +1,12 @@
 import { lazy } from 'react'
-
+ 
 export type RouterType = {
     path: string,
     component: React.LazyExoticComponent<any>,
     root: string[],
     notExect?: boolean
 }
-
+ 
 // 总路由
 const Routers: RouterType[] = ([
     {
@@ -82,6 +82,11 @@ const Routers: RouterType[] = ([
     {
         path: '/datePicker',
         component: lazy(() => import('../pages/datePicker')),
+        root: []
+    },
+    {
+        path: '/menu',
+        component: lazy(() => import('../pages/menu')),
         root: []
     },
     {

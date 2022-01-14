@@ -1,0 +1,25 @@
+@import "../index";
+
+
+.lg_menu_root{
+    width: 100%;
+    .el-menu{
+        background-color: rgba(0, 0, 0, 0);
+    }
+}
+@each $skin,
+$color,
+$imgColor,
+$colorHover in $all_colors {
+    #{$skin} {
+        .lg-loading-root {
+
+            .lg-loading-dot-top,
+            .lg-loading-dot-right,
+            .lg-loading-dot-bottom,
+            .lg-loading-dot-left {
+                background: $imgColor;
+            }
+        }
+    }
+}
