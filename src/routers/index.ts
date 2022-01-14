@@ -42,6 +42,10 @@ const Routers: RouterType[] = ([
       path: '/topBar',
       component: lazy(() => import('../pages/topBar')),
       root: []
+    },{
+        path: '/filter',
+        component: lazy(() => import('../pages/filter')),
+        root: []
     }, {
       path: '/firstPage',
       component: lazy(() => import('../pages/firstPage')),
@@ -85,6 +89,10 @@ const Routers: RouterType[] = ([
         component: lazy(() => import('../pages/menu')),
         root: []
     },
+        path: '/drawer',
+        component: lazy(() => import('../pages/drawer')),
+        root: []
+    }
 ])
 export {
     Routers
