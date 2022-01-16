@@ -4,18 +4,23 @@ import { BaseProps } from '../../type/BaseProps'
 
 import { Layout, Menu } from "element-react";
 
-interface IFMenu extends BaseProps {
-    type: "A" | "B" | undefined,
 
+const  defaultProps = {
+    type : "A",
+    mode : "vertical"
 }
+type IFMenu = {
+    mode : "vertical" | "horizontal" | undefined
+} & Partial<typeof defaultProps> & BaseProps
+
 class LgItem extends Component{
 
 }
-export class LgMenu extends Component<IFMenu, {}> {
+export class LgMenu extends Component<IFMenu & typeof defaultProps, {}> {
     
     static lgItem = LgItem
-
-    constructor(props: IFMenu) {
+    static defaultProps = defaultProps
+    constructor(props: IFMenu & typeof defaultProps) {
         super(props)
     }
     onSelect() {
@@ -28,15 +33,14 @@ export class LgMenu extends Component<IFMenu, {}> {
 
     }
     render() {
-        const { className = '', style = {}, type = "A" } = this.props
+        const { className = '', style = {}, type, mode } = this.props
         return (
             <div className={`lg_menu_root ${className}`} style={style}>
-            <input type="file" name="a" onChange={e=>{console.log(e)}}></input>
                 {
                     type == 'A' ? (
-                        <Menu defaultActive="1" className="el-menu-demo" mode="horizontal" onSelect={this.onSelect.bind(this)}>
+                        <Menu defaultActive="1" className="el-menu-demo" mode={mode} onSelect={this.onSelect.bind(this)}>
                             <Menu.Item index="1">处理中心</Menu.Item>
-                            <Menu.SubMenu index="2" title="我的工作台">
+                            <Menu.SubMenu index="2" title={<span><i className="el-icon-message"></i>我的工作台</span>}>
                                 <Menu.Item index="2-1">选项1</Menu.Item>
                                 <Menu.Item index="2-2">选项2</Menu.Item>
                                 <Menu.Item index="2-3">选项3</Menu.Item>
