@@ -5,7 +5,7 @@ import { ElementAlert, LgAlertProps, tipModel, TipType, typeModel_A, typeModel_E
  * @param LgAlertPropsPosition 
  * @returns 
  */
-export function initContainerPosition(LgAlertPropsPosition?: LgAlertPropsPosition, zIndexNumber?:number): { style: React.CSSProperties, type: string, positionType: number } {
+export function initContainerPosition(LgAlertPropsPosition?: LgAlertPropsPosition, zIndexNumber?: number): { style: React.CSSProperties, type: string, positionType: number } {
     let style = {}; let tipPositionXType: string = ''; let tipPositionYType: string = '';
     switch (LgAlertPropsPosition?.xAxis) {
         case 'left': tipPositionXType = '1'; break;
@@ -200,6 +200,11 @@ export function initLgAlertTypeAClass(tipSize: string): { miniClass: string, lay
  * @param o 需初始化的参数
  * @returns {onClose?(): void;title?: string;description?: string;closable?: boolean;closeText?: string;showIcon?: boolean;className?: string;style?: React.CSSProperties}//返回的参数
  */
+/**
+ * @description  : 初始化提示框A的参数
+ * @param         { type LgAlertProps }  o 需初始化的参数
+ * @return        { type * } 
+ */
 export function initAlertParamsA(o: LgAlertProps): ElementAlert {
     let initOption = { title: o.content, type: 'info', closable: true, showIcon: false }
     initOption = Object.assign(initOption, o)
@@ -208,6 +213,7 @@ export function initAlertParamsA(o: LgAlertProps): ElementAlert {
     options.closable = o?.isShowCloseBtn ? true : false;
     options.className = o.className;
     options.closeText = o.closeText;
+    options.style = o.style
     let tipType = o.tipType;
     switch (tipType) {
         case 'info': tipType = 'info'; break;
