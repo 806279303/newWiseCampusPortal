@@ -1,31 +1,9 @@
 import './index.scss'
 import {Component, useState} from 'react'
+import TopBarProps from './props';
 
-interface Props {
-    logoStyle: object,
-    version?: string,
-    homeUrl: string,
-    helpUrl: string,
-    onNotice: () => void,
-    hasNotice?: boolean,
-    userIconUrl: string,
-    userName: string,
-    userTypeIcon: string,
-    userType?: string,
-    onQuitPage: () => void,
-    otherBtn?: {
-        iconUrl: string,
-        btnName: string,
-        onBtn: () => void,
-        hasNode?: boolean
-    }[],
-    className?: string,
-    style?: object,
-    onRef?: (ref: any) => void
-}
-
-export default class TopBar extends Component<Props> {
-    constructor(props: Props) {
+export default class TopBar extends Component<TopBarProps> {
+    constructor(props: TopBarProps) {
         super(props);
         this.openHelp = this.openHelp.bind(this);
         this.openPersonPage = this.openPersonPage.bind(this);

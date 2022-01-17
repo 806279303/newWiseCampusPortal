@@ -64,7 +64,11 @@ const Routers: RouterType[] = ([
         path: '/alert',
         component: lazy(() => import('../pages/alert')),
         root: []
-    }, 
+    },  {
+        path: '/subPage',
+        component: lazy(() => import('../pages/subPage')),
+        root: []
+      }
 ])
 export {
     Routers
