@@ -1,7 +1,7 @@
 /*
  * @Author       : super-J
  * @Date         : 2021-12-31 16:25:37
- * @LastEditTime : 2022-01-17 17:26:03
+ * @LastEditTime : 2022-01-17 20:57:27
  * @LastEditors  : super-J
  * @Description  : Alert组件的封装
  */
@@ -588,12 +588,12 @@ class LgPopLayer {
         return option;
     }
 }
-let superJ = new LgPopLayer();
-let superJ1 = new LgPopLayer();
-let superJ2 = new LgPopLayer();
-console.log(superJ.show({
-    duration: 0
-}))
-console.log(superJ1.show({
-    duration: 0, content: 'superJ1~~~', position: { xAxis: 'center', yAxis: 'center', }
-}))
+// let superJ = new LgPopLayer();
+// let superJ1 = new LgPopLayer();
+// let superJ2 = new LgPopLayer();
+// console.log(superJ.show({
+//     duration: 0
+// }))
+// console.log(superJ1.show({
+//     duration: 0, content: 'superJ1~~~', position: { xAxis: 'center', yAxis: 'center', }
+// }))
