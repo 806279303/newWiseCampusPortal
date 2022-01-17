@@ -1,12 +1,12 @@
 import { lazy } from 'react'
-
+ 
 export type RouterType = {
     path: string,
     component: React.LazyExoticComponent<any>,
     root: string[],
     notExect?: boolean
 }
-
+ 
 // 总路由
 const Routers: RouterType[] = ([
     {
@@ -42,6 +42,10 @@ const Routers: RouterType[] = ([
       path: '/topBar',
       component: lazy(() => import('../pages/topBar')),
       root: []
+    },{
+        path: '/filter',
+        component: lazy(() => import('../pages/filter')),
+        root: []
     }, {
       path: '/firstPage',
       component: lazy(() => import('../pages/firstPage')),
@@ -68,7 +72,32 @@ const Routers: RouterType[] = ([
         path: '/subPage',
         component: lazy(() => import('../pages/subPage')),
         root: []
-      }
+      },
+    {
+        path: '/timeline',
+        component: lazy(() => import('../pages/timeline')),
+        root: []
+    },
+    {
+        path: '/steps',
+        component: lazy(() => import('../pages/steps')),
+        root: []
+    },
+    {
+        path: '/datePicker',
+        component: lazy(() => import('../pages/datePicker')),
+        root: []
+    },
+    {
+        path: '/menu',
+        component: lazy(() => import('../pages/menu')),
+        root: []
+    },
+    {
+        path: '/drawer',
+        component: lazy(() => import('../pages/drawer')),
+        root: []
+    }
 ])
 export {
     Routers

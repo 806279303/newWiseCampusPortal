@@ -1,6 +1,6 @@
 export interface IndexScss{
   allSkin: string
 }
-const indexVariable: IndexScss;
+declare const indexVariable: IndexScss;
 
 export default indexVariable;

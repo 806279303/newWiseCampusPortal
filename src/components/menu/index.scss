@@ -1,0 +1,47 @@
+@import "../index";
+
+
+.lg_menu_root{
+    .el-menu{
+        background-color: rgba(0, 0, 0, 0);
+
+    }
+}
+// 导航选中颜色
+.el-menu--horizontal.el-menu--dark .el-submenu .el-menu-item.is-active, .el-menu-item.is-active{
+    color:#6144a8;
+}
+// .el-menu--horizontal>.el-menu-item:hover, .el-menu--horizontal>.el-submenu.is-active .el-submenu__title:hover, .el-menu--horizontal>.el-submenu:hover .el-submenu__title {
+//     border-bottom: #6144a8;
+// }
+.el-menu--horizontal>.el-menu-item:hover, .el-menu--horizontal>.el-submenu.is-active .el-submenu__title, .el-menu--horizontal>.el-submenu:hover .el-submenu__title{
+    border-bottom: 5px solid #6144a8;
+}
+// 横向导航颜色
+.el-menu--horizontal .el-menu-item:hover, .el-menu--horizontal .el-submenu__title:hover{
+    background-color: lighten($color: #6144a8, $amount:47%);
+}
+// 纵向导航二级
+.el-menu--horizontal.el-menu--dark .el-submenu .el-menu-item:hover, .el-menu--horizontal.el-menu--dark .el-submenu .el-submenu-title:hover, .el-menu-item:hover{
+    background-color: lighten($color: #6144a8, $amount:40%);
+}
+// 纵向导航一级
+.el-submenu .el-menu-item:hover, .el-submenu__title:hover{
+    background-color: lighten($color: #6144a8, $amount:40%);
+}
+@each $skin,
+$color,
+$imgColor,
+$colorHover in $all_colors {
+    #{$skin} {
+        .lg-loading-root {
+
+            .lg-loading-dot-top,
+            .lg-loading-dot-right,
+            .lg-loading-dot-bottom,
+            .lg-loading-dot-left {
+                background: $imgColor;
+            }
+        }
+    }
+}
