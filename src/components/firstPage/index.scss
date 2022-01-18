@@ -1,1 +1,267 @@
 @import '../index.scss';
+
+@mixin totalSize {
+    width: 100%;
+    height: 100%;
+}
+* {
+    box-sizing: border-box;
+}
+body, html, #root, .lg_first_page {
+    @include totalSize;
+}
+body {
+    min-width: 1440px;
+    min-height: 720px;
+    font-size: 14px;
+}
+.lg_first_page {
+    position: relative;
+    padding: 114px 0 0 200px;
+}
+.oneline {
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+/* 左侧导航 */
+$textColor: rgba(255, 255, 255, 0.8);
+$textHoverColor: #fff;
+.lg_page_left_warp {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    padding-top: 64px;
+}
+.lg_left_tab_List {
+	height: 50px;
+	overflow: hidden;
+	transition: height 0.2s;
+    -moz-transition: height 0.2s; /* Firefox 4 */
+    -webkit-transition: height 0.2s; /* Safari 和 Chrome */
+	-o-transition: height 0.2s; /* Opera */
+}
+.lg_left_tab_name {
+	position: relative;
+	height: 50px;
+	line-height: 50px;
+	padding-left: 52px; 
+	background-position: 22px 16px;
+	background-repeat: no-repeat;
+	color: $textColor;
+	cursor: pointer;
+}
+.lg_left_tab_List_cho, .lg_left_tab_List:hover {
+    .lg_left_tab_name {
+        color: $textHoverColor;
+        background-position: 22px -24px;
+        background-color: rgba(0, 0, 0, 0.24);
+    }
+}
+.lg_left_show_btn {
+	position: absolute;
+	top: 15px;
+	right: 22px;
+	height: 20px;
+	line-height: 20px;
+	font-family: SimSun;
+	transition: transform 0.2s;
+    -moz-transition: transform 0.2s; /* Firefox 4 */
+    -webkit-transition: transform 0.2s; /* Safari 和 Chrome */
+	-o-transition: transform 0.2s; /* Opera */
+    cursor: pointer;
+}
+.lg_left_tab_List_show .lg_left_show_btn {
+	transform: rotate(90deg);
+	-ms-transform: rotate(90deg); 
+}
+.lg_left_tab_List_no_sub .lg_left_show_btn {
+	display: none;
+}
+.lg_left_tab_itam {
+	height: 42px;
+	line-height: 42px;
+	padding-left: 52px;
+	color: $textColor;
+	cursor: pointer;
+}
+.lg_left_tab_List_cho, .lg_left_tab_List:hover {
+    .lg_left_tab_itam {
+        background-color: rgba(0, 0, 0, 0.08);
+    }
+}
+.lg_left_tab_List:hover .lg_left_tab_itam:hover {
+    color: $textHoverColor;
+	background-color: rgba(0, 0, 0, 0.16);
+}
+ .lg_left_tab_List_cho, .lg_left_tab_List_cho:hover {
+    .lg_left_tab_i_cho {
+        color: $textHoverColor;
+        background-color: rgba(0, 0, 0, 0.16);
+    }
+}
+.lg_left_tab_List_cho {
+    .lg_left_tab_i_cho, .lg_left_tab_name {
+        cursor: default;
+    }
+}
+.lg_left_tab_i_node {
+	width: 4px;
+	height: 4px;
+	margin-top: 19px;
+	margin-right: 10px;
+	background-color: $textColor;
+	border-radius: 50%;
+}
+.lg_left_tab_List_cho, .lg_left_tab_List:hover  {
+    .lg_left_tab_i_node {
+        background-color: $textHoverColor;
+    }
+}
+.lg_left_tab_i_name, .lg_left_tab_text { 
+	position: relative;
+}
+.lg_red_node {
+	position: relative;
+}
+.lg_red_node_show {
+	position: absolute;
+	top: 0px;
+	right: -7px;
+	width: 6px;
+	height: 6px;
+	background-color: red;
+	border-radius: 50%;
+}
+/* end左侧导航 */
+/* 顶部导航 */
+.lg_top_tab {
+	position: relative;
+	height: 49px;
+	line-height: 49px;
+	padding: 0 20px;
+	font-size: 16px;
+	color: #666;
+	/* background-color: #fff; */
+	transition: padding 0.2s;
+    -moz-transition: padding 0.2s; /* Firefox 4 */
+    -webkit-transition: padding 0.2s; /* Safari 和 Chrome */
+	-o-transition: padding 0.2s; /* Opera */
+	cursor: pointer;
+	z-index: 1;
+	background: url("./images/top_split_line.png") left center no-repeat;
+}
+.lg_top_tab:first-child {
+	background-image: none;
+}
+.lg_top_tab_close {
+	position: absolute;
+	top: 16px;
+	right: 8px;
+	width: 0;
+	height: 18px;
+	background: url("./images/cho_tab_close.png") right center no-repeat;
+	cursor: pointer;
+	transition: width 0.2s;
+    -moz-transition: width 0.2s; /* Firefox 4 */
+    -webkit-transition: width 0.2s; /* Safari 和 Chrome */
+	-o-transition: width 0.2s; /* Opera */
+}
+.lg_top_tab:hover {
+	padding: 0 30px 0 10px;
+	z-index: 2;
+}
+.lg_top_tab:hover > .lg_top_tab_close {
+	width: 20px;
+}
+.cho_tab_list_only > .lg_top_tab > .lg_top_tab_close, .cho_tab_list_only > .lg_top_tab:hover > .lg_top_tab_close {
+	width: 0 !important;
+}
+.lg_top_tab_cho {
+	padding: 0 35px 0 15px;
+	color: #fff;
+	cursor: default;
+	z-index: 3;
+	background-image: none;
+	margin-right: -1px;
+	.lg_top_tab_close {
+		right: 10px;
+	}
+}
+.lg_top_tab_cho:hover {
+	padding: 0 35px 0 15px;
+	color: #fff !important;
+}
+.lg_page_top_tab_only {
+	.lg_top_tab_cho {
+		padding: 0 20px;
+		.lg_top_tab_close {
+			display: none;
+		}
+	}
+}
+.lg_top_tab_cho > .lg_top_tab_close {
+	width: 20px;
+	background-image: url("./images/cho_tab_close_c.png");
+}
+.lg_top_tab_close:hover {
+	opacity: 0.8;
+}
+.lg_top_tab_text {
+	overflow: hidden;
+	// text-overflow: ellipsis;
+	.lg_red_node_show {
+		right: auto;
+		left: 0px;
+	}
+}
+/* end顶部导航 */
+/* 内容区域 */
+.lg_sub_page_item {
+    @include totalSize;
+    iframe {
+        @include totalSize;
+        border: none;
+    }
+}
+/* end内容区域 */
+.lg_page_top_tab_warp {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    padding-left: 200px;
+}
+.lg_page_top_tab_list {
+    width: 100%;
+    height: 49px;
+    line-height: 49px;
+}
+.lg_page_sub_warp {
+    width: 100%;
+    height: 100%;
+}
+.lg_page_top_tab_list {
+	display: flex;
+	overflow: hidden;
+}
+@each $skin, $color, $imgColor in $all_colors {
+    #{$skin} {
+        @include totalSize;
+        .lg_page_left_content {
+            background: url("./images/left#{$skin}.png") center center/100% 100% no-repeat;
+        }
+        .lg_page_top_tab_warp {
+            border-bottom: 1px solid $color;
+        }
+        .lg_top_tab_cho {
+            background-color: $color;
+        }
+        .lg_top_tab:hover {
+            color: $color;
+        }
+    }
+}

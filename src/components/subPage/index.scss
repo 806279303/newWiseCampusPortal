@@ -1,0 +1,58 @@
+@import "../index.scss";
+.sub_page_tab_warp {
+    width: 100%;
+    padding: 0 24px;
+}
+.sub_page_tabs {
+    width: 100%;
+    border-bottom: 1px solid #e8e8e8;
+    color: #666;
+}
+.sub_page_tab_item {
+    position: relative;
+    display: inline-block;
+    margin: 18px 40px 0 0;
+    min-width: 32px;
+    text-align: center;
+    cursor: pointer;
+    .sub_page_tab_i_name {
+        line-height: 30px;
+    }
+    .sub_page_tab_i_num {
+        position: absolute;
+        top: 0px;
+        left: 100%;
+        padding: 0 3px;
+        font-size: 12px;
+        color: #fff;
+        background-color: red;
+        border-radius: 5px;
+        font-weight: normal;
+    }
+}
+.sub_page_tab_i_cho {
+    cursor: default;
+    font-weight: bold;
+    &::after {
+        display: block;
+        content: "";
+        width: 32px;
+        height: 2px;
+        margin: 2px auto -2px;
+    }
+}
+
+@each $skin, $color in $all_colors {
+    #{$skin} {
+        .sub_page_tab_item:hover {
+            font-weight: bold;
+            color: $color;
+        }
+        .sub_page_tab_i_cho {
+            color: $color;
+            &::after {
+                background-color: $color;
+            }
+        }
+    }
+}
