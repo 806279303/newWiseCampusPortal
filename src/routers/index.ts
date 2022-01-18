@@ -94,6 +94,11 @@ const Routers: RouterType[] = ([
         root: []
     },
     {
+        path: '/treeselect',
+        component: lazy(() => import('../pages/treeselect')),
+        root: []
+    },
+    {
         path: '/drawer',
         component: lazy(() => import('../pages/drawer')),
         root: []

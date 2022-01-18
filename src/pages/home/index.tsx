@@ -21,6 +21,7 @@ export default () => {
             <div><Link to='/datePicker'>时间选择</Link></div>
             <div><Link to='/menu'>菜单</Link></div>
             <div><Link to='/drawer'>抽屉</Link></div>
+            <div><Link to='/treeselect'>选择树</Link></div>
             <div><Link to='/collapse'>折叠面板</Link></div>
         </>
     )

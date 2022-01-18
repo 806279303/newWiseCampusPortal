@@ -1,0 +1,7 @@
+@import "../index.scss";
+
+@each $skin, $color, $imgColor, $colorHover in $all_colors {
+    #{$skin} {
+        
+    }
+}
