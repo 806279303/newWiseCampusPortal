@@ -112,4 +112,34 @@
     }
   }
 
+  .type-c-demo {
+    height: 260px;
+    .loading-list-c {
+      margin-top: 20px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      .lg-progress-root {
+        margin: 5px 0;
+      }
+    }
+  }
+
+  .type-c-demo-inner {
+    height: 300px;
+    .loading-list-c {
+      margin-top: 20px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      .lg-progress-root {
+        margin: 5px 0;
+      }
+    }
+  }
+
 }

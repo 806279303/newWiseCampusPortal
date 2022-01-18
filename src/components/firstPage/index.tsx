@@ -1,74 +1,131 @@
 import "./index.scss";
-import {Component, ReactNode, useState} from 'react';
+import {Component, useState, ReactNode} from 'react';
 import { stopProps } from "../../utils";
+import TopBar from '../topBar';
+import TopBarProps from '../topBar/props';
+import { Scrollbars } from 'react-custom-scrollbars-2';
+import myEvent from '../../type/event'
 
-interface Props {
-    topBar: React.ReactNode,
-    btnList: {
+interface btnList {
+    name: string,
+    icon: string,
+    subPage?: ReactNode | string,
+    redNode?: boolean,
+    btns?: {
         name: string,
-        icon: string,
-        noSubBtn?: boolean, //true没有自按钮，false有
-        btns: {
-            name: string,
-            url: string,
-            hasNode?: number
-        }[]
-    }[],
+        subPage: ReactNode | string,
+        redNode?: boolean
+    }[]
+}
+interface Props {
+    TopBarProps: TopBarProps,
+    btnList: btnList[],
     children?: any,
     className?: string,
     style?: object,
     onRef?: (ref: any) => void
 }
 interface States {
-    tab: object[],
-    choIndex: object,
-    style: object,
+    choTabs: Array<number>[],
+    choIndex: Array<number>
 }
 export default class FirstPage extends Component<Props, States> {
     constructor(props: Props) {
         super(props);
+        var curChoTabs = this.getSession(props.btnList);
         this.state = {
-            tab: [],
-            style: {},
-            choIndex: []
+            choTabs: [curChoTabs],
+            choIndex: curChoTabs
         }
+        this.deleShowTab = this.deleShowTab.bind(this);
+        this.choShowTab = this.choShowTab.bind(this);
+        this.addTab = this.addTab.bind(this);
+        this.getCurData = this.getCurData.bind(this);
     }
-    choShowTab(data: object) {
-
+    getSession(btnList: any[]) {
+        var pagePath = sessionStorage.getItem("pagePath");
+        if (pagePath) {
+            var index = pagePath.split("|");
+            var index0 = index[0] ? parseInt(index[0]) : 0,
+                index1 = index[1] ? parseInt(index[1]) : 0;
+            if (btnList[index0]) {
+                if (btnList[index0].btns) {
+                    if (btnList[index0].btns[index1])
+                        return  [index0, index1];
+                    else if (btnList[index0].btns[0])
+                        return [index0, 0]
+                }
+                return [index0, -1];
+            }
+        } 
+        if (btnList[0] && btnList[0].btns && btnList[0].btns[0])
+            return [0, 0];
+        return [0, -1];
     }
-    addTab() {
-
+    setSession() {
+        let choIndex = this.state.choIndex;
+        sessionStorage.setItem("pagePath", choIndex[0] + "|" + choIndex[1] + "|0");
+    }
+    deleShowTab(index: number, type?: boolean) {
+        var choTabs = this.state.choTabs, choIndex = this.state.choIndex;
+        choTabs.splice(index, 1);
+        if (type) choIndex = choTabs[choTabs.length - 1];
+        this.setState({choTabs: choTabs, choIndex: choIndex}, this.setSession);
+    }
+    choShowTab(data: Array<number>) {
+        var choTabs = this.state.choTabs;
+        for (let i = 0; i < choTabs.length ; i++) {
+            if (data[0] == choTabs[i][0] && data[1] == choTabs[i][1]) {
+                this.setState({choIndex: data}, this.setSession);
+                return true;
+            }
+        }
+        return false;
+    }
+    addTab(data: Array<number>) {
+        if (this.choShowTab(data)) return;
+        var choTabs = this.state.choTabs;
+        choTabs.push(data);
+        this.setState({choTabs: choTabs, choIndex: data}, this.setSession);
+    }
+    getCurData(btnList: any[], o: Array<number>) {
+        if (!btnList[o[0]].btns || o[1] == -1) {
+            var curData = btnList[o[0]];
+            curData.parentName = "";
+        } else {
+            var curData = btnList[o[0]].btns[o[1]];
+            curData.parentName = btnList[o[0]].name;
+        }
+        curData.posi = o;
+        return curData;
     }
     render() {
         const props = this.props, that = this;
-        var choIndex = this.state.choIndex
+        var choIndex = this.state.choIndex, btnList = props.btnList;
+        var subPages = new Array();
+        var topTabsData = this.state.choTabs.map((o, i) => {
+            var data = that.getCurData(btnList, o);
+            var hasCho = (choIndex[0] == o[0] && choIndex[1] == o[1]) ? true : false;
+            data.hasCho = hasCho;
+            subPages.push(<SubPageItem data={data} hasCho={hasCho} key={"con_i" + i} />)
+            return data;
+        })
         return (
             <div className={`lg_first_page ${props.className || ""}`} style={props.style || {}}>
-                {props.topBar}
-                <div id="cho_tab_warp">
-                    <div id="cho_tab_list" className={"clear" + (this.state.tab.length == 1 ? " cho_tab_list_only" : "")} style={{ width: 2000 }}>
-                            {
-                            this.state.tab.map(function (o, i) {
-                                return <ChoTabItem choIndex={choIndex} style={that.state.style} index={i} key={"cho_tab" + i} data={o} handle={that.choShowTab} />
-                            })
-                        }
-                    </div>
-                </div>
-                <div id="left_content">
-                    <div className="main_tab_warp">
-                        {
+                <TopBar {...props.TopBarProps} />
+                <TopTabWarp data={topTabsData} choTab={this.choShowTab} closeTab={this.deleShowTab} />
+                <div className="lg_page_left_warp">
+                    <Scrollbars className="lg_page_left_content" style={{width: 200, height: "100%"}}>
+                        <div style={{paddingTop: 10}}>{
                             props.btnList.map(function (o, i) {
-                                return <MainTabWarp data={o} index={i} key={"man_t_w" + i} choTab={that.addTab} choIndex={choIndex} />
+                                return <LeftTabWarp data={o} index={i} key={"man_t_w" + i} choTab={that.addTab} choIndex={choIndex} />
                             })
                         }
-                    </div>
+                        </div>
+                    </Scrollbars >
                 </div>
-                <div id="content_warp">
-                    {
-                        this.state.tab.map(function (o, i) {
-                            return <ContentItem data={o} index={i} key={"con_i" + i} choIndex={choIndex} />
-                        })
-                    }
+                <div className="lg_page_sub_warp">
+                    {subPages}
                 </div>
                 {props.children}
             </div>
@@ -76,112 +133,114 @@ export default class FirstPage extends Component<Props, States> {
     }
 }
 
-class MainTabWarp extends Component<any, any> {
+const LeftTabWarp = (props: any) => {
+    const [isHide, setIsHide] = useState(false);
+    const openSub = () => {
+        if (props.data.btns) {
+            setIsHide(!isHide);
+        } else {
+            props.choTab([props.index, -1])
+        }
+    }
+    var o = props.data, choIndex = props.choIndex, hasCho = "", style = {}, index = props.index;
+    var btns = o.btns || [];
+    if (choIndex[0] == index) {
+        hasCho = " lg_left_tab_List_cho";
+    }
+    if (btns.length) {
+        if (!isHide) {
+            style = { height: 50 + btns.length * 42 };
+            hasCho += " lg_left_tab_List_show";
+        }
+    } else {
+        hasCho += " lg_left_tab_List_no_sub";
+    }
+    return (
+        <div className={"lg_left_tab_List" + hasCho} style={style}>
+            <div className="lg_left_tab_name" onClick={openSub} style={{ backgroundImage: "url('" + o.icon + "')" }}>
+                <RedNode hasNode={o.redNode}>{o.name}</RedNode>
+                <b className="lg_left_show_btn">{">"}</b>
+            </div>
+            {
+                btns.map((o: any, i: number) => {
+                    var hasChoSub = (choIndex[0] == index && choIndex[1] == i) ? " lg_left_tab_i_cho" : "";
+                    return <LeftTabItem data={o} index={[index, i]} key={"man_t_i" + i} choTab={props.choTab} hasCho={hasChoSub} />
+                })
+            }
+        </div>
+    )
+}
+const LeftTabItem = (props: any) => {
+    var o = props.data;
+    return (
+        <div className={"lg_left_tab_itam clear " + props.hasCho} onClick={() => { props.choTab(props.index) }}>
+            <div className="lg_left_tab_i_node left" />
+            <div className="lg_left_tab_text left"><RedNode hasNode={o.redNode}>{o.name}</RedNode></div>
+        </div>
+    )
+}
+const RedNode = (props: {hasNode?: boolean, children: string, className?: string}) => {
+    return (
+        <span className={`lg_red_node ${props.className || ""}`}>
+            {props.children} 
+            {props.hasNode ? <b className="lg_red_node_show" /> : null}
+        </span>
+    )
+}
+
+class TopTabWarp extends Component<any, any> {
     constructor(props: any) {
         super(props);
-        this.state = {
-
-        }
-    }
-    openSub() {
-        if (this.props.data.btns) {
-            this.props.choTab(this.props.index, -1)
-        } else {
-            var data = this.props.data;
-            data.posi = [this.props.index, 0];
-            this.props.choTab(data);
-        }
     }
     render() {
-        var o = this.props.data, that = this, choIndex = this.props.choIndex, hasCho = "", style = {}, index = this.props.index;
-        var btns = [];
-        if (choIndex.length == 2 && choIndex[0] == index || choIndex.length == 3 && choIndex[2] == index) {
-            hasCho = " main_tab_List_cho";
-        }
-        if (o.btns) {
-            btns = o.btns
-            if (!o.isHide) {
-                style = { height: 50 + btns.length * 42 };
-                hasCho += " main_tab_List_show";
-            }
-        } else {
-            hasCho += " main_tab_List_no_sub";
-        }
+        var that = this, choTab = this.props.choTab, closeTab = this.props.closeTab;
+        var allData = this.props.data || [];
         return (
-            <div className={"main_tab_List" + hasCho} style={style}>
-                <div className="main_tab_name" onClick={this.openSub} style={{ backgroundImage: "url('" + o.icon + "')" }}>{o.name}<b>{">"}</b></div>
-                {
-                    btns.map((o: any, i: number) => {
-                        return <MainTabItem data={o} index={[index, i]} key={"man_t_i" + i} choTab={that.props.choTab} choIndex={choIndex} />
-                    })
-                }
+            <div className="lg_page_top_tab_warp">
+                <div className={"lg_page_top_tab_list clear" + (allData.length == 1 ? " lg_page_top_tab_only" : "")}>
+                    {
+                        allData.map((o: object, i: number) => {
+                            return <TopTabItem  data={o} index={i} handle={choTab} close={closeTab} key={"cho_tab" + i} />
+                        })
+                    }
+                </div>
             </div>
         )
     }
-}
-class MainTabItem extends Component<any, any> {
-    choTab() {
-        var index = this.props.index, choIndex = this.props.choIndex;
-        if (choIndex[0] == index[0] && choIndex[1] == index[1]) return;
-        var data = this.props.data;
-        data.posi = this.props.index;
-        this.props.choTab(data);
-    }
-    showNode() {
-        return "none"
-    }
-    render() {
-        var o = this.props.data, index = this.props.index, choIndex = this.props.choIndex;
-        var hasCho = (choIndex[0] == index[0] && choIndex[1] == index[1]) ? " main_tab_i_cho" : "";
-        return (
-            <div className={"main_tab_itam clear" + hasCho} onClick={this.choTab}>
-                <div className="main_tab_i_node left" />
-                <div className="main_tab_i_name left">{o.name}<b style={{display: this.showNode()}}/></div>
-            </div>
-        )
-    }
-}
-
-class ChoTabItem extends Component<any, any> {
-    close(e:any) {
+} 
+const TopTabItem = (props: any) => {
+    const close = (e:any) => {
         stopProps(e)
-        this.props.handle(this.props.index, this.props.data);
+        props.close(props.index, props.data.hasCho);
     }
-    choTab () {
-        if (this.props.choIndex == this.props.index) return;
-        this.props.handle(this.props.index, this.props.data, 1);
+    const choTab = () => {
+        if (props.data.hasCho) return;
+        props.handle(props.data.posi);
     }
-    showNode() {
-        return "none"
-    }
-    render() {
-        var o = this.props.data;
-        var cla =  (this.props.choIndex == this.props.index) ? " cho_tab_i_cho" : "";
-        return (
-            <div className={"cho_tab_i left" + cla} onClick={this.choTab} style={this.props.style || {}}>
-                <div className="cho_tab_i_text left">{o.name}<b style={{display: this.showNode()}}/></div>
-                <div className="cho_tab_i_close left hover_btn" onClick={this.close} />
-            </div>
-        );
-    }
+    var o = props.data;
+    return (
+        <div className={`lg_top_tab oneline left ${props.data.hasCho ? " lg_top_tab_cho" : ""}`} onClick={choTab} style={props.style || {}}>
+            <div className="lg_top_tab_text" title={`${o.parentName ? o.parentName + "/" : ""}${o.name}`}><RedNode hasNode={o.redNode}>{o.name}</RedNode></div>
+            <div className="lg_top_tab_close hover_btn" onClick={close} />
+        </div>
+    );
 }
 
 
-class ContentItem extends Component<any, any> {
-    componentWillReceiveProps (nextProps: any) {
-        // if (this.props.choIndex != this.props.index && nextProps.choIndex == nextProps.index) {
-        //     var posi = this.props.data.posi;
-        //     var mySubPage = window.frames["mySubPage" + posi[0] + "_" + posi[1]];
-        //     if (mySubPage && mySubPage.window) {
-        //         mySubPage.window.refreshCurPage && mySubPage.window.refreshCurPage();
-        //     }
-        // }
+class SubPageItem extends Component<any, any> {
+    shouldComponentUpdate(nextProps: any) {
+        return (this.props.hasCho !== nextProps.hasCho)
+    }
+    componentDidUpdate() {
+        if (this.props.hasCho) {
+            myEvent.emit("refresh");
+        }
     }
     render () {
         var o = this.props.data;
         return (
-            <div className="content_item" style={{ display: (this.props.choIndex == this.props.index) ? "block" : "none" }}>
-                <iframe src={o.url} name={"mySubPage" + o.posi[0] + "_" + o.posi[1]}/>
+            <div className="lg_sub_page_item" style={{ display: this.props.hasCho ? "block" : "none" }}>
+                {o.subPage}
             </div>
         )
     }
