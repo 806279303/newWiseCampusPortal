@@ -1,7 +1,7 @@
 /*
  * @Author       : super-J
  * @Date         : 2021-12-31 16:25:37
- * @LastEditTime : 2022-01-19 10:24:59
+ * @LastEditTime : 2022-01-19 10:56:36
  * @LastEditors  : super-J
  * @Description  : Alert组件的封装
  */
@@ -78,7 +78,6 @@ export interface LgAlertDefaultProps {
     className?: string// 修改样式的类名 | 默认值: --
     style?: React.CSSProperties// 修改样式的对象 | 默认值: --
 
-
     // ------------------------------------不对外使用---------------------------------------
     showIdNumber?: number;// 标示单个lgAlert的数字
     showIdName?: string;// 标示单个lgAlert的id类名
@@ -88,8 +87,8 @@ export interface LgAlertDefaultProps {
  * @summary A款样式的参数 仅适用于A款
  */
 export interface LgAlertModelAProps {
-    confirmText?: string;// 确认按钮显示的文字 | 默认值: 确定
-    closeText?: string;// 关闭按钮显示的文字 | 默认值: 再想想
+    confirmText?: string;// 确认按钮显示的文字 | 默认值: "确定"
+    closeText?: string;// 关闭按钮显示的文字 | 默认值: "再想想"
     reverse?: boolean;// 确认按钮与取消按钮是否反转 | 默认值: false
     tipSize?: tipSize;// 弹窗尺寸 | 默认值: small
 
@@ -103,7 +102,8 @@ export interface LgAlertModelAProps {
 
 /**
  * @summary E款样式的参数 elementUI中需要传入的变量
- * @see 
+ * 
+ * @see https://elemefe.github.io/element-react/#/zh-CN/alert
  */
 export interface ElementAlert {
     title?: string// 标题，必选参数 | 默认值: --
