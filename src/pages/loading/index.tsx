@@ -22,9 +22,9 @@ export default class Loading extends Component<{}, {}> {
 
         <div>标签属性详解</div>
         <CodeView className="code-size">
-          {`interface LgBreadcrumbProps{
+          {`interface LgLoadingProps{
                type?: "A" | "B" | "C" // 款式选择，"A"、"B"、 "C",可空，默认为A
-               tip?: string  //提示词，可空，默认为”加载中...“
+               tip?: string  //提示词，可空，默认为”加载中...“， C款无效
                
                /*A款专用属性*/
                size?: "medium" | "large" //大小，可空，默认"large"
