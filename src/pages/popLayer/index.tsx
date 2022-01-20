@@ -1,4 +1,5 @@
-import { LgPopLayer, PopLayerProps } from '@/components/popLayer'
+import { CodeView } from '@/components/CodeView';
+import { LgPopLayer } from '@/components/popLayer';
 import React, { Component } from 'react'
 import './index.scss'
 interface PopLayerState {
@@ -78,7 +79,7 @@ export default class popLayer extends Component<{}, PopLayerState> {
     initDom3() {
         return (
             <div>
-                <input type="button" value="打开弹窗2" className='open-layer' onClick={() => { this.showPopLayerFun2() }} />
+                <input type="button" value="打开弹窗2" className='comment_position' onClick={() => { this.showPopLayerFun2() }} />
             </div>)
     }
     initDom4() {
@@ -108,18 +109,6 @@ export default class popLayer extends Component<{}, PopLayerState> {
         this.setState({ isOpen4: !this.state.isOpen4 })
     }
     componentDidMount() {
-        // setTimeout(() => {
-        //     this.showPopLayerFun1()
-        // }, 1000)
-        // setTimeout(() => {
-        //     this.showPopLayerFun3()
-        // }, 2000)
-        // setTimeout(() => {
-        //     this.showPopLayerFun4()
-        // }, 3000)
-        // setTimeout(() => {
-        //     this.showPopLayerFun2()
-        // }, 4000)
         let allSkin = ["lg-skin-s1", "lg-skin-s2", "lg-skin-s3", "lg-skin-s4", "lg-skin-s5", "lg-skin-k1", "lg-skin-k2"];
         let number = allSkin.length;
         setInterval(() => {
@@ -137,24 +126,209 @@ export default class popLayer extends Component<{}, PopLayerState> {
 
     }
     isConfirm2(isOpen?: boolean) {
-        console.log('isConfirm2 --- 弹窗2 点击确定', isOpen)
+        alert('isConfirm2 --- 弹窗2 点击确定')
     }
     isClose2(isOpen?: boolean) {
-        console.log('isClose2 --- 弹窗2 点击取消', isOpen)
+        alert('isClose2 --- 弹窗2 点击取消')
     }
     isIconClose2(isOpen?: boolean) {
-        console.log('isIconClose2 --- 弹窗2 点击小图标取消', isOpen)
+        alert('isIconClose2 --- 弹窗2 点击小图标取消')
     }
 
     render() {
         return (
             <>
-                <div className='open_layer'>
-                    <input type="button" value="打开弹窗1" className='open-layer' onClick={this.showPopLayerFun1} />
-                    <input type="button" value="打开弹窗2" className='open-layer' onClick={() => { this.showPopLayerFun2() }} />
-                    <input type="button" value="打开弹窗3" className='open-layer' onClick={this.showPopLayerFun3} />
-                    <input type="button" value="打开弹窗4" className='open-layer' onClick={this.showPopLayerFun4} />
+
+                <div className='components-show-box'>
+                    <div className='components-show-big-title'>G004</div>
+                    <div className='components-show-use'>使用指南</div>
+                    <div className='components-show-steps-box'>
+                        <div className='components-show-steps'>一、在 @/components/popLayer 文件中引入组件 LgPopLayer</div>
+                        <div className='components-show-steps-code'>
+                            <CodeView className=''>
+                                {
+                                    `
+                                        import { LgPopLayer } from '@/components/popLayer';
+                                    `
+                                }
+                            </CodeView>
+                        </div>
+                    </div>
+                    <div className='components-show-steps-box'>
+                        <div className='components-show-steps'>二、再引入标签，标签属性解析</div>
+                        <div className='components-show-steps-code'>
+                            <div className='components-show-steps-code'>
+                                <CodeView className='props_container'>
+                                    {
+                                        `
+                                        /**
+                                         * @summary 使用的弹出层传入的props
+                                         */
+                                        export interface PopLayerProps {
+                                            // popLayerBox
+                                            isOpen: boolean;//是否打开弹窗 | 默认值：-- | 是否必传:true
+                                            width?: number;//弹窗的总宽度 | 默认值: 400 | 是否必传:false
+                                            height?: number;//弹窗的总高度 | 默认值: 300 | 是否必传:false
+                                            title?: string;//弹窗头部的标题 | 默认值: Lg弹出层-默认标题 | 是否必传:false
+                                            className?: string;//弹窗最外层的类名 | 默认值：-- | 是否必传:false
+                                            style?: React.CSSProperties;//弹窗最外层的样式类型 | 默认值：--  | 注： 不建议使用,在本组件初始化使用后，部分样式（zIndex）有可能会被覆盖掉导致不生效。推荐使用className去修改样式 | 是否必传:false
+                                        
+                                            // coverLayer
+                                            isShowCoverLayer?: boolean;//是否展示遮罩层 | 默认值：true | 是否必传:false
+                                            coverLayerClass?: string;//遮罩层类名 | 默认值：-- | 是否必传:false
+                                            isCoverLayerClickClose?: boolean;//是否点击遮罩层关闭弹窗 | 默认值：false | 是否必传:false
+                                        
+                                            // top
+                                            isShowTopClose?: boolean;//是否显示头部的关闭按钮 | 默认值:true | 是否必传:false
+                                        
+                                            // bottom
+                                            isShowBottom?: boolean;//是否显示底部的 | 默认值:true | 是否必传:false
+                                            confirmText?: string;//确认按钮需要显示的文本 | 默认值：确认 | 是否必传:false
+                                            confirmClass?: string;//确认按钮元素上的类名 | 默认值：-- | 是否必传:false
+                                            closeText?: string;//关闭按钮需要显示的文本 | 默认值：取消 | 是否必传:false
+                                            closeClass?: string;//关闭按钮元素上的类名 | 默认值：-- | 是否必传:false
+                                        
+                                            // customHtml
+                                            customOfHeader?: (React.ReactDOM | React.ReactChild | React.ReactElement) | (() => React.ReactElement);//弹窗头部添加的自定义Dom | 默认值：-- | 是否必传:false
+                                            headerClassName?: string;//弹窗头部添加的自定义Dom容器的类名 | 默认值：-- | 是否必传:false
+                                            children?: (React.ReactDOM | React.ReactChild | React.ReactElement) | (() => React.ReactElement);// 弹窗中部添加的自定义Dom | 默认值：-- | 是否必传:false
+                                            childClassName?: string;//自定义弹窗容器的类名 | 默认值：-- | 是否必传:false
+                                            customOfBottom?: (React.ReactDOM | React.ReactChild | React.ReactElement) | (() => React.ReactElement);//弹窗低部添加的自定义Dom | 默认值：-- | 是否必传:false
+                                            bottomClassName?: string;//弹窗低部添加的自定义Dom的类名 | 默认值：-- | 是否必传:false
+                                        
+                                            // function
+                                            onConfirm?: (isOpen?: boolean) => void;//点击确认按钮时触发的函数  | 是否必传:false
+                                            onClose?: (isOpen?: boolean) => void;//点击关闭按钮时触发的函数 | 是否必传:false
+                                            onIconClose?: (isOpen?: boolean) => void;//点击顶部的关闭小图标时触发的函数 | 是否必传:false
+                                            onShowLayer: (isOpen?: boolean) => void;//必传的弹窗开关函数打开和关闭都必执行的函数，可以在打开前和关闭后触发父组件逻辑的函数 | 是否必传:true
+                                        }
+                                    `
+                                    }
+                                </CodeView>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='components-show-steps-box'>
+                        <div className='components-show-steps'>三、demo样式展示</div>
+                        <div className='components-show-example'>
+                            <div className='components-show-example-title'>popLayer 弹出案例1:</div>
+                            <div className='open_layer'>
+                                <input type="button" value="打开弹窗1" className='comment_position' onClick={this.showPopLayerFun1} />
+                            </div>
+                            <div className='components-show-steps-code'>
+                                <div className='components-show-steps-code'>
+                                    <CodeView className=''>
+                                        {
+                                            `
+initDom1() {
+    return (
+        <div className='open_1'>
+            2022年春运正式开启！
+
+            2022年铁路春运自1月17日开始，2月25日结束，共40天，全国铁路旅客发送量预计达到2.8亿人次。
+        </div>)
+}
+showPopLayerFun1() {
+    this.setState({
+        isOpen1: !this.state.isOpen1
+    })
+}
+<LgPopLayer
+    coverLayerClass={'weekly_publication'}
+    isShowTopClose={false}
+    isOpen={this.state.isOpen1}
+    width={700}
+    height={500}
+    title='打开弹窗1'
+    isShowCoverLayer={false}
+    onClose={this.showPopLayerFun1}
+    onShowLayer={this.showPopLayerFun1}
+>
+    {this.initDom1()}
+</LgPopLayer>
+<input type="button" value="打开弹窗1" className='comment_position' onClick={this.showPopLayerFun1} />
+                                    `
+                                        }
+                                    </CodeView>
+                                </div>
+                            </div>
+                            <div className='components-show-example-title'>popLayer 弹出案例2:</div>
+                            <div className='open_layer'>
+                                <input type="button" value="打开弹窗2" className='comment_position' onClick={() => { this.showPopLayerFun2() }} />
+                                <div className='components-show-steps-code'>
+                                    <CodeView className=''>
+                                        {
+                                            `
+<LgPopLayer isOpen={this.state.isOpen2}
+    onShowLayer={this.showPopLayerFun2}
+    title='打开弹窗2'
+    onClose={this.isClose2}
+    onConfirm={this.isConfirm2}
+    onIconClose={this.isIconClose2}
+>
+    <div className='components-show-example-title'>popLayer 弹出案例3:</div>
+</LgPopLayer>
+<input type="button" value="打开弹窗2" className='comment_position' onClick={() => { this.showPopLayerFun2() }} />
+                                    `
+                                        }
+                                    </CodeView>
+                                </div>
+                            </div>
+
+                            <div className='components-show-example-title'>popLayer 弹出案例3:</div>
+                            <div className='open_layer'>
+                                <input type="button" value="打开弹窗3" className='comment_position' onClick={this.showPopLayerFun3} />
+                                <div className='components-show-steps-code'>
+                                    <CodeView className=''>
+                                        {
+                                            `
+initDom3() {
+    return (
+        <div>
+            <input type="button" value="打开弹窗2" className='comment_position' onClick={() => { this.showPopLayerFun2() }} />
+        </div>)
+}
+<LgPopLayer
+    isOpen={this.state.isOpen3}
+    onShowLayer={this.showPopLayerFun3}
+    title='打开弹窗3'
+>
+    {this.initDom3()}
+</LgPopLayer>
+<input type="button" value="打开弹窗3" className='comment_position' onClick={this.showPopLayerFun3} />                
+                                    `
+                                        }
+                                    </CodeView>
+                                </div>
+                            </div>
+                            <div className='components-show-example-title'>popLayer 弹出案例4:</div>
+                            <div className='open_layer'>
+                                <input type="button" value="打开弹窗4" className='comment_position' onClick={this.showPopLayerFun4} />
+                                <div className='components-show-steps-code'>
+                                    <CodeView className=''>
+                                        {
+                                            `
+<LgPopLayer
+    isOpen={this.state.isOpen4}
+    onShowLayer={this.showPopLayerFun4}
+    title='打开弹窗4'
+    customOfHeader={<>nihaoisdfh asd</>}
+    customOfBottom={<div onClick={this.closePop4} >点我关闭弹窗，我是自定义的</div>}
+    isCoverLayerClickClose
+>
+    {this.initDom4()}
+</LgPopLayer>
+<input type="button" value="打开弹窗4" className='comment_position' onClick={this.showPopLayerFun4} />
+                                    `
+                                        }
+                                    </CodeView>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
                 <LgPopLayer
                     coverLayerClass={'weekly_publication'}
                     isShowTopClose={false}
@@ -163,7 +337,6 @@ export default class popLayer extends Component<{}, PopLayerState> {
                     height={500}
                     title='打开弹窗1'
                     isShowCoverLayer={false}
-                    style={{ zIndex: 100, width: 1000 }}
                     onClose={this.showPopLayerFun1}
                     onShowLayer={this.showPopLayerFun1}
                 >
@@ -198,4 +371,3 @@ export default class popLayer extends Component<{}, PopLayerState> {
         )
     }
 }
-

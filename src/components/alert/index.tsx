@@ -1,7 +1,7 @@
 /*
  * @Author       : super-J
  * @Date         : 2021-12-31 16:25:37
- * @LastEditTime : 2022-01-19 10:56:36
+ * @LastEditTime : 2022-01-20 16:34:36
  * @LastEditors  : super-J
  * @Description  : Alert组件的封装
  */
@@ -124,6 +124,7 @@ export interface ElementAlert {
 
 export interface lgAlert {
     showIdNumber: number;// 
+    // -------------------------------------------对外使用的接口--------------------------------------------------
     show: (e?: LgAlertShowProps, showIdIndex?: string) => { index: string, options: LgAlertShowProps };// 返回一个数字用于关闭已经打开的弹窗
     close: (index: string) => void;// 关闭一个lgAlert
     closeAll: () => void;// 关闭所有的lgAlert
