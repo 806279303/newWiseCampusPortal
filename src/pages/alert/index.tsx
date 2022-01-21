@@ -37,7 +37,8 @@ export default class alert extends Component<{}, AlertState> {
     alertMsg3() {
         let alert = lgAlert.show({ tipType: 'question', duration: 0, position: { xAxis: 'right', yAxis: 'top' } });
         setTimeout(() => {
-            lgAlert.show({ tipType: 'success', content: "加载成功", duration: 1000, }, alert.index);
+            // lgAlert.show({ tipType: 'success', content: "加载成功", duration: 1000, }, alert.index);
+            lgAlert.close(alert.index)
         }, 1000 * 3)
     }
     alertMsg4() {
@@ -163,9 +164,31 @@ export default class alert extends Component<{}, AlertState> {
                                       */
                                     
                                      /**
-                                      * @param LgAlertShowProps:在打开提示窗时提示的
+                                      * @param LgAlertShowProps:在打开提示窗时提示的配置项,默认是3s后会消失
+                                      * 
                                       */
 
+                                     /**
+                                      * @description 在打开提示窗时提示的
+                                      * @example 
+                                      * 打开:
+                                      * let showIndex = lgAlert.show({ tipType: 'success', content: "加载成功", duration: 1000, })
+                                      * 
+                                      * 修改,1s后删除:
+                                      * lgAlert.show({ tipType: 'success', content: "加载成功", duration: 1000, }, showIndex.index);
+                                      * 
+                                      * 长驻窗口:
+                                      * let showIndex = lgAlert.show({ tipType: 'success', content: "加载成功", duration: 0, });
+                                      * 
+                                      * 删除单个:
+                                      *  lgAlert.close(showIndex.index);
+                                      * 
+                                      * 删除所有
+                                      * lgAlert.show({ tipType: 'closeAll' })
+                                      *  
+                                      */
+                                
+                                    
                                      interface lgAlert {
                                         show: (e?:LgAlertShowProps, showIdIndex?: string) => { index: string, options: LgAlertShowProps }; // 返回一个数字用于关闭已经打开的弹窗
                                         close: (index: string) => void; // 关闭一个lgAlert
@@ -214,7 +237,7 @@ export default class alert extends Component<{}, AlertState> {
 
                                             tipMouldType?: tipMouldType;// lgAlert的款式 | 默认值：undefined | 必传性: false
                                         
-                                            tipType?: TipType | typeModel_A;// lgAlert展示的类型 | 默认值: -- |/| 兼容款式：default \\ A \\ E  | 必传性: false
+                                            tipType?: TipType | typeModel_A | typeModel_E;// lgAlert展示的类型 | 默认值: -- |/| 兼容款式：default \\ A \\ E  | 必传性: false
                                         
                                             position?: {
                                                 xAxis?: xOffsetType | number | string;// lgAlert在X轴上的相对位置 | "left" | "center" | "right" | undefined(默认值)  | 必传性:false
@@ -255,7 +278,7 @@ export default class alert extends Component<{}, AlertState> {
                                 {
                                     `
                                     /**
-                                     * @summary A款样式的参数 仅适用于A款
+                                     * @summary A款样式的配置项 仅适用于A款
                                      */
                                     export interface LgAlertModelAProps {
                                         confirmText?: string;// 确认按钮显示的文字 | 默认值: "确定" | 必传性: false
@@ -274,9 +297,9 @@ export default class alert extends Component<{}, AlertState> {
                                 {
                                     `
                                     /**
-                                     * @summary E款样式的参数 elementUI中需要传入的变量
+                                     * @summary E款样式的配置项 elementUI中需要传入的变量
                                      * 
-                                     * @see https://elemefe.github.io/element-react/#/zh-CN/alert
+                                     * @see 详见可参考: https://elemefe.github.io/element-react/#/zh-CN/alert
                                      */
                                     export interface ElementAlert {
                                         title?: string// 标题，必选参数 | 默认值: -- | 必传性: false
