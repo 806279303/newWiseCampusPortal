@@ -3,7 +3,7 @@ import {BaseComponent} from "../../type/BaseComponent"
 import "./icon/iconfont.css"
 
 export interface LgLoadingProps extends LgLoadingAProps, LgLoadingBProps, LgProgressProps {
-  type?: "A" | "B" | "C" | "D"
+  type?: "A" | "B" | "C"
 }
 
 export const LgLoading = (props: LgLoadingProps) => {
@@ -14,8 +14,6 @@ export const LgLoading = (props: LgLoadingProps) => {
       return <LgLoadingB {...props} />
     case "C":
       return <LgProgress {...props} />
-    case "D":
-      return <></>
   }
 
   return <LgLoadingA {...props} />

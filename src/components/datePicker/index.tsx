@@ -43,7 +43,7 @@ interface DatePickerBaseProps {
   placeholder?: string
   onFocus?(self?: any): void
   onBlur?(self?: any): void
-  onChange?(value?: string): void
+  onChange?(value?: Date): void
   value?: dateType | dateType[]
 }
 
