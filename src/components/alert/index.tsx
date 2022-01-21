@@ -1,7 +1,7 @@
 /*
  * @Author       : super-J
  * @Date         : 2021-12-31 16:25:37
- * @LastEditTime : 2022-01-19 10:56:36
+ * @LastEditTime : 2022-01-21 09:02:08
  * @LastEditors  : super-J
  * @Description  : Alert组件的封装
  */
@@ -47,7 +47,7 @@ export interface LgAlertProps extends LgAlertDefaultProps, ElementAlert, LgAlert
 
     tipMouldType?: tipMouldType;// lgAlert的款式 | 默认值：undefined
 
-    tipType?: TipType | typeModel_A;// lgAlert展示的类型 | 默认值: -- |/| 兼容款式：default \ A \ E 
+    tipType?: TipType | typeModel_A | typeModel_E;// lgAlert展示的类型 | 默认值: -- |/| 兼容款式：default \ A \ E 
 
     position?: LgAlertPropsPosition;// 设置lgAlert弹出的位置 | 默认值: -- |/| 兼容款式：default \ A \ E 
 
@@ -121,9 +121,27 @@ export interface ElementAlert {
 
 
 
-
+/**
+ * @example 
+ * 打开:
+ * let showIndex = lgAlert.show({ tipType: 'success', content: "加载成功", duration: 1000, })
+ * 
+ * 修改,1s后删除:
+ * lgAlert.show({ tipType: 'success', content: "加载成功", duration: 1000, }, showIndex.index);
+ * 
+ * 长驻窗口:
+ * let showIndex = lgAlert.show({ tipType: 'success', content: "加载成功", duration: 0, });
+ * 
+ * 删除单个:
+ *  lgAlert.close(showIndex.index);
+ * 
+ * 删除所有
+ * lgAlert.show({ tipType: 'closeAll' })
+ *  
+ */
 export interface lgAlert {
     showIdNumber: number;// 
+    // -------------------------------------------对外使用的接口--------------------------------------------------
     show: (e?: LgAlertShowProps, showIdIndex?: string) => { index: string, options: LgAlertShowProps };// 返回一个数字用于关闭已经打开的弹窗
     close: (index: string) => void;// 关闭一个lgAlert
     closeAll: () => void;// 关闭所有的lgAlert

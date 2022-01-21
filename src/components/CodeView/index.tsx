@@ -40,7 +40,6 @@ export class CodeView extends Component<CodeViewProps, {}> {
       console.error("代码格式有误，无法解析")
       result = this.props.children
     }
-    console.log(result)
     return (
       <pre className={`lg-code-view prettyprint lang-js ${this.props.className || ""}`} style={this.props.style}>
           <div className="cede_block">
