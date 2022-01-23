@@ -11,7 +11,7 @@
 // 导航选中颜色
 .el-menu--horizontal.el-menu--dark .el-submenu .el-menu-item.is-active,
 .el-menu-item.is-active {
-    color: $color_s1;
+    color: $color_s2;
 }
 
 // .el-menu--horizontal>.el-menu-item:hover, .el-menu--horizontal>.el-submenu.is-active .el-submenu__title:hover, .el-menu--horizontal>.el-submenu:hover .el-submenu__title {
@@ -20,26 +20,26 @@
 .el-menu--horizontal>.el-menu-item:hover,
 .el-menu--horizontal>.el-submenu.is-active .el-submenu__title,
 .el-menu--horizontal>.el-submenu:hover .el-submenu__title {
-    border-bottom: 5px solid $color_s1;
+    border-bottom: 5px solid $color_s2;
 }
 
 // 横向导航颜色
 .el-menu--horizontal .el-menu-item:hover,
 .el-menu--horizontal .el-submenu__title:hover {
-    background-color: lighten($color: $color_s1, $amount:47%);
+    background-color: lighten($color: $color_s2, $amount:47%);
 }
 
 // 纵向导航二级
 .el-menu--horizontal.el-menu--dark .el-submenu .el-menu-item:hover,
 .el-menu--horizontal.el-menu--dark .el-submenu .el-submenu-title:hover,
 .el-menu-item:hover {
-    background-color: lighten($color: $color_s1, $amount:40%);
+    background-color: lighten($color: $color_s2, $amount:40%);
 }
 
 // 纵向导航一级
 .el-submenu .el-menu-item:hover,
 .el-submenu__title:hover {
-    background-color: lighten($color: $color_s1, $amount:40%);
+    background-color: lighten($color: $color_s2, $amount:40%);
 }
 
 @each $skin,

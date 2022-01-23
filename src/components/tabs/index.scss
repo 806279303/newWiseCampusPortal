@@ -14,11 +14,11 @@
 }
 
 .el-tabs__active-bar {
-    background-color: $color_s1;
+    background-color: $color_s2;
 }
 
 .el-tabs--border-card>.el-tabs__header {
-    background-color: transparentize($color_s1, $amount: 0.95);
+    background-color: transparentize($color_s2, $amount: 0.95);
 }
 
 @each $skin,
