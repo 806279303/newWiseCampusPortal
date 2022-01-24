@@ -61,7 +61,6 @@ export class LgItemGroupClass extends BaseComponent<MenuItemGroupProps, {}>{
 interface MenuProps{
     defaultActive?: menuIndex
     defaultOpeneds?: menuIndex[]
-    theme?: 'light' | 'dark'
     uniqueOpened?: boolean
     menuTrigger?: string
     onSelect?(index?: menuIndex, indexPath?: menuIndex[]): void

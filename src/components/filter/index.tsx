@@ -12,30 +12,16 @@ export interface FliterProps {
     disable?: boolean,
     title?:  "筛选:"| string
     onChange?: (value: any) => void 
+    filterConfig: any[],
+    checkValue?: string[]
 }
 
 
-let filterConfig = [{
-    key: "nameA",
-    name: "选项A",
-    checked: true,
-    disable: false
-},{
-    key: "valueB",
-    name: "选项B",
-},{
-    key: "typec",
-    name: "选项C",
-   
-},{
-    key: "typed",
-    name: "选项D",
 
-}]
 
 export function Filter(props: FliterProps) {
-    const [filtervalue, setFilterValue] = useState(filterConfig);
-    const [selectID, setSelectID] = useState<string[]>([])
+    const [filtervalue, setFilterValue] = useState(props.filterConfig);
+    const [selectID, setSelectID] = useState<string[]>(props.checkValue || [])
 
 
     /**
@@ -62,30 +48,14 @@ export function Filter(props: FliterProps) {
 
         }else{
             if(status === 0){
-                newArr.map(item => {
-                    item.checked = false;
-                    return item
-                })
-                newArr.map(item => {
-                    if(item.key === backData){
-                        item.checked = true
-                        return item
-                    }
-                })
-                setFilterValue(newArr);
+                setSelectID([backData])
                 if(typeof (props.onChange) === "function"){
-                    props.onChange(newArr)
+                    props.onChange([backData])
                 }
             }else{
-                newArr.map(item => {
-                    if(item.key === backData){
-                        item.checked = false
-                        return item
-                    }
-                })
-                setFilterValue(newArr);
+                setSelectID([]);
                 if(typeof (props.onChange) === "function"){
-                    props.onChange(newArr)
+                    props.onChange([])
                 }
             }
         }

@@ -71,8 +71,8 @@ export default class DatePicker extends Component<{}, DatePickerState> {
         <CodeView className="code-size">
           {`
             /* dateType可以是Date或者字符串 */
-            type dateType = Date | string | null
-            interface LgBreadcrumbProps{
+            type dateType = Date | string | null;
+            interface LgDatePickerProps{
                type?: "A" | "B" | "C" | "D" // 款式选择，"A"、"B"、 "C"、"D",可空，默认为A
                value?: dateType | dateType[] //当前值， dateType[]仅限B款时，开始日期是第一个，结束是第二个
                align?: 'left' | 'center' | 'right', //对齐方式， 可空，默认left
@@ -87,7 +87,7 @@ export default class DatePicker extends Component<{}, DatePickerState> {
                
                /*A、B款专用*/
                showWeekNumber?: boolean //是否展示周数 ，可空，默认false
-               shortcuts?: {text: string, onClick: ()=>()}[] // 快捷选项
+               shortcuts?: Shortcut[] // 快捷选项
                selectionMode?: 'year' | 'month' | 'week' | 'day' // 日期类型， 可空，默认"day" 
                disabledDate?(date?: Date, type?: SelectionMode): boolean //是否进入日期可空
                firstDayOfWeek?: number // 周起始日 0到6 可空，默认0
@@ -98,6 +98,11 @@ export default class DatePicker extends Component<{}, DatePickerState> {
                step?: string //间隔时间
                minTime?: dateType //最小时间
                maxTime?: dateType // 最大时间
+            }
+            
+            interface Shortcut{
+              text: string
+              onClick(): void
             }
           `}
         </CodeView>
