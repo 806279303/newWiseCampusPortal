@@ -13,15 +13,6 @@ const Routers: RouterType[] = ([
         path: '/home',
         component: lazy(() => import('../pages/home')),
         root: []
-    }, 
-    {
-        path: '/Personal',
-        component: lazy(() => import('../pages/personal')),
-        root: []
-    }, {
-        path: '/About',
-        component: lazy(() => import('../pages/about')),
-        root: []
     }, {
         path: '/pagination',
         component: lazy(() => import('../pages/pagination')),
