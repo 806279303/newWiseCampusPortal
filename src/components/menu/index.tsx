@@ -1,30 +1,87 @@
 import "./index.scss"
 import { Component } from "react";
-import { BaseProps } from '../../type/BaseProps'
+import { BaseProps } from '../../type/BaseProps';
 
-import { Layout, Menu } from "element-react";
+import { Menu } from "element-react";
+import { BaseComponent } from "../../type/BaseComponent";
 
 
-const  defaultProps = {
-    type : "A",
-    mode : "vertical"
+export interface IMenu {
+    type?: "A" | "B"
 }
-type IFMenu = {
-    mode : "vertical" | "horizontal" | undefined
-} & Partial<typeof defaultProps> & BaseProps
 
-class LgItem extends Component{
-
+type menuIndex = string // 这里代码里面标注的 flowtype 是 number
+interface MenuItemProps {
+    index: menuIndex
+    disabled?: boolean
 }
-export class LgMenu extends Component<IFMenu & typeof defaultProps, {}> {
-    
-    static lgItem = LgItem
-    static defaultProps = defaultProps
-    constructor(props: IFMenu & typeof defaultProps) {
+interface SubMenuProps {
+    index: menuIndex
+    title?: React.ReactElement<any> | string
+}
+
+interface MenuItemGroupProps {
+    title: string
+}
+export class LgItemClass extends BaseComponent<MenuItemProps, {}>{
+    render() {
+        return (
+            <Menu.Item {...this.props}>
+                {
+                    this.props.children
+                }
+            </Menu.Item>
+        )
+    }
+}
+export class LgSubMenuClass extends BaseComponent<SubMenuProps, {}>{
+    render() {
+        return (
+            <Menu.SubMenu {...this.props}>
+                {
+                    this.props.children
+                }
+            </Menu.SubMenu>
+        )
+    }
+}
+export class LgItemGroupClass extends BaseComponent<MenuItemGroupProps, {}>{
+    render() {
+        return (
+            <Menu.ItemGroup {...this.props}>
+                {
+                    this.props.children
+                }
+            </Menu.ItemGroup>
+        )
+    }
+}
+
+
+interface MenuProps{
+    defaultActive?: menuIndex
+    defaultOpeneds?: menuIndex[]
+    uniqueOpened?: boolean
+    menuTrigger?: string
+    onSelect?(index?: menuIndex, indexPath?: menuIndex[]): void
+    onOpen?(index?: menuIndex, indexPath?: menuIndex[]): void
+    onClose?(index?: menuIndex, indexPath?: menuIndex[]): void
+}
+export class LgMenu extends BaseComponent<IMenu & MenuProps> {
+
+    static readonly LgItem = LgItemClass
+    static readonly LgSubMenu = LgSubMenuClass
+    static readonly LgItemGroup = LgItemGroupClass
+
+    static defaultProps: IMenu = {
+        type: "A"
+    }
+
+    constructor(props: (IMenu & BaseProps) | Readonly<IMenu & BaseProps>) {
         super(props)
     }
+
     onSelect() {
-        
     }
     onOpen() {
 
@@ -32,62 +89,20 @@ export class LgMenu extends Component<IFMenu & typeof defaultProps, {}> {
     onClose() {
 
     }
+
+    componentDidMount(): void {
+        super.componentDidMount()
+    }
     render() {
-        const { className = '', style = {}, type, mode } = this.props
+        const { className = '', style, type } = this.props
+        const mode = type == "A" ? "horizontal" : "vertical"
         return (
             <div className={`lg_menu_root ${className}`} style={style}>
-                {
-                    type == 'A' ? (
-                        <Menu defaultActive="1" className="el-menu-demo" mode={mode} onSelect={this.onSelect.bind(this)}>
-                            <Menu.Item index="1">处理中心</Menu.Item>
-                            <Menu.SubMenu index="2" title={<span><i className="el-icon-message"></i>我的工作台</span>}>
-                                <Menu.Item index="2-1">选项1</Menu.Item>
-                                <Menu.Item index="2-2">选项2</Menu.Item>
-                                <Menu.Item index="2-3">选项3</Menu.Item>
-                            </Menu.SubMenu>
-                            <Menu.Item index="3">订单管理</Menu.Item>
-                        </Menu>
-                    ) : (
-                        <Menu defaultActive="2" onOpen={this.onOpen.bind(this)} onClose={this.onClose.bind(this)}>
-                            <Menu.SubMenu index="1" title={<span><i className="el-icon-message"></i>导航一</span>}>
-                                <Menu.ItemGroup title="分组一">
-                                    <Menu.Item index="1-1">选项1</Menu.Item>
-                                    <Menu.Item index="1-2">选项2</Menu.Item>
-                                </Menu.ItemGroup>
-                                <Menu.ItemGroup title="分组2">
-                                    <Menu.Item index="1-3">选项3</Menu.Item>
-                                </Menu.ItemGroup>
-                            </Menu.SubMenu>
-                            <Menu.Item index="2"><i className="el-icon-menu"></i>导航二</Menu.Item>
-                            <Menu.Item index="3"><i className="el-icon-setting"></i>导航三</Menu.Item>
-                        </Menu>
-                    )
-                }
-
-                {/* <Menu defaultActive="2" onOpen={this.onOpen.bind(this)} onClose={this.onClose.bind(this)}>
-                    <Menu.SubMenu index="1" title="导航一">
-                        <Menu.ItemGroup title="分组一">
-                            <Menu.Item index="1-1">选项1</Menu.Item>
-                            <Menu.Item index="1-2">选项2</Menu.Item>
-                        </Menu.ItemGroup>
-                        <Menu.ItemGroup title="分组2">
-                            <Menu.Item index="1-3">选项3</Menu.Item>
-                        </Menu.ItemGroup>
-                    </Menu.SubMenu>
-                    <Menu.Item index="2">导航二</Menu.Item>
-                    <Menu.Item index="3">导航三</Menu.Item>
+                <Menu {...this.props} mode={mode}>
+                    {
+                        this.props.children
+                    }
                 </Menu>
- 
-                <Menu mode="vertical" defaultActive="1">
-                    <Menu.ItemGroup title="分组一">
-                        <Menu.Item index="1"><i className="el-icon-message"></i>导航一</Menu.Item>
-                        <Menu.Item index="2"><i className="el-icon-message"></i>导航二</Menu.Item>
-                    </Menu.ItemGroup>
-                    <Menu.ItemGroup title="分组二">
-                        <Menu.Item index="3"><i className="el-icon-message"></i>导航三</Menu.Item>
-                        <Menu.Item index="4"><i className="el-icon-message"></i>导航四</Menu.Item>
-                    </Menu.ItemGroup>
-                </Menu> */}
             </div>
         )
     }

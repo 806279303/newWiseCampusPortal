@@ -1,0 +1,45 @@
+@import "../index";
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.lg_tabs_block {
+    margin-bottom: 50px;
+}
+
+.el-tabs__item.is-active {
+    color: $color_s1;
+}
+
+.el-tabs__active-bar {
+    background-color: $color_s2;
+}
+
+.el-tabs--border-card>.el-tabs__header {
+    background-color: transparentize($color_s2, $amount: 0.95);
+}
+
+@each $skin,
+$color,
+$imgColor,
+$colorHover in $all_colors {
+    #{$skin} {
+        .lg_tabs_block {
+            margin-bottom: 50px;
+        }
+
+        .el-tabs__item.is-active {
+            color: $color;
+        }
+
+        .el-tabs__active-bar {
+            background-color: $color;
+        }
+
+        .el-tabs--border-card>.el-tabs__header {
+            background-color: transparentize($color, $amount: 0.95);
+        }
+    }
+}

@@ -1,21 +1,13 @@
-* {
-    padding: 0;
-    margin: 0;
-}
-
-.clear::before, .clear::after {
-    display: block;
-    content: "";
-    clear: both;
-}
-.lg_tabs_container {
-    width: 800px;
-    margin: 10px;
+.lg_tabs_block{
+    margin:10px;
     padding: 10px;
+}
+.lg_tabs_block {
+    width: 800px;
+
     .lg_tabs_item {
         width: 100%;
         margin-bottom: 30px;
-
         .lg_tabs_item_title {
             color: #1f2f3d;
             font-family: Helvetica Neue;
@@ -36,24 +28,6 @@
             padding: 24px;
             border: 1px solid rgb(235, 235, 235);
             margin-bottom: 5px;
-        }
-        .lg_tabs_item_cont_flex{
-            display: flex;
-            justify-content: space-around;
-        }
-
-        .lg_menu_b {
-            width: 200px;
-            float: left;
-            margin-right: 30px;
-
-            .lg_menu_b_title {
-                color: #8492a6;
-                font-family: Helvetica Neue;
-                font-size: 14px;
-                text-align: center;
-                line-height: 30px;
-            }
         }
     }
 }

@@ -1,0 +1,57 @@
+.collapse_content {
+    .el-collapse-item {
+        position: relative;
+        .el-collapse-item__header {
+            background: #f4f6f9;
+            color: #1f2633;
+            height: 38px;
+            line-height: 38px;
+            font-size: 14px;
+            .el-collapse-item__header__arrow {
+                font-size: 12px !important;
+            }
+        }
+        .el-collapse-item__wrap {
+            background: #fff;
+            .el-collapse-item__content {
+                font-size: 14px;
+                color: #585d66;
+            }
+        }
+        .el-collapse-item__header:hover {
+            background: #edeff1;
+        }
+        .disable {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 38px;
+            width: calc(100% - 38px);
+            cursor: no-drop;
+            padding-left: 34px;
+            color: #c4c7cc;
+            background: #f4f6f9;
+            .disable_span {
+                position: absolute;
+                left: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-family: element-icons !important;
+                speak: none;
+                font-size: 12px !important;
+                font-style: normal;
+                font-weight: 400;
+                font-feature-settings: normal;
+                font-variant: normal;
+                text-transform: none;
+                line-height: 1;
+                vertical-align: baseline;
+                display: inline-block;
+                -webkit-font-smoothing: antialiased;
+            }
+            .disable_span::before {
+                content: "\e602";
+            }
+        }
+    }
+}

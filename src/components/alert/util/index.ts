@@ -1,11 +1,12 @@
 import { ElementAlert, LgAlertProps, tipModel, TipType, typeModel_A, typeModel_E, LgAlertPropsPosition } from "../";
 
 /**
- * @msg 初始化弹出提示框的位置
- * @param LgAlertPropsPosition 
- * @returns 
+ * @description  : 初始化弹出提示框的位置
+ * @param         { type LgAlertPropsPosition }  LgAlertPropsPosition
+ * @param         { type number }  zIndexNumber
+ * @return        { type * } 
  */
-export function initContainerPosition(LgAlertPropsPosition?: LgAlertPropsPosition, zIndexNumber?:number): { style: React.CSSProperties, type: string, positionType: number } {
+export function initContainerPosition(LgAlertPropsPosition?: LgAlertPropsPosition, zIndexNumber?: number): { style: React.CSSProperties, type: string, positionType: number } {
     let style = {}; let tipPositionXType: string = ''; let tipPositionYType: string = '';
     switch (LgAlertPropsPosition?.xAxis) {
         case 'left': tipPositionXType = '1'; break;
@@ -46,8 +47,7 @@ export function initContainerPosition(LgAlertPropsPosition?: LgAlertPropsPositio
         }; positionType = 1; break;
         case '21': style = {
             zIndex: zIndexNumber,
-            top: '40px',
-            left: '50%',
+            top: '40px', left: '50%',
             transform: `translate(${LgAlertPropsPosition?.xOffset || '-50%'}, ${LgAlertPropsPosition?.yOffset || 0})`,
             alignItems: 'flex-start',
             justifyContent: 'center'
@@ -119,11 +119,11 @@ export function initContainerPosition(LgAlertPropsPosition?: LgAlertPropsPositio
     return { style, type, positionType }
 }
 /**
- * @msg 初始化提示的类型
- * @param tipType 需要提示的类型
- * @returns number
+ * @description  : 初始化提示的类型
+ * @param         { type typeModel_A }  tipType 需要提示的类型
+ * @param         { type tipModel }  model alert的提示类型
+ * @return        { type * } 
  */
-
 export function initTipType(tipType: typeModel_A | typeModel_E | TipType = 'info', model?: tipModel) {
     let type: number = -1;
     switch (model) {
@@ -164,10 +164,11 @@ export function initTipType(tipType: typeModel_A | typeModel_E | TipType = 'info
     }
     return type;
 }
+
 /**
- * 
- * @param tipSize tipSize:'big' | 'small' | 'mini' | undefined;
- * @returns { miniClass: string //弹窗类型的名称, layerContainerClass: string//弹窗容器类型的名称, showDom: boolean[]//展示那些dom }
+ * @description  :初始化A款的必要className名称
+ * @param         { type string }  tipSize
+ * @return        { type * } 
  */
 export function initLgAlertTypeAClass(tipSize: string): { miniClass: string, layerContainerClass: string, showDom: boolean[] } {
     let miniClass = '';
@@ -196,9 +197,9 @@ export function initLgAlertTypeAClass(tipSize: string): { miniClass: string, lay
     return { miniClass, layerContainerClass, showDom }
 }
 /**
- * @msg 初始化提示框A的参数
- * @param o 需初始化的参数
- * @returns {onClose?(): void;title?: string;description?: string;closable?: boolean;closeText?: string;showIcon?: boolean;className?: string;style?: React.CSSProperties}//返回的参数
+ * @description  : 初始化提示框A的参数
+ * @param         { type LgAlertProps }  o 需初始化的参数
+ * @return        { type * } 
  */
 export function initAlertParamsA(o: LgAlertProps): ElementAlert {
     let initOption = { title: o.content, type: 'info', closable: true, showIcon: false }
@@ -208,6 +209,7 @@ export function initAlertParamsA(o: LgAlertProps): ElementAlert {
     options.closable = o?.isShowCloseBtn ? true : false;
     options.className = o.className;
     options.closeText = o.closeText;
+    options.style = o.style
     let tipType = o.tipType;
     switch (tipType) {
         case 'info': tipType = 'info'; break;
@@ -220,6 +222,11 @@ export function initAlertParamsA(o: LgAlertProps): ElementAlert {
     return options
 }
 
+/**
+ * @description  : 初始化E款的参数
+ * @param         { type LgAlertProps }  o
+ * @return        { type * } 
+ */
 export function initAlertParams(o: LgAlertProps): ElementAlert {
     let initOption = {
         title: o.content,

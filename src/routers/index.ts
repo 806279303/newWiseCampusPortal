@@ -94,10 +94,29 @@ const Routers: RouterType[] = ([
         root: []
     },
     {
+        path: '/treeselect',
+        component: lazy(() => import('../pages/treeselect')),
+        root: []
+    },
+    {
         path: '/drawer',
         component: lazy(() => import('../pages/drawer')),
         root: []
-    }
+    },{ 
+        path: '/tabs',
+        component: lazy(() => import('../pages/tabs')),
+        root: []
+    },
+    {
+        path: '/collapse',
+        component: lazy(() => import('../pages/collapse')),
+        root: []
+    },
+    {
+        path: '/charts',
+        component: lazy(() => import('../pages/charts')),
+        root: []
+    },
 ])
 export {
     Routers
