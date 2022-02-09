@@ -29,12 +29,12 @@ function StepA(props: Props) {
                 props.stepList.map((item, index) => {
                     var stepLiBg: any = "", stepNameColor: any = ""
                     if (index < props.stepIndex - 1) {
-                        stepLiBg = props.colorType
+                        stepLiBg = props.colorType?props.colorType:"lg-skin-s1"
                     } else if (index == props.stepIndex - 1) {
                         stepLiBg = "at_present"; stepNameColor = "stepNameColor"
                     }
                     return (
-                        <div className={stepLiBg}>
+                        <div className={stepLiBg} key={"A"+index}>
                             <div key={index} className={`step_li left`}>
                                 <div className={'step_li_bg ' + stepLiBg}>
                                     {index + 1}
@@ -51,8 +51,9 @@ function StepA(props: Props) {
     )
 }
 function StepB(props: Props) {
+    var colorType=props.colorType?props.colorType:"lg-skin-s1"
     return (
-        <div className={`step_itemB clear ${props.colorType} ${props.className}`} style={props.style || {}}>
+        <div className={`step_itemB clear ${colorType} ${props.className}`} style={props.style || {}}>
             {
                 props.stepList.map((item, index) => {
                     var stepLiBg: any = "", stepBline: any = "", stepBname: any = ""
@@ -64,7 +65,7 @@ function StepB(props: Props) {
                         stepLiBg = "at_after"; stepBline = "afterB_line"; stepBname = "afterB_name"
                     }
                     return (
-                        <div key={index} className='stepB_li left'>
+                        <div key={"B"+index} className='stepB_li left'>
                             <div className='stepB_li_bg'>
                                 <div className={`stepB_poit ${stepLiBg}`}></div>
                                 <div className={`stepB_line ${stepBline}`} style={{ display: index == props.stepList.length - 1 ? "none" : "" }}></div>
@@ -78,8 +79,9 @@ function StepB(props: Props) {
     )
 }
 function StepC(props: Props) {
+    var colorType=props.colorType?props.colorType:"lg-skin-s1"
     return (
-        <div className={`step_itemC clear ${props.colorType} ${props.className}`} style={props.style || {}}>
+        <div className={`step_itemC clear ${colorType} ${props.className}`} style={props.style || {}}>
             {
                 props.stepList.map((item, index) => {
                     var stepLiBg: any = ""
