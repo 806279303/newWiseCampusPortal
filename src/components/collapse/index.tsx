@@ -1,5 +1,4 @@
 import './index.scss';
-import { Component, useState } from 'react'
 import { Collapse } from 'element-react'
 interface Props {
     className?: string,

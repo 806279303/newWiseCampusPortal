@@ -1,5 +1,4 @@
 import "./index.scss"
-import { Component } from "react";
 import { BaseProps } from '../../type/BaseProps';
 
 import { Menu } from "element-react";
@@ -95,7 +94,7 @@ export class LgMenu extends BaseComponent<IMenu & MenuProps> {
     }
     render() {
         const { className = '', style, type } = this.props
-        const mode = type == "A" ? "horizontal" : "vertical"
+        const mode = type === "A" ? "horizontal" : "vertical"
         return (
             <div className={`lg_menu_root ${className}`} style={style}>
                 <Menu {...this.props} mode={mode}>
