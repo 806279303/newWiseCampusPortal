@@ -1,5 +1,5 @@
 import './index.scss';
-import { Component, useState } from 'react'
+
 interface Props {
     type: 'A' | 'B',
     className?: string,
@@ -8,27 +8,29 @@ interface Props {
     mode?: string
 }
 const LgTimeline = (props: Props): any => {
-
-    if (props.type == 'A')
-        return <TimelineA {...props} />
-    else if (props.type == 'B')
-        return <TimelineB {...props} />
+    switch (props.type){
+        case "A":
+            return <TimelineA {...props} />
+        case "B":
+            return <TimelineB {...props} />
+    }
+    return <TimelineA {...props} />
 }
 function TimelineA(props: Props) {
     return (
         <div className={`timeline_content ${props.className}`} style={props.style || {}}>
             {
                 props.list.map((item: any, index: number) => {
-                    var mode = ""
-                    if (props.mode == "alternate") {
-                        mode = (index % 2) == 0 ? "mode_right" : "mode_left"
+                    let mode = ""
+                    if (props.mode === "alternate") {
+                        mode = (index % 2) === 0 ? "mode_right" : "mode_left"
                     }
                     return (
                         <div className={`timeline_item ${mode}`}>
                             <div className='timeline-item-dot-wrapper'>
-                                <div className='timeline-item-dot-line' style={{ display: index == props.list.length - 1 ? "none" : "", borderColor: item.lineColor }}></div>
+                                <div className='timeline-item-dot-line' style={{ display: index === props.list.length - 1 ? "none" : "", borderColor: item.lineColor }}/>
                                 <div className='timeline-item-dot-content'>
-                                    <div className='timeline-item-dot' style={{ backgroundColor: item.dotColor }}></div>
+                                    <div className='timeline-item-dot' style={{ backgroundColor: item.dotColor }}/>
                                 </div>
                             </div>
                             <div className='timeline-item-content-wrapper'>
@@ -55,9 +57,9 @@ function TimelineB(props: Props) {
                     return (
                         <div className={`timeline_itemB `}>
                             <div className='timeline-item-dot-wrapper'>
-                                <div className='timeline-item-dot-line' style={{ display: index == props.list.length - 1 ? "none" : "", borderColor: item.lineColor }}></div>
+                                <div className='timeline-item-dot-line' style={{ display: index === props.list.length - 1 ? "none" : "", borderColor: item.lineColor }}/>
                                 <div className='timeline-item-dot-content'>
-                                    <div className='timeline-item-dot' style={{ backgroundColor: item.dotColor }}></div>
+                                    <div className='timeline-item-dot' style={{ backgroundColor: item.dotColor }}/>
                                 </div>
                             </div>
 

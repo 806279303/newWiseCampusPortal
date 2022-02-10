@@ -1,13 +1,13 @@
-import "code-prettify"
-import "code-prettify/src/prettify.css"
+import "code-prettify";
+import "code-prettify/src/prettify.css";
 
-import parserTypeScript from 'prettier/parser-typescript'
-import prettier from 'prettier/standalone'
-import parserHtml from "prettier/parser-html"
+import parserTypeScript from 'prettier/parser-typescript';
+import prettier from 'prettier/standalone';
+import parserHtml from "prettier/parser-html";
 import {Component, CSSProperties} from "react";
-import "./index.scss"
+import "./index.scss";
 
-export interface CodeViewProps {
+interface CodeViewProps {
   children: string
   className?: string
   style?: CSSProperties
@@ -42,7 +42,7 @@ export class CodeView extends Component<CodeViewProps, {}> {
     }
     return (
       <pre className={`lg-code-view prettyprint lang-js ${this.props.className || ""}`} style={this.props.style}>
-          <div className="cede_block">
+          <div className="code_block">
             <code className="code_text">{result}</code>
           </div>
       </pre>
