@@ -1,0 +1,27 @@
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: "";
+}
+.clearfix:after {
+    clear: both
+}
+
+.box-card {
+    width: 480px;  
+}
+
+.shadow-always {
+}
+
+.shadow-hover {
+    box-shadow: none;
+}
+
+.shadow-hover:hover {
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.12), 0 0 6px 0 rgba(0,0,0,0.04);
+}
+
+.shadow-never {
+    box-shadow: none;
+}

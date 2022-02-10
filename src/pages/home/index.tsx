@@ -27,7 +27,7 @@ export default () => {
             <div><Link to='/home'>G024步进器(缺)</Link></div>
             <div><Link to='/home'>G025开关(缺)</Link></div>
             <div><Link to='/pagination'>G026页码</Link></div>
-            <div><Link to='/home'>G027卡片(缺)</Link></div>
+            <div><Link to='/card'>G027卡片(缺)</Link></div>
             <div><Link to='/topBar'>顶部栏</Link></div>
             <div><Link to='/firstPage'>首页</Link></div>
 
