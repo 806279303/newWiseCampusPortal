@@ -24,10 +24,10 @@ export default () => {
             <div><Link to='/collapse'>G021折叠面板</Link></div>
             <div><Link to='/drawer'>G022抽屉</Link></div>
             <div><Link to='/home'>G023缺省页(缺)</Link></div>
-            <div><Link to='/home'>G024步进器(缺)</Link></div>
+            <div><Link to='/inputNumber'>G024步进器</Link></div>
             <div><Link to='/home'>G025开关(缺)</Link></div>
             <div><Link to='/pagination'>G026页码</Link></div>
-            <div><Link to='/card'>G027卡片(缺)</Link></div>
+            <div><Link to='/card'>G027卡片</Link></div>
             <div><Link to='/topBar'>顶部栏</Link></div>
             <div><Link to='/firstPage'>首页</Link></div>
 

@@ -1,8 +1,6 @@
-import { Children, Component, ReactNode } from "react";
 import "./index.scss";
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Card,Button } from 'element-react';
+import { Card } from 'element-react';
 import {BaseComponent} from "../../type/BaseComponent"
 import { BaseProps } from "../../type/BaseProps";
 import classNames from "classnames";
