@@ -196,7 +196,7 @@ export default class InputNumber extends Component<{}, LgInputNumberState> {
             {`
                 <>
                 // 代码示例
-                <LgInputNumber value={5} controls-outside></LgInputNumber>
+                <LgInputNumber value={5} controlsOutside></LgInputNumber>
                 </>
             `}
             </CodeView>
