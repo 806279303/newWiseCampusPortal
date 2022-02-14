@@ -1,8 +1,11 @@
 import "./index.scss"
 import {BaseComponent} from "../../type/BaseComponent"
 import "./icon/iconfont.css"
+import {BaseProps} from "../../type/BaseProps";
+import classNames from "classnames";
 
-export interface LgLoadingProps extends LgLoadingAProps, LgLoadingBProps, LgProgressProps {
+
+export interface LgLoadingProps extends LgLoadingAProps, LgLoadingBProps, LgProgressProps, BaseProps {
   type?: "A" | "B" | "C"
 }
 
@@ -34,9 +37,18 @@ export class LgLoadingA extends BaseComponent<LgLoadingAProps> {
   }
 
   render() {
+    let className = classNames(
+      "lg-loading-a-root",
+      `lg-loading-tip-align-${this.props.tipAlign}`,
+      `lg-loading-size-${this.props.size}`,
+      {
+        [`${this.props.className}`]: !!this.props.className
+      }
+    )
+
     return (
       <div
-        className={`lg-loading-a-root lg-loading-tip-align-${this.props.tipAlign} lg-loading-size-${this.props.size} ${this.props.className || ""}`}>
+        className={className}>
         <div className={`lg-loading-anime `}
              style={this.props.style}>
           <div className="lg-loading-dot-top"/>
@@ -143,12 +155,12 @@ export class LgProgress extends BaseComponent<LgProgressProps> {
     height: 5
   }
 
-  getOuterStatusText(){
-    if(this.props.innerText){
+  getOuterStatusText() {
+    if (this.props.innerText) {
       return <></>;
     }
 
-    switch (this.props.status){
+    switch (this.props.status) {
       case "success":
         return <i className="loading-icon-check-circle"/>
       case "warning":
@@ -157,7 +169,7 @@ export class LgProgress extends BaseComponent<LgProgressProps> {
         return <i className="loading-icon-close-circle"/>
     }
 
-    const percentageText =  this.getPercentage() === 100? "满": this.getPercentage() + "%"
+    const percentageText = this.getPercentage() === 100 ? "满" : this.getPercentage() + "%"
     return <div className="lg-progress-outer-text">{percentageText}</div>
   }
 
@@ -165,15 +177,17 @@ export class LgProgress extends BaseComponent<LgProgressProps> {
     const percentage = this.getPercentage()
 
     let height = this.props.height || 0;
-    if(this.props.innerText && height < 26){
+    if (this.props.innerText && height < 26) {
       height = 26
     }
 
     return (
       <div className="lg-progress-root">
-        <div style={{width: this.props.width + 'px', height: height + 'px'}} className={`lg-progress-line ${this.props.innerText? "lg-progress-line-innerText": ""}`}>
-          <div className={`lg-progress-high-light ${!this.props.status? "": "lg-progress-status-" + this.props.status}`}
-               style={{width: `${percentage}%`}}>{this.props.innerText ? `${percentage}%` : ""}&nbsp;</div>
+        <div style={{width: this.props.width + 'px', height: height + 'px'}}
+             className={`lg-progress-line ${this.props.innerText ? "lg-progress-line-innerText" : ""}`}>
+          <div
+            className={`lg-progress-high-light ${!this.props.status ? "" : "lg-progress-status-" + this.props.status}`}
+            style={{width: `${percentage}%`}}>{this.props.innerText ? `${percentage}%` : ""}&nbsp;</div>
         </div>
         {
           this.getOuterStatusText()
@@ -183,10 +197,10 @@ export class LgProgress extends BaseComponent<LgProgressProps> {
   }
 
   private getPercentage() {
-    if(!this.props.percentage || this.props.percentage < 0){
+    if (!this.props.percentage || this.props.percentage < 0) {
       return 0
     }
-    if(this.props.percentage > 100){
+    if (this.props.percentage > 100) {
       return 100
     }
     return this.props.percentage;
