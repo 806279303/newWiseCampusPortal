@@ -5,5 +5,4 @@ export interface BaseProps{
   style?: CSSProperties | undefined
   children?: ReactNode | undefined
   onRef?: (ref: any) => void
-
 }

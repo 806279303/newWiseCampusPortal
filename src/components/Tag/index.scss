@@ -1,0 +1,59 @@
+@import "../index";
+@import "../mixin";
+
+.lg-tag-a-root{
+  width: fit-content;
+  height: 24px;
+  background-color: #094194;
+  border-radius: 12px;
+  opacity: 0.16;
+  font-size: 14px;
+  color: #ffffff;
+  @include flexCenter;
+  padding: 0 12px;
+}
+
+.lg-tag-b-root{
+  display: inline-block;
+  position: relative;
+  .lg-tag-b-icon{
+    @include positionAbsoluteFill;
+  }
+  .lg-tag-b-text{
+    @include positionAbsoluteFill;
+    @include flexCenter;
+    color: #fff;
+  }
+}
+
+
+.lg-tag-c-root{
+  display: inline-block;
+  position: relative;
+  transform: rotate(-20deg);
+  .lg-tag-c-icon{
+    @include positionAbsoluteFill;
+    transform: rotate(20deg);
+  }
+  .lg-tag-c-text{
+    @include positionAbsoluteFill;
+    @include flexCenter;
+  }
+}
+
+.lg-tag-d-root{
+  display: inline-block;
+  position: relative;
+  transform: rotate(-45deg);
+  .lg-tag-d-icon{
+    @include positionAbsoluteFill;
+    transform: rotate(45deg);
+  }
+  .lg-tag-d-text{
+    @include positionAbsoluteFill;
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    top: 20px;
+  }
+}
