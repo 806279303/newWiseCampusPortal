@@ -101,8 +101,8 @@ export class LgLoadingB extends BaseComponent<LgLoadingBProps> {
       <div className={`lg-loading-b-root ${this.props.className || ""}`} style={this.props.style}>
         {
           !this.props.showIcon || this.props.animeType !== "A" ? "" :
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="30px"
-                 height="30px" viewBox="0 0 200 200" className="lg-loading-b-circle-anime">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="100%"
+                 height="100%" viewBox="0 0 200 200" className="lg-loading-b-circle-anime">
               <g>
                 <linearGradient id={this.getLeftId()} gradientUnits="userSpaceOnUse" x1="150" y1="20" x2="150" y2="180">
                   <stop offset="0" className="left-start-color-0"/>
@@ -122,7 +122,7 @@ export class LgLoadingB extends BaseComponent<LgLoadingBProps> {
         }
         {
           !this.props.showIcon || this.props.animeType !== "B" ? "" :
-            <div className="lg-loading-anime-b-wrapper" style={{width: "30px", height: "30px"}}>
+            <div className="lg-loading-anime-b-wrapper">
               <svg viewBox="25 25 50 50" className="circular">
                 <circle cx="50" cy="50" r="20" fill="none" strokeWidth="5" strokeMiterlimit="10"
                         className="lg-loading-anime-b"/>
