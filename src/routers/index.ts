@@ -108,6 +108,16 @@ const Routers: RouterType[] = ([
         component: lazy(() => import('../pages/charts')),
         root: []
     },
+    {
+        path: '/input',
+        component: lazy(() => import('../pages/input')),
+        root: []
+    },
+    {
+        path: '/table',
+        component: lazy(() => import('../pages/table')),
+        root: []
+    },
 ])
 export {
     Routers

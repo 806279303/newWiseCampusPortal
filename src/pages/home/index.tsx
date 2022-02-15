@@ -1,3 +1,10 @@
+/*
+ * @Author       : super-J
+ * @Date         : 2021-12-28 15:20:12
+ * @LastEditTime : 2022-02-10 20:10:49
+ * @LastEditors  : super-J
+ * @Description  : 
+ */
 import {Link} from "react-router-dom";
 export default () => {
     return (
@@ -6,7 +13,7 @@ export default () => {
             <div><Link to='/charts'>G002图表</Link></div>
             <div><Link to='/popLayer'>G003弹窗</Link></div>
             <div><Link to='/alert'>G004提示层</Link></div>
-            <div><Link to='/home'>G005输入框/下拉框(缺)</Link></div>
+            <div><Link to='/input'>G005输入框/下拉框(缺)</Link></div>
             <div><Link to='/menu'>G006导航菜单栏</Link></div>
             <div><Link to='/tabs'>G007选项卡</Link></div>
             <div><Link to='/breadcrumb'>G008面包屑</Link></div>
@@ -17,7 +24,7 @@ export default () => {
             <div><Link to='/home'>G013音/视频播放器(缺)</Link></div>
             <div><Link to='/richEditor'>G014富文本编辑器</Link></div>
             <div><Link to='/loading'>G016加载/进度条</Link></div>
-            <div><Link to='/home'>G017列表/表格(缺)</Link></div>
+            <div><Link to='/table'>G017列表/表格(缺)</Link></div>
             <div><Link to='/datePicker'>G018时间/日期选择器</Link></div>
             <div><Link to='/home'>G019标记/标签(缺)</Link></div>
             <div><Link to='/timeline'>G020时间线</Link></div>
