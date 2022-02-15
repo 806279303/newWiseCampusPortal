@@ -1,0 +1,26 @@
+<svg id="暂无数据2" xmlns="http://www.w3.org/2000/svg" width="116" height="77" viewBox="0 0 116 77">
+  <defs>
+    <style>
+      .lg-empty-icon-b-1 {
+        fill: #f7f7f7;
+      }
+
+      .lg-empty-icon-b-2 {
+        fill: #fff;
+      }
+
+      .lg-empty-icon-b-2, .lg-empty-icon-b-3 {
+        stroke: #dbdbdb;
+        stroke-width: 2px;
+        fill-rule: evenodd;
+      }
+
+      .lg-empty-icon-b-3 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <ellipse id="椭圆_1" data-name="椭圆 1" class="lg-empty-icon-b-1" cx="58" cy="65" rx="58" ry="12"/>
+  <path id="形状_2" data-name="形状 2" class="lg-empty-icon-b-2" d="M586,632s-10-.166-10-11V588l23-26h45l24,25v36s1.075,9-11,9H586Z" transform="translate(-564 -561)"/>
+  <path id="形状_2_拷贝" data-name="形状 2 拷贝" class="lg-empty-icon-b-3" d="M667,588H648s-7,.009-7,5-0.278,8-6,8H612s-9,.622-9-6c0-6.328-4.463-6-8-6H577" transform="translate(-564 -561)"/>
+</svg>
