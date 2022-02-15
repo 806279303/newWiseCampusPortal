@@ -1,1 +1,172 @@
 @import "../index.scss";
+@import "../mixin";
+
+.lg-switch-root {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+
+
+  border: 2px solid #f0f2f5;
+  border-radius: 20px;
+
+  vertical-align: middle;
+  transition: background .25s cubic-bezier(.4, 0, .2, 1), color .1s cubic-bezier(.4, 0, .2, 1);
+
+  font-size: 14px;
+  line-height: 1.28571;
+  color: #1f2633;
+
+  $checkedColor: #03c1fd;
+
+
+  &.lg-switch-large{
+    min-width: 48px;
+    height: 28px;
+    .lg-switch-btn{
+      width: 24px;
+      height: 24px;
+    }
+    .lg-switch-children{
+      height: 24px;
+      line-height: 24px;
+    }
+    &.lg-switch-checked{
+      .lg-switch-btn{
+        margin-left: calc(100% - 25px);
+      }
+      .lg-switch-children{
+        left: 3px;
+        margin-right: 30px;
+        padding-left: 5px;
+      }
+    }
+
+    &.lg-switch-unchecked{
+      .lg-switch-btn {
+        margin-left: 2px;
+      }
+      .lg-switch-children{
+        right: 3px;
+        margin-left: 30px;
+        padding-right: 5px;
+      }
+    }
+  }
+
+  &.lg-switch-small{
+    min-width: 44px;
+    height: 24px;
+    .lg-switch-btn{
+      width: 20px;
+      height: 20px;
+    }
+    .lg-switch-children{
+      height: 20px;
+      line-height: 20px;
+    }
+    &.lg-switch-checked{
+      .lg-switch-btn{
+        margin-left: calc(100% - 21px);
+      }
+      .lg-switch-children{
+        left: 3px;
+        margin-right: 30px;
+        padding-left: 5px;
+      }
+    }
+
+    &.lg-switch-unchecked{
+      .lg-switch-btn {
+        margin-left: 2px;
+      }
+      .lg-switch-children{
+        right: 3px;
+        margin-left: 30px;
+        padding-right: 5px;
+      }
+    }
+  }
+
+  &.lg-switch-checked{
+    background-color: $checkedColor;
+    .lg-switch-children{
+      color: #fff;
+      text-align: left;
+    }
+  }
+
+  &.lg-switch-unchecked{
+    background-color: #f0f2f5;
+    .lg-switch-children{
+      color: #8d9299;
+      text-align: right;
+    }
+  }
+
+
+  &.lg-switch-disabled{
+    opacity: 0.8;
+    &:hover{
+      cursor: not-allowed;
+    }
+  }
+  &.lg-switch-loading{
+    &:hover{
+      cursor: default;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .lg-switch-btn{
+    left: 0;
+    box-shadow: 0 1px 4px 0 rgba(#000, 0.16);
+    border: 1px solid transparent;
+    position: absolute;
+    border-radius: 20px;
+    box-sizing: border-box;
+    transform-origin: left center;
+    text-align: left;
+    user-select: none;
+    transition: margin-left .2s;
+    background-color: #fff;
+    @include flexCenter;
+    .lg-switch-loading{
+      height: 70%;
+      width: 70%;
+      .lg-loading-tip {
+        color: $checkedColor;
+      }
+
+      .left-start-color-0 {
+        stop-color: $checkedColor;
+      }
+
+      .left-start-color-1 {
+        stop-color: lighten($checkedColor, 40%);
+      }
+
+      .right-start-color-0 {
+        stop-color: #fff;
+      }
+
+      .right-start-color-1 {
+        stop-color: lighten($checkedColor, 40%);
+      }
+
+      .top {
+        fill: $checkedColor;
+      }
+    }
+  }
+
+  .lg-switch-children{
+    @include flexCenter;
+    font-size: 14px;
+    transition: background .1s cubic-bezier(.4,0,.2,1),border-color .1s cubic-bezier(.4,0,.2,1);
+  }
+}

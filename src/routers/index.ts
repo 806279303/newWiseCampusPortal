@@ -1,12 +1,12 @@
 import { lazy } from 'react'
- 
+
 export type RouterType = {
     path: string,
     component: React.LazyExoticComponent<any>,
     root: string[],
     notExect?: boolean
 }
- 
+
 // 总路由
 const Routers: RouterType[] = ([
     {
@@ -30,17 +30,17 @@ const Routers: RouterType[] = ([
         component: lazy(() => import('../pages/richEditor')),
         root: [],
     }, {
-      path: '/topBar',
-      component: lazy(() => import('../pages/topBar')),
-      root: []
-    },{
+        path: '/topBar',
+        component: lazy(() => import('../pages/topBar')),
+        root: []
+    }, {
         path: '/filter',
         component: lazy(() => import('../pages/filter')),
         root: []
     }, {
-      path: '/firstPage',
-      component: lazy(() => import('../pages/firstPage')),
-      root: []
+        path: '/firstPage',
+        component: lazy(() => import('../pages/firstPage')),
+        root: []
     }, {
         path: '/breadcrumb',
         component: lazy(() => import('../pages/breadcrumb')),
@@ -54,16 +54,16 @@ const Routers: RouterType[] = ([
         path: '/popLayer',
         component: lazy(() => import('../pages/popLayer')),
         root: []
-    }, 
+    },
     {
         path: '/alert',
         component: lazy(() => import('../pages/alert')),
         root: []
-    },  {
+    }, {
         path: '/subPage',
         component: lazy(() => import('../pages/subPage')),
         root: []
-      },
+    },
     {
         path: '/timeline',
         component: lazy(() => import('../pages/timeline')),
@@ -93,7 +93,7 @@ const Routers: RouterType[] = ([
         path: '/drawer',
         component: lazy(() => import('../pages/drawer')),
         root: []
-    },{ 
+    }, {
         path: '/tabs',
         component: lazy(() => import('../pages/tabs')),
         root: []
@@ -116,6 +116,30 @@ const Routers: RouterType[] = ([
     {
         path: '/table',
         component: lazy(() => import('../pages/table')),
+        root: []
+    }, {
+        path: '/tag',
+        component: lazy(() => import('../pages/tag')),
+        root: []
+    },
+    {
+        path: '/card',
+        component: lazy(() => import('../pages/card')),
+        root: []
+    },
+    {
+        path: '/inputNumber',
+        component: lazy(() => import('../pages/inputNumber')),
+        root: []
+    },
+    {
+        path: '/switch',
+        component: lazy(() => import('../pages/switch')),
+        root: []
+    },
+    {
+        path: '/empty',
+        component: lazy(() => import('../pages/empty')),
         root: []
     },
 ])

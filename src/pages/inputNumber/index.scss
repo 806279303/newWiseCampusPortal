@@ -1,0 +1,132 @@
+.text {
+    font-size: 14px;
+}
+
+.item {
+    margin-bottom: 18px;
+}
+
+.time {
+    font-size: 13px;
+    color: #999;
+}
+  
+.bottom {
+    margin-top: 13px;
+    line-height: 12px;
+}
+
+.button {
+    padding: 0;
+    float: right;
+}
+
+.image {
+    width: 100%;
+    display: block;
+}
+
+.clearfix:before,
+.clearfix:after {
+      display: table;
+      content: "";
+}
+  
+.clearfix:after {
+      clear: both
+}
+
+@mixin flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  @mixin flexStart {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+.lg-card-demo {
+    width: 60%;
+    margin-top: 20px;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+
+    .card-frame {
+        &:first-child {
+          margin-top: 0;
+        }
+        display: flex;
+        width: 665px;
+        height: 400px;
+        flex-direction: column;
+        align-items: flex-start;
+        border: 1px solid rgb(146, 146, 146);
+        box-sizing: border-box;
+        padding: 20px 25px;
+        margin-top: 20px;
+    
+        .title {
+          @include flexStart;
+          height: 40px;
+          width: 100%;
+        }
+    
+        .subtitle {
+          @include flexStart;
+          height: 20px;
+          width: 100%;
+          color: #666;
+        }
+    
+        .split-line {
+          height: 10px;
+          width: 100%;
+          border-bottom: 1px dashed #eee;
+        }
+    
+        .card-content {
+          flex: 1;
+          display: block;
+          align-items: center;
+          width: 100%;
+          padding-top: 10px;
+          [class^='lg-skin-'] {
+            margin-right: 20px;
+          }
+        }
+    }
+
+    .base-use {
+      height: 250px;
+    }
+
+    .formatter-use {
+      height: 450px;
+      .lg-formatter-input>div {
+        margin-right: 10px;
+      }
+    }
+    
+    .size-use {
+      height: 500px;
+      .lg-size-input>div {
+        margin-right: 10px;
+      }
+    }
+
+    .disabled-use {
+      height: 250px;
+      .lg-disabled-input>div {
+        margin-right: 10px;
+        
+      }
+    }
+
+    .lg-disabled-buttom {
+      display: inline-block;
+    }
+}

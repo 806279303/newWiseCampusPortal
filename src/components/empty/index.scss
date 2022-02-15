@@ -1,0 +1,13 @@
+@import "../mixin";
+
+.lg-empty-root{
+  @include flexCenter;
+  flex-direction: column;
+  .lg-empty-icon{
+
+  }
+
+  .lg-empty-tip{
+
+  }
+}

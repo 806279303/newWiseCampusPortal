@@ -222,6 +222,8 @@ $animationDuration: 5.6s;
   flex-direction: column;
   //justify-content: center;
   align-items: center;
+  width: 30px;
+  height: 30px;
 
   .lg-loading-tip {
     margin-left: 5px;
@@ -257,7 +259,8 @@ $animationDuration: 5.6s;
 
   .lg-loading-anime-b-wrapper {
     position: relative;
-
+    width: 100%;
+    height: 100%;
     .circular {
       animation: rotate 2s linear infinite;
       height: 30px;
