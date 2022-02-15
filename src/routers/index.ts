@@ -142,6 +142,11 @@ const Routers: RouterType[] = ([
         component: lazy(() => import('../pages/empty')),
         root: []
     },
+    {
+        path: '/rate',
+        component: lazy(() => import('../pages/rate')),
+        root: []
+    },
 ])
 export {
     Routers

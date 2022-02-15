@@ -1,0 +1,33 @@
+.lg_tabs_block{
+    margin:10px;
+    padding: 10px;
+}
+.lg_tabs_block {
+    width: 800px;
+
+    .lg_tabs_item {
+        width: 100%;
+        margin-bottom: 30px;
+        .lg_tabs_item_title {
+            color: #1f2f3d;
+            font-family: Helvetica Neue;
+            font-size: 22px;
+            line-height: 40px;
+        }
+
+        .lg_tabs_item_des {
+            color: #5e6d82;
+            font-family: Helvetica Neue;
+            font-size: 14px;
+            line-height: 40px;
+        }
+
+        .lg_tabs_item_cont {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 24px;
+            border: 1px solid rgb(235, 235, 235);
+            margin-bottom: 5px;
+        }
+    }
+}
