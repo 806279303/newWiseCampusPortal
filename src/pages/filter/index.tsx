@@ -39,6 +39,7 @@ export default () => {
         </CodeView>
         <CodeView className="code-size">
           {`interface LgLoadingProps{
+              title?: string, //筛选前的提示文字
               filterConfig: object[]//[{key:"字段名",name:"按键名称"},...]key必须唯一
               checkValue?: string[]//选中的字段，和key一致的时候视为选中
               className?: string,
