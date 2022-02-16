@@ -76,7 +76,7 @@ export function Filter(props: FliterProps) {
     })
     return (
         <div className="lg-filter-area">
-            <span>筛选: </span>
+            <span>{props.title}</span>
             {filterConfigDom}
         </div>
     )

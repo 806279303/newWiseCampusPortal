@@ -92,7 +92,7 @@ export default () => {
           allSkinClassName.map((className,index) => {
             return (
               <div className={className} key={index}>
-                <Filter type="radio" filterConfig={filterConfig} checkValue={checkValue} onChange={onChange}/>
+                <Filter type="radio" title={"筛选 :"} filterConfig={filterConfig} checkValue={checkValue} onChange={onChange}/>
               </div>
             )
           })
