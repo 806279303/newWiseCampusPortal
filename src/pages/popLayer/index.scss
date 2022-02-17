@@ -1,1 +1,46 @@
 @import "../alert/common.scss";
+.popLayer4_custom_header {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    color: #fff;
+}
+.popLayer4_custom_bottom_box {
+    display: flex;
+    justify-content: flex-end;
+    .popLayer4_custom_bottom {
+        padding: 10px;
+        display: flex;
+        justify-content: flex-end;
+        .popLayer4_custom_bottom_button {
+            margin-right: 10px;
+            padding: 5px 10px;
+            cursor: pointer;
+            border: none;
+            background-color: rgb(25, 125, 255);
+            color: rgba(255, 255, 255, 0.9);
+            border-radius: 4px;
+            &:hover {
+                color: #fff;
+            }
+        }
+    }
+}
+.popLayer4_container,
+.popLayer1_container,
+.popLayer3_container {
+    padding: 20px;
+    .popLayer4_container_p {
+        font-size: 16px;
+        line-height: 24px;
+        color: #333;
+        margin-bottom: 20px;
+    }
+    .popLayer4_container_img {
+        width: 100%;
+        border-radius: 10px;
+    }
+}
+.popLayer3_container {
+    padding-top: 10px;
+}
