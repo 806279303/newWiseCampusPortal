@@ -2,6 +2,7 @@ import {Component} from "react";
 import {allSkinClassName} from "@/components/index";
 import {Filter} from "@/components/filter";
 import {CodeView} from "@/components/CodeView";
+import TreeSelectComponent from '../treeselect';
 
 
 let filterConfig = [{
@@ -98,6 +99,7 @@ export default () => {
             )
           })
         }
+        <TreeSelectComponent />
       </div>
     )
 }

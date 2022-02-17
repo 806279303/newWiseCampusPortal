@@ -2,6 +2,23 @@
 
 @each $skin, $color, $imgColor, $colorHover in $all_colors {
     #{$skin} {
-        
+        .lg-treeselect-area{
+            .el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content{
+                background-color: #fcecd8;
+                color: #8a400f;
+            }
+            .el-tree-node__content:hover{
+                background-color: #fef8f0;
+                color: #c78e69;
+            }
+            .el-checkbox__input.is-checked .el-checkbox__inner{
+                background-color:$color !important;
+                border-color: $color !important;
+            }
+            .el-checkbox__input.is-indeterminate .el-checkbox__inner{
+                background-color:$color !important;
+                border-color: $color !important;
+            }
+        }
     }
 }
