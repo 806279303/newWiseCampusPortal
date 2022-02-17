@@ -32,7 +32,7 @@ export default class Loading extends Component<{}, {}> {
                
                /* B款专用属性 */
                showIcon?: boolean //是否显示动画，可空，默认false
-               animeType?: "A" | "B" //动画类型，可空，默认"A"
+               animeType?: "A" | "B" //动画类型，可空，默认"A"。注意：B类型动画不支持IE
                
                /* C款专用属性 */
                innerText?: boolean //是否内置百分比，可空，默认false
@@ -99,7 +99,7 @@ export default class Loading extends Component<{}, {}> {
           `}
         </CodeView>
 
-        <TypeLoadingFrame className="type-b-demo" title="B款" subtitle="B款有三种，纯文字款，带动画自旋，带动画长度变动">
+        <TypeLoadingFrame className="type-b-demo" title="B款" subtitle="B款有三种，纯文字款、带动画自旋、带动画长度变动（不支持IE）">
           <div className="loading-align-list">
             <LgLoading type="B" className="custom-style"/>
             <LgLoading type="B" showIcon tip=""/>
