@@ -37,24 +37,40 @@ export default class popLayer extends Component<{}, PopLayerState> {
     }
     initDom1() {
         return (
-            <div className='open_1'>
-                2022年春运正式开启！
+            <div className='popLayer1_container'>
+                <p>
+                    2022年春运正式开启！
+                </p>
+                <p>
+                    2022年铁路春运自1月17日开始，2月25日结束，共40天，全国铁路旅客发送量预计达到2.8亿人次。
+                </p>
+                <p>
+                    铁路部门表示，今年春运每日可提供客座席位1050万个以上，较2019年提高10%以上。
+                </p>
+                <p>
+                    按照“适需安排、应急有备，精准匹配、梯次投放”原则，铁路部门根据客流变化和车票预售情况，更加精准地实施“一日一图”，动态安排运力投放和客车开行，全力满足保障旅客出行和疫情防控的双重需要。
+                </p>
+                <p>
+                    此外，如果局部地区出现疫情，将快速调整运输组织，停开、减开涉疫地区旅客列车，减少人员流动。
+                </p>
 
-                2022年铁路春运自1月17日开始，2月25日结束，共40天，全国铁路旅客发送量预计达到2.8亿人次。
 
-                铁路部门表示，今年春运每日可提供客座席位1050万个以上，较2019年提高10%以上。
+                <p>
+                    这些目的地或成“最热”
+                </p>
 
-                按照“适需安排、应急有备，精准匹配、梯次投放”原则，铁路部门根据客流变化和车票预售情况，更加精准地实施“一日一图”，动态安排运力投放和客车开行，全力满足保障旅客出行和疫情防控的双重需要。
 
-                此外，如果局部地区出现疫情，将快速调整运输组织，停开、减开涉疫地区旅客列车，减少人员流动。
+                <p>
+                    此前有平台预测了今年春运的热门目的地。
+                </p>
+                <p>
 
-                这些目的地或成“最热”
+                    去哪儿大数据显示，2022年春运铁路出行十大热门目的地为：重庆、武汉、哈尔滨、长沙、贵阳、成都、南昌、沈阳、长春、阜阳。西南、东北地区人群购票积极性较高。
+                </p>
 
-                此前有平台预测了今年春运的热门目的地。
-
-                去哪儿大数据显示，2022年春运铁路出行十大热门目的地为：重庆、武汉、哈尔滨、长沙、贵阳、成都、南昌、沈阳、长春、阜阳。西南、东北地区人群购票积极性较高。
-
-                而十大热门出发城市为：广州，北京，上海，杭州，成都，苏州，南京，东莞，武汉，长沙。其中东莞相较往年增幅较为明显，第一次跻身春运十大出发地。
+                <p>
+                    而十大热门出发城市为：广州，北京，上海，杭州，成都，苏州，南京，东莞，武汉，长沙。其中东莞相较往年增幅较为明显，第一次跻身春运十大出发地。
+                </p>
             </div>)
     }
     initDom2() {
@@ -78,14 +94,19 @@ export default class popLayer extends Component<{}, PopLayerState> {
     }
     initDom3() {
         return (
-            <div>
-                <input type="button" value="打开弹窗2" className='comment_position' onClick={() => { this.showPopLayerFun2() }} />
+            <div className='popLayer3_container'>
+                <h4>热点新闻</h4>
+                <p>冬奥会上的激情庆祝瞬间</p>
+                <input type="button" value="查看新闻" className='comment_position' onClick={() => { this.showPopLayerFun4() }} />
             </div>)
     }
     initDom4() {
         return (
-            <div>
-                4444444444444444444444444444444444444444444
+            <div className='popLayer4_container'>
+                <div className='popLayer4_container_p'>
+                    北京2022年冬奥会正如火如荼地进行。运动员们脚踩冰刀雪板，驰骋冰雪赛场，演绎出冰天雪地里炙热的活力与激情。戳图↓看北京冬奥会赛场上运动员们激情庆祝的精彩瞬间，总有一张触动你的心弦。（新华社冬奥报道团）
+                </div>
+                <img className='popLayer4_container_img' src="https://iknow-pic.cdn.bcebos.com/e850352ac65c1038597fbe50a0119313b07e891a" alt="体育运动" />
             </div>)
     }
 
@@ -126,13 +147,10 @@ export default class popLayer extends Component<{}, PopLayerState> {
 
     }
     isConfirm2(isOpen?: boolean) {
-        alert('isConfirm2 --- 弹窗2 点击确定')
     }
     isClose2(isOpen?: boolean) {
-        alert('isClose2 --- 弹窗2 点击取消')
     }
     isIconClose2(isOpen?: boolean) {
-        alert('isIconClose2 --- 弹窗2 点击小图标取消')
     }
 
     render() {
@@ -359,11 +377,18 @@ initDom3() {
                     {this.initDom3()}
                 </LgPopLayer>
                 <LgPopLayer
+                    width={500}
+                    height={600}
                     isOpen={this.state.isOpen4}
                     onShowLayer={this.showPopLayerFun4}
                     title='打开弹窗4'
-                    customOfHeader={<>nihaoisdfh asd</>}
-                    customOfBottom={<div onClick={this.closePop4} >点我关闭弹窗，我是自定义的</div>}
+                    customOfHeader={<div className='popLayer4_custom_header'>冬奥会上的激情庆祝瞬间</div>}
+                    customOfBottom={
+                        <div onClick={this.closePop4} className='popLayer4_custom_bottom_box'>
+                            <div className='popLayer4_custom_bottom'>
+                                <input type="button" value="我已知晓" className='popLayer4_custom_bottom_button' />
+                            </div>
+                        </div>}
                     isCoverLayerClickClose
                 >{this.initDom4()}
                 </LgPopLayer>
