@@ -1,9 +1,11 @@
 import { Component } from "react";
-import "./index.scss";
 import { LgCharts } from "@/components/charts";
 import { CodeView } from "@/components/CodeView";
 import * as echarts from 'echarts';
 
+
+import "./index.scss";
+import "../index.scss";
 export default class Charts extends Component<{}, {}>{
     getChartOptions1() {
         return {
@@ -362,11 +364,11 @@ export default class Charts extends Component<{}, {}>{
     }
     render() {
         return (
-            <div className="lg_charts_container">
+            <div className="lg_pages_container">
                 <h2>Charts图表</h2>
-                <div className="lg_tabs_item">
-                <div className="lg_tabs_item_title">标签属性</div>
-                <CodeView language="html" className="lg_tabs_block">
+                <div className="lg_pages_item">
+                <div className="lg_pages_item_title">标签属性</div>
+                <CodeView language="html" className="lg_pages_block">
                     {`
                         /* 具体参照echarts官方文档：https://echarts.apache.org/zh/api.html#echarts  */
                         import { EChartsReactProps } from "echarts-for-react";
@@ -381,7 +383,7 @@ export default class Charts extends Component<{}, {}>{
                         lazyUpdate={true}
                         style={{ height: '300px' }}
                     />
-                    <CodeView language="html" className="lg_tabs_block">
+                    <CodeView language="html" className="lg_pages_block">
                         {`
                             /* 平面柱状图 */
                             const options1 = {
@@ -429,7 +431,7 @@ export default class Charts extends Component<{}, {}>{
                         lazyUpdate={true}
                         style={{ height: '300px' }}
                     />
-                    <CodeView language="html" className="lg_tabs_block">
+                    <CodeView language="html" className="lg_pages_block">
                     {`
                         /* 直角曲线图 */
                         const options2 = {
@@ -464,7 +466,7 @@ export default class Charts extends Component<{}, {}>{
                         lazyUpdate={true}
                         style={{ height: '400px' }}
                     />
-                    <CodeView language="html" className="lg_tabs_block">
+                    <CodeView language="html" className="lg_pages_block">
                     {`
                         /* 圆弧曲线图 */
                         let base = +new Date(2016, 9, 3);
@@ -634,7 +636,7 @@ export default class Charts extends Component<{}, {}>{
                         lazyUpdate={true}
                         style={{ height: '300px' }}
                     />
-                    <CodeView language="html" className="lg_tabs_block">
+                    <CodeView language="html" className="lg_pages_block">
                         {`  
                             /* 饼状图 */
                             const options4 = {
@@ -689,7 +691,7 @@ export default class Charts extends Component<{}, {}>{
                         lazyUpdate={true}
                         style={{ height: '300px' }}
                     />
-                    <CodeView language="html" className="lg_tabs_block">
+                    <CodeView language="html" className="lg_pages_block">
                         {`
                             /* 玫瑰图 */
                             const options5 = {
@@ -753,7 +755,7 @@ export default class Charts extends Component<{}, {}>{
                         lazyUpdate={true}
                         style={{ height: '300px' }}
                     />
-                    <CodeView language="html" className="lg_tabs_block">
+                    <CodeView language="html" className="lg_pages_block">
                         {`
                             /* 雷达图 */
                             const options6 = {
@@ -808,7 +810,7 @@ export default class Charts extends Component<{}, {}>{
                         lazyUpdate={true}
                         style={{ height: '300px' }}
                     />
-                    <CodeView language="html" className="lg_tabs_block">
+                    <CodeView language="html" className="lg_pages_block">
                         {`
                             /* 散点图 */
                             const options7 = {
