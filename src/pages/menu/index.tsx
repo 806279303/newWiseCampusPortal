@@ -13,27 +13,27 @@ export default class Menu extends Component<{}, {}> {
           <div className="lg_tabs_item_title">标签属性</div>
           <CodeView language="html" className="lg_tabs_block">
             {`
-            type menuIndex = string
-            interface MenuProps{
-                defaultActive?: menuIndex
-                defaultOpeneds?: menuIndex[]
-                uniqueOpened?: boolean
-                menuTrigger?: string
-                onSelect?(index?: menuIndex, indexPath?: menuIndex[]): void
-                onOpen?(index?: menuIndex, indexPath?: menuIndex[]): void
-                onClose?(index?: menuIndex, indexPath?: menuIndex[]): void
-            }
-            interface SubMenuProps {
-                index: menuIndex
-                title?: React.ReactElement<any> | string
-            }
-            interface MenuItemGroupProps {
-                title: string
-            }
-            interface MenuItemProps {
-                index: menuIndex
-                disabled?: boolean
-            }
+              type menuIndex = string;
+              interface MenuProps{
+                  defaultActive?: menuIndex
+                  defaultOpeneds?: menuIndex[]
+                  uniqueOpened?: boolean
+                  menuTrigger?: string
+                  onSelect?(index?: menuIndex, indexPath?: menuIndex[]): void
+                  onOpen?(index?: menuIndex, indexPath?: menuIndex[]): void
+                  onClose?(index?: menuIndex, indexPath?: menuIndex[]): void
+              };
+              interface SubMenuProps {
+                  index: menuIndex
+                  title?: React.ReactElement<any> | string
+              };
+              interface MenuItemGroupProps {
+                  title: string
+              };
+              interface MenuItemProps {
+                  index: menuIndex
+                  disabled?: boolean
+              }
           `}
           </CodeView>
         </div>
@@ -53,15 +53,15 @@ export default class Menu extends Component<{}, {}> {
           </div>
           <CodeView language="html" className="lg_tabs_block">
             {`
-<LgMenu defaultActive="1">
-  <LgMenu.LgItem index="1">处理中心</LgMenu.LgItem>
-  <LgMenu.LgSubMenu index="2" title="我的工作台">
-    <LgMenu.LgItem index="2-1">选项1</LgMenu.LgItem>
-    <LgMenu.LgItem index="2-2">选项2</LgMenu.LgItem>
-    <LgMenu.LgItem index="2-3">选项3</LgMenu.LgItem>
-  </LgMenu.LgSubMenu>
-  <LgMenu.LgItem index="3">订单管理</LgMenu.LgItem>
-</LgMenu>
+              <LgMenu defaultActive="1">
+                <LgMenu.LgItem index="1">处理中心</LgMenu.LgItem>
+                <LgMenu.LgSubMenu index="2" title="我的工作台">
+                  <LgMenu.LgItem index="2-1">选项1</LgMenu.LgItem>
+                  <LgMenu.LgItem index="2-2">选项2</LgMenu.LgItem>
+                  <LgMenu.LgItem index="2-3">选项3</LgMenu.LgItem>
+                </LgMenu.LgSubMenu>
+                <LgMenu.LgItem index="3">订单管理</LgMenu.LgItem>
+              </LgMenu>
             `}
           </CodeView>
         </div>
