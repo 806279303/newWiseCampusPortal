@@ -9,7 +9,7 @@ export interface LgBreadcrumbProps extends LgBreadcrumbCommonProps {
 export interface LgBreadcrumbCommonProps {
   itemList: string[]
   selectedIndex?: number
-  onChange?: (index: number) => void
+  onChange?(index: number): void
 }
 
 export const LgBreadcrumb = (props: LgBreadcrumbProps & BaseProps) => {
