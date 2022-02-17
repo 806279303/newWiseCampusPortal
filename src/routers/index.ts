@@ -1,12 +1,12 @@
 import { lazy } from 'react'
- 
+
 export type RouterType = {
     path: string,
     component: React.LazyExoticComponent<any>,
     root: string[],
     notExect?: boolean
 }
- 
+
 // 总路由
 const Routers: RouterType[] = ([
     {
@@ -30,17 +30,17 @@ const Routers: RouterType[] = ([
         component: lazy(() => import('../pages/richEditor')),
         root: [],
     }, {
-      path: '/topBar',
-      component: lazy(() => import('../pages/topBar')),
-      root: []
-    },{
+        path: '/topBar',
+        component: lazy(() => import('../pages/topBar')),
+        root: []
+    }, {
         path: '/filter',
         component: lazy(() => import('../pages/filter')),
         root: []
     }, {
-      path: '/firstPage',
-      component: lazy(() => import('../pages/firstPage')),
-      root: []
+        path: '/firstPage',
+        component: lazy(() => import('../pages/firstPage')),
+        root: []
     }, {
         path: '/breadcrumb',
         component: lazy(() => import('../pages/breadcrumb')),
@@ -54,16 +54,16 @@ const Routers: RouterType[] = ([
         path: '/popLayer',
         component: lazy(() => import('../pages/popLayer')),
         root: []
-    }, 
+    },
     {
         path: '/alert',
         component: lazy(() => import('../pages/alert')),
         root: []
-    },  {
+    }, {
         path: '/subPage',
         component: lazy(() => import('../pages/subPage')),
         root: []
-      },
+    },
     {
         path: '/timeline',
         component: lazy(() => import('../pages/timeline')),
@@ -93,7 +93,7 @@ const Routers: RouterType[] = ([
         path: '/drawer',
         component: lazy(() => import('../pages/drawer')),
         root: []
-    },{ 
+    }, {
         path: '/tabs',
         component: lazy(() => import('../pages/tabs')),
         root: []
@@ -109,6 +109,15 @@ const Routers: RouterType[] = ([
         root: []
     },
     {
+        path: '/input',
+        component: lazy(() => import('../pages/input')),
+        root: []
+    },
+    {
+        path: '/table',
+        component: lazy(() => import('../pages/table')),
+        root: []
+    }, {
         path: '/tag',
         component: lazy(() => import('../pages/tag')),
         root: []
@@ -131,6 +140,11 @@ const Routers: RouterType[] = ([
     {
         path: '/empty',
         component: lazy(() => import('../pages/empty')),
+        root: []
+    },
+    {
+        path: '/rate',
+        component: lazy(() => import('../pages/rate')),
         root: []
     },
 ])

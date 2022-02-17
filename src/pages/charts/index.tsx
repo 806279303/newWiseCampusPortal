@@ -382,43 +382,43 @@ export default class Charts extends Component<{}, {}>{
                         style={{ height: '300px' }}
                     />
                     <CodeView language="html" className="lg_tabs_block">
-{`
-    /* 平面柱状图 */
-    const options1 = {
-        xAxis: {
-            type: 'category',
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [
-            {
-                data: [
-                    120,
-                    {
-                        value: 200,
-                        itemStyle: {
-                            color: '#a90000'
-                        }
-                    },
-                    150,
-                    80,
-                    70,
-                    110,
-                    130
-                ],
-                type: 'bar'
-            }
-        ]
-    }
-    <LgCharts
-        option={this.getChartOptions1()}      // option：图表配置项
-        notMerge={true}
-        lazyUpdate={true}
-        style={{ height: '300px' }}
-    />
-`}
+                        {`
+                            /* 平面柱状图 */
+                            const options1 = {
+                                xAxis: {
+                                    type: 'category',
+                                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                                },
+                                yAxis: {
+                                    type: 'value'
+                                },
+                                series: [
+                                    {
+                                        data: [
+                                            120,
+                                            {
+                                                value: 200,
+                                                itemStyle: {
+                                                    color: '#a90000'
+                                                }
+                                            },
+                                            150,
+                                            80,
+                                            70,
+                                            110,
+                                            130
+                                        ],
+                                        type: 'bar'
+                                    }
+                                ]
+                            };
+                            <LgCharts
+                                option={this.getChartOptions1()}      // option：图表配置项
+                                notMerge={true}
+                                lazyUpdate={true}
+                                style={{ height: '300px' }}
+                            />
+                        `}
                     </CodeView>
                 </div>
                 <div className="lg_charts_item">
@@ -635,50 +635,50 @@ export default class Charts extends Component<{}, {}>{
                         style={{ height: '300px' }}
                     />
                     <CodeView language="html" className="lg_tabs_block">
-{`
-    /* 饼状图 */
-    const options4 = {
-        title: {
-            text: 'Referer of a Website',
-            subtext: 'Fake Data',
-            left: 'center'
-        },
-        tooltip: {
-            trigger: 'item'
-        },
-        legend: {
-            orient: 'vertical',
-            left: 'left'
-        },
-        series: [
-            {
-                name: 'Access From',
-                type: 'pie',
-                radius: ['40%', '70%'],
-                data: [
-                    { value: 1048, name: 'Search Engine' },
-                    { value: 735, name: 'Direct' },
-                    { value: 580, name: 'Email' },
-                    { value: 484, name: 'Union Ads' },
-                    { value: 300, name: 'Video Ads' }
-                ],
-                emphasis: {
-                    itemStyle: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                    }
-                }
-            }
-        ]
-    }
-    <LgCharts
-        option={this.getChartOptions4()}      // option：图表配置项
-        notMerge={true}
-        lazyUpdate={true}
-        style={{ height: '300px' }}
-    />
-`}
+                        {`  
+                            /* 饼状图 */
+                            const options4 = {
+                                title: {
+                                    text: 'Referer of a Website',
+                                    subtext: 'Fake Data',
+                                    left: 'center'
+                                },
+                                tooltip: {
+                                    trigger: 'item'
+                                },
+                                legend: {
+                                    orient: 'vertical',
+                                    left: 'left'
+                                },
+                                series: [
+                                    {
+                                        name: 'Access From',
+                                        type: 'pie',
+                                        radius: ['40%', '70%'],
+                                        data: [
+                                            { value: 1048, name: 'Search Engine' },
+                                            { value: 735, name: 'Direct' },
+                                            { value: 580, name: 'Email' },
+                                            { value: 484, name: 'Union Ads' },
+                                            { value: 300, name: 'Video Ads' }
+                                        ],
+                                        emphasis: {
+                                            itemStyle: {
+                                                shadowBlur: 10,
+                                                shadowOffsetX: 0,
+                                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                            }
+                                        }
+                                    }
+                                ]
+                            };
+                            <LgCharts
+                                option={this.getChartOptions4()}      // option：图表配置项
+                                notMerge={true}
+                                lazyUpdate={true}
+                                style={{ height: '300px' }}
+                            />
+                        `}
                     </CodeView>
                 </div>
                 <div className="lg_charts_item">
@@ -690,59 +690,59 @@ export default class Charts extends Component<{}, {}>{
                         style={{ height: '300px' }}
                     />
                     <CodeView language="html" className="lg_tabs_block">
-{`
-    /* 玫瑰图 */
-    const options5 = {
-        angleAxis: {
-            type: 'category',
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-        },
-        radiusAxis: {},
-        polar: {},
-        series: [
-            {
-                type: 'bar',
-                data: [1, 2, 3, 4, 3, 5, 1],
-                coordinateSystem: 'polar',
-                name: 'A',
-                stack: 'a',
-                emphasis: {
-                    focus: 'series'
-                }
-            },
-            {
-                type: 'bar',
-                data: [2, 4, 6, 1, 3, 2, 1],
-                coordinateSystem: 'polar',
-                name: 'B',
-                stack: 'a',
-                emphasis: {
-                    focus: 'series'
-                }
-            },
-            {
-                type: 'bar',
-                data: [1, 2, 3, 4, 1, 2, 5],
-                coordinateSystem: 'polar',
-                name: 'C',
-                stack: 'a',
-                emphasis: {
-                    focus: 'series'
-                }
-            }
-        ],
-        legend: {
-            show: true,
-            data: ['A', 'B', 'C']
-        }
-    }
-    <LgCharts
-        option={this.getChartOptions5()}      // option：图表配置项
-        notMerge={true}
-        lazyUpdate={true}
-        style={{ height: '300px' }}
-    />
-`}
+                        {`
+                            /* 玫瑰图 */
+                            const options5 = {
+                                angleAxis: {
+                                    type: 'category',
+                                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                                },
+                                radiusAxis: {},
+                                polar: {},
+                                series: [
+                                    {
+                                        type: 'bar',
+                                        data: [1, 2, 3, 4, 3, 5, 1],
+                                        coordinateSystem: 'polar',
+                                        name: 'A',
+                                        stack: 'a',
+                                        emphasis: {
+                                            focus: 'series'
+                                        }
+                                    },
+                                    {
+                                        type: 'bar',
+                                        data: [2, 4, 6, 1, 3, 2, 1],
+                                        coordinateSystem: 'polar',
+                                        name: 'B',
+                                        stack: 'a',
+                                        emphasis: {
+                                            focus: 'series'
+                                        }
+                                    },
+                                    {
+                                        type: 'bar',
+                                        data: [1, 2, 3, 4, 1, 2, 5],
+                                        coordinateSystem: 'polar',
+                                        name: 'C',
+                                        stack: 'a',
+                                        emphasis: {
+                                            focus: 'series'
+                                        }
+                                    }
+                                ],
+                                legend: {
+                                    show: true,
+                                    data: ['A', 'B', 'C']
+                                }
+                            };
+                            <LgCharts
+                                option={this.getChartOptions5()}      // option：图表配置项
+                                notMerge={true}
+                                lazyUpdate={true}
+                                style={{ height: '300px' }}
+                            />
+                        `}
                     </CodeView>
                 </div>
                 <div className="lg_charts_item">
@@ -754,50 +754,50 @@ export default class Charts extends Component<{}, {}>{
                         style={{ height: '300px' }}
                     />
                     <CodeView language="html" className="lg_tabs_block">
-{`
-    /* 雷达图 */
-    const options6 = {
-        title: {
-            text: 'Basic Radar Chart'
-        },
-        legend: {
-            data: ['Allocated Budget', 'Actual Spending']
-        },
-        radar: {
-            // shape: 'circle',
-            indicator: [
-                { name: 'Sales', max: 6500 },
-                { name: 'Administration', max: 16000 },
-                { name: 'Information Technology', max: 30000 },
-                { name: 'Customer Support', max: 38000 },
-                { name: 'Development', max: 52000 },
-                { name: 'Marketing', max: 25000 }
-            ]
-        },
-        series: [
-            {
-                name: 'Budget vs spending',
-                type: 'radar',
-                data: [
-                    {
-                        value: [4200, 3000, 20000, 35000, 50000, 18000],
-                        name: 'Allocated Budget'
-                    },
-                    {
-                        value: [5000, 14000, 28000, 26000, 42000, 21000],
-                        name: 'Actual Spending'
-                    }
-                ]
-            }
-        ]
-    }
-    <LgCharts
-        option={this.getChartOptions6()}      // option：图表配置项
-        notMerge={true}
-        lazyUpdate={true}
-        style={{ height: '300px' }}
-    />
-`}
+                        {`
+                            /* 雷达图 */
+                            const options6 = {
+                                title: {
+                                    text: 'Basic Radar Chart'
+                                },
+                                legend: {
+                                    data: ['Allocated Budget', 'Actual Spending']
+                                },
+                                radar: {
+                                    // shape: 'circle',
+                                    indicator: [
+                                        { name: 'Sales', max: 6500 },
+                                        { name: 'Administration', max: 16000 },
+                                        { name: 'Information Technology', max: 30000 },
+                                        { name: 'Customer Support', max: 38000 },
+                                        { name: 'Development', max: 52000 },
+                                        { name: 'Marketing', max: 25000 }
+                                    ]
+                                },
+                                series: [
+                                    {
+                                        name: 'Budget vs spending',
+                                        type: 'radar',
+                                        data: [
+                                            {
+                                                value: [4200, 3000, 20000, 35000, 50000, 18000],
+                                                name: 'Allocated Budget'
+                                            },
+                                            {
+                                                value: [5000, 14000, 28000, 26000, 42000, 21000],
+                                                name: 'Actual Spending'
+                                            }
+                                        ]
+                                    }
+                                ]
+                            };
+                            <LgCharts
+                                option={this.getChartOptions6()}      // option：图表配置项
+                                notMerge={true}
+                                lazyUpdate={true}
+                                style={{ height: '300px' }}
+                            />
+                        `}
                     </CodeView>
                 </div>
                 <div className="lg_charts_item">
@@ -809,49 +809,49 @@ export default class Charts extends Component<{}, {}>{
                         style={{ height: '300px' }}
                     />
                     <CodeView language="html" className="lg_tabs_block">
-{`
-    /* 散点图 */
-    const options7 = {
-        xAxis: {},
-        yAxis: {},
-        series: [
-            {
-                symbolSize: 20,
-                data: [
-                    [10.0, 8.04],
-                    [8.07, 6.95],
-                    [13.0, 7.58],
-                    [9.05, 8.81],
-                    [11.0, 8.33],
-                    [14.0, 7.66],
-                    [13.4, 6.81],
-                    [10.0, 6.33],
-                    [14.0, 8.96],
-                    [12.5, 6.82],
-                    [9.15, 7.2],
-                    [11.5, 7.2],
-                    [3.03, 4.23],
-                    [12.2, 7.83],
-                    [2.02, 4.47],
-                    [1.05, 3.33],
-                    [4.05, 4.96],
-                    [6.03, 7.24],
-                    [12.0, 6.26],
-                    [12.0, 8.84],
-                    [7.08, 5.82],
-                    [5.02, 5.68]
-                ],
-                type: 'scatter'
-            }
-        ]
-    }
-    <LgCharts
-        option={this.getChartOptions7()}      // option：图表配置项
-        notMerge={true}
-        lazyUpdate={true}
-        style={{ height: '300px' }}
-    />
-`}
+                        {`
+                            /* 散点图 */
+                            const options7 = {
+                                xAxis: {},
+                                yAxis: {},
+                                series: [
+                                    {
+                                        symbolSize: 20,
+                                        data: [
+                                            [10.0, 8.04],
+                                            [8.07, 6.95],
+                                            [13.0, 7.58],
+                                            [9.05, 8.81],
+                                            [11.0, 8.33],
+                                            [14.0, 7.66],
+                                            [13.4, 6.81],
+                                            [10.0, 6.33],
+                                            [14.0, 8.96],
+                                            [12.5, 6.82],
+                                            [9.15, 7.2],
+                                            [11.5, 7.2],
+                                            [3.03, 4.23],
+                                            [12.2, 7.83],
+                                            [2.02, 4.47],
+                                            [1.05, 3.33],
+                                            [4.05, 4.96],
+                                            [6.03, 7.24],
+                                            [12.0, 6.26],
+                                            [12.0, 8.84],
+                                            [7.08, 5.82],
+                                            [5.02, 5.68]
+                                        ],
+                                        type: 'scatter'
+                                    }
+                                ]
+                            };
+                            <LgCharts
+                                option={this.getChartOptions7()}      // option：图表配置项
+                                notMerge={true}
+                                lazyUpdate={true}
+                                style={{ height: '300px' }}
+                            />
+                        `}
                     </CodeView>
                 </div>
             </div>
