@@ -1,15 +1,13 @@
 /*
  * @Author       : super-J
  * @Date         : 2022-02-09 16:52:27
- * @LastEditTime : 2022-02-14 10:34:34
+ * @LastEditTime : 2022-02-17 14:06:36
  * @LastEditors  : super-J
  * @Description  : 输入框/下拉框
  */
 
-import { create } from 'domain';
 import { Input } from 'element-react';
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom';
 import classNames from "classnames";
 import "./index.scss";
 let createNum = 0;
@@ -59,7 +57,6 @@ interface InputProps {
     min?: string | number
     step?: string | number
     resize?: 'none' | 'both' | 'horizontal' | 'vertical'
-
 
     // lgInput
     isShowCount?: boolean; //是否显示统计字数
