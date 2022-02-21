@@ -71,6 +71,13 @@ export interface LgTagBProps extends LgTagCommonProps{
   baseSize?: number
 }
 
+const colorTypeRGB = {
+  "primary": "#30abff",
+  "success":"#6ec632",
+  "warning":"#ff8b38",
+  "disabled": "#a2a2a2"
+}
+
 export class LgTagB extends BaseComponent<LgTagBProps>{
 
   private readonly classNamePrefix: string
@@ -89,6 +96,7 @@ export class LgTagB extends BaseComponent<LgTagBProps>{
   render(){
     let className = classNames(
       `${this.classNamePrefix}-root`,
+      `${this.classNamePrefix}-color-type-${this.props.tagBColorType}`,
         {
           [`${this.props.className}`]: !!this.props.className
         }
@@ -101,10 +109,14 @@ export class LgTagB extends BaseComponent<LgTagBProps>{
     let height = baseSize * (24 / 64)
     let width = baseSize + 10
     let fontSize = baseSize * (14 / 64)
+    let boxShadowSize = baseSize * (10 / 64)
+    let boxShadowColor = this.props.tagBColorType && colorTypeRGB[this.props.tagBColorType]? colorTypeRGB[this.props.tagBColorType]: "#30abff";
+
+    let boxShadow = `0 ${boxShadowSize}px ${boxShadowSize}px -${boxShadowSize}px ${boxShadowColor}`;
 
     return(
       <span onClick={this.props.onClick} className={className} style={{...this.props.style, height: `${height}px`, width: `${width}px`}}>
-        <Icon className={`${this.classNamePrefix}-icon`} />
+        <Icon className={`${this.classNamePrefix}-icon`} style={{boxShadow: boxShadow}} />
         <span className={`${this.classNamePrefix}-text`} style={{fontSize: `${fontSize}px`}}>{this.props.children}</span>
       </span>
     )
