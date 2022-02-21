@@ -3,6 +3,7 @@ import {LgSwitch} from "@/components/switch";
 import "./index.scss"
 import {CodeView} from "@/components/CodeView";
 import {DemoView} from "@/components/demoView";
+import axios from "axios";
 
 
 interface SwitchState {
@@ -18,16 +19,14 @@ export default class Switch extends Component<{}, SwitchState> {
   constructor(props: Readonly<{}>) {
     super(props)
     this.state = {
-      defaultSwitch: false,
+      defaultSwitch: true,
       largeSwitch: true,
-      smallSwitch: true,
+      smallSwitch: false,
       wordSwitch: true
     }
   }
 
-
   render() {
-
     return (
       <div className="lg-switch-demo">
         <div>在页面文件中引入组件</div>
@@ -53,9 +52,27 @@ export default class Switch extends Component<{}, SwitchState> {
 
         <DemoView style={{marginTop: "10px"}} title={"简单使用"} subtitle={"最简单的用法，尺寸不限"}
                   code={`
+                          <>
                           <LgSwitch checked={this.state.defaultSwitch} onClick={checked => this.setState({defaultSwitch: checked})} />
+                          <LgSwitch checked={this.state.smallSwitch} size="small" onClick={checked => this.setState({smallSwitch: checked})} />
+                          <LgSwitch disabled={true} />
+                          </> 
                         `}>
-          <LgSwitch checked={this.state.defaultSwitch} onClick={checked => this.setState({defaultSwitch: checked})}/>
+          <div className="title-component">
+            <div className="title">开</div>
+            <LgSwitch checked={this.state.defaultSwitch} onClick={checked => this.setState({defaultSwitch: checked})}/>
+          </div>
+          <div className="row-group">
+            <div className="title-component">
+              <div className="title">关</div>
+              <LgSwitch checked={this.state.smallSwitch} size="small"
+                        onClick={checked => this.setState({smallSwitch: checked})}/>
+            </div>
+            <div className="title-component">
+              <div className="title">不可用</div>
+              <LgSwitch disabled={true}/>
+            </div>
+          </div>
         </DemoView>
 
         <DemoView style={{marginTop: "10px"}} title={"加载中"} subtitle={"带加载中状态的switch"}
@@ -65,20 +82,27 @@ export default class Switch extends Component<{}, SwitchState> {
                             <LgSwitch checked={true} showLoading={true} />
                           </>
                         `}>
-          <LgSwitch showLoading={true}/>
-          <LgSwitch checked={true} showLoading={true}/>
+          <div className="title-component">
+            <div className="title">开</div>
+            <LgSwitch checked={true} showLoading={true}/>
+          </div>
+
+          <div className="title-component">
+            <div className="title">关</div>
+            <LgSwitch checked={false} showLoading={true}/>
+          </div>
+
         </DemoView>
 
         <DemoView style={{marginTop: "10px"}} title={"文字和图标"} subtitle={"带文字说明和图标"}
                   code={`
                           <>
-                            <LgSwitch checked={this.state.defaultSwitch} checkedChildren="已启用" unCheckedChildren="已关闭" onClick={checked => this.setState({defaultSwitch: checked})} />
+                            <LgSwitch checked={this.state.wordSwitch} checkedChildren="已启用" unCheckedChildren="已关闭" onClick={checked => this.setState({defaultSwitch: checked})} />
                           </>
                         `}>
-          <LgSwitch checked={this.state.defaultSwitch} checkedChildren="已启用" unCheckedChildren="已关闭"
-                    onClick={checked => this.setState({defaultSwitch: checked})}/>
+          <LgSwitch checked={this.state.wordSwitch} checkedChildren="已启用" unCheckedChildren="已关闭"
+                    onClick={checked => this.setState({wordSwitch: checked})}/>
         </DemoView>
-
       </div>
     )
   }

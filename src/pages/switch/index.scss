@@ -1,2 +1,23 @@
+
+
 .lg-switch-demo{
+  .row-group{
+    display: flex;
+    .title-component{
+      &:first-child{
+        margin-left: 0;
+      }
+      margin-left: 10px;
+    }
+  }
+  .title-component{
+    display: flex;
+    align-items: center;
+    font-family: MicrosoftYaHei, serif;
+    color: #666;
+    font-size: 14px;
+    .title{
+      margin-right: 10px;
+    }
+  }
 }

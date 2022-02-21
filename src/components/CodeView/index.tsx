@@ -48,7 +48,6 @@ export class CodeView extends Component<CodeViewProps, CodeViewState> {
 
   componentDidMount() {
     (window as any).PR.prettyPrint();
-    console.log(this.codeViewAreaRef.current?.clientHeight);
     this.areaMaxHeight = this.codeViewAreaRef.current?.clientHeight + "px" || "fit-content"
     this.setState({
       isShowCode: !this.props.canHidden || !!this.props.defaultShow
