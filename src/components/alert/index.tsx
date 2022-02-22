@@ -1,7 +1,7 @@
 /*
  * @Author       : super-J
  * @Date         : 2021-12-31 16:25:37
- * @LastEditTime : 2022-01-21 09:02:08
+ * @LastEditTime : 2022-02-21 14:22:48
  * @LastEditors  : super-J
  * @Description  : Alert组件的封装
  */
@@ -250,6 +250,9 @@ export const lgAlert: lgAlert = {
             if (initTipType(tipItemOption.tipType, tipItemOption.tipMouldType) == 4) {
                 tipItemOption.duration = 0;
             }
+            if (tipItemOption.tipMouldType == "A" && tipItemOption.tipSize == 'mini') {
+                tipItemOption.duration = 3000;
+            }
             let positionIndexPosition: number = parseInt(positionIndex as any)
             containerClassName[positionIndexPosition] = tipItemOption.containerClassName as string;
             containerStyle[positionIndexPosition] = tipItemOption.containerStyle as React.CSSProperties;
@@ -486,10 +489,17 @@ export class LgAlertMouldA extends Component<LgAlertProps, LgAlertState> {
         const { state, props } = this;
         let rowRevers = props.reverse ? 'lg_alert_body_selection lg_alert_body_selection_reverse' : "lg_alert_body_selection";
         let { miniClass, layerContainerClass, showDom } = initLgAlertTypeAClass(props.tipSize as string);
+        console.log(props);
         return (
             <div className={'lg_alert_body lg_alert_body_A ' + layerContainerClass + props.className} style={props.style} id={this.props.showIdName as string + this.props.showIdNumber} data-index={props.showIdNumber} data-position-index={props.positionIndex} >
                 <div className={'lg_alert_body_box ' + miniClass}>
-                    <div className={'lg_alert_body_icon tip_icon_type_item_none tip_icon_type_A' + initTipType(props?.tipType, props?.tipMouldType)} style={{ display: props.isShowIcon ? 'block' : 'none' }}><div className='lg_alert_body_icon_small'></div>{props.customIcon}</div>
+
+                    <div className={props.tipSize == 'big' ? 'lg_alert_body_A_big_body' : props.tipSize == 'mini' ? 'lg_alert_body_A_mini_body' : 'lg_alert_body_A_small_body'}>
+                        <div className={'lg_alert_body_icon tip_icon_type_item_none tip_icon_type_A' + initTipType(props?.tipType, props?.tipMouldType)} style={{ display: props.isShowIcon ? 'block' : 'none' }}>
+                            <div className='lg_alert_body_icon_small'></div>
+                            {props.customIcon}
+                        </div>
+                    </div>
                     <div className='lg_alert_body_title'>{props?.content}</div>
                     <div className={'lg_alert_body_description'} style={{ display: props?.description && showDom[0] ? 'block' : 'none' }}>{props?.description}</div>
                 </div>

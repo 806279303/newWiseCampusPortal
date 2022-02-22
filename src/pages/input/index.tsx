@@ -1,7 +1,7 @@
 /*
  * @Author       : super-J
  * @Date         : 2022-02-09 17:22:40
- * @LastEditTime : 2022-02-14 21:01:22
+ * @LastEditTime : 2022-02-22 08:49:59
  * @LastEditors  : super-J
  * @Description  : 
  */
@@ -354,10 +354,10 @@ export default class InputDemo extends Component<{}, InputDemoState> {
                             <div className='components-show-example-title'>单行文本输入框:</div>
                             <div>
                                 <div className="input_item">
-                                    <LgInput type="text" onChange={this.onChange} value={this.state.inputValue} />
+                                    <LgInput placeholder="单行文本输入框" type="text" onChange={this.onChange} value={this.state.inputValue} />
                                 </div>
                                 <div className="input_item">
-                                    <LgInput isShowCount maxLength={50} />
+                                    <LgInput placeholder="单行文本输入框" isShowCount maxLength={50} />
                                 </div>
                                 <div className="input_item">
                                     <LgInput isShowCount disabled placeholder="禁用状态" />

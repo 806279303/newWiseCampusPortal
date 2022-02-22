@@ -28,27 +28,76 @@
         }
     }
 }
-.lg_input_text_box_show_num {
-    .el-input__inner {
+.lg_input_box {
+    .el-input-group__append,
+    .el-input-group__prepend,
+    .el-input__inner,
+    .el-textarea__inner {
         padding-right: 50px;
+        &:hover {
+            border-color: #a3a3a3;
+        }
+        &:focus {
+            border-color: #a3a3a3;
+        }
+    }
+    .el-input__inner,
+    .el-textarea__inner {
+        font-family: MicrosoftYaHei;
+        font-size: 14px;
+        line-height: normal;
+        font-weight: normal;
+        font-stretch: normal;
+        letter-spacing: 0px;
+        color: #333333;
+        border-radius: 3px;
+        padding: 9px 12px;
+    }
+    .el-input__inner {
+        height: 30px;
+        line-height: 1;
+    }
+    .el-input.is-disabled .el-input__inner,
+    .el-textarea.is-disabled .el-textarea__inner {
+        color: #666666;
+        background-color: #f5f5f5;
+        border-color: #d0d0d0;
+        &::placeholder {
+            color: #666666;
+        }
+        &:hover {
+            border-color: #d0d0d0;
+        }
+        &:focus {
+            border-color: #d0d0d0;
+        }
+    }
+    .el-input__inner::placeholder,
+    .el-textarea__inner::placeholder {
+        font-family: MicrosoftYaHei;
+        font-size: 14px;
+        font-weight: normal;
+        font-stretch: normal;
+        letter-spacing: 0px;
+        color: #cccccc;
     }
 }
 
-@each $skin, $color, $imgColor, $colorHover, $imgHColor in $all_colors {
-    #{$skin} {
-        .lg_input_box {
-            .el-input-group__append,
-            .el-input-group__prepend,
-            .el-input__inner,
-            .el-textarea__inner {
-                border-color: rgba($color, 0.6);
-                &:hover {
-                    border-color: rgba($color, 1);
-                }
-                &:focus{
-                    border-color: #20a0ff;
-                }
-            }
-        }
-    }
-}
+// @each $skin, $color, $imgColor, $colorHover, $imgHColor in $all_colors {
+//     #{$skin} {
+//         .lg_input_box {
+//             .el-input-group__append,
+//             .el-input-group__prepend,
+//             .el-input__inner,
+//             .el-textarea__inner {
+//                 border-color: rgba($color, 0.6);
+//                 &:hover {
+//                     border-color: rgba($color, 1);
+//                 }
+//                 &:focus{
+//                     border-color: #20a0ff;
+//                 }
+//             }
+//         }
+//     }
+// }

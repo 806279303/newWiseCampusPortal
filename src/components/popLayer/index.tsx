@@ -1,7 +1,7 @@
 /*
 * @Author       : super-J
 * @Date         : 2021-12-29 08:41:58
- * @LastEditTime : 2022-01-19 10:31:28
+ * @LastEditTime : 2022-02-22 13:59:38
  * @LastEditors  : super-J
 * @Description  : 弹窗组件
 */
@@ -92,6 +92,8 @@ export class LgPopLayer extends Component<PopLayerProps, PopLayerState, { isOpen
      * @return        { type * } 
      */
     closePopLayer(type: number = 0, fun?: (isOpen?: boolean) => any) {
+        console.log('关闭页面');
+        document.documentElement.style.overflow = 'auto';
         this.setState({
             isOpen: false
         }, () => {
@@ -121,10 +123,16 @@ export class LgPopLayer extends Component<PopLayerProps, PopLayerState, { isOpen
         if (this.props.isOpen == nextProps.isOpen) return;
         let initCoverLayerType: number = nextProps.isOpen ? 1 : 0;// 0: 无弹窗 1:有弹窗
         this.setState({ isOpen: nextProps.isOpen }, () => {
+            if (nextProps.isOpen) {
+                document.documentElement.style.overflow = 'hidden';
+            }
             let popLayerMainClassName = nextProps.isOpen ? ' lg_popLayer_container_show lg_popLayer_main_hasBottom ' : ' lg_popLayer_main_noHasBottom ';
             setTimeout(() => { this.setState({ popLayerMainClassName, }) }, 200);
             this.initCoverLayer(initCoverLayerType, this.popLayerCreateNumIndex, nextProps.isShowCoverLayer);
         })
+    }
+    componentWillUnmount() {
+        this.closePopLayer()
     }
     /**
      * @description  : 数组去重

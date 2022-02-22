@@ -38,6 +38,7 @@ export default class popLayer extends Component<{}, PopLayerState> {
     initDom1() {
         return (
             <div className='popLayer1_container'>
+                <h3 style={{ margin: 0, lineHeight: 1 }}>春运快讯</h3>
                 <p>
                     2022年春运正式开启！
                 </p>
@@ -68,7 +69,7 @@ export default class popLayer extends Component<{}, PopLayerState> {
                     去哪儿大数据显示，2022年春运铁路出行十大热门目的地为：重庆、武汉、哈尔滨、长沙、贵阳、成都、南昌、沈阳、长春、阜阳。西南、东北地区人群购票积极性较高。
                 </p>
 
-                <p>
+                <p style={{ marginBottom: 0 }}>
                     而十大热门出发城市为：广州，北京，上海，杭州，成都，苏州，南京，东莞，武汉，长沙。其中东莞相较往年增幅较为明显，第一次跻身春运十大出发地。
                 </p>
             </div>)
@@ -83,7 +84,7 @@ export default class popLayer extends Component<{}, PopLayerState> {
             '你好，我们的时候的说法华东数控就回复是肯定发哈删掉卡或付扩所多军军军军军就看看看时间多喝几杯浮点数富士达会计法好']
         return (
             <div>
-                <ul>
+                <ul style={{ margin: 0 }}>
                     {list?.map((o, i) => {
                         return (
                             <li>{o}</li>
@@ -95,7 +96,7 @@ export default class popLayer extends Component<{}, PopLayerState> {
     initDom3() {
         return (
             <div className='popLayer3_container'>
-                <h4>热点新闻</h4>
+                <h4 style={{ margin: 0, lineHeight: 1 }}>热点新闻</h4>
                 <p>冬奥会上的激情庆祝瞬间</p>
                 <input type="button" value="查看新闻" className='comment_position' onClick={() => { this.showPopLayerFun4() }} />
             </div>)
@@ -130,12 +131,12 @@ export default class popLayer extends Component<{}, PopLayerState> {
         this.setState({ isOpen4: !this.state.isOpen4 })
     }
     componentDidMount() {
-        let allSkin = ["lg-skin-s1", "lg-skin-s2", "lg-skin-s3", "lg-skin-s4", "lg-skin-s5", "lg-skin-k1", "lg-skin-k2"];
-        let number = allSkin.length;
-        setInterval(() => {
-            let index = Math.floor(Math.random() * parseInt(number as any));
-            document.documentElement.className = allSkin[index];
-        }, 1000 * 5)
+        // let allSkin = ["lg-skin-s1", "lg-skin-s2", "lg-skin-s3", "lg-skin-s4", "lg-skin-s5", "lg-skin-k1", "lg-skin-k2"];
+        // let number = allSkin.length;
+        // setInterval(() => {
+        //     let index = Math.floor(Math.random() * parseInt(number as any));
+        //     document.documentElement.className = allSkin[index];
+        // }, 1000 * 5)
     }
     closePop1(isOpen: boolean) {
         this.setState({
@@ -156,7 +157,6 @@ export default class popLayer extends Component<{}, PopLayerState> {
     render() {
         return (
             <>
-
                 <div className='components-show-box'>
                     <div className='components-show-big-title'>G004</div>
                     <div className='components-show-use'>使用指南</div>
@@ -232,7 +232,7 @@ export default class popLayer extends Component<{}, PopLayerState> {
                         <div className='components-show-example'>
                             <div className='components-show-example-title'>popLayer 弹出案例1:</div>
                             <div className='open_layer'>
-                                <input type="button" value="打开弹窗1" className='comment_position' onClick={this.showPopLayerFun1} />
+                                <input type="button" value="春运快讯" className='comment_position' onClick={this.showPopLayerFun1} />
                             </div>
                             <div className='components-show-steps-code'>
                                 <div className='components-show-steps-code'>
@@ -349,11 +349,11 @@ initDom3() {
 
                 <LgPopLayer
                     coverLayerClass={'weekly_publication'}
-                    isShowTopClose={false}
+                    isShowTopClose
                     isOpen={this.state.isOpen1}
                     width={700}
                     height={500}
-                    title='打开弹窗1'
+                    title='春运快讯'
                     isShowCoverLayer={false}
                     onClose={this.showPopLayerFun1}
                     onShowLayer={this.showPopLayerFun1}
@@ -362,7 +362,9 @@ initDom3() {
                 </LgPopLayer>
                 <LgPopLayer isOpen={this.state.isOpen2}
                     onShowLayer={this.showPopLayerFun2}
-                    title='打开弹窗2'
+                    title='精简文章'
+                    width={700}
+                    height={500}
                     onClose={this.isClose2}
                     onConfirm={this.isConfirm2}
                     onIconClose={this.isIconClose2}

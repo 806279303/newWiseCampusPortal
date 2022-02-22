@@ -30,14 +30,42 @@ $img_h_color_s5: linear-gradient(-90deg, #9966b6 0%, #6144a8 100%);
 $img_h_color_k1: linear-gradient(-90deg, #347ed1 0%, #305e91 100%);
 $img_h_color_k2: linear-gradient(-90deg, #347ed1 0%, #305e91 100%);
 
+$popLayer_fail_B_color_s1: #7b98b9;
+$popLayer_fail_B_color_s2: #5cc3ff;
+$popLayer_fail_B_color_s3: #6994d9;
+$popLayer_fail_B_color_s4: #69c186;
+$popLayer_fail_B_color_s5: #9a87c7;  
+$popLayer_fail_B_color_k1: #347ed1;
+$popLayer_fail_B_color_k2: #347ed1;
 
-$all_colors: (".lg-skin-s1", $color_s1, $img_color_s1, $color_s1_hover, $img_h_color_s1),
-            (".lg-skin-s2", $color_s2, $img_color_s2, $color_s2_hover, $img_h_color_s2),
-            (".lg-skin-s3", $color_s3, $img_color_s3, $color_s3_hover, $img_h_color_s3),
-            (".lg-skin-s4", $color_s4, $img_color_s4, $color_s4_hover, $img_h_color_s4),
-            (".lg-skin-s5", $color_s5, $img_color_s5, $color_s5_hover, $img_h_color_s5),
-            (".lg-skin-k1", $color_k1, $img_color_k1, $color_k1_hover, $img_h_color_k1),
-            (".lg-skin-k2", $color_k2, $img_color_k2, $color_k2_hover, $img_h_color_k2);
+$popLayer_confirm_color_s1: #305e91;
+$popLayer_confirm_color_s2: #00a1ff;
+$popLayer_confirm_color_s3: #1557c4;
+$popLayer_confirm_color_s4: #149e41;
+$popLayer_confirm_color_s5: #6144a8;  
+$popLayer_confirm_color_k1: #347ed1;
+$popLayer_confirm_color_k2: #347ed1;
+
+$popLayer_fail_color_s1: #597ea7;
+$popLayer_fail_color_s2: #33b4ff;
+$popLayer_fail_color_s3: #4076cf;
+$popLayer_fail_color_s4: #43b167;
+$popLayer_fail_color_s5: #8169b9;  
+$popLayer_fail_color_k1: #347ed1;
+$popLayer_fail_color_k2: #347ed1;
+
+
+
+
+
+
+$all_colors: (".lg-skin-s1", $color_s1, $img_color_s1, $color_s1_hover, $img_h_color_s1,$popLayer_fail_B_color_s1,$popLayer_fail_color_s1,$popLayer_confirm_color_s1),
+            (".lg-skin-s2", $color_s2, $img_color_s2, $color_s2_hover, $img_h_color_s2,$popLayer_fail_B_color_s2,$popLayer_fail_color_s2,$popLayer_confirm_color_s2),
+            (".lg-skin-s3", $color_s3, $img_color_s3, $color_s3_hover, $img_h_color_s3,$popLayer_fail_B_color_s3,$popLayer_fail_color_s3,$popLayer_confirm_color_s3),
+            (".lg-skin-s4", $color_s4, $img_color_s4, $color_s4_hover, $img_h_color_s4,$popLayer_fail_B_color_s4,$popLayer_fail_color_s4,$popLayer_confirm_color_s4),
+            (".lg-skin-s5", $color_s5, $img_color_s5, $color_s5_hover, $img_h_color_s5,$popLayer_fail_B_color_s5,$popLayer_fail_color_s5,$popLayer_confirm_color_s5),
+            (".lg-skin-k1", $color_k1, $img_color_k1, $color_k1_hover, $img_h_color_k1,$popLayer_fail_B_color_k1,$popLayer_fail_color_k1,$popLayer_confirm_color_k1),
+            (".lg-skin-k2", $color_k2, $img_color_k2, $color_k2_hover, $img_h_color_k2,$popLayer_fail_B_color_k2,$popLayer_fail_color_k2,$popLayer_confirm_color_k2);
 :export{
   allSkin: "lg-skin-s1", "lg-skin-s2", "lg-skin-s3", "lg-skin-s4","lg-skin-s5","lg-skin-k1", "lg-skin-k2";
 }

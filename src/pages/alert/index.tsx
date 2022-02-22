@@ -23,103 +23,144 @@ export default class alert extends Component<{}, AlertState> {
         this.alertMsgCustom = this.alertMsgCustom.bind(this)
     }
     alertMsg() {
-        let alert = lgAlert.show({ isShowCloseBtn: true, tipType: this.state.successLoading ? 'success' : 'loading', position: { xAxis: 'left', yAxis: 'top' } });
-        setTimeout(() => {
-            lgAlert.show({ tipType: 'success', content: "加载成功", duration: 1000 * 2 }, alert.index);
-        }, 1000 * 3);
+        let alert = lgAlert.show({ content: "用户操作的基本提示", tipType: 'info', position: { xAxis: 'left', yAxis: 'top' } });
+        // setTimeout(() => {
+        //     lgAlert.show({ tipType: 'success', content: "加载成功", duration: 1000 * 2 }, alert.index);
+        // }, 1000 * 3);
     }
     alertMsg2() {
-        let alert = lgAlert.show({ tipType: this.state.successLoading ? 'success' : 'loading', duration: 0, isShowCloseBtn: true, position: { xAxis: 'center', yAxis: 'top' } });
-        setTimeout(() => {
-            lgAlert.show({ tipType: 'success', content: "加载成功", duration: 0, customClose: (<div className='custom_close_dom'>关闭</div>) }, alert.index);
-        }, 1000 * 3);
+        let alert = lgAlert.show({ content: "用户操作的询问提示", tipType: 'question', position: { xAxis: 'center', yAxis: 'top' } });
+        // setTimeout(() => {
+        //     lgAlert.show({ tipType: 'question', content: "加载成功", }, alert.index);
+        // }, 1000 * 3);
     }
     alertMsg3() {
-        let alert = lgAlert.show({ tipType: 'question', duration: 0, position: { xAxis: 'right', yAxis: 'top' } });
-        setTimeout(() => {
-            // lgAlert.show({ tipType: 'success', content: "加载成功", duration: 1000, }, alert.index);
-            lgAlert.close(alert.index)
-        }, 1000 * 3)
+        let alert = lgAlert.show({ content: "用户操作的警告提示", tipType: 'warning', position: { xAxis: 'right', yAxis: 'top' } });
+        // setTimeout(() => {
+        //     lgAlert.show({ tipType: 'warning', content: "加载成功", }, alert.index);
+        // }, 1000 * 3)
     }
     alertMsg4() {
-        let alert = lgAlert.show({ tipType: this.state.successLoading ? 'success' : 'loading', duration: 0, position: { xAxis: 'left', yAxis: 'center' } });
-        setTimeout(() => {
-            lgAlert.show({ tipType: 'success', content: "加载成功", duration: 1000 }, alert.index);
-        }, 1000 * 3)
+        let alert = lgAlert.show({ content: "用户操作的错误提示", tipType: 'error', position: { xAxis: 'left', yAxis: 'center' } });
+        // setTimeout(() => {
+        //     lgAlert.show({ tipType: 'error', content: "加载成功",}, alert.index);
+        // }, 1000 * 3)
     }
     alertMsg5() {
-        let alert = lgAlert.show({ tipType: this.state.successLoading ? 'success' : 'loading', duration: 0, position: { xAxis: 'center', yAxis: 'center' } });
-        setTimeout(() => {
-            lgAlert.show({ tipType: 'success', content: "加载成功", duration: 1000 }, alert.index);
-        }, 1000 * 3)
+        let alert = lgAlert.show({ content: "用户操作的成功提示", tipType: 'success', position: { xAxis: 'center', yAxis: 'center' } });
+        // setTimeout(() => {
+        //     lgAlert.show({ tipType: 'success', content: "加载成功", duration: 0 }, alert.index);
+        // }, 1000 * 3)
     }
     alertMsg6() {
-        let alert = lgAlert.show({ tipType: this.state.successLoading ? 'success' : 'loading', duration: 0, position: { xAxis: 'right', yAxis: 'center' }, description: '实时通讯的智子制造过程' });
+        let alert = lgAlert.show({ content: '用户操作的基本提示', tipType: 'info', position: { xAxis: 'right', yAxis: 'center' }, description: '给时光以生命，给岁月以文明。' });
         setTimeout(() => {
-            lgAlert.show({ tipType: 'success', content: "加载成功", duration: 0, isShowCloseBtn: true, description: "How do you spell color? You’ll see other writers do it two ways—the one we’ve already used in this paragraph, and another one—colour. Neither of the spellings is wrong, and they both mean exactly the same thing. Still, the two spellings are slightly different, so there has to be something to it, right? Let’s see. " }, alert.index);
+            lgAlert.show({ tipType: 'success', content: "加载成功", description: "You should be self-esteem, do not be arrogant" }, alert.index);
         }, 1000 * 3)
     }
     alertMsg7() {
-        let alert = lgAlert.show({ isShowCloseBtn: true, tipType: this.state.successLoading ? 'success' : 'loading', duration: 0, position: { xAxis: 'left', yAxis: 'bottom' }, });
+        let alert = lgAlert.show({ content: '数据加载中', tipType: 'loading', position: { xAxis: 'left', yAxis: 'bottom' }, });
         setTimeout(() => {
-            lgAlert.show({ tipType: 'success', content: "加载成功", duration: 1000 }, alert.index);
+            lgAlert.show({ tipType: 'success', content: "加载成功", }, alert.index);
         }, 1000 * 3)
     }
     alertMsg8() {
-        let alert = lgAlert.show({ isShowCloseBtn: true, tipType: this.state.successLoading ? 'success' : 'loading', duration: 0, position: { xAxis: 'center', yAxis: 'bottom' } });
+        let alert = lgAlert.show({ content: '数据加载中', tipType: 'loading', position: { xAxis: 'center', yAxis: 'bottom' } });
         setTimeout(() => {
-            lgAlert.show({ tipType: 'success', content: "加载成功", duration: 1000 }, alert.index);
+            lgAlert.show({ tipType: 'warning', content: "数据为空", }, alert.index);
         }, 1000 * 3)
     }
     alertMsg9() {
-        let alert = lgAlert.show({ isShowCloseBtn: true, tipType: this.state.successLoading ? 'success' : 'loading', duration: 0, position: { xAxis: 'right', yAxis: 'bottom' } });
+        let alert = lgAlert.show({ content: '数据加载中', tipType: 'loading', position: { xAxis: 'right', yAxis: 'bottom' } });
         setTimeout(() => {
-            lgAlert.show({ tipType: 'success', content: "加载成功", duration: 1000 }, alert.index);
+            lgAlert.show({ tipType: 'error', content: "数据加载失败", }, alert.index);
         }, 1000 * 3)
     }
     alertMsgCustom() {
-        let alert = lgAlert.show({ isShowCloseBtn: true, tipType: 'warning', position: { xOffset: '-50%', xAxis: '50%', yAxis: 32, showDirection: 'center', showAlign: 'top' } });
+        let alert = lgAlert.show({ content: "数据加载中(自定义位置)", tipType: 'loading', position: { xOffset: '-50%', xAxis: '50%', yAxis: 32, showDirection: 'center', showAlign: 'top' } });
         setTimeout(() => {
-            lgAlert.show({ tipType: 'error', content: "加载失败~", duration: 1000 * 2, isShowCloseBtn: false, }, alert.index);
+            lgAlert.show({ tipType: 'error', content: "加载失败(自定义位置)", }, alert.index);
         }, 1000 * 3)
     }
     clearAlertMsgCustom() {
         lgAlert.show({ tipType: 'closeAll' })
     }
+
+
+
     alertSuccess() {
-        let alert = lgAlert.show({ tipType: 'success', tipMouldType: 'E', duration: 0, closable: true, closeText: "关闭", description: "全市各社区(村)、西安急救中心和各医疗机构均不得以查验核酸48小时阴性证明作为进出小区就医、转送病人和接诊的限制。全文2331字，阅读约需4分钟 据央视新闻消息，陕西西安1... " });
+        let alert = lgAlert.show({ content: '用户操作的成功提示', tipType: 'success', tipMouldType: 'E', closable: true, description: "这是一个操作成功的描述" });
     }
     alertWarning() {
-        let alert = lgAlert.show({ tipType: 'warning', tipMouldType: 'E', duration: 0, description: "How do you spell color? You’ll see other writers do it two ways—the one we’ve already used in this paragraph, and another one—colour. Neither of the spellings is wrong, and they both mean exactly the same thing. Still, the two spellings are slightly different, so there has to be something to it, right? Let’s see. " });
+        let alert = lgAlert.show({ content: '用户操作的警告提示', tipType: 'warning', tipMouldType: 'E', isShowCloseBtn: true, description: "You should be self-esteem, do not be arrogant" });
     }
     alertInfo() {
-        let alert = lgAlert.show({ tipType: 'info', tipMouldType: 'E', duration: 0, isShowIcon: false });
+        let alert = lgAlert.show({ content: '用户操作的基本提示', tipType: 'info', tipMouldType: 'E', });
     }
     alertError() {
-        let alert = lgAlert.show({
-            tipType: 'error', tipMouldType: 'E', isShowCloseBtn: true, description: `There are a couple of ways you can choose which spelling to use. You can, for example, choose the spelling that’s prevalent in the country you’re from—if you’re an American, use color. If you’re from any of the Commonwealth countries, use colour. If English is not your first language, use the spelling you were taught.
-        If you’re still not sure which to choose, or if you’re writing for an international audience, the best thing to do is choose one of the spellings and stick with it. In other words, choose consistency. ` });
+        let alert = lgAlert.show({ content: '用于表示操作然后操作失败的', tipType: 'error', tipMouldType: 'E', });
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     alertASuccess() {
-        let alert = lgAlert.show({ tipType: 'success', tipSize: 'mini', tipMouldType: 'A', duration: 0, isShowCloseBtn: true });
+        let alert = lgAlert.show({ content: "用于表示操作然后操作成功的", tipType: 'success', tipSize: 'big', tipMouldType: 'A', description: `这是一个操作成功的描述` });
     }
     alertAWarning() {
-        let alert = lgAlert.show({ tipType: 'warning', tipSize: 'small', tipMouldType: 'A', containerClassName: 'weishoujiong', duration: 0, description: "How do you spell color? You’ll see other writers do it two ways—the one we’ve already used in this paragraph, and another one—colour. " });
+        let alert = lgAlert.show({ content: '用于表示操作引起严重的后果', tipType: 'warning', tipSize: 'big', tipMouldType: 'A', description: `这是一个后果信息描述` });
     }
     alertAInfo() {
-        let alert = lgAlert.show({ tipType: 'info', reverse: true, tipMouldType: 'A', duration: 0 });
-
+        let alert = lgAlert.show({ content: '用户表示普通操作信息提示', tipType: 'info', tipSize: 'big', description: "这是一个普通提示描述", reverse: true, tipMouldType: 'A', });
     }
     alertAError() {
-        let alert = lgAlert.show({
-            tipType: 'error', tipMouldType: 'A', tipSize: 'big', isShowCloseBtn: true, duration: 0, description: `There are a couple of ways you can choose which spelling to use.`
-        });
+        let alert = lgAlert.show({ content: '用于表示操作然后操作失败的', tipType: 'error', tipMouldType: 'A', tipSize: 'big', description: `这是一个操作失败的原因` });
     }
     alertAQuestion() {
-        let alert = lgAlert.show({
-            tipType: 'question', tipMouldType: 'A', duration: 0, isShowCloseBtn: true, description: `There are a couple of ways you can choose which spelling to use. You can, for example, choose the spelling that’s prevalent in the country you’re from—if you’re an American, use color. If you’re from any of the Commonwealth countries, use colour. If English is not your first language, use the spelling you were taught.
-        If you’re still not sure which to choose, or if you’re writing for an international audience, the best thing to do is choose one of the spellings and stick with it. In other words, choose consistency. ` });
+        let alert = lgAlert.show({ duration: 0, content: '用于帮助用户操作的信息提示', isShowCloseBtn: true, tipType: 'question', tipMouldType: 'A', tipSize: 'big', description: `这是一个帮助提示描述` });
     }
+    alertASuccess2() {
+        let alert = lgAlert.show({ content: '操作成功', tipType: 'success', tipSize: 'small', tipMouldType: 'A', });
+    }
+    alertAWarning2() {
+        let alert = lgAlert.show({ content: '该操作无法执行', tipType: 'warning', tipSize: 'small', tipMouldType: 'A', });
+    }
+    alertAInfo2() {
+        let alert = lgAlert.show({ content: '该操作无法执行', tipType: 'info', tipSize: 'small', description: "You should be self-esteem, do not be arrogant", reverse: true, tipMouldType: 'A', });
+
+    }
+    alertAError2() {
+        let alert = lgAlert.show({ content: '操作失败', tipType: 'error', tipMouldType: 'A', tipSize: 'small', description: `You should be self-esteem, do not be arrogant` });
+    }
+    alertAQuestion2() {
+        let alert = lgAlert.show({ duration: 0, content: '是否执行操作？ ', isShowCloseBtn: true, tipType: 'question', tipMouldType: 'A', tipSize: 'small', description: `You should be self-esteem, do not be arrogant` });
+    }
+    alertASuccess3() {
+        let alert = lgAlert.show({ content: '操作成功', tipType: 'success', tipSize: 'mini', tipMouldType: 'A', });
+    }
+    alertAWarning3() {
+        let alert = lgAlert.show({ content: '该操作无法执行', tipType: 'warning', tipSize: 'mini', tipMouldType: 'A', });
+    }
+    alertAInfo3() {
+        let alert = lgAlert.show({ content: '该操作无法执行', tipType: 'info', tipSize: 'mini', description: "You should be self-esteem, do not be arrogant", reverse: true, tipMouldType: 'A', });
+    }
+    alertAError3() {
+        let alert = lgAlert.show({ content: '操作失败', tipType: 'error', tipMouldType: 'A', tipSize: 'mini', description: `You should be self-esteem, do not be arrogant` });
+    }
+
 
     componentDidMount() { }
     render() {
@@ -178,7 +219,7 @@ export default class alert extends Component<{}, AlertState> {
                                       * lgAlert.show({ tipType: 'success', content: "加载成功", duration: 1000, }, showIndex.index);
                                       * 
                                       * 长驻窗口:
-                                      * let showIndex = lgAlert.show({ tipType: 'success', content: "加载成功", duration: 0, });
+                                      * let showIndex = lgAlert.show({ tipType: 'success', content: "加载成功",  });
                                       * 
                                       * 删除单个:
                                       *  lgAlert.close(showIndex.index);
@@ -320,6 +361,8 @@ export default class alert extends Component<{}, AlertState> {
                         <div className='components-show-example'>
                             <div className='components-show-example-title'>默认-LgUI-Alert:</div>
                             <div>
+                                <div className='components-show-example-title-text'>弹窗位置与所有样式展示</div>
+
                                 <div>
                                     <input type="button" value="左上" onClick={this.alertMsg} className='comment_position alert_position_left_top' />
                                     <input type="button" value="中上" onClick={this.alertMsg2} className='comment_position alert_position_left_top' />
@@ -341,156 +384,44 @@ export default class alert extends Component<{}, AlertState> {
                                     <CodeView className='props_container'>
                                         {
                                             `
-alertMsg() {
-    let alert = lgAlert.show({ 
-        isShowCloseBtn: true,
-        tipType: this.state.successLoading ? 'success' : 'loading',
-        position: { xAxis: 'left', yAxis: 'top' } 
-    });
-    setTimeout(() => {
-        lgAlert.show({ tipType: 'success', content: "加载成功", duration: 1000 * 2 }, alert.index);
-    }, 1000 * 3);
-}
-alertMsg2() {
-    let alert = lgAlert.show({ 
-        tipType: this.state.successLoading ? 'success' : 'loading',
-        duration: 0,
-        isShowCloseBtn: true,
-        position: { xAxis: 'center', yAxis: 'top' }
-    });
-    setTimeout(() => {
-        lgAlert.show({ tipType: 'success',
-         content: "加载成功",
-         duration: 0,
-         customClose: (<div className='custom_close_dom'>关闭</div>) },
-         alert.index);
-    },
-     1000 * 3);
-}
-alertMsg3() {
-    let alert = lgAlert.show({ tipType: 'question',
-     duration: 0,
-     position: { xAxis: 'right',
-     yAxis: 'top' } });
-    setTimeout(() => {
-        lgAlert.show({ tipType: 'success',
-         content: "加载成功",
-         duration: 1000,
-     },
-         alert.index);
-    },
-     1000 * 3)
-}
-alertMsg4() {
-    let alert = lgAlert.show({ tipType: this.state.successLoading ? 'success' : 'loading',
-     duration: 0,
-     position: { xAxis: 'left',
-     yAxis: 'center' } });
-    setTimeout(() => {
-        lgAlert.show({ tipType: 'success',
-         content: "加载成功",
-         duration: 1000 },
-         alert.index);
-    },
-     1000 * 3)
-}
+alertMsg() {let alert = lgAlert.show({ content: "用户操作的基本提示", tipType: 'info', position: { xAxis: 'left', yAxis: 'top' } });}
+alertMsg2() {let alert = lgAlert.show({ content: "用户操作的询问提示", tipType: 'question', position: { xAxis: 'center', yAxis: 'top' } });}
+alertMsg3() {let alert = lgAlert.show({ content: "用户操作的警告提示", tipType: 'warning', position: { xAxis: 'right', yAxis: 'top' } });}
+alertMsg4() {let alert = lgAlert.show({ content: "用户操作的错误提示", tipType: 'error', position: { xAxis: 'left', yAxis: 'center' } });}
 alertMsg5() {
-    let alert = lgAlert.show({ tipType: this.state.successLoading ? 'success' : 'loading',
-     duration: 0,
-     position: { xAxis: 'center',
-     yAxis: 'center' } });
-    setTimeout(() => {
-        lgAlert.show({ tipType: 'success',
-         content: "加载成功",
-         duration: 1000 },
-         alert.index);
-    },
-     1000 * 3)
+    let alert = lgAlert.show({ content: "用户操作的成功提示", tipType: 'success', position: { xAxis: 'center', yAxis: 'center' } });
 }
 alertMsg6() {
-    let alert = lgAlert.show({ tipType: this.state.successLoading ? 'success' : 'loading',
-     duration: 0,
-     position: { xAxis: 'right',
-     yAxis: 'center' },
-     description: '实时通讯的智子制造过程' });
+    let alert = lgAlert.show({ content: '用户操作的基本提示', tipType: 'info', position: { xAxis: 'right', yAxis: 'center' }, description: '给时光以生命，给岁月以文明。' });
     setTimeout(() => {
-        lgAlert.show({ tipType: 'success',
-         content: "加载成功",
-         duration: 0,
-         isShowCloseBtn: true,
-         description: "How do you spell color? You’ll see other writers do it two ways—the one we’ve already used in this paragraph,
-         and another one—colour. Neither of the spellings is wrong,
-         and they both mean exactly the same thing. Still,
-         the two spellings are slightly different,
-         so there has to be something to it,
-         right? Let’s see. " },
-         alert.index);
-    },
-     1000 * 3)
-}
-alertMsg7() {
-    let alert = lgAlert.show({ isShowCloseBtn: true,
-         tipType: this.state.successLoading ? 'success' : 'loading',
-     duration: 0,
-     position: { xAxis: 'left',
-     yAxis: 'bottom' },
- });
-    setTimeout(() => {
-        lgAlert.show({ tipType: 'success',
-         content: "加载成功",
-         duration: 1000 },
-         alert.index);
-    },
-     1000 * 3)
-}
-alertMsg8() {
-    let alert = lgAlert.show({ isShowCloseBtn: true,
-         tipType: this.state.successLoading ? 'success' : 'loading',
-     duration: 0,
-     position: { xAxis: 'center',
-     yAxis: 'bottom' } });
-    setTimeout(() => {
-        lgAlert.show({ tipType: 'success',
-         content: "加载成功",
-         duration: 1000 },
-         alert.index);
-    },
-     1000 * 3)
-}
-alertMsg9() {
-    let alert = lgAlert.show({ isShowCloseBtn: true,
-         tipType: this.state.successLoading ? 'success' : 'loading',
-     duration: 0,
-     position: { xAxis: 'right',
-     yAxis: 'bottom' } });
-    setTimeout(() => {
-        lgAlert.show({ tipType: 'success',
-         content: "加载成功",
-         duration: 1000 },
-         alert.index);
-    },
-     1000 * 3)
-}
-alertMsgCustom() {
-    let alert = lgAlert.show({ isShowCloseBtn: true,
-         tipType: 'warning',
-     position: { xOffset: '-50%',
-     xAxis: '50%',
-     yAxis: 32,
-     showDirection: 'center',
-     showAlign: 'top' } });
-    setTimeout(() => {
-        lgAlert.show({ tipType: 'error',
-         content: "加载失败~",
-         duration: 1000 * 2,
-         isShowCloseBtn: false,
-     },
-         alert.index);
+        lgAlert.show({ tipType: 'success', content: "加载成功", description: "You should be self-esteem, do not be arrogant" }, alert.index);
     }, 1000 * 3)
 }
-clearAlertMsgCustom() {
-    lgAlert.show({ tipType: 'closeAll' })
+alertMsg7() {
+    let alert = lgAlert.show({ content: '数据加载中', tipType: 'loading', position: { xAxis: 'left', yAxis: 'bottom' }, });
+    setTimeout(() => {
+        lgAlert.show({ tipType: 'success', content: "加载成功", }, alert.index);
+    }, 1000 * 3)
 }
+alertMsg8() {
+    let alert = lgAlert.show({ content: '数据加载中', tipType: 'loading', position: { xAxis: 'center', yAxis: 'bottom' } });
+    setTimeout(() => {
+        lgAlert.show({ tipType: 'warning', content: "数据为空", }, alert.index);
+    }, 1000 * 3)
+}
+alertMsg9() {
+    let alert = lgAlert.show({ content: '数据加载中', tipType: 'loading', position: { xAxis: 'right', yAxis: 'bottom' } });
+    setTimeout(() => {
+        lgAlert.show({ tipType: 'error', content: "数据加载失败", }, alert.index);
+    }, 1000 * 3)
+}
+alertMsgCustom() {
+    let alert = lgAlert.show({ content: "数据加载中(自定义位置)", tipType: 'loading', position: { xOffset: '-50%', xAxis: '50%', yAxis: 32, showDirection: 'center', showAlign: 'top' } });
+    setTimeout(() => {
+        lgAlert.show({ tipType: 'error', content: "加载失败(自定义位置)", }, alert.index);
+    }, 1000 * 3)
+}
+clearAlertMsgCustom() {lgAlert.show({ tipType: 'closeAll' })}
 <div>
     <div>
         <input type="button" value="左上" onClick={this.alertMsg} className='comment_position alert_position_left_top' />
@@ -517,73 +448,96 @@ clearAlertMsgCustom() {
                             </div>
                         </div>
                         <div className='components-show-example'>
-                            <div className='components-show-example-title'>A款-LgUI-Alert:</div>
+                            <div className='components-show-example-title'>A款-LgUI-Alert: 商务蓝&智慧蓝A款</div>
                             <div>
+                                <div className='components-show-example-title-text'>大尺寸</div>
                                 <input type="button" value="success" onClick={this.alertASuccess} className='comment_position alert_position_left_top' />
                                 <input type="button" value="warning" onClick={this.alertAWarning} className='comment_position alert_position_left_top' />
                                 <input type="button" value="info" onClick={this.alertAInfo} className='comment_position alert_position_left_top' />
                                 <input type="button" value="question" onClick={this.alertAQuestion} className='comment_position alert_position_left_top' />
                                 <input type="button" value="error" onClick={this.alertAError} className='comment_position alert_position_left_top' />
                             </div>
+                            <div>
+                                <div className='components-show-example-title-text'>中等尺寸</div>
+                                <input type="button" value="success" onClick={this.alertASuccess2} className='comment_position alert_position_left_top' />
+                                <input type="button" value="warning" onClick={this.alertAWarning2} className='comment_position alert_position_left_top' />
+                                <input type="button" value="info" onClick={this.alertAInfo2} className='comment_position alert_position_left_top' />
+                                <input type="button" value="question" onClick={this.alertAQuestion2} className='comment_position alert_position_left_top' />
+                                <input type="button" value="error" onClick={this.alertAError2} className='comment_position alert_position_left_top' />
+                            </div>
+                            <div>
+                                <div className='components-show-example-title-text'>小尺寸</div>
+                                <input type="button" value="success" onClick={this.alertASuccess3} className='comment_position alert_position_left_top' />
+                                <input type="button" value="warning" onClick={this.alertAWarning3} className='comment_position alert_position_left_top' />
+                                <input type="button" value="info" onClick={this.alertAInfo3} className='comment_position alert_position_left_top' />
+                                <input type="button" value="error" onClick={this.alertAError3} className='comment_position alert_position_left_top' />
+                            </div>
                             <div className='components-show-steps-code'>
                                 <CodeView className='props_container'>
                                     {`
-     alertASuccess() {
-        let alert = lgAlert.show({ tipType: 'success',
-         tipSize: 'mini',
-         tipMouldType: 'A',
-         duration: 0,
-         isShowCloseBtn: true });
-    }
-    alertAWarning() {
-        let alert = lgAlert.show({ tipType: 'warning',
-         tipSize: 'small',
-         tipMouldType: 'A',
-         containerClassName: 'weishoujiong',
-         duration: 0,
-         description: "How do you spell color? You’ll see other writers do it two ways—the one we’ve already used in this paragraph,
-         and another one—colour. " });
-    }
-    alertAInfo() {
-        let alert = lgAlert.show({ tipType: 'info',
-         reverse: true,
-         tipMouldType: 'A',
-         duration: 0 });
+alertASuccess() {
+let alert = lgAlert.show({ content: "用于表示操作然后操作成功的", tipType: 'success', tipSize: 'big', tipMouldType: 'A', description: "这是一个操作成功的描述" });
+}
+alertAWarning() {
+let alert = lgAlert.show({ content: '用于表示操作引起严重的后果', tipType: 'warning', tipSize: 'big', tipMouldType: 'A', description: "这是一个后果信息描述" });
+}
+alertAInfo() {
+let alert = lgAlert.show({ content: '用户表示普通操作信息提示', tipType: 'info', tipSize: 'big', description: "这是一个普通提示描述", reverse: true, tipMouldType: 'A', });
+}
+alertAError() {
+let alert = lgAlert.show({ content: '用于表示操作然后操作失败的', tipType: 'error', tipMouldType: 'A', tipSize: 'big', description: "这是一个操作失败的原因" });
+}
+alertAQuestion() {
+let alert = lgAlert.show({ content: '用于帮助用户操作的信息提示', tipType: 'question', tipMouldType: 'A', tipSize: 'big', description: "这是一个帮助提示描述" });
+}
+alertASuccess2() {
+let alert = lgAlert.show({ content: '操作成功', tipType: 'success', tipSize: 'small', tipMouldType: 'A', });
+}
+alertAWarning2() {
+let alert = lgAlert.show({ content: '该操作无法执行', tipType: 'warning', tipSize: 'small', tipMouldType: 'A', });
+}
+alertAInfo2() {
+let alert = lgAlert.show({ content: '该操作无法执行', tipType: 'info', tipSize: 'small',  reverse: true, tipMouldType: 'A', });
+}
+alertAError2() {
+let alert = lgAlert.show({ content: '操作失败', tipType: 'error', tipMouldType: 'A', tipSize: 'small',  });
+}
+alertAQuestion2() {
+let alert = lgAlert.show({ content: '是否执行操作？ ', tipType: 'question', tipMouldType: 'A', tipSize: 'small', });
+}
+alertASuccess3() {
+let alert = lgAlert.show({ content: '操作成功', tipType: 'success', tipSize: 'mini', tipMouldType: 'A', });
+}
+alertAWarning3() {
+let alert = lgAlert.show({ content: '该操作无法执行', tipType: 'warning', tipSize: 'mini', tipMouldType: 'A', });
+}
+alertAInfo3() {
+let alert = lgAlert.show({ content: '该操作无法执行', tipType: 'info', tipSize: 'mini', reverse: true, tipMouldType: 'A', });
+}
+alertAError3() {
+let alert = lgAlert.show({ content: '操作失败', tipType: 'error', tipMouldType: 'A', tipSize: 'mini',  });
+}
 
-    }
-    alertAError() {
-        let alert = lgAlert.show({
-            tipType: 'error',
-             tipMouldType: 'A',
-             tipSize: 'big',
-             isShowCloseBtn: true,
-             duration: 0,
-             description: 'There are a couple of ways you can choose which spelling to use.'
-        });
-    }
-    alertAQuestion() {
-        let alert = lgAlert.show({
-        tipType: 'question',
-         tipMouldType: 'A',
-         duration: 0,
-         isShowCloseBtn: true,
-         description: 'There are a couple of ways you can choose which spelling to use. You can,
-         for example,
-         choose the spelling that’s prevalent in the country you’re from—if you’re an American,
-         use color. If you’re from any of the Commonwealth countries,
-         use colour. If English is not your first language,
-         use the spelling you were taught.
-        If you’re still not sure which to choose,
-         or if you’re writing for an international audience,
-         the best thing to do is choose one of the spellings and stick with it. In other words, choose consistency. ' });
-    }
-    <div>
-        <input type="button" value="success" onClick={this.alertASuccess} className='comment_position alert_position_left_top' />
-        <input type="button" value="warning" onClick={this.alertAWarning} className='comment_position alert_position_left_top' />
-        <input type="button" value="info" onClick={this.alertAInfo} className='comment_position alert_position_left_top' />
-        <input type="button" value="question" onClick={this.alertAQuestion} className='comment_position alert_position_left_top' />
-        <input type="button" value="error" onClick={this.alertAError} className='comment_position alert_position_left_top' />
-    </div>
+
+<div className='components-show-example-title-text'>大尺寸</div>
+<input type="button" value="success" onClick={this.alertASuccess} className='comment_position alert_position_left_top' />
+<input type="button" value="warning" onClick={this.alertAWarning} className='comment_position alert_position_left_top' />
+<input type="button" value="info" onClick={this.alertAInfo} className='comment_position alert_position_left_top' />
+<input type="button" value="question" onClick={this.alertAQuestion} className='comment_position alert_position_left_top' />
+<input type="button" value="error" onClick={this.alertAError} className='comment_position alert_position_left_top' />
+
+<div className='components-show-example-title-text'>中等尺寸</div>
+<input type="button" value="success" onClick={this.alertASuccess2} className='comment_position alert_position_left_top' />
+<input type="button" value="warning" onClick={this.alertAWarning2} className='comment_position alert_position_left_top' />
+<input type="button" value="info" onClick={this.alertAInfo2} className='comment_position alert_position_left_top' />
+<input type="button" value="question" onClick={this.alertAQuestion2} className='comment_position alert_position_left_top' />
+<input type="button" value="error" onClick={this.alertAError2} className='comment_position alert_position_left_top' />
+
+<div className='components-show-example-title-text'>小尺寸</div>
+<input type="button" value="success" onClick={this.alertASuccess3} className='comment_position alert_position_left_top' />
+<input type="button" value="warning" onClick={this.alertAWarning3} className='comment_position alert_position_left_top' />
+<input type="button" value="info" onClick={this.alertAInfo3} className='comment_position alert_position_left_top' />
+<input type="button" value="error" onClick={this.alertAError3} className='comment_position alert_position_left_top' />
     `}
                                 </CodeView>
                             </div>
@@ -601,44 +555,16 @@ clearAlertMsgCustom() {
                             <div className='components-show-steps-code'>
                                 <CodeView className='props_container'>
                                     {`
-alertSuccess() {
-    let alert = lgAlert.show({ tipType: 'success',
-     tipMouldType: 'E',
-     duration: 0,
-     closable: true,
-     closeText: "关闭",
-     description: "据央视新闻消息，陕西西安1... " });
-}
-alertWarning() {
-    let alert = lgAlert.show({ tipType: 'warning',
-     tipMouldType: 'E',
-     duration: 0,
-     description: "How do you spell color? You’ll see other writers do it two ways—the one we’ve already used in this paragraph,
-     the two spellings are slightly different,
-     so there has to be something to it,
-     right? Let’s see. " });
-}
-alertInfo() {
-    let alert = lgAlert.show({ tipType: 'info',
-     tipMouldType: 'E',
-     duration: 0,
-     isShowIcon: false });
-}
-alertError() {
-    let alert = lgAlert.show({
-        tipType: 'error',
-         tipMouldType: 'E',
-         isShowCloseBtn: true,
-         description: 'There are a couple of ways you can choose which spelling to use. You can,
-     the best thing to do is choose one of the spellings and stick with it. In other words,
-     choose consistency. ' });
-}
-<div>
-    <input type="button" value="success" onClick={this.alertSuccess} className='comment_position alert_position_left_top' />
-    <input type="button" value="warning" onClick={this.alertWarning} className='comment_position alert_position_left_top' />
-    <input type="button" value="info" onClick={this.alertInfo} className='comment_position alert_position_left_top' />
-    <input type="button" value="error" onClick={this.alertError} className='comment_position alert_position_left_top' />
-</div>
+alertSuccess() {let alert = lgAlert.show({ content: '用户操作的成功提示', tipType: 'success', tipMouldType: 'E', closable: true, description: "这是一个操作成功的描述" });}
+alertWarning() {let alert = lgAlert.show({ content: '用户操作的警告提示', tipType: 'warning', tipMouldType: 'E', 
+isShowCloseBtn: true, description: "You should be self-esteem, do not be arrogant" });}
+alertInfo() {let alert = lgAlert.show({ content: '用户操作的基本提示', tipType: 'info', tipMouldType: 'E', });}
+alertError() {let alert = lgAlert.show({ content: '用于表示操作然后操作失败的', tipType: 'error', tipMouldType: 'E', });}
+
+<input type="button" value="success" onClick={this.alertSuccess} className='comment_position alert_position_left_top' />
+<input type="button" value="warning" onClick={this.alertWarning} className='comment_position alert_position_left_top' />
+<input type="button" value="info" onClick={this.alertInfo} className='comment_position alert_position_left_top' />
+<input type="button" value="error" onClick={this.alertError} className='comment_position alert_position_left_top' />
                                         `}
                                 </CodeView>
                             </div>
