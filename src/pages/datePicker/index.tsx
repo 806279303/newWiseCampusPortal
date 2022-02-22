@@ -145,11 +145,11 @@ export default class DatePicker extends Component<{}, DatePickerState> {
         <DatePickerDemoFrame className="selected-day" title="选择日" subtitle="以「日」为基本单位，基础的日期选择控件">
           <div className="left">
             <div className="component-title">默认</div>
-            <LgDatePicker onChange={e => console.log(e?.getTime())}/>
+            <LgDatePicker placeholder="请选择" onChange={e => console.log(e?.getTime())}/>
           </div>
           <div className="right">
             <div className="component-title">带快捷选项</div>
-            <LgDatePicker onChange={e => console.log(e)} onRef={e => this.demonstrationPicker = e} align={"right"}
+            <LgDatePicker placeholder="请选择" onChange={e => console.log(e)} onRef={e => this.demonstrationPicker = e} align={"right"}
                           value={this.state.demonstrationValue}
                           shortcuts={[
                             {

@@ -1,13 +1,71 @@
 @import "../index";
 
-.el-date-table td:hover{
-  border-radius: 50%;
+
+//日期选择
+
+//选择框样式
+.el-input__icon+.el-input__inner{
+  font-family: "Microsoft YaHei", serif;
+  font-size: 14px;
+  color: #333;
+  border-color: #dedede;
+}
+.el-input__icon + .el-input__inner:hover{
+  border-color: #a3a3a3;
+}
+.el-input__icon + .el-input__inner:focus{
+  border-color: $color_s1;
+}
+.el-input__icon + .el-input__inner:hover::placeholder{
+  color: #e6e6e6;
+}
+.el-input__icon+.el-input__inner::placeholder{
+  color: #ccc;
+}
+.el-input__icon{
+  color: #808080;
+}
+.el-input:hover .el-input__icon{
+  color: #333;
+}
+
+//禁用状态
+.el-input.is-disabled .el-input__inner{
+  color: #666;
+  border-color: #d9d9d9;
+  background-color: #f5f5f5;
+}
+.el-input.is-disabled:hover .el-input__icon{
+  color: #808080;
+}
+
+//选框中标题的样式
+.el-date-picker__header-label{
+  font-size: 14px;
+  font-family: "Microsoft YaHei", serif;
+  color: #333;
+}
+
+//选框中标题鼠标悬浮颜色
+.el-date-picker__header-label.active, .el-date-picker__header-label:hover, .el-picker-panel__icon-btn:hover{
+  color: $color_s1;
+}
+
+//日期样式
+.el-date-table td{
+  font-size: 14px;
+  font-family: "Microsoft YaHei", serif;
+  color: #333;
+}
+
+.el-date-table td:hover {
+  border-radius: 3px;
 }
 
 .el-date-table td.current:not(.disabled), .el-date-table td.end-date, .el-date-table td.start-date {
-  background-color: #409eff !important;
+  background-color: $color_s1 !important;
   color: #fff;
-  border-radius: 50%;
+  border-radius: 3px;
 }
 
 .el-date-table td.today.current:before {
@@ -15,16 +73,20 @@
 }
 
 .el-date-table td.today {
-  color: #409eff;
+  color: $color_s1;
 }
-.el-date-table td.start-date, .el-date-table td.end-date{
+
+.el-date-table td.start-date, .el-date-table td.end-date {
   color: #fff;
 }
 
-.el-date-table td.today:before{
+.el-date-table td.today:before {
   content: none;
 }
 
+
+
+//时间选择
 .time-select-item.selected:not(.disabled):hover {
   background-color: #e4e8f1;
 }
@@ -32,4 +94,21 @@
 .time-select-item.selected:not(.disabled) {
   background-color: transparent;
   color: #48576a;
+}
+
+@each $skin, $color, $imgColor, $colorHover in $all_colors {
+  #{$skin} {
+    .el-input__icon + .el-input__inner:focus{
+      border-color: $color;
+    }
+    .el-date-table td.current:not(.disabled), .el-date-table td.end-date, .el-date-table td.start-date {
+      background-color: $color !important;
+    }
+    .el-date-table td.today:not(.current):not(.end-date) {
+      color: $color;
+    }
+    .el-date-picker__header-label.active, .el-date-picker__header-label:hover, .el-picker-panel__icon-btn:hover{
+      color: $color;
+    }
+  }
 }
