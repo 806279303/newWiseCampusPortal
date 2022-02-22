@@ -19,6 +19,8 @@ export default () => {
               onChange?: (value: string) => void //当搜索框发生变化时，触发的事件，返回变化的内容
               onSearch?: (value: string) => void //当点击搜索按钮时，返回的事件
               className?: string,
+              placeholder?: string,  //提示框: 提示文字
+              disabled?: boolean,    //禁止输入
               style?: object,
               onChange?: (value: string[]) => void//激活时回调，显示当前激活的key值
             }
@@ -45,9 +47,31 @@ export default () => {
 
         {
           allSkinClassName.map((className,index) => {
+            let placeholder = "";
+            if(index < 2){
+                placeholder = "查找相关信息"
+            }else if(index === 5){
+                placeholder = "禁止输入"
+            } 
             return (
               <div className={className} key={index}>
-                <Search onChange={(e) => {console.log(e)}}/>
+                <div style={{margin : 10}}>
+                    <Search placeholder={placeholder}
+                            disabled={index === 5 ? true : false}
+                            onChange={(e) => {console.log(e)}}/>
+                </div>
+              </div>
+            )
+          })
+        }
+
+        {
+          allSkinClassName.map((className,index) => {
+            return (
+              <div className={className} key={index}>
+                <div style={{margin : 10}}>
+                    <Search type="A" onChange={(e) => {console.log(e)}}/>
+                </div>
               </div>
             )
           })
