@@ -13,7 +13,7 @@ export default class Menu extends Component<{}, {}> {
         <h2>Menu导航菜单</h2>
         <div className="lg_tabs_item">
           <div className="lg-demo-view-title">标签属性</div>
-          <CodeView language="html" style={{marginTop:10}}>
+          <CodeView style={{marginTop:10}}>
             {`
               type menuIndex = string;
               interface MenuProps{

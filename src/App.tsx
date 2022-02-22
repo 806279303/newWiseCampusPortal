@@ -10,12 +10,12 @@ import './App.scss'
 function App() {
   const [ stlyeIndex, setStyleIndex ] = useState<number>(0)
   return (
-    <div className={`${allSkinClassName[stlyeIndex]}`}>
+    <div className={`root`}>
       <ul className='style_change_block'>
         {
           allSkinName.map((skinName, index) => {
             return (
-              <li key={index} className={`style_change_item ${index == stlyeIndex ? 'style_change_item_cho' : ''}`} onClick={() => { setStyleIndex(index);console.log(index)}}>
+              <li key={index} className={`style_change_item ${index == stlyeIndex ? 'style_change_item_cho' : ''}`} onClick={() => { document.body.className = allSkinClassName[index];setStyleIndex(index) }}>
                 {skinName}
               </li>
             )
