@@ -52,7 +52,7 @@ export class DemoPage extends BaseComponent<DemoPageProps> {
           {
             !this.props.interfaceCode ? "" : (
               <div className={`${this.classNamePrefix}-interface`}>
-                <div className={`${this.classNamePrefix}-interface-title`}>再引入标签，标签属性解析</div>
+                <div className={`${this.classNamePrefix}-interface-title`}>标签属性解析</div>
                 <CodeView>
                   {this.props.interfaceCode}
                 </CodeView>
