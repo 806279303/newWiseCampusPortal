@@ -3,6 +3,7 @@ $classNamePrefix: lg-demo-view;
 
 .#{$classNamePrefix}-root{
   width: 100%;
+  margin-top: 10px;
   .#{$classNamePrefix}-title{
     font-size: 20px;
     color: #333;
