@@ -4,6 +4,7 @@ $classNamePrefix: lg-demo-view;
 .#{$classNamePrefix}-root{
   width: 100%;
   margin-top: 10px;
+  margin-bottom: 20px;
   .#{$classNamePrefix}-title{
     font-size: 20px;
     color: #333;
@@ -25,5 +26,4 @@ $classNamePrefix: lg-demo-view;
     padding: 38px 38px 38px 48px;
     box-sizing: border-box;
   }
-
 }
