@@ -7,6 +7,8 @@ export interface SearchProps {
     onChange?: (value: string) => void,
     onSearch?: (value: string) => void,
     className?: string,
+    placeholder?: string,
+    disabled?: boolean,
     style?: object
 }
 
@@ -45,6 +47,8 @@ export function Search(props: SearchProps) {
             <input className={inputClassName} 
                 value={searchValue} 
                 onChange={changeSearch}
+                placeholder={props.placeholder}
+                disabled={props.disabled}
             />
           
             <i className='lg-search-input-icon'

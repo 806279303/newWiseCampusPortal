@@ -16,9 +16,20 @@
 .lg-tag-b-root{
   display: inline-block;
   position: relative;
-  .lg-tag-b-icon{
-    @include positionAbsoluteFill;
-  }
+
+  //由于需要无限缩放，因此迁移到了js
+  //@mixin iconBoxShadow($colorType, $rgb){
+  //  &.lg-tag-b-color-type-#{$colorType}{
+  //    .lg-tag-b-icon{
+  //      box-shadow: 0 10px 10px -10px $rgb;
+  //    }
+  //  }
+  //}
+  //$colorTypes: (primary, #30abff),(success, #6ec632),(warning, #ff8b38),(disabled, #a2a2a2);
+  //@each $colorType, $rgb in $colorTypes {
+  //  @include iconBoxShadow($colorType, $rgb);
+  //}
+
   .lg-tag-b-text{
     @include positionAbsoluteFill;
     @include flexCenter;

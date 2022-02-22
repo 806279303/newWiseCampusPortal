@@ -1,0 +1,61 @@
+@import "./components/index.scss";
+.root{
+    margin:0;
+    padding:0;
+    padding-top: 64px;
+}
+.style_change_block {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    border-bottom: 1px solid rgb(221, 221, 221);
+    box-sizing: border-box;
+    padding:0 20px 0 0;
+    margin:0;
+    position: fixed;
+    top: 0;
+    background-color: #fff;
+    .style_change_item {
+        list-style: none;
+        line-height: 64px;
+        margin: 0 0 0 40px;
+        color: #8cc4fc;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .style_change_item_cho {
+        font-weight: bold;
+        color: #1989fa;
+        position: relative;
+        &::after {
+            position: absolute;
+            content: '';
+            width: 30px;
+            height: 2px;
+            background-color: #409eff;
+            bottom: 0;
+            left: 50%;
+            margin-left: -15px;
+            transition: height 0.2s ease-in-out;
+        }
+
+    }
+
+}
+
+@each $skin,
+$color,
+$imgColor,
+$colorHover in $all_colors {
+    #{$skin} {
+        .style_change_item_cho {
+            color: $colorHover;
+            &::after {
+                background-color: $colorHover;
+            }
+
+        }
+
+    }
+}
