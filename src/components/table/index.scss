@@ -34,62 +34,92 @@
     }
 }
 
-@each $skin, $color, $imgColor, $colorHover, $imgHColor in $all_colors {
+@each $skin, $table_H, $table_H_C, $table_Hover_bg in $all_table_colors {
     #{$skin} {
         .lg_table_box {
-            .el-table td,
-            .el-table th.is-leaf,
-            .el-table {
-                border-bottom-color: rgba($color, 0.4);
-                &:hover {
-                    border-color: rgba($color, 0.4);
-                }
-            }
-            .el-table th.is-leaf {
-                border-bottom-color: rgba($color, 0.1);
-                border-bottom-color: transparent;
-                &:hover {
-                    border-bottom-color: transparent;
-                }
-            }
-            .el-table {
-                border-color: rgba($color, 0.4);
-                &:hover {
-                    border-color: rgba($color, 0.4);
-                }
-            }
             .el-table th,
-            .el-table__footer-wrapper thead div,
-            .el-table__header-wrapper thead div,
-            .el-table::after,
-            .el-table::before {
-                background-color: rgba($color, 0.4);
-            }
-            .el-table--border td,
-            .el-table--border th {
-                border-right-color: rgba($color, 0.4);
-                &:hover {
-                    border-right-color: rgba($color, 0.4);
-                }
-            }
-            .el-table__footer-wrapper thead div,
-            .el-table__header-wrapper thead div,
             .el-table__fixed-header-wrapper thead div {
+                background-color: $table_H;
+                color: $table_H_C;
+            }
+            .el-table__footer-wrapper thead div,
+            .el-table__header-wrapper thead div {
+                color: $table_H_C;
                 background-color: transparent;
+            }
+            .el-table--enable-row-hover .el-table__body tr:hover > td,
+            .el-table--enable-row-hover .el-table__body tr:hover {
+                background-color: $table_Hover_bg;
+                color: $table_H_C;
             }
 
             .el-table--striped .el-table__body tr.el-table__row--striped td {
-                background-color: rgba($color, 0.1);
+                background-color: $table_Hover_bg;
             }
+
+            .el-table__body tr.hover-row.current-row > td,
+            .el-table__body tr.hover-row.el-table__row--striped.current-row > td,
+            .el-table__body tr.hover-row.el-table__row--striped > td,
+            .el-table__body tr.hover-row > td {
+                color: $table_H_C;
+                background-color: $table_Hover_bg;
+            }
+            .el-table td,
+            .el-table th.is-leaf,
+            .el-table {
+                border-color: rgb(225, 234, 245);
+                &:hover {
+                    border-color: rgb(225, 234, 245);
+                }
+            }
+            // .el-table th.is-leaf {
+            //     border-bottom-color: rgb(225, 234, 245);
+            //     &:hover {
+            //     }
+            // }
+            .el-table {
+                border-color: rgb(225, 234, 245);
+                &:hover {
+                    border-color: rgb(225, 234, 245);
+                }
+            }
+            // .el-table th,
+            // .el-table__footer-wrapper thead div,
+            // .el-table__header-wrapper thead div,
+            // .el-table::after,
+            // .el-table::before {
+            //     background-color: rgb(225,234,245);
+            // }
+            .el-table--border td,
+            .el-table--border th {
+                border-right-color: rgb(225, 234, 245);
+                &:hover {
+                    border-right-color: rgb(225, 234, 245);
+                }
+            }
+            // .el-table__footer-wrapper thead div,
+            // .el-table__header-wrapper thead div,
+            // .el-table__fixed-header-wrapper thead div {
+            //     background-color: transparent;
+            // }
+
+            // .el-table--striped .el-table__body tr.el-table__row--striped td {
+            //     background-color: rgb($color, 0.1);
+            // }
             .el-table__fixed-right,
             .el-table__fixed {
-                box-shadow: -1px 0 8px rgba($color, 0.4);
+                box-shadow: -1px 0 8px $table_H;
             }
+            // .el-table__fixed,
+            // .el-table__fixed-right {
+            //     border-right-color: rgb(225, 234, 245);
+            //     border-left-color: rgb(225, 234, 245);
+            // }
             .el-table--border th,
             .el-table__fixed-right-patch {
-                border-bottom-color: rgba($color, 0.4);
+                border-bottom-color: rgb(225, 234, 245);
                 &:hover {
-                    border-bottom-color: rgba($color, 0.4);
+                    border-bottom-color: rgb(225, 234, 245);
                 }
             }
         }

@@ -1,7 +1,7 @@
 /*
 * @Author       : super-J
 * @Date         : 2021-12-29 08:41:58
- * @LastEditTime : 2022-02-22 13:59:38
+ * @LastEditTime : 2022-02-22 21:21:34
  * @LastEditors  : super-J
 * @Description  : 弹窗组件
 */
@@ -78,7 +78,7 @@ export class LgPopLayer extends Component<PopLayerProps, PopLayerState, { isOpen
         title: 'Lg弹出层-默认标题',//弹窗头部的标题 | 默认值:
         isShowTopClose: true,//是否显示头部的关闭按钮 | 默认值:false
         isShowBottom: true,//是否显示底部的 | 默认值:true
-        confirmText: '确认',//确认按钮需要显示的文本
+        confirmText: '确定',//确认按钮需要显示的文本
         closeText: '取消',//关闭按钮需要显示的文本
         zIndex: popLayerZIndex,//弹窗的层级
         width: 400,//弹窗的总宽度 | 默认值: 500
