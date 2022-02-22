@@ -5,40 +5,39 @@ import { AllSkinCover } from "../AllSkinCover";
 import { LgMenu } from "@/components/menu";
 import { CodeView } from "@/components/CodeView";
 import { DemoView } from "@/components/demoView";
+import { DemoPage } from "../demoPage";
 export default class Menu extends Component<{}, {}> {
   render() {
 
     return (
-      <div className="lg_tabs_container">
-        <h2>Menu导航菜单</h2>
-        <div className="lg_tabs_item">
-          <div className="lg-demo-view-title">标签属性</div>
-          <CodeView style={{marginTop:10}}>
-            {`
-              type menuIndex = string;
-              interface MenuProps{
-                  defaultActive?: menuIndex
-                  defaultOpeneds?: menuIndex[]
-                  uniqueOpened?: boolean
-                  menuTrigger?: string
-                  onSelect?(index?: menuIndex, indexPath?: menuIndex[]): void
-                  onOpen?(index?: menuIndex, indexPath?: menuIndex[]): void
-                  onClose?(index?: menuIndex, indexPath?: menuIndex[]): void
-              };
-              interface SubMenuProps {
-                  index: menuIndex
-                  title?: React.ReactElement<any> | string
-              };
-              interface MenuItemGroupProps {
-                  title: string
-              };
-              interface MenuItemProps {
-                  index: menuIndex
-                  disabled?: boolean
-              }
-          `}
-          </CodeView>
-        </div>
+      <DemoPage title="G006导航菜单" className="lg_tabs_container"
+                importCode={`
+                    import { LgMenu } from "@/components/menu";
+                `}
+                interfaceCode={`
+                  type menuIndex = string;
+                  interface MenuProps{
+                      defaultActive?: menuIndex
+                      defaultOpeneds?: menuIndex[]
+                      uniqueOpened?: boolean
+                      menuTrigger?: string
+                      onSelect?(index?: menuIndex, indexPath?: menuIndex[]): void
+                      onOpen?(index?: menuIndex, indexPath?: menuIndex[]): void
+                      onClose?(index?: menuIndex, indexPath?: menuIndex[]): void
+                  };
+                  interface SubMenuProps {
+                      index: menuIndex
+                      title?: React.ReactElement<any> | string
+                  };
+                  interface MenuItemGroupProps {
+                      title: string
+                  };
+                  interface MenuItemProps {
+                      index: menuIndex
+                      disabled?: boolean
+                  }
+                `}>
+          
         <DemoView title={"顶栏"} subtitle={"适用广泛的基础用法。"}
           code={`
               <LgMenu defaultActive="1">
@@ -160,7 +159,8 @@ export default class Menu extends Component<{}, {}> {
             </div>
           </div>
         </DemoView>
-      </div>
+
+      </DemoPage>
     )
   }
 }
