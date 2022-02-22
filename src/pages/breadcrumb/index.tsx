@@ -1,7 +1,6 @@
 import "./index.scss"
 import {Component} from "react";
 import {LgBreadcrumb} from "@/components/breadcrumb";
-import {CodeView} from "@/components/CodeView";
 import {DemoView} from "@/components/demoView";
 import {DemoPage} from "../demoPage";
 

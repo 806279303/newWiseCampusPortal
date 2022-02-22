@@ -49,6 +49,13 @@ export class DemoPage extends BaseComponent<DemoPageProps> {
             )
 
           }
+        </div>
+        <div className={`${this.classNamePrefix}-body`}>
+          {
+            this.props.children
+          }
+        </div>
+        <div className={`${this.classNamePrefix}-footer`}>
           {
             !this.props.interfaceCode ? "" : (
               <div className={`${this.classNamePrefix}-interface`}>
@@ -58,11 +65,6 @@ export class DemoPage extends BaseComponent<DemoPageProps> {
                 </CodeView>
               </div>
             )
-          }
-        </div>
-        <div className={`${this.classNamePrefix}-body`}>
-          {
-            this.props.children
           }
         </div>
       </div>

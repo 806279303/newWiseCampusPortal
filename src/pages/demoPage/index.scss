@@ -25,7 +25,12 @@ $classNamePrefix: lg-demo-page;
         font-family: MicrosoftYaHei, serif;
       }
     }
+  }
 
+  .#{$classNamePrefix}-body {
+
+  }
+  .#{$classNamePrefix}-footer {
     .#{$classNamePrefix}-interface {
       .#{$classNamePrefix}-interface-title {
         margin-top: 22px;
@@ -33,9 +38,5 @@ $classNamePrefix: lg-demo-page;
         font-family: MicrosoftYaHei, serif;
       }
     }
-  }
-
-  .#{$classNamePrefix}-body {
-
   }
 }
