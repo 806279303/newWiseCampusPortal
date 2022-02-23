@@ -8,7 +8,6 @@ import classNames from "classnames";
 export interface LgCardProps extends BaseProps {
     headerContent?: string | React.ReactElement<any>
     bodyStyle?: React.CSSProperties
-    width?: number
     shadow?: "always" | "hover" | "never"
 
 }
@@ -19,11 +18,12 @@ export const LgCard = (props: LgCardProps) => {
 
 export class LgBaseCard extends BaseComponent<LgCardProps> {
     render() {
-        let width = this.props.width || 480
+        const { className = '', style } = this.props
         let shadow = this.props.shadow || "always"
-        let className = classNames(
+        let cardClassName = classNames(
             "box-card",
             `shadow-${shadow}`,
+            className,
             {
                 [`${this.props.className}`]: !!this.props.className
             }
@@ -31,9 +31,9 @@ export class LgBaseCard extends BaseComponent<LgCardProps> {
            
         return (
             <Card
-              className={className}
+              className={cardClassName}
               bodyStyle={this.props.bodyStyle}
-              style={{width}}
+              style={style}
               header={
                 this.props.headerContent
               }

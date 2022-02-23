@@ -1,7 +1,5 @@
 import {Component} from "react";
 import "./index.scss";
-import {BaseProps} from "../../type/BaseProps";
-import {CodeView} from "@/components/CodeView";
 import {LgInputNumber} from "@/components/inputNumber"
 import { Button } from "element-react";
 import {DemoView} from "@/components/demoView";
