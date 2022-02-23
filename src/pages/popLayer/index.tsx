@@ -155,7 +155,7 @@ export default class popLayer extends Component<{}, PopLayerState> {
         return (
             <>
                 <div className='components-show-box'>
-                    <DemoPage title="G004 弹窗" subtitle="" className="lg-breadcrumb-demo-page"
+                    <DemoPage title="G003 弹窗" subtitle="" className="lg-breadcrumb-demo-page"
                         importCode={`import { LgPopLayer } from '@/components/popLayer';`}
                         interfaceCode={`
 /**
@@ -192,7 +192,7 @@ export interface PopLayerProps {
     children?: (React.ReactDOM | React.ReactChild | React.ReactElement) | (() => React.ReactElement);// 弹窗中部添加的自定义Dom | 默认值：-- | 是否必传:false
     childClassName?: string;//自定义弹窗容器的类名 | 默认值：-- | 是否必传:false
     customOfBottom?: (React.ReactDOM | React.ReactChild | React.ReactElement) | (() => React.ReactElement);//弹窗低部添加的自定义Dom | 默认值：-- 
-    | 是否必传:false (注:在关闭弹窗时若出现无法滚动需要在关闭的)
+    | 是否必传:false (注:在关闭弹窗时若出现无法滚动需要在关闭的时候设置:document.documentElement.style.overflow = 'auto')
     bottomClassName?: string;//弹窗低部添加的自定义Dom的类名 | 默认值：-- | 是否必传:false
 
     // function
@@ -258,7 +258,7 @@ showPopLayerFun1() {
                         >
                             <input type="button" value="打开弹窗2" className='comment_position' onClick={() => { this.showPopLayerFun2() }} />
                         </DemoView>
-                        <DemoView className='' title={'popLayer 弹出案例3:'}
+                        {/* <DemoView className='' title={'popLayer 弹出案例3:'}
                             code=
 
                             {
@@ -302,7 +302,7 @@ initDom3() {
                                             `
                             }>
                             <input type="button" value="打开弹窗4" className='comment_position' onClick={this.showPopLayerFun4} />
-                        </DemoView>
+                        </DemoView> */}
                     </DemoPage>
                 </div>
 
@@ -319,8 +319,10 @@ initDom3() {
                 >
                     {this.initDom1()}
                 </LgPopLayer>
-                <LgPopLayer isOpen={this.state.isOpen2}
+                <LgPopLayer
+                    isOpen={this.state.isOpen2}
                     onShowLayer={this.showPopLayerFun2}
+                    isCoverLayerClickClose
                     title='精简文章'
                     width={700}
                     height={500}
