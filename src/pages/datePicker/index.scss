@@ -1,100 +1,19 @@
 .lg-date-picker-demo {
-  width: 60%;
-
-  .change-skin {
-    &:hover{
-      cursor: pointer;
-    }
-    height: 40px;
-    width: 100px;
-    color: #1ca6fe;
+  .lg-date-picker-demo-h{
+    display: flex;
+    justify-content: space-evenly;
   }
-  .lg-date-picker-demo-frame{
-    margin-left: 20px;
-    width: 100%;
+  .lg-date-picker-demo-v{
+    flex: 1;
     &:first-child{
-      .title{
-        margin-top: 10px;
-      }
+      border-left: none;
     }
-    .title{
-      font-size: 22px;
-      color: #1f2f3d;
-      font-weight: normal;
-      margin: 45px 0 15px;
-    }
-    .subtitle{
-      font-size: 14px;
-      color: #5e6d82;
-      margin: 1em 0;
-    }
-    .component-container{
-      border: solid 1px #eaeefb;
-      border-radius: 4px;
-      width: 100%;
-      .component-title{
-        height: 40px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 14px;
-        color: #8492a6;
-      }
+    border-left: 1px solid #e5e5e5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .component-title{
+      margin-bottom: 20px;
     }
   }
-  .selected-day{
-    .component-container{
-      display: flex;
-      .left{
-        flex: 1;
-        padding: 30px 0;
-        border-right: solid 1px #eaeefb;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-      }
-      .right{
-        flex: 1;
-        padding: 30px 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-      }
-    }
-  }
-
-  .selected-time{
-    .component-container{
-      display: flex;
-      .left{
-        margin-left: 20px;
-        flex: 1;
-        padding: 30px 0;
-        border-right: solid 1px #eaeefb;
-        display: flex;
-        justify-content: center;
-        //align-items: center;
-        flex-direction: column;
-      }
-    }
-  }
-
-  .selected-range-time{
-    .component-container{
-      display: flex;
-      .left{
-        margin-left: 20px;
-        flex: 1;
-        padding: 30px 0;
-        border-right: solid 1px #eaeefb;
-        display: flex;
-        .el-date-editor:last-child{
-          margin-left: 20px;
-        }
-      }
-    }
-  }
-
 }

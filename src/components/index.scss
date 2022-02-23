@@ -66,6 +66,42 @@ $all_colors: (".lg-skin-s1", $color_s1, $img_color_s1, $color_s1_hover, $img_h_c
             (".lg-skin-s5", $color_s5, $img_color_s5, $color_s5_hover, $img_h_color_s5,$popLayer_fail_B_color_s5,$popLayer_fail_color_s5,$popLayer_confirm_color_s5),
             (".lg-skin-k1", $color_k1, $img_color_k1, $color_k1_hover, $img_h_color_k1,$popLayer_fail_B_color_k1,$popLayer_fail_color_k1,$popLayer_confirm_color_k1),
             (".lg-skin-k2", $color_k2, $img_color_k2, $color_k2_hover, $img_h_color_k2,$popLayer_fail_B_color_k2,$popLayer_fail_color_k2,$popLayer_confirm_color_k2);
+
+
+
+
+$table_Hbg_s1: #e6eff8;
+$table_Hbg_s2: rgb(219,238,255);
+$table_Hbg_s3: #d6e6ff;
+$table_Hbg_s4: #d7fbe3;
+$table_Hbg_s5: #ede9f8;
+$table_Hbg_k1: #347ed1;
+$table_Hbg_k2: #1ca6fe;
+
+$table_Hc_s1: #305e91;
+$table_Hc_s2: #399cd0;
+$table_Hc_s3: #194ca1;
+$table_Hc_s4: #0f8737;
+$table_Hc_s5: #6446a9;
+$table_Hc_k1: #000;
+$table_Hc_k2: #000;
+
+$table_Hover_bg_s1: #f6faff;
+$table_Hover_bg_s2: #f2f9ff;
+$table_Hover_bg_s3: #f3f8ff;
+$table_Hover_bg_s4: #f0faf3;
+$table_Hover_bg_s5: #f7f5fe;
+$table_Hover_bg_k1: #347ed1;
+$table_Hover_bg_k2: #1ca6fe;
+             
+$all_table_colors: 
+            (".lg-skin-s1",$table_Hbg_s1,$table_Hc_s1 ,$table_Hover_bg_s1 ),
+            (".lg-skin-s2",$table_Hbg_s2,$table_Hc_s2 ,$table_Hover_bg_s2 ),
+            (".lg-skin-s3",$table_Hbg_s3,$table_Hc_s3 ,$table_Hover_bg_s3 ),
+            (".lg-skin-s4",$table_Hbg_s4,$table_Hc_s4 ,$table_Hover_bg_s4 ),
+            (".lg-skin-s5",$table_Hbg_s5,$table_Hc_s5 ,$table_Hover_bg_s5 ),
+            (".lg-skin-k1",$table_Hbg_k1,$table_Hc_k1 ,$table_Hover_bg_k1 ),
+            (".lg-skin-k2",$table_Hbg_k2,$table_Hc_k2 ,$table_Hover_bg_k2 );
 :export{
   allSkin: "lg-skin-s1", "lg-skin-s2", "lg-skin-s3", "lg-skin-s4","lg-skin-s5","lg-skin-k1", "lg-skin-k2";
   skinName: "S1智慧经典", "S2商务蓝天", "S3蓝色海洋", "S4绿意盎然", "S5紫色天空" 

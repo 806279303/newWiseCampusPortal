@@ -37,7 +37,7 @@ export default class Loading extends Component<{}, {}> {
                      height?: number //线条高度
                   }
                 `}>
-        <DemoView title="A款代码样例"
+        <DemoView title="A款常用款" subtitle="可以设置大小，位置"
                   code={`
                       <>
                         // 基本使用

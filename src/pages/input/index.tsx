@@ -1,15 +1,18 @@
 /*
  * @Author       : super-J
  * @Date         : 2022-02-09 17:22:40
- * @LastEditTime : 2022-02-22 08:49:59
+ * @LastEditTime : 2022-02-22 19:56:08
  * @LastEditors  : super-J
  * @Description  : 
  */
 import { LgCascader } from "@/components/cascader";
 import { CodeView } from "@/components/CodeView";
+import { DemoView } from "@/components/demoView";
 import { LgInput } from "@/components/input";
+import { LgTable } from "@/components/table";
 import { AutoComplete, Button, Cascader, Input, Layout, Select } from "element-react";
 import { Component } from "react";
+import { DemoPage } from "../demoPage";
 import "./index.scss";
 interface InputDemoState {
     inputValue: string
@@ -278,12 +281,7 @@ export default class InputDemo extends Component<{}, InputDemoState> {
         this.onChange = this.onChange.bind(this)
     }
     componentDidMount() {
-        let allSkin = ["lg-skin-s1", "lg-skin-s2", "lg-skin-s3", "lg-skin-s4", "lg-skin-s5", "lg-skin-k1", "lg-skin-k2"];
-        let number = allSkin.length;
-        setInterval(() => {
-            let index = Math.floor(Math.random() * parseInt(number as any));
-            document.documentElement.className = allSkin[index];
-        }, 1000 * 5)
+
     }
     onChange(e: any) {
         console.log(e);
@@ -319,145 +317,64 @@ export default class InputDemo extends Component<{}, InputDemoState> {
     render() {
         return (
             <div className="input_container">
-                <div className='components-show-box'>
-                    <div className='components-show-big-title'>G005 输入框/下拉框</div>
-                    <div className='components-show-use'>使用指南</div>
-                    <div className='components-show-steps-box'>
-                        <div className='components-show-steps'>一、在 @/components/input 文件中引入组件 LgInput</div>
-                        <div className='components-show-steps-code'>
-                            <CodeView className=''>
-                                {
-                                    `import { LgInput } from "@/components/input";`
-                                }
-                            </CodeView>
-                        </div>
-                    </div>
-                    <div className='components-show-steps-box'>
-                        <div className='components-show-steps'>二、再引入标签，标签属性解析</div>
-                        <div className='components-show-steps-code'>
-                            <CodeView className=''>
-                                {
-                                    `
-                                interface lgAlert {
-                                    isShowCount?: boolean; //是否显示统计字数
-                                    
-                                    // 其他参数请参考: @see https://elemefe.github.io/element-react/#/zh-CN/input
-                                }
-                                `
-                                }
-                            </CodeView>
-                        </div>
-                    </div>
-                    <div className='components-show-steps-box'>
-                        <div className='components-show-steps'>三、demo样式展示</div>
-                        <div className='components-show-example'>
-                            <div className='components-show-example-title'>单行文本输入框:</div>
-                            <div>
-                                <div className="input_item">
-                                    <LgInput placeholder="单行文本输入框" type="text" onChange={this.onChange} value={this.state.inputValue} />
-                                </div>
-                                <div className="input_item">
-                                    <LgInput placeholder="单行文本输入框" isShowCount maxLength={50} />
-                                </div>
-                                <div className="input_item">
-                                    <LgInput isShowCount disabled placeholder="禁用状态" />
-                                </div>
-                                <div className='components-show-steps-code'>
-                                    <CodeView className='props_container'>
-                                        {
-                                            `
+                <DemoPage title="G005 输入框/下拉框" subtitle="" className="lg-breadcrumb-demo-page"
+                    importCode={`import { LgInput } from "@/components/input";`}
+                    interfaceCode={`
+                    interface lgAlert {
+                        isShowCount?: boolean; //是否显示统计字数
+                        // 其他参数请参考: @see https://elemefe.github.io/element-react/#/zh-CN/input
+                    }`
+                    }>
+                    <DemoView title="单行文本输入框" code={`
+this.state = {
+    inputValue:''
+}
+
+onChange(){}
+
 <LgInput type="text" onChange={this.onChange} value={this.state.inputValue} />
 <LgInput isShowCount maxLength={50} />
 <LgInput isShowCount disabled placeholder="禁用状态" />
-                                    `
-                                        }
-                                    </CodeView>
-                                </div>
-                            </div>
+                    `}>
+                        <div className="input_item">
+                            <LgInput placeholder="单行文本输入框" type="text" onChange={this.onChange} value={this.state.inputValue} />
                         </div>
-                        <div className='components-show-example'>
-                            <div className='components-show-example-title'>多行文本输入框:</div>
-                            <div>
-                                <div className="input_item">
-                                    <LgInput placeholder="多行文本输入框" type='textarea' />
-                                </div>
-                                <div className="input_item">
-                                    <LgInput isShowCount placeholder="多行文本输入框" maxLength={50} type='textarea' />
-                                </div>
-                                <div className="input_item">
+                        <div className="input_item">
+                            <LgInput placeholder="单行文本输入框" isShowCount maxLength={50} />
+                        </div>
+                        <div className="input_item">
+                            <LgInput isShowCount disabled placeholder="禁用状态" />
+                        </div>
+                    </DemoView>
 
-                                    <LgInput isShowCount placeholder="禁用状态" type='textarea' disabled />
-                                </div>
-                                <div className='components-show-steps-code'>
-                                    <CodeView className='props_container'>
-                                        {
-                                            `
+                    <DemoView title="多行文本输入框" code={`
 <LgInput placeholder="多行文本输入框" type='textarea' />
 <LgInput isShowCount placeholder="多行文本输入框" maxLength={50} type='textarea' />
 <LgInput isShowCount placeholder="禁用状态" type='textarea' disabled />
-                                    `
-                                        }
-                                    </CodeView>
-                                </div>
-                            </div>
+                    `}>
+                        <div className="input_item">
+                            <LgInput placeholder="多行文本输入框" type='textarea' />
                         </div>
+                        <div className="input_item">
+                            <LgInput isShowCount placeholder="多行文本输入框" maxLength={25} type='textarea' />
+                        </div>
+                        <div className="input_item">
 
+                            <LgInput isShowCount placeholder="禁用状态" type='textarea' disabled />
+                        </div>
+                    </DemoView>
+                </DemoPage>
 
-                    </div>
-                </div>
-                <div className='components-show-box'>
-                    <div className='components-show-big-title'>G005 下拉框</div>
-                    <div className='components-show-use'>使用指南</div>
-                    <div className='components-show-steps-box'>
-                        <div className='components-show-steps'>一、在 @/components/cascader 文件中引入组件 LgCascader</div>
-                        <div className='components-show-steps-code'>
-                            <CodeView className=''>
-                                {
-                                    `import { LgCascader } from "@/components/cascader";`
-                                }
-                            </CodeView>
-                        </div>
-                    </div>
-                    <div className='components-show-steps-box'>
-                        <div className='components-show-steps'>二、再引入标签，标签属性解析</div>
-                        <div className='components-show-steps-code'>
-                            <CodeView className=''>
-                                {
-                                    `
-                                interface LgCascader {
-                                    
-                                    // 参数请参考: @see https://elemefe.github.io/element-react/#/zh-CN/cascader
-                                }
-                                `
-                                }
-                            </CodeView>
-                        </div>
-                    </div>
-                    <div className='components-show-steps-box'>
-                        <div className='components-show-steps'>三、demo样式展示</div>
-                        <div>层级选择器</div>
-                        <div>
-                            <div className="block">
-                                <span className="demonstration">默认 click 触发子菜单</span>
-                                <br />
-                                <LgCascader
-                                    options={this.state.options}
-                                    value={this.state.selectedOptions}
-                                    onChange={this.handleChange1.bind(this)} />
-                            </div>
-                            <div className="block">
-                                <span className="demonstration">hover 触发子菜单</span>
-                                <br />
-                                <LgCascader
-                                    options={this.state.options}
-                                    expandTrigger="hover"
-                                    value={this.state.selectedOptions2}
-                                    onChange={this.handleChange2.bind(this)} />
-                            </div>
-                            <div className='components-show-steps-code'>
-                                <CodeView className='props_container'>
-                                    {
-                                        `
+                <DemoPage title="G005 下拉框" subtitle="" className="lg-breadcrumb-demo-page"
+                    importCode={`import { LgCascader } from "@/components/cascader";`}
+                    interfaceCode={`
+interface LgCascader {
+    // 参数请参考: @see https://elemefe.github.io/element-react/#/zh-CN/cascader
+}
+                    `
+                    }>
+                    <DemoView title="默认 click 触发子菜单" code={`
+this.state = {
 options: [{
     value: 'zhinan',
     label: '指南',
@@ -652,26 +569,232 @@ options: [{
         value: 'jiaohu',
         label: '组件交互文档'
     }]
-}],
+}],}
 
 <LgCascader
-options={this.state.options}
-value={this.state.selectedOptions}
-onChange={this.handleChange1.bind(this)} />
+    options={this.state.options}
+    value={this.state.selectedOptions}
+    onChange={this.handleChange1.bind(this)} 
+/>
+                    `}>
+                        <LgCascader
+                            options={this.state.options}
+                            value={this.state.selectedOptions2}
+                            onChange={this.handleChange2.bind(this)} />
 
+                    </DemoView>
+                    <DemoView title="hover 触发子菜单" code={`
+this.state = {
+options: [{
+    value: 'zhinan',
+    label: '指南',
+    children: [{
+        value: 'shejiyuanze',
+        label: '设计原则',
+        children: [{
+            value: 'yizhi',
+            label: '一致'
+        }, {
+            value: 'fankui',
+            label: '反馈'
+        }, {
+            value: 'xiaolv',
+            label: '效率'
+        }, {
+            value: 'kekong',
+            label: '可控'
+        }]
+    }, {
+        value: 'daohang',
+        label: '导航',
+        children: [{
+            value: 'cexiangdaohang',
+            label: '侧向导航'
+        }, {
+            value: 'dingbudaohang',
+            label: '顶部导航'
+        }]
+    }]
+}, {
+    value: 'zujian',
+    label: '组件',
+    children: [{
+        value: 'basic',
+        label: 'Basic',
+        children: [{
+            value: 'layout',
+            label: 'Layout 布局'
+        }, {
+            value: 'color',
+            label: 'Color 色彩'
+        }, {
+            value: 'typography',
+            label: 'Typography 字体'
+        }, {
+            value: 'icon',
+            label: 'Icon 图标'
+        }, {
+            value: 'button',
+            label: 'Button 按钮'
+        }]
+    }, {
+        value: 'form',
+        label: 'Form',
+        children: [{
+            value: 'radio',
+            label: 'Radio 单选框'
+        }, {
+            value: 'checkbox',
+            label: 'Checkbox 多选框'
+        }, {
+            value: 'input',
+            label: 'Input 输入框'
+        }, {
+            value: 'input-number',
+            label: 'InputNumber 计数器'
+        }, {
+            value: 'select',
+            label: 'Select 选择器'
+        }, {
+            value: 'cascader',
+            label: 'Cascader 级联选择器'
+        }, {
+            value: 'switch',
+            label: 'Switch 开关'
+        }, {
+            value: 'slider',
+            label: 'Slider 滑块'
+        }, {
+            value: 'time-picker',
+            label: 'TimePicker 时间选择器'
+        }, {
+            value: 'date-picker',
+            label: 'DatePicker 日期选择器'
+        }, {
+            value: 'datetime-picker',
+            label: 'DateTimePicker 日期时间选择器'
+        }, {
+            value: 'upload',
+            label: 'Upload 上传'
+        }, {
+            value: 'rate',
+            label: 'Rate 评分'
+        }, {
+            value: 'form',
+            label: 'Form 表单'
+        }]
+    }, {
+        value: 'data',
+        label: 'Data',
+        children: [{
+            value: 'table',
+            label: 'Table 表格'
+        }, {
+            value: 'tag',
+            label: 'Tag 标签'
+        }, {
+            value: 'progress',
+            label: 'Progress 进度条'
+        }, {
+            value: 'tree',
+            label: 'Tree 树形控件'
+        }, {
+            value: 'pagination',
+            label: 'Pagination 分页'
+        }, {
+            value: 'badge',
+            label: 'Badge 标记'
+        }]
+    }, {
+        value: 'notice',
+        label: 'Notice',
+        children: [{
+            value: 'alert',
+            label: 'Alert 警告'
+        }, {
+            value: 'loading',
+            label: 'Loading 加载'
+        }, {
+            value: 'message',
+            label: 'Message 消息提示'
+        }, {
+            value: 'message-box',
+            label: 'MessageBox 弹框'
+        }, {
+            value: 'notification',
+            label: 'Notification 通知'
+        }]
+    }, {
+        value: 'navigation',
+        label: 'Navigation',
+        children: [{
+            value: 'menu',
+            label: 'NavMenu 导航菜单'
+        }, {
+            value: 'tabs',
+            label: 'Tabs 标签页'
+        }, {
+            value: 'breadcrumb',
+            label: 'Breadcrumb 面包屑'
+        }, {
+            value: 'dropdown',
+            label: 'Dropdown 下拉菜单'
+        }, {
+            value: 'steps',
+            label: 'Steps 步骤条'
+        }]
+    }, {
+        value: 'others',
+        label: 'Others',
+        children: [{
+            value: 'dialog',
+            label: 'Dialog 对话框'
+        }, {
+            value: 'tooltip',
+            label: 'Tooltip 文字提示'
+        }, {
+            value: 'popover',
+            label: 'Popover 弹出框'
+        }, {
+            value: 'card',
+            label: 'Card 卡片'
+        }, {
+            value: 'carousel',
+            label: 'Carousel 走马灯'
+        }, {
+            value: 'collapse',
+            label: 'Collapse 折叠面板'
+        }]
+    }]
+}, {
+    value: 'ziyuan',
+    label: '资源',
+    children: [{
+        value: 'axure',
+        label: 'Axure Components'
+    }, {
+        value: 'sketch',
+        label: 'Sketch Templates'
+    }, {
+        value: 'jiaohu',
+        label: '组件交互文档'
+    }]
+}],}
 
 <LgCascader
-options={this.state.options}
-expandTrigger="hover"
-value={this.state.selectedOptions2}
-onChange={this.handleChange2.bind(this)} />
-                                            `
-                                    }
-                                </CodeView>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    options={this.state.options}
+    expandTrigger="hover"
+    value={this.state.selectedOptions2}
+    onChange={this.handleChange2.bind(this)} 
+/>
+                    `}>
+                        <LgCascader
+                            options={this.state.options}
+                            expandTrigger="hover"
+                            value={this.state.selectedOptions2}
+                            onChange={this.handleChange2.bind(this)} />
+                    </DemoView>
+                </DemoPage>
             </div>
         )
     }

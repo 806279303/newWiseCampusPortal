@@ -2,6 +2,7 @@
 
 .lg_input_box {
     position: relative;
+    max-width: 240px;
     .lg_input_text_num {
         font-size: 14px;
         color: #444;
@@ -18,6 +19,7 @@
         transform: translateY(0%);
     }
 }
+
 .lg_input_textarea_box {
     .el-textarea {
         .el-textarea__inner {
@@ -82,7 +84,11 @@
         color: #cccccc;
     }
 }
-
+.lg_input_text_box_show_num {
+    .el-input__inner {
+        padding-right: 55px;
+    }
+}
 // @each $skin, $color, $imgColor, $colorHover, $imgHColor in $all_colors {
 //     #{$skin} {
 //         .lg_input_box {
