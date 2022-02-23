@@ -127,13 +127,6 @@ export default class InputNumber extends Component<{}, LgInputNumberState> {
             `}>
                 <LgInputNumber value={5} readonly/>
             </DemoView>
-            <DemoView title="只读" subtitle="通过设置readonly属性开启只读。"  code={`
-
-                <LgInputNumber value={5} readonly/>
-
-            `}>
-                <LgInputNumber value={5} readonly/>
-            </DemoView>
             <DemoView title="不可编辑" subtitle="通过设置editable属性控制是否能编辑。"  code={`
 
                 <LgInputNumber value={5} editable/>
