@@ -144,8 +144,10 @@ export class LgInput extends BaseComponent<LgInputNumberProps,LgInputNumberState
         }
     }
     render() {
+        const { className = '', style } = this.props
         let inputNumberClassName = classNames(
-            "lancoo-input-number",   
+            "lancoo-input-number",
+            className,
             {
                 "lancoo-input-number-controls-outside": this.props.controlsOutside,
                 "lancoo-input-number-disable": this.props.disabled,
@@ -154,7 +156,7 @@ export class LgInput extends BaseComponent<LgInputNumberProps,LgInputNumberState
             }
         )
         return (
-            <div className={inputNumberClassName}>
+            <div className={inputNumberClassName} style={style}>
                 <div className="lancoo-input-number-wrap">
                     <span className={`lancoo-input-number-handle lancoo-input-number-handle-up ${this.props.max && parseInt(this.state.inputValue) >= Number(this.props.max) ? "lancoo-input-number-handle-disable":""}`} onClick={this.onUpClick.bind(this)}>
                         <span className="lancoo-input-number-handle-up-inner el-icon-arrow-up">
