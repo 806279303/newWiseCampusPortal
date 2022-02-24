@@ -40,10 +40,10 @@ export default () => {
                 `}
                 interfaceCode={`
                     interface FilterProps{
-                      type?: "radio" | "default" //单选或者多选
+                      type?: "radio" | "default", //单选或者多选
                       title?: string, //筛选前的提示文字
-                      filterConfig: object[]//[{key:"字段名",name:"按键名称"},...]key必须唯一
-                      checkValue?: string[]//选中的字段，和key一致的时候视为选中
+                      filterConfig: object[],//[{key:"字段名",name:"按键名称"},...]key必须唯一
+                      checkValue?: string[],//选中的字段，和key一致的时候视为选中
                       className?: string,
                       style?: object,
                       onChange?: (value: string[]) => void//激活时回调，显示当前激活的key值
