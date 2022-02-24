@@ -1,20 +1,24 @@
 @import '../index.scss';
+
+.lg-filter-area{
+    margin: 0px;
+    .lg_checkbox_typeC.lg_checkbox1{
+        .lg_checkbox_btn{
+            display: none;
+        }
+    }
+    .lg_checkbox_typeC{
+        border: 0px;
+        border-radius: 16px;
+        width: 37;
+        height: 15;
+        margin: 5px 10px;
+    }
+}
+
+
+
 @each $skin, $color, $imgColor, $colorHover in $all_colors {
     #{$skin} {  
-        .lg-filter-area{
-            margin: 0px;
-            .lg_checkbox_typeC.lg_checkbox1{
-                .lg_checkbox_btn{
-                    display: none;
-                }
-            }
-            .lg_checkbox_typeC{
-                border: 0px;
-                border-radius: 16px;
-                width: 37;
-	            height: 15;
-                margin: 5px 10px;
-            }
-        }
-      }
+    }
 }
