@@ -1,7 +1,5 @@
 import {Component} from "react";
 import "./index.scss";
-import {BaseProps} from "../../type/BaseProps";
-import {CodeView} from "@/components/CodeView";
 import {LgInputNumber} from "@/components/inputNumber"
 import { Button } from "element-react";
 import {DemoView} from "@/components/demoView";
@@ -121,13 +119,6 @@ export default class InputNumber extends Component<{}, LgInputNumberState> {
                         <Button type="primary" onClick={this.toggleDisabled.bind(this)}>禁用转换</Button>
                     </div>
                 </div>
-            </DemoView>
-            <DemoView title="只读" subtitle="通过设置readonly属性开启只读。"  code={`
-
-                <LgInputNumber value={5} readonly/>
-
-            `}>
-                <LgInputNumber value={5} readonly/>
             </DemoView>
             <DemoView title="只读" subtitle="通过设置readonly属性开启只读。"  code={`
 
