@@ -91,6 +91,20 @@
         margin: 0 6px;
     }
 }
+
+.lg_page_number, .lg_page_input {
+    color: $color_s1;
+}
+.lg_page_number, .lg_page_input:hover {
+    border-color: $color_s1;
+}
+.lg_page_cur_page, .lg_page_number:hover {
+    background-image: $img_color_s1;
+}
+.lg_page_cur_page_c {
+    background-color: $color_s1;
+}
+
 @each $skin, $color, $imgColor in $all_colors {
     #{$skin} {
         .lg_page_number, .lg_page_input {

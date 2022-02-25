@@ -1,9 +1,7 @@
 import {Component} from "react";
 import {LgSwitch} from "@/components/switch";
 import "./index.scss"
-import {CodeView} from "@/components/CodeView";
 import {DemoView} from "@/components/demoView";
-import axios from "axios";
 import {DemoPage} from "../demoPage";
 
 

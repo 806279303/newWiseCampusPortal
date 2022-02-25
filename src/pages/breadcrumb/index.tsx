@@ -8,7 +8,7 @@ export default class BreadcrumbPage extends Component<{}, { selectedIndex: numbe
 
   render() {
     return (
-      <DemoPage title="G008面包屑" subtitle="常用锚点定位" className="lg-breadcrumb-demo-page"
+      <DemoPage title="G008面包屑/锚点链接" subtitle="常用锚点定位" className="lg-breadcrumb-demo-page"
                 importCode={`
                     import {LgBreadcrumb} from "@/components/breadcrumb";
                 `}
