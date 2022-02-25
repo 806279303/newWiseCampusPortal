@@ -10,7 +10,7 @@ export default class SearchComponent extends Component<{}, {}> {
 
   render(){
       return (
-          <DemoPage title="搜索" subtitle="常用的搜索组件，用来查找搜索内容"
+          <DemoPage title="G011搜索" subtitle="常用的搜索组件，用来查找搜索内容"
               importCode={`
                   import {Search} from "@/components/search";
               `}
