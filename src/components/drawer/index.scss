@@ -6,14 +6,46 @@
     width: 100%;
     background: rgba(0, 0, 0, 0.451);
     opacity: 0;
-    transition: opacity .3s linear,height 0s ease .3s;
+    transition: opacity 0.3s linear, height 0s ease 0.3s;
     pointer-events: none;
     .drawer_content {
         position: fixed;
         top: 0;
-        height: 100%;
         background: #ffffff;
-        transition: all 0.3s ;
+        transition: all 0.3s;
+        display: flex;
+        flex-flow: column nowrap;
+        height: 100%;
+        .drawer_head_content {
+            position: relative;
+            padding: 16px 24px;
+            color: #000000d9;
+            background: #fff;
+            border-bottom: 1px solid #f0f0f0;
+            border-radius: 2px 2px 0 0;
+            .drawer_title{
+                float: left;
+            }
+            .drawer_close_top_btn{
+                width: 16px;
+                height: 16px;
+                float: right;
+                cursor: pointer;
+                background: url('./images/close_btn.png');
+            }
+            .drawer_close_top_btn:hover{
+                background: url('./images/close_btn_hover.png');
+            }
+            
+        }
+        .drawer_child_content {
+            flex-grow: 1;
+            padding: 24px;
+            overflow: auto;
+            font-size: 14px;
+            line-height: 1.5715;
+            word-wrap: break-word;
+        }
     }
     .open_drawerA {
         left: 0 !important;
@@ -22,11 +54,11 @@
         right: 0 !important;
     }
 }
-.open_screen{
+.open_screen {
     height: 100% !important;
     opacity: 1 !important;
     transition: none !important;
-    animation: openSc .3s cubic-bezier(.23,1,.32,1) !important;
+    animation: openSc 0.3s cubic-bezier(0.23, 1, 0.32, 1) !important;
     pointer-events: auto !important;
 }
 @keyframes openSc {

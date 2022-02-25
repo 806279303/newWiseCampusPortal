@@ -4,7 +4,8 @@ interface Props {
     className?: string,
     style?: object,
     type: 'A' | 'B',//A左侧，B右侧
-    width?: any
+    width?: any,
+    title?:string,
     children?: any,
     visible: boolean,
     onClick: (flag: boolean) => void
@@ -19,7 +20,13 @@ const LgDrawer = (props: Props): any => {
     return (
         <div className={`drawer ${screen} ${props.className}`} onClick={hanleDrawer} style={props.style || {}}>
             <div className={`drawer_content ${open}`} onClick={(e) => { e.stopPropagation() }} style={style}>
-                {props.children}
+                <div className='drawer_head_content'>
+                    <div className='drawer_title'>{props.title||""}</div>
+                    <div className='drawer_close_top_btn' onClick={hanleDrawer}></div>
+                </div>
+                <div className='drawer_child_content'>
+                    {props.children}
+                </div>
             </div>
         </div>
     );
