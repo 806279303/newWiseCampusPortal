@@ -38,14 +38,14 @@
                 background: url("./images/stepA/complete.png") no-repeat;
             }
         }
-        .step_name {
+        .A_step_name {
             margin-top: 5px;
             font-size: 12px;
             width: 39px;
             text-align: center;
             color: #999999;
         }
-        .at_present {
+        .A_present {
             background: url("./images/stepA/at_present.png") no-repeat 100% 100%;
             color: #ffffff;
         }
@@ -62,14 +62,14 @@
 }
 @each $skin, $color, $imgColor in $all_colors {
     #{$skin} {
-        .step_li_bg {
+        .A_before {
             color: #ffffff !important;
             background: url("./images/stepA/step#{$skin}.png") no-repeat 100% 100% !important;
         }
-        .step_name {
+        .A_before_Color {
             color: $color !important;
         }
-        .step_allow {
+        .A_allow_before {
             background: url("./images/stepA/allow#{$skin}.png") no-repeat !important;
         }
     }
