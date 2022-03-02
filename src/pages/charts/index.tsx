@@ -11,40 +11,65 @@ export default class Charts extends Component<{}, {}>{
         return {
             xAxis: {
                 type: 'category',
-                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        color: '#999999',   //这里用参数代替了
+                    }
+                },    
             },
             yAxis: {
-                type: 'value'
+                type: 'value',
+                show: true,
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        color: '#999999',   //这里用参数代替了
+                    }
+                },
             },
             series: [
                 {
                     data: [
                         120,
-                        {
-                            value: 200,
-                            itemStyle: {
-                                color: '#a90000'
-                            }
-                        },
+                        200,
                         150,
                         80,
                         70,
                         110,
                         130
                     ],
-                    type: 'bar'
+                    type: 'bar',
                 }
-            ]
+            ],
+            tooltip : { 
+                axisPointer: {
+                    type: 'cross',
+                }
+            }
         }
     }
     getChartOptions2() {
         return {
             xAxis: {
                 type: 'category',
-                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        color: '#999999',   //这里用参数代替了
+                    }
+                },
             },
             yAxis: {
-                type: 'value'
+                type: 'value',
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        color: '#999999',   //这里用参数代替了
+                    }
+                },
             },
             series: [
                 {
@@ -124,7 +149,13 @@ export default class Charts extends Component<{}, {}>{
                 },
                 splitLine: {
                     show: false
-                }
+                },
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        color: '#999999',   //这里用参数代替了
+                    }
+                },
             },
             yAxis: {
                 type: 'value',
@@ -136,7 +167,11 @@ export default class Charts extends Component<{}, {}>{
                 },
                 axisLabel: {
                     inside: true,
-                    formatter: '{value}\n'
+                    formatter: '{value}\n',
+                    show: true,
+                    textStyle: {
+                        color: '#999999',   //这里用参数代替了
+                    }
                 },
                 z: 10
             },

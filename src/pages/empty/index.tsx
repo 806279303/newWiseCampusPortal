@@ -1,44 +1,35 @@
 import "./index.scss"
-import {Component} from "react";
+import { Component } from "react";
 import { LgEmpty } from "@/components/empty";
-import {CodeView} from "@/components/CodeView";
+import { CodeView } from "@/components/CodeView";
+import { DemoPage } from "../demoPage";
+import { DemoView } from "@/components/demoView";
 
 export default class Empty extends Component<{}, {}>{
   render() {
     return (
-      <div className="lg-empty-demo">
-        <div>在页面文件中引入组件</div>
-        <CodeView className="code-size">
-          {`
-               import { LgEmpty } from "@/components/empty";
-          `}
-        </CodeView>
-
-        <div>标签属性详解</div>
-        <CodeView className="code-size">
-          {`interface LgEmptyProps {
-              tip?: string
-              icon?: "icon-1" | "icon-2" | ReactNode //图标位置可以填组件，默认值是icon-1
-            }
-          `}
-        </CodeView>
-
-        <div>简单使用</div>
-        <CodeView className="code-size">
-          {`
+      <DemoPage title="G023缺省页" subtitle="常用锚点定位" className="lg-breadcrumb-demo-page"
+        importCode={`
+                    import { LgEmpty } from "@/components/empty";
+                `}
+        interfaceCode={`
+                  interface LgEmptyProps {
+                    tip?: string
+                    icon?: "icon-1" | "icon-2" | ReactNode //图标位置可以填组件，默认值是icon-1
+                  }
+                `}>
+        <DemoView title="简单使用" code={`
             <LgEmpty icon="icon-1" />
-          `}
-        </CodeView>
-        <LgEmpty/>
+        `}>
+          <LgEmpty icon="icon-1" />
+        </DemoView>
 
-        <div>图标二</div>
-        <CodeView className="code-size">
-          {`
-            <LgEmpty icon="icon-2" />
-          `}
-        </CodeView>
-        <LgEmpty icon="icon-2" />
-      </div>
+        <DemoView title="图标二" code={`
+           <LgEmpty icon="icon-2" />
+        `}>
+          <LgEmpty icon="icon-2" />
+        </DemoView>
+      </DemoPage>
     );
   }
 }

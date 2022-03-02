@@ -11,10 +11,10 @@ export default class Menu extends Component<{}, {}> {
 
     return (
       <DemoPage title="G006导航菜单" className="lg_tabs_container"
-                importCode={`
+        importCode={`
                     import { LgMenu } from "@/components/menu";
                 `}
-                interfaceCode={`
+        interfaceCode={`
                   type menuIndex = string;
                   interface MenuProps{
                       defaultActive?: menuIndex
@@ -37,7 +37,7 @@ export default class Menu extends Component<{}, {}> {
                       disabled?: boolean
                   }
                 `}>
-          
+
         <DemoView title={"顶栏"} subtitle={"适用广泛的基础用法。"}
           code={`
               <LgMenu defaultActive="1">
@@ -50,7 +50,16 @@ export default class Menu extends Component<{}, {}> {
                 <LgMenu.LgItem index="3">订单管理</LgMenu.LgItem>
               </LgMenu>
             `}>
-          <LgMenu defaultActive="1">
+          <LgMenu defaultActive="1" style={{marginBottom:20}}>
+            <LgMenu.LgItem index="1">处理中心</LgMenu.LgItem>
+            <LgMenu.LgSubMenu index="2" title="我的工作台">
+              <LgMenu.LgItem index="2-1">选项1</LgMenu.LgItem>
+              <LgMenu.LgItem index="2-2">选项2</LgMenu.LgItem>
+              <LgMenu.LgItem index="2-3">选项3</LgMenu.LgItem>
+            </LgMenu.LgSubMenu>
+            <LgMenu.LgItem index="3">订单管理</LgMenu.LgItem>
+          </LgMenu>
+          <LgMenu defaultActive="1" theme="dark">
             <LgMenu.LgItem index="1">处理中心</LgMenu.LgItem>
             <LgMenu.LgSubMenu index="2" title="我的工作台">
               <LgMenu.LgItem index="2-1">选项1</LgMenu.LgItem>

@@ -18,7 +18,7 @@ window.onload = () => {
 
 function App() {
   return (
-    <div className={`root`}>
+    <div className={`lg-skin-s5 root`}>
       <Switch>
         {
           Routers.map(router => (

@@ -62,6 +62,7 @@ interface MenuProps{
     defaultOpeneds?: menuIndex[]
     uniqueOpened?: boolean
     menuTrigger?: string
+    theme?: 'light' | 'dark'
     onSelect?(index?: menuIndex, indexPath?: menuIndex[]): void
     onOpen?(index?: menuIndex, indexPath?: menuIndex[]): void
     onClose?(index?: menuIndex, indexPath?: menuIndex[]): void
