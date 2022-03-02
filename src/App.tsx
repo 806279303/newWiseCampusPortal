@@ -11,14 +11,14 @@ window.onload = () => {
   document.body.className = allSkinClassName[0]
   window.addEventListener('message', function (e) {
     if (e.data) {
-      document.body.className = allSkinClassName[e.data.index]
+      document.body.className = 'root '+allSkinClassName[e.data.index]
     }
   });
 }
 
 function App() {
   return (
-    <div className={`lg-skin-s5 root`}>
+    <div className={`root`}>
       <Switch>
         {
           Routers.map(router => (
