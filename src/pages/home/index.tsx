@@ -37,7 +37,6 @@ export default () => {
             <div><Link to='/card'>G027卡片</Link></div>
             <div><Link to='/topBar'>顶部栏</Link></div>
             <div><Link to='/firstPage'>首页</Link></div>
-            <div><Link to='/treeselect'>树形选择</Link></div>
 
             {/* <div><Link to='/treeselect'>选择树</Link></div> */}
         </>
