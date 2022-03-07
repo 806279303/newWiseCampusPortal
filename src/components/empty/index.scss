@@ -1,13 +1,29 @@
 @import "../mixin";
 
-.lg-empty-root{
+.lg-empty-root {
   @include flexCenter;
   flex-direction: column;
-  .lg-empty-icon{
 
+  &.lg-empty-icon-1 {
+    $icon1Height: 100px;
+
+    .lg-empty-icon {
+      width: $icon1Height * 1.2;
+      height: $icon1Height;
+    }
   }
 
-  .lg-empty-tip{
+  &.lg-empty-icon-2 {
+    $icon2Height: 60px;
+
+    .lg-empty-icon {
+      width: $icon2Height * 1.507;
+      height: $icon2Height;
+    }
+  }
+
+
+  .lg-empty-tip {
 
   }
 }

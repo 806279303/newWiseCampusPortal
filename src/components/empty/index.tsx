@@ -30,10 +30,10 @@ export class LgEmpty extends BaseComponent<LgEmptyProps> {
     let icon
     switch (this.props.icon){
       case "icon-1":
-        icon = <EmptyIcon1 />
+        icon = <EmptyIcon1 style={{height: "100%", width: "100%"}} />
         break
       case "icon-2":
-        icon = <EmptyIcon2 />
+        icon = <EmptyIcon2 style={{height: "100%", width: "100%"}} />
         break
       default:
         icon = this.props.icon

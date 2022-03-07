@@ -3,7 +3,7 @@ $classNamePrefix: lg-demo-view;
 
 .#{$classNamePrefix}-root{
   width: 100%;
-  margin-top: 10px;
+  margin-top: 60px;
   margin-bottom: 20px;
   .#{$classNamePrefix}-title{
     font-size: 20px;
@@ -12,12 +12,12 @@ $classNamePrefix: lg-demo-view;
     font-weight: bold;
   }
   .#{$classNamePrefix}-subtitle{
-    margin-top: 7px;
+    margin-top: 26px;
     font-size: 14px;
-    color: #666;
+    color: #5e6d82;
   }
   .#{$classNamePrefix}-component-area{
-    margin-top: 14px;
+    margin-top: 18px;
     width: 100%;
     height: fit-content;
     background-color: #fff;

@@ -1,14 +1,13 @@
 import "./index.scss"
 import { Component } from "react";
 import { LgEmpty } from "@/components/empty";
-import { CodeView } from "@/components/CodeView";
 import { DemoPage } from "../demoPage";
 import { DemoView } from "@/components/demoView";
 
 export default class Empty extends Component<{}, {}>{
   render() {
     return (
-      <DemoPage title="G023缺省页" subtitle="常用锚点定位" className="lg-breadcrumb-demo-page"
+      <DemoPage title="G023缺省页" subtitle="常用无数据占位组件" className="lg-breadcrumb-demo-page"
         importCode={`
                     import { LgEmpty } from "@/components/empty";
                 `}

@@ -1,19 +1,20 @@
 $classNamePrefix: lg-demo-page;
 
 .#{$classNamePrefix}-root {
+  margin-left: 50px;
   .#{$classNamePrefix}-header {
-    margin-top: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
 
     .#{$classNamePrefix}-title {
-      font-family: MicrosoftYaHei, serif;
+      margin-top: 54px;
+      font-family: "Microsoft YaHei", serif;
       font-size: 28px;
       color: #1f2f3d;
     }
 
     .#{$classNamePrefix}-subtitle {
       margin-top: 22px;
-      font-family: MicrosoftYaHei, serif;
+      font-family: "Microsoft YaHei", serif;
       font-size: 14px;
       color: #5e6d82;
     }
@@ -22,7 +23,7 @@ $classNamePrefix: lg-demo-page;
       .#{$classNamePrefix}-import-title {
         margin-top: 22px;
         margin-bottom: 10px;
-        font-family: MicrosoftYaHei, serif;
+        font-family: "Microsoft YaHei", serif;
       }
     }
   }
@@ -31,11 +32,12 @@ $classNamePrefix: lg-demo-page;
 
   }
   .#{$classNamePrefix}-footer {
+    margin-top: 60px;
     .#{$classNamePrefix}-interface {
       .#{$classNamePrefix}-interface-title {
         margin-top: 22px;
         margin-bottom: 10px;
-        font-family: MicrosoftYaHei, serif;
+        font-family: "Microsoft YaHei", serif;
       }
     }
   }

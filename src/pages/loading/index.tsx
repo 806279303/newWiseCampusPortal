@@ -44,24 +44,24 @@ export default class Loading extends Component<{}, {}> {
                         <LgLoading/>
                         
                         // 修改尺寸
-                        <LgLoading tip="default=large"/>
-                        <LgLoading tip="large"/>
-                        <LgLoading size="medium" tip="medium"/>
+                        <LgLoading tip="默认"/>
+                        <LgLoading tip="大"/>
+                        <LgLoading size="medium" tip="中"/>
                         
                         //修改提示词位置
-                        <LgLoading tip="default=bottom"/>
-                        <LgLoading tip="right" tipAlign="right"/>
-                        <LgLoading tip="bottom"/>
+                        <LgLoading tip="默认"/>
+                        <LgLoading tip="右边" tipAlign="right"/>
+                        <LgLoading tip="底部"/>
                       </>
                     `}>
           <div className="lg-loading-horizontal-show">
             <LgLoading/>
-            <LgLoading tip="default=large"/>
-            <LgLoading tip="large"/>
-            <LgLoading size="medium" tip="medium"/>
-            <LgLoading tip="default=bottom"/>
-            <LgLoading tip="right" tipAlign="right"/>
-            <LgLoading tip="bottom"/>
+            <LgLoading tip="默认"/>
+            <LgLoading tip="大"/>
+            <LgLoading size="medium" tip="中"/>
+            <LgLoading tip="默认"/>
+            <LgLoading tip="右边" tipAlign="right"/>
+            <LgLoading tip="底部"/>
           </div>
         </DemoView>
 

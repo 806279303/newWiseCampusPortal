@@ -1,11 +1,11 @@
 import { Redirect, Route, Switch, withRouter } from 'react-router-dom'
-import { useState } from 'react';
 import { Routers } from './routers'
 import { allSkinClassName, allSkinName } from "@/components/index";
 
 import 'element-theme-default';
 
 import './App.scss'
+import "./index.css"
 
 window.onload = () => {
   document.body.className = allSkinClassName[0]
