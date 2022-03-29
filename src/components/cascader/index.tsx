@@ -9,6 +9,7 @@
 import { create } from 'domain';
 import { Cascader, Input } from 'element-react';
 import React, { Component } from 'react'
+import { BaseComponent } from "../../type/BaseComponent";
 import ReactDOM from 'react-dom';
 import classNames from "classnames";
 import "./index.scss";
@@ -41,7 +42,7 @@ interface CascaderProps {
 }
 interface CascaderState { }
 
-export class LgCascader extends Component<CascaderProps, CascaderState> {
+export class LgCascader extends BaseComponent<CascaderProps, CascaderState> {
     constructor(props: CascaderProps | Readonly<CascaderProps>) {
         super(props);
     }

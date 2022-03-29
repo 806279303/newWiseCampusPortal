@@ -1,0 +1,104 @@
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+.clear::before, .clear::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+.oneline {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+//常用page样式
+.common{
+  &-page{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    box-sizing: border-box;
+    padding: 12px 20px;
+    &-content{
+      width: 100%;
+      height: 100%;
+    }
+  }
+  &-page1{
+    padding:66px 20px 12px;
+    .common-page-header{
+      width: 100%;
+      height: 42px;
+      line-height: 42px;
+      position: absolute;
+      top: 12px;
+      left: 0px;
+      padding:0 12px;
+      box-sizing: border-box;
+      &-total{
+        margin-left: 10px;
+        font-size: 16px;
+      }
+    }
+  }
+}
+.common-btn{
+  padding:0 20px;
+  height: 30px;
+  line-height: 30px;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 3px;
+  cursor: pointer;
+  &:active{
+    opacity: 0.9;
+  }
+  &-green{
+    background-color:#32b432;
+  }
+  &-blue{
+    background-color: #019dff;
+  }
+  &-orange{
+    background-color: #ff8001;
+  }
+  &-red{
+    background-color: #ec5260;
+  }
+}
+
+.flex{
+  display: flex;
+}
+.flex-row-center{
+  display: flex;
+  justify-content: center;
+}
+.flex-column-center{
+  display: flex;
+  align-items: center;
+}
+//常用page样式-结束
+
+//常用table样式，包括头部栏固定fixed
+.lg-common-tb{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  box-sizing: border-box;
+  padding: 40px 0px 12px;
+  .lg-common-tb-header{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    padding: 0 0px;
+  }
+}
+
+//常用table样式，包括头部栏固定fixed -结束

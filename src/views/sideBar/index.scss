@@ -1,0 +1,154 @@
+$sideBarWidth: 200;
+.side-bar {
+  width: #{$sideBarWidth}px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  box-sizing: border-box;
+  height: 100%;
+  z-index: 99;
+}
+
+
+@import "../../css/skin.scss";
+@import '../../css/common.scss';
+
+/* 左侧导航 */
+$textColor: rgba(255, 255, 255, 0.8);
+$textHoverColor: #fff;
+.lg_page_left_content {
+  width: 100%;
+  height: 100%;
+}
+
+.lg_left_tab_List {
+  height: 50px;
+  overflow: hidden;
+  transition: height 0.2s;
+  -moz-transition: height 0.2s; /* Firefox 4 */
+  -webkit-transition: height 0.2s; /* Safari 和 Chrome */
+  -o-transition: height 0.2s; /* Opera */
+}
+
+.lg_left_tab_name {
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+  padding-left: 52px;
+  background-position: 22px 16px;
+  background-repeat: no-repeat;
+  color: $textColor;
+  cursor: pointer;
+}
+
+.lg_left_tab_List_cho, .lg_left_tab_List:hover {
+  .lg_left_tab_name {
+    color: $textHoverColor;
+    background-position: 22px -24px;
+    background-color: rgba(0, 0, 0, 0.16);
+  }
+}
+
+.lg_left_show_btn {
+  position: absolute;
+  top: 15px;
+  right: 22px;
+  height: 20px;
+  line-height: 20px;
+  font-family: SimSun;
+  transition: transform 0.2s;
+  -moz-transition: transform 0.2s; /* Firefox 4 */
+  -webkit-transition: transform 0.2s; /* Safari 和 Chrome */
+  -o-transition: transform 0.2s; /* Opera */
+  cursor: pointer;
+  display: none;
+}
+
+.lg_left_tab_List_show .lg_left_show_btn {
+  transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+}
+
+.lg_left_tab_List_sub .lg_left_show_btn {
+  display: block;
+}
+
+.lg_left_tab_itam {
+  height: 42px;
+  line-height: 42px;
+  padding-left: 52px;
+  color: $textColor;
+  cursor: pointer;
+}
+
+.lg_left_tab_List_cho,
+.lg_left_tab_List:hover {
+  .lg_left_tab_itam {
+    background-color: rgba(0, 0, 0, 0.08);
+  }
+}
+
+.lg_left_tab_List:hover .lg_left_tab_itam:hover {
+  color: $textHoverColor;
+  background-color: rgba(0, 0, 0, 0.16);
+}
+
+.lg_left_tab_List_cho,
+.lg_left_tab_List_cho:hover {
+  .lg_left_tab_i_cho {
+    color: $textHoverColor;
+    background-color: rgba(0, 0, 0, 0.16);
+  }
+}
+
+.lg_left_tab_List_cho {
+  .lg_left_tab_i_cho, .lg_left_tab_name {
+    cursor: default;
+  }
+}
+
+.lg_left_tab_i_node {
+  width: 4px;
+  height: 4px;
+  margin-top: 19px;
+  margin-right: 10px;
+  background-color: $textColor;
+  border-radius: 50%;
+}
+
+.lg_left_tab_List_cho, .lg_left_tab_List:hover {
+  .lg_left_tab_i_node {
+    background-color: $textHoverColor;
+  }
+}
+
+.lg_left_tab_i_name, .lg_left_tab_text {
+  position: relative;
+}
+
+.lg_red_node {
+  position: relative;
+}
+
+.lg_red_node_show {
+  position: absolute;
+  top: 0px;
+  right: -7px;
+  width: 6px;
+  height: 6px;
+  background-color: red;
+  border-radius: 50%;
+}
+
+/* end左侧导航 */
+@each $skin, $color, $imgColor in $all_colors {
+  #{$skin} {
+    .lg_page_left_content {
+      background: url("./images/left#{$skin}.png") center center/100% 100% no-repeat;
+    }
+  }
+}
+
+:export {
+  sideBarWidth: $sideBarWidth
+}

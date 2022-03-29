@@ -20,7 +20,12 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "@/components/*":["./src/components/*"]
+      "@/components/*":["./src/components/*"],
+      "@/views/*":["./src/views/*"],
+      "@/images/*":["./src/images/*"],
+      "@/css/*":["./src/css/*"],
+      "@/utils/*":["./src/css/*"],
+      "@/routes/*":["./src/routes/*"],
     }
   },
   "include": [

@@ -1,0 +1,58 @@
+$classNamePrefix: lg-system-pop;
+
+.#{$classNamePrefix} {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0 0 0 20px;
+
+  &-top {
+    display: flex;
+    align-items: start;
+    width: 100%;
+
+    &-uploadImg {
+      width: 150px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+
+      &-cont {
+        display: block;
+        width: 80px;
+        height: 80px;
+        border-radius: 10px;
+        border: 1px solid #d3d3d3;
+        line-height: 80px;
+        color: #b4b4b4;
+      }
+
+      &-add {
+        margin-top: 15px;
+      }
+
+      &-tip {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #8d8d8d;
+      }
+    }
+
+    &-systemContent {
+      flex: 1;
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+
+  &-bottom{
+    &-title{
+      font-size: 15px;
+      line-height: 24px;
+      color: #949494;
+      width: 100%;
+      border-bottom: 1px solid #d0d0d0;
+    }
+  }
+}

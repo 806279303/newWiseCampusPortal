@@ -10,7 +10,7 @@ import React, { Component, SyntheticEvent } from 'react'
 import classNames from "classnames";
 import "./index.scss";
 import { Table } from 'element-react';
-interface TableColumn {
+export interface TableColumn {
     label?: string
     prop?: string
     property?: string
@@ -30,7 +30,7 @@ interface TableColumn {
 }
 
 
-interface LgTableProps {
+export interface LgTableProps {
     className?: string
     style?: React.CSSProperties
 
@@ -54,7 +54,7 @@ interface LgTableProps {
 
     onRowClick?(row?: any, event?: SyntheticEvent, column?: any): void
 }
-interface LgTableState {
+export interface LgTableState {
 }
 export class LgTable extends Component<LgTableProps, LgTableState> {
     constructor(props: LgTableProps | Readonly<LgTableProps>) {

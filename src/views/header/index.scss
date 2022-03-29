@@ -1,0 +1,12 @@
+$naviHei: 60;
+.root-header{
+  width: 100%;
+  height: #{$naviHei}px;
+  background-color: #9a87c7;
+  position: relative;
+  z-index: 100;
+}
+
+:export{
+  naviHei:$naviHei
+}

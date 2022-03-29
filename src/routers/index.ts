@@ -1,4 +1,5 @@
 import { lazy } from 'react'
+import RouterPath from './routers'
 
 export type RouterType = {
     path: string,
@@ -10,141 +11,40 @@ export type RouterType = {
 // 总路由
 const Routers: RouterType[] = ([
     {
-        path: '/home',
-        component: lazy(() => import('../pages/home')),
+        path: RouterPath.HOME,
+        component: lazy(() => import('../views/home')),
         root: []
-    }, {
-        path: '/pagination',
-        component: lazy(() => import('../pages/pagination')),
+    },{
+        path: RouterPath.WEAPP,
+        component: lazy(() => import('../views/weappMg')),
         root: []
-    }, {
-        path: '/checkBox',
-        component: lazy(() => import('../pages/checkBox')),
+    },{
+        path: RouterPath.MESSAGE_RECORD,
+        component: lazy(() => import('../views/messageRecord')),
         root: []
-    }, {
-        path: '/search',
-        component: lazy(() => import('../pages/search')),
-        root: [],
-    }, {
-        path: '/richEditor',
-        component: lazy(() => import('../pages/richEditor')),
-        root: [],
-    }, {
-        path: '/topBar',
-        component: lazy(() => import('../pages/topBar')),
+    },{
+        path: RouterPath.MESSAGE_MODEL,
+        component: lazy(() => import('../views/messageModel')),
         root: []
-    }, {
-        path: '/filter',
-        component: lazy(() => import('../pages/filter')),
+    },{
+        path: RouterPath.SCHOOL_INFO,
+        component: lazy(() => import('../views/schoolInfo')),
         root: []
-    }, {
-        path: '/firstPage',
-        component: lazy(() => import('../pages/firstPage')),
+    },{
+        path: RouterPath.SCHOOL_SYSTEM,
+        component: lazy(() => import('../views/schoolSystem')),
         root: []
-    }, {
-        path: '/breadcrumb',
-        component: lazy(() => import('../pages/breadcrumb')),
-        root: [],
-    }, {
-        path: '/loading',
-        component: lazy(() => import('../pages/loading')),
-        root: [],
-    },
-    {
-        path: '/popLayer',
-        component: lazy(() => import('../pages/popLayer')),
+    },{
+        path: RouterPath.WISEBOARD,
+        component: lazy(() => import('../views/wiseBoard')),
         root: []
-    },
-    {
-        path: '/alert',
-        component: lazy(() => import('../pages/alert')),
+    },{
+        path: RouterPath.LOG_MANAGEMENT,
+        component: lazy(() => import('../views/logMg')),
         root: []
-    }, {
-        path: '/subPage',
-        component: lazy(() => import('../pages/subPage')),
-        root: []
-    },
-    {
-        path: '/timeline',
-        component: lazy(() => import('../pages/timeline')),
-        root: []
-    },
-    {
-        path: '/steps',
-        component: lazy(() => import('../pages/steps')),
-        root: []
-    },
-    {
-        path: '/datePicker',
-        component: lazy(() => import('../pages/datePicker')),
-        root: []
-    },
-    {
-        path: '/menu',
-        component: lazy(() => import('../pages/menu')),
-        root: []
-    },
-    {
-        path: '/treeselect',
-        component: lazy(() => import('../pages/treeselect')),
-        root: []
-    },
-    {
-        path: '/drawer',
-        component: lazy(() => import('../pages/drawer')),
-        root: []
-    }, {
-        path: '/tabs',
-        component: lazy(() => import('../pages/tabs')),
-        root: []
-    },
-    {
-        path: '/collapse',
-        component: lazy(() => import('../pages/collapse')),
-        root: []
-    },
-    {
-        path: '/charts',
-        component: lazy(() => import('../pages/charts')),
-        root: []
-    },
-    {
-        path: '/input',
-        component: lazy(() => import('../pages/input')),
-        root: []
-    },
-    {
-        path: '/table',
-        component: lazy(() => import('../pages/table')),
-        root: []
-    }, {
-        path: '/tag',
-        component: lazy(() => import('../pages/tag')),
-        root: []
-    },
-    {
-        path: '/card',
-        component: lazy(() => import('../pages/card')),
-        root: []
-    },
-    {
-        path: '/inputNumber',
-        component: lazy(() => import('../pages/inputNumber')),
-        root: []
-    },
-    {
-        path: '/switch',
-        component: lazy(() => import('../pages/switch')),
-        root: []
-    },
-    {
-        path: '/empty',
-        component: lazy(() => import('../pages/empty')),
-        root: []
-    },
-    {
-        path: '/rate',
-        component: lazy(() => import('../pages/rate')),
+    },{
+        path: RouterPath.USER_MANAGEMENT,
+        component: lazy(() => import('../views/userMg')),
         root: []
     },
 ])

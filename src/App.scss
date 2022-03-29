@@ -1,6 +1,28 @@
 @import "./components/index.scss";
+@import "./src/views/sideBar/index.scss";
+
+*{
+    padding: 0;
+    margin: 0;
+}
 .root{
     margin:0;
     padding:0;
-    height: 100%;
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    &-body{
+        width: 100%;
+        height: 100%;
+        position: relative;
+
+        &-content{
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            padding-left: #{$sideBarWidth}px;
+            padding-top: 48px;
+            position: relative;
+        }
+    }
 }

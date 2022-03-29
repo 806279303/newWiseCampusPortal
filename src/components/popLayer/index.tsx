@@ -109,7 +109,8 @@ export class LgPopLayer extends Component<PopLayerProps, PopLayerState, { isOpen
      * @return        { type *} 
      */
     confirmPopLayer() {
-        this.closePopLayer(0, this.props.onConfirm);
+        this.props.onConfirm && this.props.onConfirm()
+        // this.closePopLayer(0, this.props.onConfirm);
     }
     /**
      * @description  : 点击顶部小图标关闭弹窗

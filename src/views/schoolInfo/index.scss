@@ -1,0 +1,15 @@
+.school-sync-btn{
+  margin-left: 10px;
+  margin-top: 6px;
+}
+
+.school-list{
+  &-name{
+    font-weight: bold;
+    cursor: pointer;
+  }
+  &-url{
+    text-decoration: underline;
+    color: rgb(153,153,153);
+  }
+}

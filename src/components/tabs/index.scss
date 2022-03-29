@@ -20,7 +20,9 @@
 .el-tabs--border-card>.el-tabs__header {
     background-color: transparentize($color_s2, $amount: 0.95);
 }
+.el-tabs__content{
 
+}
 @each $skin,
 $color,
 $imgColor,

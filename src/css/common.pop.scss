@@ -1,0 +1,16 @@
+.common-pop-cell{
+  display: flex;
+  align-items: center;
+  margin:0 10px 20px;
+  &-label{
+    width: 120px;
+    text-align: right;
+  }
+  &-content{
+    margin-left: 10px;
+    width: 200px;
+  }
+}
+.lg_input_box .el-input__inner{
+  height: 36px;
+}

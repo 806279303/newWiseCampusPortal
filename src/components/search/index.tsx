@@ -1,11 +1,12 @@
-
 import './index.scss';
-import React ,{Component, useState} from 'react';
+import React from 'react';
 
 export interface SearchProps {
     type?: "default" | "A",
+    value: string
     onChange?: (value: string) => void,
-    onSearch?: (value: string) => void,
+    onSearch?: () => void,
+    onClear?: () => void,
     className?: string,
     placeholder?: string,
     disabled?: boolean,
@@ -14,49 +15,48 @@ export interface SearchProps {
 
 
 export function Search(props: SearchProps) {
-    const [searchValue, setSearchValue] = useState("");
 
-    function changeSearch(e: any){
-        setSearchValue(e.target.value)
-        if(typeof (props.onChange) === "function"){
-            props.onChange(e.target.value)
-        }
+    function changeSearch(e: any) {
+        props.onChange && props.onChange(e.target.value)
     }
 
-    function clearSearch(){
-        setSearchValue("");
-        if(typeof (props.onChange) === "function"){
-            props.onChange("")
-        }
+    function clearSearch() {
+        props.onClear && props.onClear()
     }
 
-    function searchClick(){
-        if(typeof (props.onSearch) === "function"){
-            props.onSearch(searchValue)
+    function searchClick() {
+        props.onSearch && props.onSearch()
+    }
+
+    function keydownSearch(e: any) {
+        console.log(e)
+        if (e.keyCode == 13) {
+            props.onSearch && props.onSearch()
         }
     }
 
     let wappClassName = 'lg-search-input-area'
     let inputClassName = 'lg-search-input'
-    if(props.type === "A"){
-        wappClassName =  'lg-search-input-area-typeA'
+    if (props.type === "A") {
+        wappClassName = 'lg-search-input-area-typeA'
         inputClassName = 'lg-search-input-typeA'
     }
     return (
         <div className={wappClassName}>
-            <input className={inputClassName} 
-                value={searchValue} 
-                onChange={changeSearch}
-                placeholder={props.placeholder}
-                disabled={props.disabled}
+            <input className={inputClassName}
+                   value={props.value}
+                   onChange={changeSearch}
+                   onKeyDown={keydownSearch}
+                   placeholder={props.placeholder}
+                   disabled={props.disabled}
             />
-          
+
             <i className='lg-search-input-icon'
-                onClick={searchClick}></i>
+               onClick={searchClick}/>
             <i className='lg-search-input-clear'
-               style={{display: searchValue === ""? "none" : "block"}}
+               style={{display: props.value === "" ? "none" : "block"}}
                onClick={clearSearch}
-            ></i>
+            />
         </div>
     )
 }
