@@ -6,7 +6,7 @@ import {lgAlert} from "@/components/alert";
 
 let tipIndex:any
 const instance = axios.create({    //创建axios实例，在这里可以设置请求的默认配置
-    timeout: 10000, // 设置超时时间10s
+    timeout: 60000, // 设置超时时间10s
     baseURL: publicIp   //根据自己配置的反向代理去设置不同环境的baeUrl
 })
 // 文档中的统一设置post请求头。下面会说到post请求的几种'Content-Type'
@@ -90,6 +90,36 @@ export const post = (url:string, data:object, config = {}) => {
     return new Promise((resolve, reject) => {
         instance({
             method: 'post',
+            url,
+            data,
+            ...config
+        }).then(response => {
+            resolve(response)
+        }).catch(error => {
+            reject(error)
+        })
+    })
+}
+/* 统一封装delete请求  */
+export const put = (url:string, data:object, config = {}) => {
+    return new Promise((resolve, reject) => {
+        instance({
+            method: 'put',
+            url,
+            data,
+            ...config
+        }).then(response => {
+            resolve(response)
+        }).catch(error => {
+            reject(error)
+        })
+    })
+}
+/* 统一封装post请求  */
+export const del = (url:string, data:object, config = {}) => {
+    return new Promise((resolve, reject) => {
+        instance({
+            method: 'delete',
             url,
             data,
             ...config

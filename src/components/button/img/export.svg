@@ -1,0 +1,3 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14.009" viewBox="0 0 14 14.009">
+  <path className="button_export" data-name="button_export" d="M13,14H1a1,1,0,0,1-1-1V1A1,1,0,0,1,1,0H6A1,1,0,0,1,6,2H2V12H12V8a1,1,0,0,1,2,0v5A1,1,0,0,1,13,14Zm0-9a1,1,0,0,1-1-1V3.321L5.608,9.713A.955.955,0,0,1,4.257,8.362L10.619,2H10a1,1,0,0,1,0-2h2.92a.929.929,0,0,1,1.069.949A.464.464,0,0,1,14,1V4A1,1,0,0,1,13,5Z" transform="translate(0 0.009)" fill="inherit" fill-rule="evenodd"/>
+</svg>

@@ -1,13 +1,3 @@
-export interface InsertWeappInfo{
-    moduleName:string
-    defaultVersion:string
-    defaultAppUrl:string
-    schoolType:number
-    belongAdmin:number
-    belongTeacher:number
-    belongStudent:number
-    belongParent:number
-}
 
 export interface AddWeappSystem {
     lockerId: number;
@@ -72,6 +62,8 @@ export const defaultProps = {
         universityDefaultAppUrl: '',
     }
 }
+
+
 export const WIDTH_MATCHES = {
     id: '5%',
     moduleName: '25%',

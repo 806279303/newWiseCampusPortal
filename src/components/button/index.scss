@@ -1,5 +1,222 @@
-.button{
-    width: 200px;
-    height: 200px;
-    background-color: antiquewhite;
+$font_color1: #333333;
+$font_color2: #ffffff;
+$font_color3: #ffffff;
+$font_color4: #ffffff;
+$font_color5: #ffffff;
+
+$font_color_type1: #333333;
+$font_color_type2: #0099ff;
+$font_color_type3: #32b432;
+$font_color_type4: #ff8001;
+$font_color_type5: #ec5260;
+
+$bg_color_type1: #ffffff;
+$bg_color_type2: #019dff;
+$bg_color_type3: #32b432;
+$bg_color_type4: #ff8001;
+$bg_color_type5: #ec5260;
+
+$bg_translucent_color_type1: #ffffff;
+$bg_translucent_color_type2: #ecf5ff;
+$bg_translucent_color_type3: #f0f9eb;
+$bg_translucent_color_type4: #fdf6ec;
+$bg_translucent_color_type5: #fef0f0;
+
+$border_color_type1: #dcdfe6;
+$border_color_type2: #b3d8ff;
+$border_color_type3: #c2e7b0;
+$border_color_type4: #f5dab1;
+$border_color_type5: #fbc4c4;
+
+$shapeType_color_type1: linear-gradient(-90deg, #ffffff 0%, #ffffff 100%);
+$shapeType_color_type2: linear-gradient(-90deg, #39d7ff 0%, #009cff 100%);
+$shapeType_color_type3: linear-gradient(90deg, #32b332 0%, #3bcd3b 100%);
+$shapeType_color_type4: linear-gradient(-90deg, #ffb21f 0%, #ff7e00 100%);
+$shapeType_color_type5: linear-gradient(-90deg, #ff7885 0%, #ec5260 100%);
+
+$ButtonStyle: (
+        "default",
+        "super",
+        $font_color1,
+        $font_color_type1,
+        $bg_color_type1,
+        $bg_translucent_color_type1,
+        $border_color_type1,
+        $shapeType_color_type1
+    ),
+    (
+        "info",
+        "default",
+        $font_color2,
+        $font_color_type2,
+        $bg_color_type2,
+        $bg_translucent_color_type2,
+        $border_color_type2,
+        $shapeType_color_type2
+    ),
+    (
+        "success",
+        "big",
+        $font_color3,
+        $font_color_type3,
+        $bg_color_type3,
+        $bg_translucent_color_type3,
+        $border_color_type3,
+        $shapeType_color_type3
+    ),
+    (
+        "warning",
+        "small",
+        $font_color4,
+        $font_color_type4,
+        $bg_color_type4,
+        $bg_translucent_color_type4,
+        $border_color_type4,
+        $shapeType_color_type4
+    ),
+    (
+        "fail",
+        "mini",
+        $font_color5,
+        $font_color_type5,
+        $bg_color_type5,
+        $bg_translucent_color_type5,
+        $border_color_type5,
+        $shapeType_color_type5
+    );
+
+$SizeStyle: ("super", 48, 48, 16), ("default", 36, 32, 14), ("big", 30, 22, 14), ("small", 26, 17, 14),
+    ("mini", 22, 12, 12);
+$ButtonBackgroundStyle: ("-transparent", "-translucent", "-opacification");
+$ButtonType: ".lg_button_container_type-";
+$ButtonSize: ".lg_button_container_size-";
+$ButtonGradient: ".lg_button_container_gradient-";
+$ButtonBackgroundType: ".lg_button_container_backgroundType-";
+$ButtonBoard: ".lg_button_container_border-";
+// $ButtonShapeType: ".lg_button_container_shapeType-";
+.lg_button_container {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    .lg_button_box {
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        border-radius: 3px;
+        padding: 0px 22px;
+        height: 30px;
+        box-sizing: border-box;
+        font-size: 14px;
+        cursor: pointer;
+        white-space: nowrap;
+        user-select: none;
+        margin: 5px;
+    }
+    .lg_button_box:hover {
+        opacity: 0.8;
+    }
+    @each $type, $size, $fontColor, $fontTypeColor, $bgColor, $bgTransColor, $borderColor, $shapeColor in $ButtonStyle {
+        #{$ButtonType}#{$type} {
+            color: $fontColor;
+            border: 1px solid $borderColor;
+        }
+        #{$ButtonBoard}#{$type} {
+            border: 1px solid $borderColor;
+        }
+
+        @each $bgTransName in $ButtonBackgroundStyle {
+            #{$ButtonBackgroundType}#{$type}#{$bgTransName} {
+                @if ($bgTransName == "-opacification") {
+                    color: $fontColor;
+                    background: $bgColor;
+                    @if ($type != "default") {
+                        border: none;
+                    }
+                } @else if($bgTransName == "-transparent") {
+                    color: $fontTypeColor;
+                    background: rgba($bgColor, 0);
+                } @else if($bgTransName == "-translucent") {
+                    color: $fontTypeColor;
+                    background: $bgTransColor;
+                }
+            }
+        }
+        #{$ButtonGradient}#{$type} {
+            color: $fontColor;
+            background: $shapeColor;
+        }
+        #{$ButtonSize}#{$size} {
+            height: 30px;
+        }
+    }
+    @each $size, $height, $padding, $fontSize in $SizeStyle {
+        #{$ButtonSize}#{$size} {
+            height: #{$height}px;
+            padding: 0 #{$padding}px;
+            font-size: #{$fontSize}px;
+        }
+    }
+
+    .lg_button_container_disable {
+    }
+    .lg_button_container_radius {
+        border-radius: 30px;
+    }
+    .lg_button_container_disable {
+        cursor: no-drop;
+        opacity: 0.3;
+    }
+    .lg_button_container_disable:hover {
+        cursor: no-drop;
+        opacity: 0.3;
+    }
+    .lg_button_container_icon {
+        width: 15px;
+        height: 15px;
+        .icon-svg {
+            fill: #fff;
+        }
+        .icon-svg-editIcon-text {
+            fill: #0099ff;
+        }
+        .icon-svg-exportIcon-text {
+            fill: #0099ff;
+        }
+        .icon-svg-deleteIcon-text {
+            fill: #ec5260;
+        }
+    }
+    .lg_button_container_shapeType-text {
+        border: none;
+        color: #0099ff;
+        background: transparent;
+        padding: 0;
+    }
+    .lg_button_container_shapeType-text-textUnderline {
+        text-decoration: underline;
+    }
+    .lg_button_container_icon,
+    .lg_button_container_icon_custom {
+        margin-right: 2px;
+        position: relative;
+        width: 14px;
+        height: 14px;
+    }
+    .lg_button_container_showIcon-button,
+    .lg_button_container_showIcon-button-custom {
+        padding: 0 12px;
+    }
+    .lg_button_container_showIcon-radius-button,
+    .lg_button_container_showIcon-button-radius-custom {
+        padding: 0 16px;
+    }
+    .lg_button_container_disable-text {
+        color: #c1c1c1;
+        cursor: no-drop;
+    }
+    .lg_button_container_disable-text:hover {
+        color: #c1c1c1;
+        opacity: 1;
+        cursor: no-drop;
+    }
 }

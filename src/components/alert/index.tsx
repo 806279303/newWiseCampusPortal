@@ -1,7 +1,7 @@
 /*
  * @Author       : super-J
  * @Date         : 2021-12-31 16:25:37
- * @LastEditTime : 2022-02-21 14:22:48
+ * @LastEditTime : 2022-03-25 15:38:28
  * @LastEditors  : super-J
  * @Description  : Alert组件的封装
  */
@@ -9,6 +9,7 @@ import './index.scss';
 import { Alert } from 'element-react';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import * as svgIcon from './images/index'
 import { initAlertParams, initAlertParamsA, initContainerPosition, initLgAlertTypeAClass, initTipType } from './util';
 // lgAlert使用的工具
 let globalState: (state: any, callback?: () => void) => void;// 将tip的容器的setState转变到外部函数
@@ -489,7 +490,6 @@ export class LgAlertMouldA extends Component<LgAlertProps, LgAlertState> {
         const { state, props } = this;
         let rowRevers = props.reverse ? 'lg_alert_body_selection lg_alert_body_selection_reverse' : "lg_alert_body_selection";
         let { miniClass, layerContainerClass, showDom } = initLgAlertTypeAClass(props.tipSize as string);
-        console.log(props);
         return (
             <div className={'lg_alert_body lg_alert_body_A ' + layerContainerClass + props.className} style={props.style} id={this.props.showIdName as string + this.props.showIdNumber} data-index={props.showIdNumber} data-position-index={props.positionIndex} >
                 <div className={'lg_alert_body_box ' + miniClass}>

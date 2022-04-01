@@ -1,0 +1,3 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">
+  <path className="button_edit" data-name="button_edit" d="M13,14H1a1,1,0,0,1-1-1V1A1,1,0,0,1,1,0H6A1,1,0,0,1,6,2H2V12H12V8a1,1,0,0,1,2,0v5A1,1,0,0,1,13,14ZM5.632,9.713A.952.952,0,0,1,4.286,8.366l8.08-8.08a.952.952,0,0,1,1.347,1.346Z" fill="inherit" fill-rule="evenodd"/>
+</svg>

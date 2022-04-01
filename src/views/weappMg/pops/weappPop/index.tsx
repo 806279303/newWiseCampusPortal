@@ -2,14 +2,7 @@ import {BaseComponent} from "../../../../type/BaseComponent";
 import {LgInput} from "@/components/input";
 import {LgSwitch} from "@/components/switch";
 import {Select} from "element-react";
-import UploadDefaultImg from '@/images/upload_default.png'
-import {AddBtn} from "@/components/common";
 import React from "react";
-import {LgTd, LgTh, LgTr} from "@/components/miniCampusTb";
-import {Scrollbars} from "react-custom-scrollbars-2";
-import {_concatIdentityStr} from "../../../../utils/common";
-import {LgPopLayer} from "@/components/popLayer";
-import {InsertWeappPop} from "@/views/weappMg/pops/insertWeappPop";
 import {
     SystemPopProps,
     SystemPopState,
@@ -124,7 +117,7 @@ class WeappPop extends BaseComponent<SystemPopProps, SystemPopState> {
     getWeappHttpData() {
         return this.state.data
     }
-
+    //上传相关
     handleLogoScucess(res: any, file: any) {
         const data: any = this.state.data
         data.systemLogoUrl = res.data.absolutePath
@@ -145,7 +138,7 @@ class WeappPop extends BaseComponent<SystemPopProps, SystemPopState> {
         }
         return isTypes && isLt2M;
     }
-
+    //上传相关- 结束
     render() {
         const data: any = this.state.data
         const wxSystemModules = data.wxSystemModules || []
@@ -239,52 +232,6 @@ class WeappPop extends BaseComponent<SystemPopProps, SystemPopState> {
                         </CommonPopCell>
                     </div>
                 </div>
-                <div className={`${this.CNP}-bottom`}>
-                    <div className={`${this.CNP}-bottom-title`}>内部模块</div>
-                    <div className="lg-common-tb">
-                        <div className="lg-common-tb-header">
-                            {
-                                <LgTh columns={this.state.insertColumns}/>
-                            }
-                        </div>
-                        <Scrollbars className="common-page-content">
-                            {
-                                wxSystemModules.map((o: any, i: number) => {
-                                    return (
-                                        <LgTr key={`school-list-${i}`}>
-                                            <LgTd width={widthsMatch.id}>{i + 1}</LgTd>
-                                            <LgTd width={widthsMatch.moduleName}>{o.moduleName}</LgTd>
-                                            <LgTd width={widthsMatch.identity}>{_concatIdentityStr(o)}</LgTd>
-                                            <LgTd width={widthsMatch.schoolType}>{o.schoolType}</LgTd>
-                                            <LgTd width={widthsMatch.defaultAppUrl}>{o.defaultAppUrl}</LgTd>
-                                            <LgTd width={widthsMatch.defaultVersion}>{o.defaultVersion}</LgTd>
-                                            <LgTd width={widthsMatch.handles}>编辑</LgTd>
-                                        </LgTr>
-                                    )
-                                })
-                            }
-                        </Scrollbars>
-                        <div className={`${this.CNP}-bottom-add`}>
-                            <AddBtn text="添加内置模块" handClick={() => {
-                                this.openInsertWeappPop(0, data)
-                            }}></AddBtn>
-                        </div>
-                    </div>
-                </div>
-
-                <LgPopLayer
-                    width={960}
-                    height={600}
-                    coverLayerClass={'true'}
-                    onShowLayer={this.insertWeappPopDidOpened}
-                    onClose={this.insertWeappPopDidClosed}
-                    onConfirm={this.insertWeappPopDidConfirm}
-                    isOpen={this.state.isOpenInsertSystemPop}
-                    title={this.openInsertWeappPopType === 0 ? '添加内部模块' : '编辑内部模块'}
-                >
-                    <InsertWeappPop onRef={this.onInsideWeappPopRef} insertWeappData={this.state.insertWeappData}
-                                    weappData={data}/>
-                </LgPopLayer>
             </div>
         );
     }

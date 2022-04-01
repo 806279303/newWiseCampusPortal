@@ -4,20 +4,20 @@ import {Search} from "@/components/search";
 import {LgTable, TableColumn} from "@/components/table";
 import {LgTd, LgTh, LgTr} from "@/components/miniCampusTb";
 import {Scrollbars} from 'react-custom-scrollbars-2';
-import {addWeapp, getWeapp} from "../../network/http";
+import {addWeapp, getWeapp, putWeapp} from "../../network/http";
 import {LgPopLayer} from "@/components/popLayer";
 import {RouteComponentProps} from "react-router-dom";
 import {ISystemInfo, ISystemInsideInfo, SysyemStates} from "@/views/weappMg/model";
 import WeappPop from "@/views/weappMg/pops/weappPop";
 import {AddBtn} from "@/components/common";
-import {setSpecifiedWeappData} from "../../redux/weapp/action";
-import {connect} from "react-redux";
-import {Dispatch} from "redux";
-
+import {LgButton} from "@/components/button";
+import {editIcon as Edit, deleteIcon as Delete} from "@/components/button/img/index";
 import "../../css/common.scss"
 import './index.scss'
 import {defaultProps} from "@/views/weappMg/pops/weappPop/model";
+import {defaultInsideWeappProps} from "@/views/weappMg/pops/insertWeappPop/model";
 import {lgAlert} from "@/components/alert";
+import {InsertWeappPop} from "@/views/weappMg/pops/insertWeappPop";
 
 interface IWeappMgState {
     selectedState: number | ''
@@ -26,12 +26,13 @@ interface IWeappMgState {
     thColumns: Array<any>
     data: Array<any>
     isOpenSystemPop: boolean
-    weappData:any
+    weappData: any
+    isOpenInsertSystemPop: boolean
+    insertWeappData: any
 }
 
 
 class Index extends Component<RouteComponentProps, IWeappMgState> {
-    static defaultProps: {} = {}
     private static readonly WIDTH_MATCHES = {
         id: '5%',
         systemName: '15%',
@@ -44,7 +45,9 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
     }
     private openIndex: string;
     private openWeappPopType: number;//0添加1编辑
-    public weappPopRef:any = React.createRef()
+    private openInsertWeappPopType: number;//0添加1编辑
+    public weappPopRef: any = React.createRef()
+    public insertWeappPopRef: any = React.createRef()
 
     constructor(props: RouteComponentProps) {
         super(props);
@@ -79,31 +82,45 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
             ],
             data: [],
             isOpenSystemPop: false,
-            weappData:{}
+            weappData: {},
+
+            isOpenInsertSystemPop: false,
+            insertWeappData: {}
         }
         this.openIndex = "1"
-        this.openWeappPopType = 0
+        this.openWeappPopType = 0//0添加1编辑
+        this.openInsertWeappPopType = 0//0添加1编辑
         this.systemSearch = this.systemSearch.bind(this);
         this.openIndexChange = this.openIndexChange.bind(this);
-
         this.openAddWeappPop = this.openAddWeappPop.bind(this);
-        this.systemPopDidOpened = this.systemPopDidOpened.bind(this);
+        //弹窗-小程序
         this.systemPopDidClosed = this.systemPopDidClosed.bind(this);
         this.systemPopDidConfirm = this.systemPopDidConfirm.bind(this);
         this.onWeappPopRef = this.onWeappPopRef.bind(this);
+        this.delWeappPop = this.delWeappPop.bind(this);
+        //弹窗-内置模块
+        this.insertWeappPopDidClosed = this.insertWeappPopDidClosed.bind(this);
+        this.insertWeappPopDidConfirm = this.insertWeappPopDidConfirm.bind(this);
+        this.onInsideWeappPopRef = this.onInsideWeappPopRef.bind(this);
+        this.openInsideWeappPop = this.openInsideWeappPop.bind(this);
+        this.delInsideWeapp = this.delInsideWeapp.bind(this);
     }
 
     async componentDidMount() {
         this.loadWeappLists()
     }
 
-    async loadWeappLists(){
+    async loadWeappLists() {
         const data: ISystemInfo[] = await getWeapp({})
         this.setState({data: data})
     }
 
-    onWeappPopRef(child:any){
+    onWeappPopRef(child: any) {
         this.weappPopRef = child
+    }
+
+    onInsideWeappPopRef(child: any) {
+        this.insertWeappPopRef = child
     }
 
     systemSearch() {
@@ -140,12 +157,8 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
         const initData = defaultProps.data
         this.setState({
             isOpenSystemPop: true,
-            weappData:type===0?initData:(data||initData)
+            weappData: type === 0 ? initData : (data || initData)
         })
-    }
-
-    systemPopDidOpened() {
-
     }
 
     systemPopDidClosed() {
@@ -153,14 +166,68 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
     }
 
     async systemPopDidConfirm() {
+        console.log(this.openWeappPopType)
         console.log(this.weappPopRef.getWeappHttpData())
         const httpData = this.weappPopRef.getWeappHttpData()
-        const resData = await addWeapp(httpData)
-        lgAlert.show({tipType: 'success', content: "添加成功！", position: {xAxis: 'center', yAxis: 'center'}})
-        this.loadWeappLists()
+        if (this.openWeappPopType === 0) {//添加
+            const resData = await addWeapp(httpData)
+            lgAlert.show({tipType: 'success', content: "添加成功！", position: {xAxis: 'center', yAxis: 'center'}})
+            this.loadWeappLists()
+        } else {
+            const resData = await putWeapp(httpData)
+            lgAlert.show({tipType: 'success', content: "编辑成功！", position: {xAxis: 'center', yAxis: 'center'}})
+            this.loadWeappLists()
+        }
     }
 
     //弹窗相关-结束
+
+    //insert弹窗
+    openInsideWeappPop(type: number, insideData: any, weappData: any) {
+        this.openInsertWeappPopType = type
+        if (type == 0) {
+            const initData = defaultInsideWeappProps.data
+            initData.systemId = weappData.systemId
+            this.setState({insertWeappData: initData, isOpenInsertSystemPop: true})
+        } else {
+            this.setState({insertWeappData: insideData, isOpenInsertSystemPop: true})
+        }
+    }
+
+    insertWeappPopDidClosed() {
+        this.setState({isOpenInsertSystemPop: false})
+    }
+
+    insertWeappPopDidConfirm() {
+        console.log(this.openInsertWeappPopType)
+        console.log(this.insertWeappPopRef.getHttpData())
+        // const httpData = this.weappPopRef.getWeappHttpData()
+    }
+
+    delWeappPop(data: any) {
+        lgAlert.show({
+            content: '是否确认删除该小程序？',
+            tipType: 'warning',
+            tipSize: 'small',
+            tipMouldType: 'A',
+            duration: 0,
+            isShowCloseBtn: true,
+            position: {xAxis: "center", yAxis: "center"}
+        });
+    }
+
+    delInsideWeapp(data: any) {
+        lgAlert.show({
+            content: '是否确认删除该内置模块？',
+            tipType: 'warning',
+            tipSize: 'small',
+            tipMouldType: 'A',
+            duration: 0,
+            isShowCloseBtn: true,
+            position: {xAxis: "center", yAxis: "center"}
+        });
+    }
+    //insert弹窗-结束
     render() {
         const widthsMatch = Index.WIDTH_MATCHES
         return (
@@ -211,18 +278,40 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
                                             <LgTd
                                                 width={widthsMatch.systemState}>{this.showSystemStateTxt(o.systemState)}</LgTd>
                                             <LgTd width={widthsMatch.version}>{o.version}</LgTd>
-                                            <LgTd width={widthsMatch.handles}>
-                                                <div onClick={() => {
-                                                    this.openAddWeappPop(1, o)
-                                                }}>编辑
-                                                </div>
+                                            <LgTd className="flex-center" width={widthsMatch.handles}>
+                                                <i className="el-icon-plus system-list-add"
+                                                   onClick={() => {
+                                                    this.openInsideWeappPop(0, {}, o)
+                                                }}/>
+                                                <LgButton
+                                                    className=""
+                                                    value={""}
+                                                    shapeType="text"
+                                                    showIcon
+                                                    icon={<Edit style={{fill: "#0099ff"}}/>}
+                                                    onClick={() => {
+                                                        this.openAddWeappPop(1, o)
+                                                    }}
+                                                />
+                                                <LgButton
+                                                    className=""
+                                                    value={""}
+                                                    shapeType="text"
+                                                    showIcon
+                                                    icon={<Delete style={{fill: "#ec5260"}}/>}
+                                                    onClick={() => {
+                                                        this.delWeappPop(o)
+                                                    }}
+                                                />
                                             </LgTd>
                                         </LgTr>
                                     )
                                     const wxSystemModules: ISystemInsideInfo[] = o.wxSystemModules || []
                                     return wxSystemModules.length ? (
                                         <Collapse.Item title={LgTrDom} key={`collapse-${i}`} name={i + ''}>
-                                            <ModuleLists data={wxSystemModules}/>
+                                            <ModuleLists data={wxSystemModules}
+                                                         openInsideWeappPop={this.openInsideWeappPop}
+                                                         delInsideWeapp={this.delInsideWeapp}/>
                                         </Collapse.Item>
                                     ) : LgTrDom
                                 })
@@ -235,13 +324,29 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
                     height={600}
                     coverLayerClass={'true'}
                     isOpen={this.state.isOpenSystemPop}
-                    onShowLayer={this.systemPopDidOpened}
-                    title={this.openWeappPopType===0?'添加小程序':'编辑小程序'}
+                    onShowLayer={() => {
+                    }}
+                    title={this.openWeappPopType === 0 ? '添加小程序' : '编辑小程序'}
                     onClose={this.systemPopDidClosed}
                     onConfirm={this.systemPopDidConfirm}
                     onIconClose={this.systemPopDidClosed}
                 >
                     <WeappPop onRef={this.onWeappPopRef} data={this.state.weappData}></WeappPop>
+                </LgPopLayer>
+
+                <LgPopLayer
+                    width={960}
+                    height={600}
+                    coverLayerClass={'true'}
+                    onShowLayer={() => {
+                    }}
+                    onClose={this.insertWeappPopDidClosed}
+                    onIconClose={this.insertWeappPopDidClosed}
+                    onConfirm={this.insertWeappPopDidConfirm}
+                    isOpen={this.state.isOpenInsertSystemPop}
+                    title={this.openInsertWeappPopType === 0 ? '添加内部模块' : '编辑内部模块'}
+                >
+                    <InsertWeappPop onRef={this.onInsideWeappPopRef} data={this.state.insertWeappData}/>
                 </LgPopLayer>
             </div>
         );
@@ -250,6 +355,8 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
 
 interface IModuleListsProps {
     data: Array<ISystemInsideInfo>
+    openInsideWeappPop: (type: number, insertData: any, weappData: any) => void
+    delInsideWeapp: (data: any) => void
 }
 
 interface IModuleListsState {
@@ -263,7 +370,7 @@ class ModuleLists extends Component<IModuleListsProps, IModuleListsState> {
         defaultAppUrl: '20%',
         schoolType: '20%',
         belong: '20%',
-        handles:'10%'
+        handles: '10%'
     }
 
     constructor(props: IModuleListsProps) {
@@ -297,7 +404,29 @@ class ModuleLists extends Component<IModuleListsProps, IModuleListsState> {
                                 <LgTd width={widthsMatch.defaultAppUrl}>{o.defaultAppUrl}</LgTd>
                                 <LgTd width={widthsMatch.schoolType}>{o.schoolType}</LgTd>
                                 <LgTd width={widthsMatch.belong}>{o.belong}</LgTd>
-                                <LgTd width={widthsMatch.handles}>编辑</LgTd>
+
+                                <LgTd className="flex-center" width={widthsMatch.handles}>
+                                    <LgButton
+                                        className=""
+                                        value={""}
+                                        shapeType="text"
+                                        showIcon
+                                        icon={<Edit className="" style={{fill: "#0099ff"}}/>}
+                                        onClick={() => {
+                                            this.props.openInsideWeappPop(1, o, {})
+                                        }}
+                                    />
+                                    <LgButton
+                                        className=""
+                                        value={""}
+                                        shapeType="text"
+                                        showIcon
+                                        icon={<Delete className="" style={{fill: "#ec5260"}}/>}
+                                        onClick={() => {
+                                            this.props.delInsideWeapp(o)
+                                        }}
+                                    />
+                                </LgTd>
                             </LgTr>
                         )
                     })

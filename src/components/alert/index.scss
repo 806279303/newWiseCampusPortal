@@ -39,7 +39,7 @@
         padding: 14px 16px;
         border-radius: 5px;
         background-color: #fff;
-        box-shadow: 0 3px 6px 0px rgba(0, 0, 0, 0.315);
+        box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.16);
         margin-bottom: 10px;
         &:last-child {
             margin-bottom: 0;
@@ -96,8 +96,8 @@
                 background-position: center;
             }
             .tip_icon_type_item_has_description {
-                width: 30px;
-                height: 30px;
+                width: 20px;
+                height: 20px;
             }
             .tip_icon_type0 {
                 background: url("./images/d_waringB.png") no-repeat;
@@ -196,12 +196,19 @@
         .lg_alert_body_close_container_box .lg_alert_body_close_box {
             width: 16px;
             height: 16px;
+            overflow: hidden;
+            &:hover{
+                &::after,&::before{
+
+                }
+            }
+
         }
         .lg_alert_body_close_container_box .lg_alert_body_close_box::before {
-            width: 16px;
+            width: 17px;
         }
         .lg_alert_body_close_container_box .lg_alert_body_close_box::after {
-            width: 16px;
+            width: 17px;
         }
 
         min-width: fit-content;
@@ -254,7 +261,7 @@
             .lg_alert_body_icon {
                 background-size: cover;
                 width: 100%;
-                height: 42px;
+                height: 51px;
             }
         }
 
@@ -262,8 +269,8 @@
             flex-direction: row;
             max-height: 64px;
             .lg_alert_body_icon {
-                width: 54px;
-                height: 49px;
+                width: 42px;
+                height: 51px;
             }
             .lg_alert_body_title {
                 white-space: nowrap;
@@ -277,12 +284,30 @@
                 width: 28px;
                 height: 28px;
                 .lg_alert_body_icon {
+                    width: 34px;
+                    height: 41px;
                     position: absolute;
-                    left: -13px;
-                    top: -8px;
-                    transform: scale(0.68);
+                    right: 0;
+                    top: 0px;
+                }
+                .tip_icon_type_A0 {
+                    background: url("./images/warningB_small.png") center no-repeat;
+                }
+                .tip_icon_type_A1 {
+                    background: url("./images/error_small.png") center no-repeat;
+                }
+                .tip_icon_type_A2 {
+                    background: url("./images/warning_small.png") center no-repeat;
+                }
+                .tip_icon_type_A3 {
+                    background: url("./images/success_small.png") center no-repeat;
+                }
+                .tip_icon_type_A4 {
+                    background: url("./images/query_small.png") center no-repeat;
                 }
             }
+     
+            
         }
         .lg_alert_body_selection {
             display: flex;
@@ -303,7 +328,7 @@
                 justify-content: center;
                 align-items: center;
                 color: #fff;
-                box-shadow: 0 5px 5px 1px #2aa6f84b;
+                // box-shadow: 0 5px 5px 1px #2aa6f84b;
             }
             .lg_alert_body_selection_closeText {
                 color: #0099ff;
@@ -336,13 +361,14 @@
         }
         .lg_alert_body_close_container_box {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 16px;
+            right: 16px;
         }
     }
     .lg_alert_body_A_size_mini {
         padding: 18px 50px;
         box-sizing: border-box;
+        
     }
     .lg_alert_body_A_size_small {
         width: 400px;
@@ -362,12 +388,27 @@
                 height: 34px;
                 position: relative;
                 .lg_alert_body_icon {
-                    width: 54px;
-                    height: 49px;
-                    transform: scale(0.8);
+                    width: 34px;
+                    height: 41px;
+                    // transform: scale(0.8);
                     position: absolute;
-                    top: -5px;
-                    left: -10px;
+                    top: 0px;
+                    left: 0px;
+                }
+                .tip_icon_type_A0 {
+                    background: url("./images/warningB_small.png") center no-repeat;
+                }
+                .tip_icon_type_A1 {
+                    background: url("./images/error_small.png") center no-repeat;
+                }
+                .tip_icon_type_A2 {
+                    background: url("./images/warning_small.png") center no-repeat;
+                }
+                .tip_icon_type_A3 {
+                    background: url("./images/success_small.png") center no-repeat;
+                }
+                .tip_icon_type_A4 {
+                    background: url("./images/query_small.png") center no-repeat;
                 }
             }
         }
@@ -384,7 +425,7 @@
                 position: relative;
                 margin-bottom: 32px;
                 .lg_alert_body_icon {
-                    transform: scale(1.15);
+                    // transform: scale(1.15);
                     position: absolute;
                     top: 3px;
                 }
