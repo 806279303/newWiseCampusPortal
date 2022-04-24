@@ -4,7 +4,7 @@ import {Search} from "@/components/search";
 import {LgTable, TableColumn} from "@/components/table";
 import {LgTh, LgTr, LgTd} from "@/components/miniCampusTb";
 import {Scrollbars} from 'react-custom-scrollbars-2';
-import {getSchoolInfo} from "../../network/http";
+import {getSchoolInfo, synchronization, synSchoolInfo} from "../../network/http";
 import {ISchoolInfo} from "@/views/schoolInfo/model";
 
 import {withRouter, RouteComponentProps} from "react-router-dom";
@@ -12,6 +12,9 @@ import {withRouter, RouteComponentProps} from "react-router-dom";
 
 import "../../css/common.scss"
 import './index.scss'
+import Pops from "../../utils/pops";
+import {editIcon as Edit} from "@/components/button/img";
+import {LgButton} from "@/components/button";
 
 interface IWeappMgState {
     states: Array<any>
@@ -63,7 +66,7 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
                     label: '维护中'
                 }
             ],
-            selectedEnvState: 1,
+            selectedEnvState: '',
             envStates: [
                 {
                     value: '',
@@ -91,6 +94,8 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
         this.schoolStateChanged = this.schoolStateChanged.bind(this);
         this.schoolEnvStateChanged = this.schoolEnvStateChanged.bind(this);
         this.schoolSearch = this.schoolSearch.bind(this);
+        this.syncAllModules = this.syncAllModules.bind(this);
+        this.syncSchool = this.syncSchool.bind(this);
     }
 
 
@@ -130,6 +135,40 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
         this.props.history.push({pathname: `/schoolSystem/${schoolId}`})
     }
 
+    syncAllModules(){
+        Pops.showLoading('同步中')
+        synchronization().then((res:any)=>{
+            Pops.hideLoading()
+            if(res.error == 0 && res.data && res.data.success){
+                Pops.showSuccess('同步成功')
+                this.loadSchoolInfo()
+            }else{
+                Pops.showError('同步失败')
+            }
+        }).catch(_=>{
+            Pops.showError('同步失败')
+        })
+    }
+
+    syncSchool(){
+        Pops.showLoading('同步中')
+        synSchoolInfo().then((res:any)=>{
+            Pops.hideLoading()
+            if(res.error == 0){
+                Pops.showSuccess('同步成功')
+                this.loadSchoolInfo()
+            }else{
+                Pops.showError('同步失败')
+            }
+        }).catch(_=>{
+            Pops.showError('同步失败')
+        })
+    }
+
+    openPop(type:number, data:any){
+
+    }
+
     render() {
         const widthsMatch = Index.WIDTH_MATCHES
         return (
@@ -162,7 +201,8 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
                     <div className="left common-page-header-total">
                         共{this.state.data.length}个学校
                     </div>
-                    <div className="right common-btn common-btn-green school-sync-btn">同步学校信息</div>
+                    <div className="right common-btn common-btn-green school-sync-btn" onClick={this.syncAllModules}>同步所有信息</div>
+                    <div className="right common-btn common-btn-green school-sync-btn" onClick={this.syncSchool}>仅同步学校信息</div>
                     <div className="right header-seach-wrap">
                         <Search
                             value={this.state.schoolSearch}
@@ -193,7 +233,9 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
                                         <LgTd className="school-list-url" width={widthsMatch.hostServerUrl}>{o.hostServerUrl}</LgTd>
                                         <LgTd width={widthsMatch.state}>{o.state}</LgTd>
                                         <LgTd width={widthsMatch.startDate}>{`${o.startDate} - ${o.endDate}`}</LgTd>
-                                        <LgTd width={widthsMatch.handles}>编辑</LgTd>
+                                        <LgTd className="flex-center" width={widthsMatch.handles}>
+
+                                        </LgTd>
                                     </LgTr>
                                 )
                             })

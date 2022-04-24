@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, {AxiosInstance} from "axios";
 import {publicIp} from './apiURL'
 import {LOGIN} from './apiURL'
 import {Message as message} from 'element-react'
@@ -27,7 +27,7 @@ let httpCode:any = {        //这里我简单列出一些常见的http状态码�
 instance.interceptors.request.use(config => {
     // // config.headers['token'] = sessionStorage.getItem('token') || ''
     // // hide = message.loading({content: 'Loading...', duration: 0});
-    tipIndex = lgAlert.show({ content: '数据加载中', tipType: 'loading', position: { xAxis: 'center', yAxis: 'center' } });
+    // tipIndex = lgAlert.show({ content: '数据加载中', tipType: 'loading', position: { xAxis: 'center', yAxis: 'center' } });
     // // 在这里：可以根据业务需求可以在发送请求之前做些什么:例如我这个是导出文件的接口，因为返回的是二进制流，所以需要设置请求响应类型为blob，就可以在此处设置。
     // if (config.url && config.url.includes('pur/contract/export')) {
     //     config.headers && (config.headers['responseType'] = 'blob')
@@ -44,7 +44,7 @@ instance.interceptors.request.use(config => {
 
 /** 添加响应拦截器  **/
 instance.interceptors.response.use(response => {
-    lgAlert.close(tipIndex.index);
+    // lgAlert.close(tipIndex.index);
     // if (response.statusText === 'ok') {     // 响应结果里的statusText: ok是我与后台的约定，大家可以根据实际情况去做对应的判断
         return Promise.resolve(response.data)
     // } else {
@@ -52,7 +52,7 @@ instance.interceptors.response.use(response => {
     //     return Promise.reject(response.data.message)
     // }
 }, error => {
-    lgAlert.close(tipIndex);
+    // lgAlert.close(tipIndex);
     // hide()
     if (error.response) {
         // // 根据请求失败的http状态码去给用户相应的提示
@@ -86,7 +86,7 @@ export const get = (url:string, params:object, config = {}) => {
 }
 
 /* 统一封装post请求  */
-export const post = (url:string, data:object, config = {}) => {
+export const post = (url:string, data:object = {}, config = {}) => {
     return new Promise((resolve, reject) => {
         instance({
             method: 'post',
@@ -101,7 +101,7 @@ export const post = (url:string, data:object, config = {}) => {
     })
 }
 /* 统一封装delete请求  */
-export const put = (url:string, data:object, config = {}) => {
+export const put = (url:string, data:object = {}, config = {}) => {
     return new Promise((resolve, reject) => {
         instance({
             method: 'put',
@@ -116,12 +116,12 @@ export const put = (url:string, data:object, config = {}) => {
     })
 }
 /* 统一封装post请求  */
-export const del = (url:string, data:object, config = {}) => {
+export const del = (url:string, params:object, config = {}) => {
     return new Promise((resolve, reject) => {
         instance({
             method: 'delete',
             url,
-            data,
+            params,
             ...config
         }).then(response => {
             resolve(response)

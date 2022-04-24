@@ -56,12 +56,13 @@ export class InsertWeappPop extends BaseComponent<insideWeappPopProps, insideWea
     }
 
     getHttpData() {
-        const data:any = this.state.data
+        const data: any = this.state.data
         const identityCells = data.identityCells
         const httpData = {
             ...data,
-            roles:identityCells
+            roles: identityCells
         }
+        delete httpData.identityCells;
         return httpData
     }
 
@@ -79,7 +80,8 @@ export class InsertWeappPop extends BaseComponent<insideWeappPopProps, insideWea
             isExist: 1,
             type: 0,
             moduleName: '',
-            moduleDes: ''
+            moduleDesc: '',
+            moduleDefaultUrl: ''
         })
         data.identityCells = identityCells
         this.setState({data: data})
@@ -106,14 +108,16 @@ export class InsertWeappPop extends BaseComponent<insideWeappPopProps, insideWea
         }
         return isTypes && isLt2M;
     }
+
     //上传相关- 结束
 
-    updateRoles(item:any, index:number){
-        const data:any = this.state.data
+    updateRoles(item: any, index: number) {
+        const data: any = this.state.data
         const identityCells = data.identityCells
         identityCells[index] = item
-        this.setState({ data:data})
+        this.setState({data: data})
     }
+
     render() {
         const data: any = this.state.data || {}
         const identityCells = data.identityCells || []
@@ -161,13 +165,19 @@ export class InsertWeappPop extends BaseComponent<insideWeappPopProps, insideWea
                             this.onChange(value, 'defaultAppUrl')
                         }} value={data.defaultAppUrl}/>
                     </CommonPopCell>
+                    <CommonPopCell label="模块描述:">
+                        <LgInput type="text" onChange={(value) => {
+                            this.onChange(value, 'moduleDesc')
+                        }} value={data.moduleDesc}/>
+                    </CommonPopCell>
 
 
                     <div className={`${this.CNP}-systemContent`}>
                         <div className={`${this.CNP}-systemContent-title`}>内部模块</div>
                         {
                             identityCells.map((item: any, index: number) => (
-                                <IdentityCell key={'lg-identity-cell' + index} data={item} index={index} updateRoles={this.updateRoles}/>
+                                <IdentityCell key={'lg-identity-cell' + index} data={item} index={index}
+                                              updateRoles={this.updateRoles}/>
                             ))
                         }
                         <div className={`${this.CNP}-systemContent-add`}>
@@ -183,7 +193,7 @@ export class InsertWeappPop extends BaseComponent<insideWeappPopProps, insideWea
 interface IdentityCellProps {
     data: any[]
     index: number
-    updateRoles: (data:any, index:number)=>void
+    updateRoles: (data: any, index: number) => void
 }
 
 interface IdentityCellState {
@@ -227,7 +237,9 @@ class IdentityCell extends Component<IdentityCellProps, IdentityCellState> {
                 <div className={`${this.CNP}-systemContent-cell-label`}>添加角色:</div>
 
                 <div className={`${this.CNP}-systemContent-cell-identity`}>
-                    <Select value={data.type} placeholder="请选择角色">
+                    <Select value={data.type} placeholder="请选择角色" onChange={(value) => {
+                        this.onChange(value, 'type')
+                    }}>
                         {
                             this.state.identities.map(el => {
                                 return <Select.Option key={el.value} label={el.label} value={el.value}/>
@@ -244,6 +256,11 @@ class IdentityCell extends Component<IdentityCellProps, IdentityCellState> {
                     <LgInput type="text" onChange={(value) => {
                         this.onChange(value, 'moduleDesc')
                     }} value={data.moduleDesc} placeholder="请输入模块描述"/>
+                </div>
+                <div className={`${this.CNP}-systemContent-cell-url`}>
+                    <LgInput type="text" onChange={(value) => {
+                        this.onChange(value, 'moduleDefaultUrl')
+                    }} value={data.moduleDefaultUrl} placeholder="请输入模块角色默认路径"/>
                 </div>
             </div>
         );

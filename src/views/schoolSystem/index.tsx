@@ -4,7 +4,13 @@ import {Search} from "@/components/search";
 import {LgTable, TableColumn} from "@/components/table";
 import {LgTh, LgTr, LgTd} from "@/components/miniCampusTb";
 import {Scrollbars} from 'react-custom-scrollbars-2';
-import {getWxSchoolSystem} from "../../network/http";
+import {
+    getWxSchoolSystem, putWxSchoolModule,
+    synSchoolInfo,
+    synSchoolSystem,
+    synSchoolSystemAndModule,
+    synSchoolSystemModule
+} from "../../network/http";
 import {Collapse} from "element-react";
 import {LgSwitch} from "@/components/switch";
 
@@ -14,6 +20,9 @@ import {ISystemInfo, IModuleInfo} from "@/views/schoolSystem/model";
 import "../../css/common.scss"
 import './index.scss'
 import {_concatIdentityStr} from "../../utils/common";
+import Pops from "../../utils/pops";
+import {editIcon as Edit} from "@/components/button/img";
+import {LgButton} from "@/components/button";
 
 interface IWeappMgState {
     systemSearch: string
@@ -35,6 +44,7 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
         handles: '10%',
     }
     private openIndex: string;
+    private currentSchoolInfo: any
 
     constructor(props: RouteComponentProps) {
         super(props);
@@ -58,22 +68,57 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
         this.openIndexChange = this.openIndexChange.bind(this);
         this.backToSchoolInfo = this.backToSchoolInfo.bind(this);
         this.systemSearch = this.systemSearch.bind(this);
+        this.synSchoolSystem = this.synSchoolSystem.bind(this);
+        this.syncSchoolModules = this.syncSchoolModules.bind(this);
+        this.syncSchoolModules = this.syncSchoolModules.bind(this);
+        this.synSchoolSystemAndModule = this.synSchoolSystemAndModule.bind(this);
         this.openIndex = "1"
+        this.currentSchoolInfo = ''
     }
 
 
     async componentDidMount() {
         const routerParams: any = this.props.match.params
-        const schoolId = routerParams.schoolId
-        const data = await getWxSchoolSystem({schoolId})
+        this.currentSchoolInfo = routerParams
+        await this.loadWxSchoolModules()
+    }
+
+    async loadWxSchoolModules(){
+        const currentSchoolInfo = this.currentSchoolInfo
+        const schoolId = currentSchoolInfo.schoolId
+        let data = await getWxSchoolSystem({schoolId})
+        data = data.filter((item:any)=>item.hasWxApplet == 1)
         this.setState({data})
     }
 
-    handChangeSysData(moduleInfo: any, moduleIndex: number, index: number) {
-        let data = this.state.data
-        data[index].wxSchoolSystemModuleList[moduleIndex].moduleState = moduleInfo.moduleState ? 1 : 0
 
-        this.setState({data: [...data]})
+    async handChangeSysData(moduleInfo: any, moduleIndex: number, index: number) {
+        let data = this.state.data
+        console.log(moduleInfo)
+        try{
+            Pops.showLoading('请稍后')
+            const result:any = await putWxSchoolModule({
+                id: moduleInfo.id,
+                appId: moduleInfo.appId,
+                appUrl: moduleInfo.appUrl,
+                moduleState: moduleInfo.moduleState ? 1 : 0
+            })
+            Pops.hideLoading()
+            if(result.error == 0 && result.data && result.data.success){
+                Pops.showSuccess('操作成功')
+                data[index].wxSchoolSystemModuleList[moduleIndex].moduleState = moduleInfo.moduleState ? 1 : 0
+                this.setState({data: [...data]})
+            }else{
+                throw new Error(result.data && result.data.msg || '操作失败')
+            }
+
+
+        }catch (err:any){
+            Pops.hideLoading()
+            Pops.showError(err.message)
+            data[index].wxSchoolSystemModuleList[moduleIndex].moduleState = moduleInfo.moduleState ? 0 : 1
+            this.setState({data: [...data]})
+        }
     }
 
     openIndexChange(activeNames: string) {
@@ -87,6 +132,65 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
     systemSearch() {
 
     }
+    //仅同步系统
+    synSchoolSystem(){
+        const currentSchoolInfo = this.currentSchoolInfo
+        const schoolId = currentSchoolInfo.schoolId
+        Pops.showLoading('同步中')
+        synSchoolSystem({schoolId}).then((res:any)=>{
+            Pops.hideLoading()
+            if(res.error == 0){
+                Pops.showSuccess('同步成功')
+                this.loadWxSchoolModules()
+            }else{
+                Pops.showError('同步失败')
+            }
+        }).catch(_=>{
+            Pops.showError('同步失败')
+        })
+    }
+    //仅同步模块
+    syncSchoolModules(){
+        const currentSchoolInfo = this.currentSchoolInfo
+        const schoolId = currentSchoolInfo.schoolId
+        Pops.showLoading('同步中')
+        synSchoolSystemModule({schoolId}).then((res:any)=>{
+            Pops.hideLoading()
+            if(res.error == 0){
+                Pops.showSuccess('同步成功')
+                this.loadWxSchoolModules()
+            }else{
+                Pops.showError('同步失败')
+            }
+        }).catch(_=>{
+            Pops.showError('同步失败')
+        })
+    }
+    //同步系统和模块
+    synSchoolSystemAndModule(){
+        const currentSchoolInfo = this.currentSchoolInfo
+        const schoolId = currentSchoolInfo.schoolId
+        Pops.showLoading('同步中')
+        synSchoolSystemAndModule({schoolId}).then((res:any)=>{
+            Pops.hideLoading()
+            if(res.error == 0){
+                Pops.showSuccess('同步成功')
+                this.loadWxSchoolModules()
+            }else{
+                Pops.showError('同步失败')
+            }
+        }).catch(_=>{
+            Pops.showError('同步失败')
+        })
+    }
+
+    openSystemPop(systemInfo: any){
+
+    }
+
+    openModulePop(moduleInfo:any){
+
+    }
 
     render() {
         const widthsMatch = Index.WIDTH_MATCHES
@@ -97,6 +201,9 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
                     <div className="left common-page-header-total">
                         共{this.state.data.length}个系统
                     </div>
+                    <div className="right common-btn common-btn-green school-sync-btn" onClick={this.synSchoolSystemAndModule}>同步系统及模块</div>
+                    <div className="right common-btn common-btn-green school-sync-btn" onClick={this.syncSchoolModules}>仅同步模块</div>
+                    <div className="right common-btn common-btn-green school-sync-btn" onClick={this.synSchoolSystem}>仅同步系统</div>
                     <div className="right header-seach-wrap">
                         <Search
                             value={this.state.systemSearch}
@@ -127,13 +234,26 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
                                             <LgTd width={widthsMatch.lockState}>{o.lockState}</LgTd>
                                             <LgTd width={widthsMatch.systemState}>{o.systemState}</LgTd>
                                             <LgTd width={widthsMatch.version}>{o.version}</LgTd>
-                                            <LgTd width={widthsMatch.handles}>编辑</LgTd>
+                                            <LgTd className="flex-center" width={widthsMatch.handles}>
+                                                <LgButton
+                                                    className=""
+                                                    value={""}
+                                                    shapeType="text"
+                                                    showIcon
+                                                    icon={<Edit style={{fill: "#0099ff"}}/>}
+                                                    onClick={() => {
+                                                        this.openSystemPop(o)
+                                                    }}
+                                                />
+                                            </LgTd>
                                         </LgTr>
                                     )
                                     const moduleLists: IModuleInfo[] = o.wxSchoolSystemModuleList || []
                                     return moduleLists.length ? (
                                         <Collapse.Item title={LgTrDom} key={`collapse-${i}`} name={i + ''}>
-                                            <ModuleLists data={moduleLists} handChangeSysData={
+                                            <ModuleLists data={moduleLists}
+                                                         openModulePop={this.openModulePop}
+                                                         handChangeSysData={
                                                 (moduleInfo, moduleIndex) => {
                                                     this.handChangeSysData(moduleInfo, moduleIndex, i)
                                                 }}/>
@@ -151,7 +271,7 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
 
 interface IModuleListsProps {
     data: Array<IModuleInfo>
-
+    openModulePop(moduleInfo: any): void
     handChangeSysData?(moduleInfo: any, moduleIndex: number): void
 }
 
@@ -204,9 +324,10 @@ class ModuleLists extends Component<IModuleListsProps, IModuleListsState> {
                 }
                 {
                     this.props.data.map((o: any, i: number) => {
+                        const hasWeapp = !!o.appId
                         return (
                             <LgTr key={`module-list-${i}`}>
-                                <LgTd width={widthsMatch.moduleId}>{o.moduleId}</LgTd>
+                                <LgTd width={widthsMatch.moduleId}>{o.moduleId || '-'}</LgTd>
                                 <LgTd width={widthsMatch.moduleName}>{o.moduleName}</LgTd>
                                 <LgTd width={widthsMatch.belongAdmin}>
                                     {_concatIdentityStr(o)}
@@ -214,13 +335,28 @@ class ModuleLists extends Component<IModuleListsProps, IModuleListsState> {
                                 <LgTd width={widthsMatch.appId}>{o.appId || '-'}</LgTd>
                                 <LgTd width={widthsMatch.appUrl}>{o.appUrl || '-'}</LgTd>
                                 <LgTd className="flex-row-center" width={widthsMatch.moduleState}>
-                                    <LgSwitch size="small" disabled={o.moduleState === 2} checked={o.moduleState === 1}
-                                              onClick={(checked) => this.handWxState(i, checked)}/>
+                                    {
+                                        hasWeapp ? (
+                                            <LgSwitch size="small" disabled={o.moduleState === 2} checked={o.moduleState === 1}
+                                                      onClick={(checked) => this.handWxState(i, checked)}/>
+                                        ) : '-'
+                                    }
                                 </LgTd>
                                 <LgTd className="flex-row-center" width={widthsMatch.mobileAppState}>
-                                    <LgSwitch size="small" disabled={true} checked={!!o.mobileAppState}/>
+                                    { !!o.mobileAppState ? '开':'关' }
                                 </LgTd>
-                                <LgTd width={widthsMatch.handles}>编辑</LgTd>
+                                <LgTd className="flex-center" width={widthsMatch.handles}>
+                                    <LgButton
+                                        className=""
+                                        value={""}
+                                        shapeType="text"
+                                        showIcon
+                                        icon={<Edit className="" style={{fill: "#0099ff"}}/>}
+                                        onClick={() => {
+                                            this.props.openModulePop(o)
+                                        }}
+                                    />
+                                </LgTd>
                             </LgTr>
                         )
                     })

@@ -4,7 +4,7 @@ import {Search} from "@/components/search";
 import {LgTable, TableColumn} from "@/components/table";
 import {LgTd, LgTh, LgTr} from "@/components/miniCampusTb";
 import {Scrollbars} from 'react-custom-scrollbars-2';
-import {addWeapp, getWeapp, putWeapp} from "../../network/http";
+import {addModule, addWeapp, delModules, delWeapp, getWeapp, putModule, putWeapp} from "../../network/http";
 import {LgPopLayer} from "@/components/popLayer";
 import {RouteComponentProps} from "react-router-dom";
 import {ISystemInfo, ISystemInsideInfo, SysyemStates} from "@/views/weappMg/model";
@@ -18,6 +18,8 @@ import {defaultProps} from "@/views/weappMg/pops/weappPop/model";
 import {defaultInsideWeappProps} from "@/views/weappMg/pops/insertWeappPop/model";
 import {lgAlert} from "@/components/alert";
 import {InsertWeappPop} from "@/views/weappMg/pops/insertWeappPop";
+import Pops from "../../utils/pops";
+import {_concatIdentityFromType, _handleHttpResponse} from "../../utils/common";
 
 interface IWeappMgState {
     selectedState: number | ''
@@ -166,17 +168,24 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
     }
 
     async systemPopDidConfirm() {
-        console.log(this.openWeappPopType)
-        console.log(this.weappPopRef.getWeappHttpData())
+        Pops.showLoading()
         const httpData = this.weappPopRef.getWeappHttpData()
+        Pops.hideLoading()
         if (this.openWeappPopType === 0) {//添加
             const resData = await addWeapp(httpData)
-            lgAlert.show({tipType: 'success', content: "添加成功！", position: {xAxis: 'center', yAxis: 'center'}})
-            this.loadWeappLists()
+            console.log(resData)
+            _handleHttpResponse(resData, ()=>{
+                Pops.showSuccess("添加成功！")
+                this.setState({ isOpenSystemPop:false})
+                this.loadWeappLists()
+            })
         } else {
             const resData = await putWeapp(httpData)
-            lgAlert.show({tipType: 'success', content: "编辑成功！", position: {xAxis: 'center', yAxis: 'center'}})
-            this.loadWeappLists()
+            _handleHttpResponse(resData, ()=>{
+                Pops.showSuccess("编辑成功！")
+                this.loadWeappLists()
+                this.setState({ isOpenSystemPop:false})
+            })
         }
     }
 
@@ -198,13 +207,29 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
         this.setState({isOpenInsertSystemPop: false})
     }
 
-    insertWeappPopDidConfirm() {
-        console.log(this.openInsertWeappPopType)
-        console.log(this.insertWeappPopRef.getHttpData())
-        // const httpData = this.weappPopRef.getWeappHttpData()
+    async insertWeappPopDidConfirm() {
+        Pops.showLoading()
+        const httpData = this.insertWeappPopRef.getHttpData()
+        Pops.hideLoading()
+        if (this.openInsertWeappPopType === 0) {//添加
+            const resData = await addModule(httpData)
+            _handleHttpResponse(resData, ()=>{
+                Pops.showSuccess('添加成功！')
+                this.setState({ isOpenSystemPop:false, isOpenInsertSystemPop:false})
+                this.loadWeappLists()
+            })
+        } else {
+            const resData = await putModule(httpData)
+            _handleHttpResponse(resData, ()=>{
+                Pops.showSuccess('编辑成功！')
+                this.setState({ isOpenSystemPop:false, isOpenInsertSystemPop:false})
+                this.loadWeappLists()
+            })
+        }
     }
 
     delWeappPop(data: any) {
+        const that = this
         lgAlert.show({
             content: '是否确认删除该小程序？',
             tipType: 'warning',
@@ -212,11 +237,22 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
             tipMouldType: 'A',
             duration: 0,
             isShowCloseBtn: true,
-            position: {xAxis: "center", yAxis: "center"}
+            position: {xAxis: "center", yAxis: "center"},
+            onConfirm() {
+                const delIds = {ids:[data.id].join(',')}
+                delWeapp(delIds).then(resData=>{
+                    _handleHttpResponse(resData, ()=>{
+                        Pops.showSuccess('删除成功')
+                        that.setState({ isOpenSystemPop:false, isOpenInsertSystemPop:false})
+                        that.loadWeappLists()
+                    })
+                })
+            }
         });
     }
 
-    delInsideWeapp(data: any) {
+    async delInsideWeapp(data: any) {
+        const that = this
         lgAlert.show({
             content: '是否确认删除该内置模块？',
             tipType: 'warning',
@@ -224,9 +260,20 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
             tipMouldType: 'A',
             duration: 0,
             isShowCloseBtn: true,
-            position: {xAxis: "center", yAxis: "center"}
+            position: {xAxis: "center", yAxis: "center"},
+            onConfirm() {
+                const delIds = {ids:[data.id].join(',')}
+                delModules(delIds).then(resData=>{
+                    _handleHttpResponse(resData, ()=>{
+                        Pops.showSuccess('删除成功')
+                        that.setState({ isOpenSystemPop:false, isOpenInsertSystemPop:false})
+                        that.loadWeappLists()
+                    })
+                })
+            }
         });
     }
+
     //insert弹窗-结束
     render() {
         const widthsMatch = Index.WIDTH_MATCHES
@@ -281,8 +328,8 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
                                             <LgTd className="flex-center" width={widthsMatch.handles}>
                                                 <i className="el-icon-plus system-list-add"
                                                    onClick={() => {
-                                                    this.openInsideWeappPop(0, {}, o)
-                                                }}/>
+                                                       this.openInsideWeappPop(0, {}, o)
+                                                   }}/>
                                                 <LgButton
                                                     className=""
                                                     value={""}
@@ -403,7 +450,7 @@ class ModuleLists extends Component<IModuleListsProps, IModuleListsState> {
                                 <LgTd width={widthsMatch.defaultVersion}>{o.defaultVersion}</LgTd>
                                 <LgTd width={widthsMatch.defaultAppUrl}>{o.defaultAppUrl}</LgTd>
                                 <LgTd width={widthsMatch.schoolType}>{o.schoolType}</LgTd>
-                                <LgTd width={widthsMatch.belong}>{o.belong}</LgTd>
+                                <LgTd width={widthsMatch.belong}>{_concatIdentityFromType(o)}</LgTd>
 
                                 <LgTd className="flex-center" width={widthsMatch.handles}>
                                     <LgButton

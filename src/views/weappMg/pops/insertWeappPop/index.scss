@@ -63,22 +63,27 @@ $classNamePrefix: lg-insert-weapp-pop;
       }
 
       &-identity {
-        width: 150px;
+        width: 100px;
       }
 
       &-type {
-        width: 150px;
+        width: 100px;
         margin-left: 10px;
       }
 
       &-name {
-        width: 170px;
+        width: 150px;
         margin-left: 10px;
       }
 
       &-des {
         margin-left: 10px;
-        width: 250px;
+        width: 200px;
+      }
+
+      &-url {
+        margin-left: 10px;
+        width: 200px;
       }
     }
     &-add{
