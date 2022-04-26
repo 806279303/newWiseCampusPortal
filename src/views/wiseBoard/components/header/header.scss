@@ -1,0 +1,25 @@
+@import "src/css/common";
+
+$classNamePrefix: lg-header;
+
+.#{$classNamePrefix}-root {
+  display: flex;
+  justify-content: space-between;
+  .#{$classNamePrefix}-left {
+    display: flex;
+    align-items: center;
+    &-tip {
+      margin-left: 16px;
+      font-size: 14px;
+      color: #999;
+
+      &-total-school {
+        color: #f00;
+      }
+    }
+  }
+
+  .#{$classNamePrefix}-right {
+
+  }
+}

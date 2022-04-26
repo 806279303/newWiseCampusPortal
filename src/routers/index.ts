@@ -36,7 +36,7 @@ const Routers: RouterType[] = ([
         root: []
     },{
         path: RouterPath.WISEBOARD,
-        component: lazy(() => import('../views/wiseBoard')),
+        component: lazy(() => import('@/views/wiseBoard')),
         root: []
     },{
         path: RouterPath.LOG_MANAGEMENT,
