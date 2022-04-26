@@ -43,8 +43,8 @@ interface CascaderProps {
 interface CascaderState { }
 
 export class LgCascader extends BaseComponent<CascaderProps, CascaderState> {
-    constructor(props: CascaderProps | Readonly<CascaderProps>) {
-        super(props);
+    constructor(props: CascaderProps | Readonly<CascaderProps>, context: any) {
+        super(props, context);
     }
 
     handleChange(key: any, value: any) {
@@ -62,5 +62,8 @@ export class LgCascader extends BaseComponent<CascaderProps, CascaderState> {
         )
     }
 
+    getClassNamePrefix(): string {
+      return "LgCascader";
+    }
 }
 

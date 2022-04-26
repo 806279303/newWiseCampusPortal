@@ -15,8 +15,8 @@ export class DemoView extends BaseComponent<DemoViewProps> {
 
   private readonly classNamePrefix: string
 
-  constructor(props: (DemoViewProps & BaseProps) | Readonly<DemoViewProps & BaseProps>) {
-    super(props);
+  constructor(props: (DemoViewProps & BaseProps) | Readonly<DemoViewProps & BaseProps>, context: any) {
+    super(props, context);
     this.classNamePrefix = "lg-demo-view"
   }
 
@@ -45,5 +45,9 @@ export class DemoView extends BaseComponent<DemoViewProps> {
         }
       </div>
     )
+  }
+
+  getClassNamePrefix(): string {
+    return "DemoView";
   }
 }

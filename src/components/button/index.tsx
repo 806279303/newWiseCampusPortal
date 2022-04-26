@@ -49,10 +49,12 @@ export interface ButtonProps extends BaseProps {
 }
 interface ButtonState { }
 export class LgButton extends BaseComponent<ButtonProps, ButtonState> {
-    constructor(props: any) {
-        super(props)
+
+    constructor(props: (ButtonProps & BaseProps) | Readonly<ButtonProps & BaseProps>, context: any) {
+        super(props, context);
         this.onClick = this.onClick.bind(this)
     }
+
     // 修改默认值
     static defaultProps = {
         type: 'default', //描述:按钮显示的类型(支持文字按钮) | 是否必填:false | 默认值: default |
@@ -120,5 +122,9 @@ export class LgButton extends BaseComponent<ButtonProps, ButtonState> {
                 </div>
             </div>
         )
+    }
+
+    getClassNamePrefix(): string {
+      return "LgButton";
     }
 }

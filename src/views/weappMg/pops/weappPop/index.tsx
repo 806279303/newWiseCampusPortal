@@ -20,13 +20,12 @@ import {uploadLogoUrl} from "../../../../network/apiURL";
 
 class WeappPop extends BaseComponent<SystemPopProps, SystemPopState> {
     static defaultProps = defaultProps
-    private readonly CNP: string//$classNamePrefix
     private static readonly WIDTH_MATCHES = WIDTH_MATCHES
     private openInsertWeappPopType: number
     public insideWeappPopRef: any = React.createRef()
 
-    constructor(props: SystemPopProps) {
-        super(props);
+    constructor(props: SystemPopProps, context: any) {
+        super(props, context);
         const widthsMatch = WeappPop.WIDTH_MATCHES
         this.state = {
             weappStates: [{
@@ -53,7 +52,6 @@ class WeappPop extends BaseComponent<SystemPopProps, SystemPopState> {
             isOpenInsertSystemPop: false,
             insertWeappData: {}
         }
-        this.CNP = "lg-system-pop"
         this.openInsertWeappPopType = 0
         this.props.onRef && this.props.onRef(this)
         this.onChange = this.onChange.bind(this);
@@ -235,6 +233,10 @@ class WeappPop extends BaseComponent<SystemPopProps, SystemPopState> {
             </div>
         );
     }
+
+    getClassNamePrefix(): string {
+      return "WeappPop";
+    }
 }
 
 interface CommonPopCellProps {
@@ -242,8 +244,8 @@ interface CommonPopCellProps {
 }
 
 class CommonPopCell extends BaseComponent<CommonPopCellProps> {
-    constructor(props: CommonPopCellProps) {
-        super(props);
+    constructor(props: CommonPopCellProps, context: any) {
+        super(props, context);
     }
 
     render() {
@@ -255,6 +257,10 @@ class CommonPopCell extends BaseComponent<CommonPopCellProps> {
                 </div>
             </div>
         );
+    }
+
+    getClassNamePrefix(): string {
+      return "CommonPopCell";
     }
 }
 

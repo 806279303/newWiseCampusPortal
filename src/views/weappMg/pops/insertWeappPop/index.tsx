@@ -14,9 +14,8 @@ import {uploadImgTypes} from "@/views/weappMg/pops/weappPop/model";
 import {lgAlert} from "@/components/alert";
 
 export class InsertWeappPop extends BaseComponent<insideWeappPopProps, insideWeappPopState> {
-    public CNP: string//$classNamePrefix
-    constructor(props: insideWeappPopProps) {
-        super(props);
+    constructor(props: insideWeappPopProps, context: any) {
+        super(props, context);
         this.state = {
             schoolTypes: [{
                 value: 2,
@@ -30,7 +29,6 @@ export class InsertWeappPop extends BaseComponent<insideWeappPopProps, insideWea
             }],
             data: {}
         }
-        this.CNP = "lg-insert-weapp-pop"
         this.onChange = this.onChange.bind(this);
         this.getHttpData = this.getHttpData.bind(this);
         this.addIdentity = this.addIdentity.bind(this);
@@ -188,6 +186,10 @@ export class InsertWeappPop extends BaseComponent<insideWeappPopProps, insideWea
             </div>
         );
     }
+
+    getClassNamePrefix(): string {
+      return "InsertWeappPop";
+    }
 }
 
 interface IdentityCellProps {
@@ -273,8 +275,8 @@ interface CommonPopCellProps {
 }
 
 class CommonPopCell extends BaseComponent<CommonPopCellProps> {
-    constructor(props: CommonPopCellProps) {
-        super(props);
+    constructor(props: CommonPopCellProps, context: any) {
+        super(props, context);
     }
 
     render() {
@@ -286,5 +288,9 @@ class CommonPopCell extends BaseComponent<CommonPopCellProps> {
                 </div>
             </div>
         );
+    }
+
+    getClassNamePrefix(): string {
+      return "CommonPopCell";
     }
 }

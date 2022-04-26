@@ -60,6 +60,10 @@ export class LgLoadingA extends BaseComponent<LgLoadingAProps> {
       </div>
     )
   }
+
+  getClassNamePrefix(): string {
+    return "LgLoadingA";
+  }
 }
 
 export interface LgLoadingBProps {
@@ -77,8 +81,8 @@ export class LgLoadingB extends BaseComponent<LgLoadingBProps> {
   private readonly currentId: number
 
 
-  constructor(props: LgLoadingBProps & BaseComponent) {
-    super(props);
+  constructor(props: LgLoadingBProps & BaseComponent, context: any) {
+    super(props, context);
     this.currentId = loadingId++
   }
 
@@ -135,6 +139,10 @@ export class LgLoadingB extends BaseComponent<LgLoadingBProps> {
         }
       </div>
     )
+  }
+
+  getClassNamePrefix(): string {
+    return "LgLoadingB";
   }
 }
 
@@ -204,6 +212,10 @@ export class LgProgress extends BaseComponent<LgProgressProps> {
       return 100
     }
     return this.props.percentage;
+  }
+
+  getClassNamePrefix(): string {
+    return "LgProgress";
   }
 }
 

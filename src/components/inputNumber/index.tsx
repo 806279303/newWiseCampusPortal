@@ -26,8 +26,8 @@ export const LgInputNumber = (props: LgInputNumberProps) => {
     return <LgInput {...props} />
 }
 export class LgInput extends BaseComponent<LgInputNumberProps,LgInputNumberState> { 
-    constructor(props: LgInputNumberProps) {
-        super(props)
+    constructor(props: LgInputNumberProps, context: any) {
+        super(props, context)
         let tempValue = this.props.value || Number(this.props.min) || 1
         if (tempValue < Number(this.props.min)) {
             tempValue = Number(this.props.min)
@@ -188,5 +188,9 @@ export class LgInput extends BaseComponent<LgInputNumberProps,LgInputNumberState
                 </div>                
             </div>
         )
+    }
+
+    getClassNamePrefix(): string {
+      return "LgInput";
     }
 }

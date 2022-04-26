@@ -77,8 +77,8 @@ export interface ILgTrProps {
 //     }
 // }
 export class LgTr extends BaseComponent<ILgTrProps, {}> {
-    constructor(props:ILgTrProps) {
-        super(props);
+    constructor(props:ILgTrProps, context: any) {
+        super(props, context);
         this.handClick = this.handClick.bind(this);
     }
     handClick(){
@@ -93,6 +93,10 @@ export class LgTr extends BaseComponent<ILgTrProps, {}> {
             </div>
         );
     }
+
+    getClassNamePrefix(): string {
+      return "LgTr";
+    }
 }
 
 export interface ILgTdProps {
@@ -101,8 +105,8 @@ export interface ILgTdProps {
 }
 
 export class LgTd extends BaseComponent<ILgTdProps, {}> {
-    constructor(props:ILgTdProps) {
-        super(props);
+    constructor(props:ILgTdProps, context: any) {
+        super(props, context);
         this.handClick = this.handClick.bind(this);
     }
     handClick(){
@@ -115,6 +119,10 @@ export class LgTd extends BaseComponent<ILgTdProps, {}> {
                 {this.props.children}
             </div>
         );
+    }
+
+    getClassNamePrefix(): string {
+      return "LgTd";
     }
 }
 

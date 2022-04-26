@@ -33,8 +33,8 @@ export class LgSwitch extends BaseComponent<LgSwitchProps> {
     }
   }
 
-  constructor(props: (LgSwitchProps & BaseProps) | Readonly<LgSwitchProps & BaseProps>) {
-    super(props);
+  constructor(props: (LgSwitchProps & BaseProps) | Readonly<LgSwitchProps & BaseProps>, context: any) {
+    super(props, context);
     this.classNamePrefix = "lg-switch"
     this.onClick = this.onClick.bind(this)
   }
@@ -76,5 +76,9 @@ export class LgSwitch extends BaseComponent<LgSwitchProps> {
         <div className={`${this.classNamePrefix}-children`}>{children}</div>
       </div>
     )
+  }
+
+  getClassNamePrefix(): string {
+    return "LgSwitch";
   }
 }

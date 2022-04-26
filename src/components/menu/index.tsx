@@ -32,6 +32,9 @@ export class LgItemClass extends BaseComponent<MenuItemProps, {}>{
             </Menu.Item>
         )
     }
+    getClassNamePrefix(): string {
+      return "LgItemClass";
+    }
 }
 export class LgSubMenuClass extends BaseComponent<SubMenuProps, {}>{
     render() {
@@ -43,6 +46,10 @@ export class LgSubMenuClass extends BaseComponent<SubMenuProps, {}>{
             </Menu.SubMenu>
         )
     }
+
+    getClassNamePrefix(): string {
+      return "LgSubMenuClass";
+    }
 }
 export class LgItemGroupClass extends BaseComponent<MenuItemGroupProps, {}>{
     render() {
@@ -53,6 +60,10 @@ export class LgItemGroupClass extends BaseComponent<MenuItemGroupProps, {}>{
                 }
             </Menu.ItemGroup>
         )
+    }
+
+    getClassNamePrefix(): string {
+      return "LgItemGroupClass";
     }
 }
 
@@ -77,8 +88,8 @@ export class LgMenu extends BaseComponent<IMenu & MenuProps> {
         type: "A"
     }
 
-    constructor(props: (IMenu & BaseProps) | Readonly<IMenu & BaseProps>) {
-        super(props)
+    constructor(props: (IMenu & BaseProps) | Readonly<IMenu & BaseProps>, context: any) {
+        super(props, context)
     }
 
     onSelect() {
@@ -105,5 +116,9 @@ export class LgMenu extends BaseComponent<IMenu & MenuProps> {
                 </Menu>
             </div>
         )
+    }
+
+    getClassNamePrefix(): string {
+      return "LgMenu";
     }
 }

@@ -42,8 +42,8 @@ export class LgTagA extends BaseComponent<LgTagAProps>{
   static defaultProps: LgTagAProps = {
   }
 
-  constructor(props: (LgTagAProps & BaseProps) | Readonly<LgTagAProps & BaseProps>) {
-    super(props);
+  constructor(props: (LgTagAProps & BaseProps) | Readonly<LgTagAProps & BaseProps>, context: any) {
+    super(props, context);
     this.classNamePrefix = "lg-tag-a"
   }
 
@@ -63,6 +63,10 @@ export class LgTagA extends BaseComponent<LgTagAProps>{
         }
       </span>
     )
+  }
+
+  getClassNamePrefix(): string {
+    return "LgTagA";
   }
 }
 
@@ -88,8 +92,8 @@ export class LgTagB extends BaseComponent<LgTagBProps>{
   }
 
 
-  constructor(props: (LgTagBProps & BaseProps) | Readonly<LgTagBProps & BaseProps>) {
-    super(props);
+  constructor(props: (LgTagBProps & BaseProps) | Readonly<LgTagBProps & BaseProps>, context: any) {
+    super(props, context);
     this.classNamePrefix = "lg-tag-b"
   }
 
@@ -121,6 +125,10 @@ export class LgTagB extends BaseComponent<LgTagBProps>{
       </span>
     )
   }
+
+  getClassNamePrefix(): string {
+    return "LgTagB";
+  }
 }
 
 
@@ -146,8 +154,8 @@ export class LgTagC extends BaseComponent<LgTagCProps>{
     baseSize: 100
   }
 
-  constructor(props: (LgTagCProps & BaseProps) | Readonly<LgTagCProps & BaseProps>) {
-    super(props);
+  constructor(props: (LgTagCProps & BaseProps) | Readonly<LgTagCProps & BaseProps>, context: any) {
+    super(props, context);
     this.classNamePrefix = "lg-tag-c"
   }
 
@@ -183,6 +191,10 @@ export class LgTagC extends BaseComponent<LgTagCProps>{
       </span>
     )
   }
+
+  getClassNamePrefix(): string {
+    return "LgTagC";
+  }
 }
 
 
@@ -200,8 +212,8 @@ export class LgTagD extends BaseComponent<LgTabDProps>{
     baseSize: 84
   }
 
-  constructor(props: (LgTabDProps & BaseProps) | Readonly<LgTabDProps & BaseProps>) {
-    super(props);
+  constructor(props: (LgTabDProps & BaseProps) | Readonly<LgTabDProps & BaseProps>, context: any) {
+    super(props, context);
     this.classNamePrefix = "lg-tag-d"
   }
 
@@ -236,5 +248,9 @@ export class LgTagD extends BaseComponent<LgTabDProps>{
         <span className={`${this.classNamePrefix}-text`} style={{fontSize: `${fontSize}px`, top: `${top}px`}}>{text}</span>
       </span>
     )
+  }
+
+  getClassNamePrefix(): string {
+    return "LgTagD";
   }
 }

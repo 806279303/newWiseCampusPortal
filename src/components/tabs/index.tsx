@@ -35,14 +35,18 @@ export class LgPaneClass extends BaseComponent<TabsPaneProps, {}>{
             </Tabs.Pane>
         )
     }
+
+    getClassNamePrefix(): string {
+      return "LgPaneClass";
+    }
 }
 export class LgTabs extends BaseComponent<TabsProps> {
 
     static readonly LgPane = LgPaneClass
 
 
-    constructor(props: TabsProps) {
-        super(props)
+    constructor(props: TabsProps, context: any) {
+        super(props, context)
     }
 
     onSelect() {
@@ -68,5 +72,9 @@ export class LgTabs extends BaseComponent<TabsProps> {
                 </Tabs>
             </div>
         )
+    }
+
+    getClassNamePrefix(): string {
+      return "LgTabs";
     }
 }

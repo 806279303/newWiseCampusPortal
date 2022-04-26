@@ -27,8 +27,8 @@ interface RateProps {
 export class LgRate extends BaseComponent<RateProps> {
 
 
-    constructor(props: RateProps) {
-        super(props)
+    constructor(props: RateProps, context: any) {
+        super(props, context)
     }
 
     onSelect() {
@@ -54,5 +54,9 @@ export class LgRate extends BaseComponent<RateProps> {
                 </Rate>
             </div>
         )
+    }
+
+    getClassNamePrefix(): string {
+      return "LgRate";
     }
 }

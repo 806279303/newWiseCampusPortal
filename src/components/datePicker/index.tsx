@@ -9,8 +9,8 @@ export interface LgDatePickerProps extends DatePickerProps, TimeSelectProps{
 
 export class LgDatePicker extends BaseComponent<LgDatePickerProps> {
 
-  constructor(props: LgDatePickerProps & BaseProps) {
-    super(props);
+  constructor(props: LgDatePickerProps & BaseProps, context: any) {
+    super(props, context);
   }
 
   componentDidMount() {
@@ -29,6 +29,10 @@ export class LgDatePicker extends BaseComponent<LgDatePickerProps> {
     }
 
     return <DatePicker ref={e => this.props.onRef && this.props.onRef(e)} {...(this.props as any)}/>
+  }
+
+  getClassNamePrefix(): string {
+    return "LgDatePicker";
   }
 }
 

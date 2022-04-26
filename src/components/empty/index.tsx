@@ -20,8 +20,8 @@ export class LgEmpty extends BaseComponent<LgEmptyProps> {
     icon: "icon-1"
   }
 
-  constructor(props: (LgEmptyProps & BaseProps) | Readonly<LgEmptyProps & BaseProps>) {
-    super(props);
+  constructor(props: (LgEmptyProps & BaseProps) | Readonly<LgEmptyProps & BaseProps>, context: any) {
+    super(props, context);
     this.classNamePrefix = "lg-empty"
   }
 
@@ -58,5 +58,9 @@ export class LgEmpty extends BaseComponent<LgEmptyProps> {
         <div className={`${this.classNamePrefix}-tip`}>{this.props.tip}</div>
       </div>
     );
+  }
+
+  getClassNamePrefix(): string {
+    return "LgEmpty";
   }
 }

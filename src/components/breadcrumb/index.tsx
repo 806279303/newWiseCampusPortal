@@ -63,6 +63,10 @@ class LgBreadcrumbA extends BaseComponent<LgBreadcrumbCommonProps> {
       </div>
     );
   }
+
+  getClassNamePrefix(): string {
+    return "LgBreadcrumbA";
+  }
 }
 
 class LgBreadcrumbB extends BaseComponent<LgBreadcrumbCommonProps> {
@@ -97,5 +101,9 @@ class LgBreadcrumbB extends BaseComponent<LgBreadcrumbCommonProps> {
         </div>
       </div>
     );
+  }
+
+  getClassNamePrefix(): string {
+    return "LgBreadcrumbB";
   }
 }
