@@ -1,9 +1,6 @@
 $sideBarWidth: 200;
 .side-bar {
   width: #{$sideBarWidth}px;
-  position: absolute;
-  left: 0;
-  top: 0;
   box-sizing: border-box;
   height: 100%;
   z-index: 99;

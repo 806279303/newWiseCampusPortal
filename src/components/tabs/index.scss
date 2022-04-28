@@ -6,7 +6,7 @@
 }
 
 .lg_tabs_block {
-    margin-bottom: 50px;
+    //margin-bottom: 50px;
 }
 
 .el-tabs__item.is-active {
@@ -20,8 +20,12 @@
 .el-tabs--border-card>.el-tabs__header {
     background-color: transparentize($color_s2, $amount: 0.95);
 }
-.el-tabs__content{
 
+.el-tabs__header{
+    margin: 0;
+}
+
+.el-tabs__content{
 }
 @each $skin,
 $color,

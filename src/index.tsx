@@ -7,7 +7,9 @@ import App from './App'
 import {HashRouter, Route, Switch} from 'react-router-dom'
 import store from './redux/store'
 import {Provider} from "react-redux";
+import {getCurrentSkinName, setGlobalSKin} from "./utils/skin";
 
+setGlobalSKin(getCurrentSkinName())
 
 ReactDOM.render(
     <Provider store={store}><HashRouter>
