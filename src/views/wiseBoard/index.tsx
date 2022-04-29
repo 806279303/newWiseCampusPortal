@@ -13,7 +13,8 @@ class WiseBoard extends BaseComponent {
             "abc": true,
             "efg": false
           })
-        }>table
+        }>
+          table
         </div>
       </MainContentView>
     );

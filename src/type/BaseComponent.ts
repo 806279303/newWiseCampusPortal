@@ -25,7 +25,7 @@ export abstract class BaseComponent<T = {}, S = {}, SS = any> extends Component<
     return classnames(`${this.CNP}-root`,
       {
         [`${this.props.className}`]: !!this.props.className
-      }, args)
+      }, this.class(args))
   }
 
   protected class(...args: Argument[]): string {
