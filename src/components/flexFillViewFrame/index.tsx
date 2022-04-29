@@ -7,6 +7,7 @@ export interface FlexFillViewFrameProps {
   flexStart?: ReactNode
   flexEnd?: ReactNode
   orientation?: "horizontal" | "vertical"
+  flexFillViewClassName?: string
 }
 
 export class FlexFillViewFrame extends BaseComponent<FlexFillViewFrameProps> {
@@ -24,7 +25,7 @@ export class FlexFillViewFrame extends BaseComponent<FlexFillViewFrameProps> {
         {
           this.props.flexStart
         }
-        <FlexFillView>
+        <FlexFillView className={this.props.flexFillViewClassName}>
           {
             this.props.children
           }

@@ -1,11 +1,9 @@
 @import "src/css/common";
 
-$classNamePrefix: lg-header;
+$classNamePrefix: lg-wise-board-header;
 
 .#{$classNamePrefix}-root {
-  display: flex;
-  justify-content: space-between;
-  .#{$classNamePrefix}-left {
+  .#{$classNamePrefix}-left{
     display: flex;
     align-items: center;
     &-tip {
@@ -20,6 +18,10 @@ $classNamePrefix: lg-header;
   }
 
   .#{$classNamePrefix}-right {
-
+    display: flex;
+    align-items: center;
+    .#{$classNamePrefix}-search{
+      margin-right: 10px;
+    }
   }
 }

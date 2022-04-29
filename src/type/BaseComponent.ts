@@ -1,6 +1,7 @@
 import {Component} from "react";
 import {BaseProps} from "./BaseProps";
 import classnames, {Argument} from "classnames"
+import {paddingPrefix} from "../utils/classNameUtils";
 
 export abstract class BaseComponent<T = {}, S = {}, SS = any> extends Component<T & BaseProps, S, SS> {
   protected readonly CNP: string
@@ -27,8 +28,8 @@ export abstract class BaseComponent<T = {}, S = {}, SS = any> extends Component<
       }, args)
   }
 
-  protected class(postfix: string): string {
-    return `${this.CNP}-${postfix}`
+  protected class(...args: Argument[]): string {
+    return classnames(paddingPrefix(this.CNP, args))
   }
 
   protected classnames(...args: Argument[]): string {

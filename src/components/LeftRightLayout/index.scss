@@ -1,0 +1,13 @@
+$classNamePrefix: lg-left-right-layout;
+
+.#{$classNamePrefix}-root{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .#{$classNamePrefix}-left{
+
+  }
+  .#{$classNamePrefix}-right{
+
+  }
+}
