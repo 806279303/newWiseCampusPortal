@@ -15,15 +15,6 @@ class Index extends Component {
                     <LgTabs.LgPane label="用户管理" name="1"></LgTabs.LgPane>
                     <LgTabs.LgPane label="配置管理" name="2"></LgTabs.LgPane>
                     <LgTabs.LgPane label="角色管理" name="3"></LgTabs.LgPane>
-                    <LgTabs.LgPane label="定时补偿任务" name="4"></LgTabs.LgPane><LgTabs.LgPane label="用户管理" name="1"></LgTabs.LgPane>
-                    <LgTabs.LgPane label="配置管理" name="2"></LgTabs.LgPane>
-                    <LgTabs.LgPane label="角色管理" name="3"></LgTabs.LgPane>
-                    <LgTabs.LgPane label="定时补偿任务" name="4"></LgTabs.LgPane><LgTabs.LgPane label="用户管理" name="1"></LgTabs.LgPane>
-                    <LgTabs.LgPane label="配置管理" name="2"></LgTabs.LgPane>
-                    <LgTabs.LgPane label="角色管理" name="3"></LgTabs.LgPane>
-                    <LgTabs.LgPane label="定时补偿任务" name="4"></LgTabs.LgPane><LgTabs.LgPane label="用户管理" name="1"></LgTabs.LgPane>
-                    <LgTabs.LgPane label="配置管理" name="2"></LgTabs.LgPane>
-                    <LgTabs.LgPane label="角色管理" name="3"></LgTabs.LgPane>
                     <LgTabs.LgPane label="定时补偿任务" name="4"></LgTabs.LgPane>
                 </LgTabs>
             </div>

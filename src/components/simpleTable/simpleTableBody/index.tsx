@@ -1,5 +1,6 @@
 import "./index.scss"
 import {BaseComponent} from "../../../type/BaseComponent";
+import {Scrollbars} from 'react-custom-scrollbars-2';
 
 export interface SimpleTableBodyProps {
 }
@@ -11,9 +12,11 @@ export class SimpleTableBody extends BaseComponent<SimpleTableBodyProps, SimpleT
 
   render() {
     return (
-      <div className={this.rootClass()}>
-
-      </div>
+      <Scrollbars className={this.rootClass()}>
+        {
+          this.props.children
+        }
+      </Scrollbars>
     )
   }
 

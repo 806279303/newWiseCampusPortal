@@ -2,16 +2,17 @@ import {WiseBoardHeader} from "./components/header/header"
 import {BaseComponent} from "../../type/BaseComponent";
 import "./index.scss"
 import {MainContentView} from "@/components/MainContentView";
-import {SimpleTable} from "@/components/simpleTable";
+import {LgSimpleTable} from "@/components/simpleTable";
 
 
 class WiseBoard extends BaseComponent {
   render() {
+
     return (
       <MainContentView header={<WiseBoardHeader/>} footer={<div>paging</div>}>
-        <SimpleTable>
+        <LgSimpleTable>
 
-        </SimpleTable>
+        </LgSimpleTable>
       </MainContentView>
     );
   }

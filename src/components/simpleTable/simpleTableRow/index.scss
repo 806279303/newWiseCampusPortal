@@ -1,0 +1,9 @@
+$classNamePrefix: lg-simple-table-row;
+
+.#{$classNamePrefix}-root{
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  min-height: 40px;
+  border-bottom: 1px solid #f2f2f2;
+}

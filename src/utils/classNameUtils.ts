@@ -33,7 +33,6 @@ export function paddingPrefix(prefix: string, args: Argument[]): Argument[] {
       return newItem
     }
     if(isArguments(item)){
-      console.log(item, "array")
       return paddingPrefix(prefix, item as Argument[])
     }
     return null

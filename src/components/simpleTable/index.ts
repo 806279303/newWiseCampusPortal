@@ -1,3 +1,3 @@
-export * from "./SimpleTable"
+export * from "./LgSimpleTable"
 export * from "./simpleTableHeader"
 export * from "./simpleTableBody"

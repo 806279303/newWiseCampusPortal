@@ -1,5 +1,12 @@
 $classNamePrefix: lg-simple-table-header;
 
 .#{$classNamePrefix}-root{
+  display: flex;
+  flex-direction: column;
+  color: #999;
 
+  & .lg-simple-table-row-root{
+    background-color: #f7f7f7;
+    border-bottom: none;
+  }
 }

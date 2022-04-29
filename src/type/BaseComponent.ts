@@ -22,10 +22,10 @@ export abstract class BaseComponent<T = {}, S = {}, SS = any> extends Component<
   protected abstract getClassNamePrefix(): string;
 
   protected rootClass(...args: Argument[]): string {
-    return classnames(`${this.CNP}-root`,
+    return classnames(`${this.CNP}-root`,this.class(args),
       {
         [`${this.props.className}`]: !!this.props.className
-      }, this.class(args))
+      })
   }
 
   protected class(...args: Argument[]): string {

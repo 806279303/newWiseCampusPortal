@@ -1,0 +1,12 @@
+@import "src/css/mixin";
+
+$classNamePrefix: lg-simple-table-body;
+
+
+@include scrollStyle("." + $classNamePrefix + "-root")
+
+.#{$classNamePrefix}-root{
+  & .lg-simple-table-row-root{
+    min-height: 54px;
+  }
+}

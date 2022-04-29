@@ -1,13 +1,10 @@
 import "./index.scss"
 import {BaseComponent} from "../../../type/BaseComponent";
 
-export interface SimpleTableHeaderProps {
+export interface SimpleTableRowProps {
 }
 
-interface SimpleTableHeaderState {
-}
-
-export class SimpleTableHeader extends BaseComponent<SimpleTableHeaderProps, SimpleTableHeaderState> {
+export class SimpleTableRow extends BaseComponent<SimpleTableRowProps> {
 
   render() {
     return (
@@ -20,7 +17,7 @@ export class SimpleTableHeader extends BaseComponent<SimpleTableHeaderProps, Sim
   }
 
   getClassNamePrefix(): string {
-    return "SimpleTableHeader";
+    return "SimpleTableRow";
   }
 }
 
