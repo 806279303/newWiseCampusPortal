@@ -18,10 +18,8 @@ export class FlexFillViewFrame extends BaseComponent<FlexFillViewFrameProps> {
 
   render() {
 
-    const flexDirection = this.props.orientation === "horizontal"? "row": "column"
-
     return (
-      <div className={this.rootClass()} style={{flexDirection}}>
+      <div className={this.rootClass(this.props.orientation)}>
         {
           this.props.flexStart
         }

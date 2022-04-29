@@ -4,4 +4,10 @@ $classNamePrefix: lg-flex-fill-view-frame;
   display: flex;
   height: 100%;
   width: 100%;
+  &.#{$classNamePrefix}-horizontal{
+    flex-direction: row;
+  }
+  &.#{$classNamePrefix}-vertical{
+    flex-direction: column;
+  }
 }
