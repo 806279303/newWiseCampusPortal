@@ -125,3 +125,7 @@ export class LgSimpleTable<DataType extends LgSimpleTableData> extends BaseCompo
   }
 }
 
+export function createTableClass<T extends LgSimpleTableData>(){
+  return class newTable extends LgSimpleTable<T>{}
+}
+

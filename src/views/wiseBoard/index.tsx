@@ -2,44 +2,48 @@ import {WiseBoardHeader} from "./components/header/header"
 import {BaseComponent} from "../../type/BaseComponent";
 import "./index.scss"
 import {MainContentView} from "@/components/MainContentView";
-import {LgSimpleTable, LgSimpleTableData, LgSimpleTableDataDescribe} from "@/components/simpleTable";
-import { ReactNode } from "react";
-import { BaseProps } from "../../type/BaseProps";
+import {ReactNode} from "react";
+import {BaseProps} from "../../type/BaseProps";
+import {
+  WiseBoardData,
+  WiseBoardTable as WiseBoardTable1,
+  WiseBoardTable,
+  WiseBoardTableDataDescribe
+} from "@/views/wiseBoard/type";
+import {WiseBoardState} from "@/views/wiseBoard/wiseBoardState";
 
 
-interface WiseBoardData extends LgSimpleTableData{
-  schoolId: string,
-  schoolName: string,
-  useTime: string,
-  remainTime: string,
-  status: string,
-  createTime: string
-}
-
-
-
-class WiseBoard extends BaseComponent {
+class WiseBoard extends BaseComponent<{}, WiseBoardState> {
 
   constructor(props: BaseProps | Readonly<BaseProps>, context: any) {
     super(props, context);
     this.renderOperation = this.renderOperation.bind(this)
-  }
-
-
-  renderOperation(data: WiseBoardData): ReactNode {
-    return (
-      <LgSimpleTable.Column key={"operation"}>
-        <div className={this.class("operation")}>
-          <div className={this.class("recharge")} onClick={() => alert("充值:" + data.schoolId)}>充值</div>
-          <div className={this.class("split")} />
-          <div className={this.class("recharge-record")} onClick={() => alert("充值记录:" + data.schoolId)}>充值记录</div>
-        </div>
-      </LgSimpleTable.Column>
-    )
+    const dataArray: WiseBoardData[] = []
+    for (let i = 0; i < 10; i++) {
+      dataArray.push({
+        schoolId: "id-" + (i + 1),
+        schoolName: "蓝鸽中小学",
+        useTime: "100",
+        remainTime: "200",
+        status: "欠费",
+        createTime: "2010-02-01"
+      })
+    }
+    this.state = {
+      dataArray: dataArray
+    }
   }
 
   render() {
-    const dataDescribe: LgSimpleTableDataDescribe<WiseBoardData>[] = [
+    return (
+      <MainContentView className={this.rootClass()} header={<WiseBoardHeader/>} footer={<div>paging</div>}>
+        <WiseBoardTable dataDescribe={this.getDataDescribe()} dataArray={this.state.dataArray} />
+      </MainContentView>
+    );
+  }
+
+  private getDataDescribe() {
+    const dataDescribe: WiseBoardTableDataDescribe[] = [
       {
         isId: true,
         field: "schoolId",
@@ -72,24 +76,19 @@ class WiseBoard extends BaseComponent {
         render: this.renderOperation
       }
     ]
+    return dataDescribe;
+  }
 
-    const datas: WiseBoardData[] = []
-    for (let i = 0; i < 10; i++) {
-      datas.push({
-        schoolId: "id-" + (i + 1),
-        schoolName: "蓝鸽中小学",
-        useTime: "100",
-        remainTime: "200",
-        status: "欠费",
-        createTime: "2010-02-01"
-      })
-    }
-
+  renderOperation(data: WiseBoardData): ReactNode {
     return (
-      <MainContentView className={this.rootClass()} header={<WiseBoardHeader/>} footer={<div>paging</div>}>
-        <LgSimpleTable<WiseBoardData> dataDescribe={dataDescribe} dataArray={datas} />
-      </MainContentView>
-    );
+      <WiseBoardTable1 key={"operation"}>
+        <div className={this.class("operation")}>
+          <div className={this.class("recharge")} onClick={() => alert("充值:" + data.schoolId)}>充值</div>
+          <div className={this.class("split")} />
+          <div className={this.class("recharge-record")} onClick={() => alert("充值记录:" + data.schoolId)}>充值记录</div>
+        </div>
+      </WiseBoardTable1>
+    )
   }
 
   getClassNamePrefix(): string {
