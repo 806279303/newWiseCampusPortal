@@ -73,7 +73,6 @@ const LeftTabWarp = (props: any) => {
             hasOpen += " lg_left_tab_List_show"
         }
         //有二级，二级包含路由也cho
-        console.log(btns)
         const isBtnsContainRouterPath = btns.some((item:any, index:number)=>{
             return item.routerPath === routerPath
         })

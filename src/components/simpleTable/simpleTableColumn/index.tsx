@@ -12,10 +12,16 @@ export class SimpleTableColumn extends BaseComponent<SimpleTableColumnProps> {
     const style:CSSProperties = {}
     if(this.props.width){
       style.width = this.props.width
+      style.flex = "none"
+    }
+
+    let title = ""
+    if(typeof this.props.children === "string"){
+      title = this.props.children
     }
 
     return (
-      <div className={this.rootClass()} style={style}>
+      <div className={this.rootClass()} style={style} title={title}>
         {
           this.props.children
         }

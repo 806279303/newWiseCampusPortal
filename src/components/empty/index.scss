@@ -3,6 +3,8 @@
 .lg-empty-root {
   @include flexCenter;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
 
   &.lg-empty-icon-1 {
     $icon1Height: 100px;
