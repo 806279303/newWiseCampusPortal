@@ -1,5 +1,7 @@
-import {WiseBoardData} from "@/views/wiseBoard/type";
+import {WiseBoardTableData} from "../../type/wiseBoard/WiseBoardTableData";
 
-export interface WiseBoardState {
-  dataArray: WiseBoardData[]
+export interface WiseBoardProps {
+  loading: boolean
+  dataArray: WiseBoardTableData[]
+  fetchWiseBoardListAction: (page: number, limit: number) => void
 }

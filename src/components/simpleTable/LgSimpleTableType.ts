@@ -14,6 +14,7 @@ export interface LgSimpleTableData{
 }
 
 export interface LgSimpleTableProps<DataType> {
+  loading?: boolean
   dataDescribe?: LgSimpleTableDataDescribe<DataType>[]
   dataArray?: DataType[]
   rowRender?(data: DataType): ReactNode

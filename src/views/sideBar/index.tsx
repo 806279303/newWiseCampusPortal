@@ -30,7 +30,6 @@ class Index extends Component<SlideBarProps, SlideBarState> {
     }
 
     addTab(routerPath:string) {
-        console.log(routerPath)
         this.props.history.push(routerPath);
         this.setState({routerPath: routerPath})
     }

@@ -8,6 +8,9 @@ import {FlexFillViewFrame} from "../flexFillViewFrame";
 import {LgSimpleTableData, LgSimpleTableProps} from "@/components/simpleTable/LgSimpleTableType";
 import {LgEmpty} from "@/components/empty";
 import {BaseProps} from "../../type/BaseProps";
+import {ReactNode} from "react";
+import {LgLoading} from "@/components/loading";
+import {FlexCenterContainer} from "@/components/flexCenterContainer";
 
 
 export class LgSimpleTable<DataType extends LgSimpleTableData> extends BaseComponent<LgSimpleTableProps<DataType>> {
@@ -69,12 +72,19 @@ export class LgSimpleTable<DataType extends LgSimpleTableData> extends BaseCompo
 
   renderBody() {
 
+    let node: ReactNode
+    if (this.props.loading) {
+      node = <FlexCenterContainer><LgLoading/></FlexCenterContainer>
+    } else if (!this.props.dataArray || this.props.dataArray.length <= 0 || !this.props.dataDescribe || this.props.dataDescribe.length <= 0) {
+      node = <LgEmpty/>
+    } else {
+      node = this.props.dataArray.map(data => this.renderBodyRow(data))
+    }
+
+
     return (
       <LgSimpleTable.Body>
-        {
-          !this.props.dataArray || this.props.dataArray.length <= 0 || !this.props.dataDescribe || this.props.dataDescribe.length <= 0? <LgEmpty/> :
-            this.props.dataArray.map(data => this.renderBodyRow(data))
-        }
+        {node}
       </LgSimpleTable.Body>
     );
   }
@@ -84,7 +94,7 @@ export class LgSimpleTable<DataType extends LgSimpleTableData> extends BaseCompo
       return this.props.rowRender(data)
     }
 
-    if(!this.props.dataDescribe || this.props.dataDescribe.length <= 0){
+    if (!this.props.dataDescribe || this.props.dataDescribe.length <= 0) {
       return
     }
 
@@ -94,10 +104,10 @@ export class LgSimpleTable<DataType extends LgSimpleTableData> extends BaseCompo
       <LgSimpleTable.Row key={rowKey}>
         {
           rowItem.map(item => {
-            return item.render? item.render(data) :  (
+            return item.render ? item.render(data) : (
               <LgSimpleTable.Column width={item.width} key={item.key}>
                 {
-                  item.key && data.hasOwnProperty(item.key)? data[item.key]: ""
+                  item.key && data.hasOwnProperty(item.key) ? data[item.key] : ""
                 }
               </LgSimpleTable.Column>
             )
@@ -125,7 +135,8 @@ export class LgSimpleTable<DataType extends LgSimpleTableData> extends BaseCompo
   }
 }
 
-export function createTableClass<T extends LgSimpleTableData>(){
-  return class newTable extends LgSimpleTable<T>{}
+export function createTableClass<T extends LgSimpleTableData>() {
+  return class newTable extends LgSimpleTable<T> {
+  }
 }
 

@@ -1,14 +1,12 @@
 // 获取小程序列表某一数据
-export function getSpecifiedWeappData() {
-    return {
-        type: "GETWEAPPDATA"
-    }
-}
+import {Dispatch} from "react";
+import {WeappAction} from "../../type/weapp/WeappAction";
+import {WeappActionType} from "../../type/weapp/WeappActionType";
+import {delay} from "../../utils/delay";
 
-//设置小程序列表某一数据
-export function setSpecifiedWeappData(data:any) {
-    return {
-        type: "SETWEAPPDATA",
-        payload:data
+export function fetchWeappList() {
+    return async (dispatch: Dispatch<WeappAction>) => {
+        await delay(1000 * 3)
+        dispatch({type: WeappActionType.FETCH_WEAPP_LIST_SUCCESS})
     }
 }

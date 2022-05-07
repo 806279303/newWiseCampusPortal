@@ -1,13 +1,5 @@
-import {createTableClass, LgSimpleTableData, LgSimpleTableDataDescribe} from "@/components/simpleTable";
+import {createTableClass, LgSimpleTableDataDescribe} from "@/components/simpleTable";
+import {WiseBoardTableData} from "../../type/wiseBoard/WiseBoardTableData";
 
-export interface WiseBoardData extends LgSimpleTableData {
-  schoolId: string,
-  schoolName: string,
-  useTime: string,
-  remainTime: string,
-  status: string,
-  createTime: string
-}
-
-export const WiseBoardTable = createTableClass<WiseBoardData>()
-export type WiseBoardTableDataDescribe = LgSimpleTableDataDescribe<WiseBoardData>
+export const WiseBoardTable = createTableClass<WiseBoardTableData>()
+export type WiseBoardTableDataDescribe = LgSimpleTableDataDescribe<WiseBoardTableData>

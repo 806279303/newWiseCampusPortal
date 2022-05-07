@@ -4,40 +4,33 @@ import "./index.scss"
 import {MainContentView} from "@/components/MainContentView";
 import {ReactNode} from "react";
 import {BaseProps} from "../../type/BaseProps";
-import {
-  WiseBoardData,
-  WiseBoardTable as WiseBoardTable1,
-  WiseBoardTable,
-  WiseBoardTableDataDescribe
-} from "@/views/wiseBoard/type";
-import {WiseBoardState} from "@/views/wiseBoard/wiseBoardState";
+import {WiseBoardTable, WiseBoardTableDataDescribe} from "@/views/wiseBoard/type";
+import {WiseBoardProps} from "@/views/wiseBoard/wiseBoardState";
+import {connect, MapDispatchToProps, MapStateToProps} from "react-redux";
+import {RootState} from "../../redux/rootReducer";
+import {WiseBoardTableData} from "../../type/wiseBoard/WiseBoardTableData";
+import {FunctionProperties, NonFunctionProperties} from "../../type/util";
+import {bindActionCreators} from "redux";
+import {fetchWiseBoardListAction} from "../../redux/wiseBoard/action";
+import {LgLoading} from "@/components/loading";
 
 
-class WiseBoard extends BaseComponent<{}, WiseBoardState> {
+class WiseBoard extends BaseComponent<WiseBoardProps> {
 
-  constructor(props: BaseProps | Readonly<BaseProps>, context: any) {
-    super(props, context);
+  constructor(props: WiseBoardProps & BaseProps) {
+    super(props);
     this.renderOperation = this.renderOperation.bind(this)
-    const dataArray: WiseBoardData[] = []
-    for (let i = 0; i < 10; i++) {
-      dataArray.push({
-        schoolId: "id-" + (i + 1),
-        schoolName: "蓝鸽中小学",
-        useTime: "100",
-        remainTime: "200",
-        status: "欠费",
-        createTime: "2010-02-01"
-      })
-    }
-    this.state = {
-      dataArray: dataArray
-    }
+  }
+
+  componentDidMount() {
+    super.componentDidMount();
+    this.props.fetchWiseBoardListAction(1, 10)
   }
 
   render() {
     return (
       <MainContentView className={this.rootClass()} header={<WiseBoardHeader/>} footer={<div>paging</div>}>
-        <WiseBoardTable dataDescribe={this.getDataDescribe()} dataArray={this.state.dataArray} />
+        <WiseBoardTable dataDescribe={this.getDataDescribe()} dataArray={this.props.dataArray} loading={this.props.loading}/>
       </MainContentView>
     );
   }
@@ -79,15 +72,15 @@ class WiseBoard extends BaseComponent<{}, WiseBoardState> {
     return dataDescribe;
   }
 
-  renderOperation(data: WiseBoardData): ReactNode {
+  renderOperation(data: WiseBoardTableData): ReactNode {
     return (
-      <WiseBoardTable1 key={"operation"}>
+      <WiseBoardTable.Column key={"operation"}>
         <div className={this.class("operation")}>
           <div className={this.class("recharge")} onClick={() => alert("充值:" + data.schoolId)}>充值</div>
-          <div className={this.class("split")} />
+          <div className={this.class("split")}/>
           <div className={this.class("recharge-record")} onClick={() => alert("充值记录:" + data.schoolId)}>充值记录</div>
         </div>
-      </WiseBoardTable1>
+      </WiseBoardTable.Column>
     )
   }
 
@@ -96,4 +89,15 @@ class WiseBoard extends BaseComponent<{}, WiseBoardState> {
   }
 }
 
-export default WiseBoard;
+const mapStateToProps: MapStateToProps<NonFunctionProperties<WiseBoardProps>, WiseBoardProps, RootState> = (state) => {
+  return {
+    loading: state.wiseBoardReducer.loading,
+    dataArray: state.wiseBoardReducer.tableData
+  }
+}
+
+const mapDispatchToProps: MapDispatchToProps<FunctionProperties<WiseBoardProps>, any> = (dispatch) => {
+  return bindActionCreators({fetchWiseBoardListAction}, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(WiseBoard);

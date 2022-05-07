@@ -6,7 +6,10 @@ import {paddingPrefix} from "../utils/classNameUtils";
 export abstract class BaseComponent<T = {}, S = {}, SS = any> extends Component<T & BaseProps, S, SS> {
   protected readonly CNP: string
 
-  constructor(props: (T & BaseProps) | Readonly<T & BaseProps>, context: any) {
+  constructor(props: T & BaseProps);
+  constructor(props: T & BaseProps, context: any);
+
+  constructor(props: (T & BaseProps) | Readonly<T & BaseProps>, context?: any) {
     super(props, context);
     this.CNP = this.newClassNamePrefix()
   }
