@@ -4,15 +4,13 @@ import "./index.scss"
 import {MainContentView} from "@/components/MainContentView";
 import {ReactNode} from "react";
 import {BaseProps} from "../../type/BaseProps";
-import {WiseBoardTable, WiseBoardTableDataDescribe} from "@/views/wiseBoard/type";
-import {WiseBoardProps} from "@/views/wiseBoard/wiseBoardState";
+import {WiseBoardProps, WiseBoardTable, WiseBoardTableDataDescribe} from "./type";
 import {connect, MapDispatchToProps, MapStateToProps} from "react-redux";
 import {RootState} from "../../redux/rootReducer";
 import {WiseBoardTableData} from "../../type/wiseBoard/WiseBoardTableData";
 import {FunctionProperties, NonFunctionProperties} from "../../type/util";
 import {bindActionCreators} from "redux";
 import {fetchWiseBoardListAction} from "../../redux/wiseBoard/action";
-import {LgLoading} from "@/components/loading";
 
 
 class WiseBoard extends BaseComponent<WiseBoardProps> {
