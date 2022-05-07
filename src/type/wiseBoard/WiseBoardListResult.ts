@@ -5,5 +5,5 @@ export interface WiseBoardListResult {
   list: WiseBoardTableData[],
   pageNum: number,
   pageSize: number,
-  size: number
+  pages: number
 }

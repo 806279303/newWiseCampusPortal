@@ -1,4 +1,4 @@
-import {WiseBoardHeader} from "./components/header/header"
+import {WiseBoardHeader, WiseBoardHeaderComponent} from "./components/header/header"
 import {BaseComponent} from "../../type/BaseComponent";
 import "./index.scss"
 import {MainContentView} from "@/components/MainContentView";
@@ -7,7 +7,7 @@ import {BaseProps} from "../../type/BaseProps";
 import {WiseBoardProps, WiseBoardTable, WiseBoardTableDataDescribe} from "./type";
 import {connect, MapDispatchToProps, MapStateToProps} from "react-redux";
 import {RootState} from "../../redux/rootReducer";
-import {WiseBoardTableData} from "../../type/wiseBoard/WiseBoardTableData";
+import {serviceTypeOptionMap, WiseBoardTableData} from "../../type/wiseBoard/WiseBoardTableData";
 import {FunctionProperties, NonFunctionProperties} from "../../type/util";
 import {bindActionCreators} from "redux";
 import {fetchWiseBoardListAction} from "../../redux/wiseBoard/action";
@@ -28,7 +28,7 @@ class WiseBoard extends BaseComponent<WiseBoardProps> {
 
   render() {
     return (
-      <MainContentView className={this.rootClass()} header={<WiseBoardHeader/>} footer={<WiseBoardFooterComponent/>}>
+      <MainContentView className={this.rootClass()} header={<WiseBoardHeaderComponent/>} footer={<WiseBoardFooterComponent/>}>
         <WiseBoardTable dataDescribe={this.getDataDescribe()} dataArray={this.props.dataArray} loading={this.props.loading}/>
       </MainContentView>
     );
@@ -47,16 +47,25 @@ class WiseBoard extends BaseComponent<WiseBoardProps> {
         headName: "学校名称",
       },
       {
-        field: "useTime",
+        field: "usedCallTime",
         headName: "已使用总时长(分钟)",
       },
       {
-        field: "remainTime",
+        field: "restCallTime",
         headName: "剩余通话试剂盒",
       },
       {
-        field: "status",
+        field: "serviceType",
         headName: "状态",
+        render(data: WiseBoardTableData): ReactNode {
+          return (
+            <WiseBoardTable.Column key={"serviceType"}>
+              {
+                serviceTypeOptionMap.get(data.serviceType)
+              }
+            </WiseBoardTable.Column>
+          )
+        }
       },
       {
         field: "createTime",

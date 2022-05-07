@@ -1,6 +1,7 @@
 import {del, get, post, put} from './api'
 import Pops from "../utils/pops";
 import {WiseBoardListResult} from "../type/wiseBoard/WiseBoardListResult";
+import {ServiceType} from "../type/wiseBoard/WiseBoardTableData";
 
 type ResultType<T> = { error: number, msg: string, data: T };
 
@@ -74,4 +75,4 @@ export const delModules = (params: any) => del('wxSystemModule', params)
 //学校档案-编辑学校子模块列表
 export const putWxSchoolModule = (data: any) => put('wxSchoolModule', data)
 
-export const getWiseBoardList = (pageSize: number, pageNum: number) => responseHandler<WiseBoardListResult>(get('/wiseboard/list/page', {pageSize, pageNum}), true)
+export const getWiseBoardList = (pageNum: number, pageSize: number,  serviceType?: ServiceType, schoolName?: string) => responseHandler<WiseBoardListResult>(get('/wiseboard/list/page', {pageSize, pageNum, serviceType, schoolName}), true)

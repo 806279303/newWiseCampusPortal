@@ -30,7 +30,6 @@ export function Search(props: SearchProps) {
     }
 
     function keydownSearch(e: any) {
-        console.log(e)
         if (e.keyCode == 13) {
             props.onSearch && props.onSearch()
         }

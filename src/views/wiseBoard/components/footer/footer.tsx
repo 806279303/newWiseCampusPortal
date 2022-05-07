@@ -27,7 +27,6 @@ export class WiseBoardFooter extends BaseComponent<WiseBoardFooterProps> {
   }
 
   onPageChange(index: number){
-    console.log(index)
     this.props.fetchWiseBoardListAction(index)
   }
 
