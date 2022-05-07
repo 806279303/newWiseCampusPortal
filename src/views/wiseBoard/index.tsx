@@ -11,6 +11,7 @@ import {WiseBoardTableData} from "../../type/wiseBoard/WiseBoardTableData";
 import {FunctionProperties, NonFunctionProperties} from "../../type/util";
 import {bindActionCreators} from "redux";
 import {fetchWiseBoardListAction} from "../../redux/wiseBoard/action";
+import {WiseBoardFooterComponent} from "@/views/wiseBoard/components/footer/footer";
 
 
 class WiseBoard extends BaseComponent<WiseBoardProps> {
@@ -22,12 +23,12 @@ class WiseBoard extends BaseComponent<WiseBoardProps> {
 
   componentDidMount() {
     super.componentDidMount();
-    this.props.fetchWiseBoardListAction(1, 10)
+    this.props.fetchWiseBoardListAction(1)
   }
 
   render() {
     return (
-      <MainContentView className={this.rootClass()} header={<WiseBoardHeader/>} footer={<div>paging</div>}>
+      <MainContentView className={this.rootClass()} header={<WiseBoardHeader/>} footer={<WiseBoardFooterComponent/>}>
         <WiseBoardTable dataDescribe={this.getDataDescribe()} dataArray={this.props.dataArray} loading={this.props.loading}/>
       </MainContentView>
     );

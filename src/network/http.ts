@@ -1,10 +1,11 @@
-import {get, post, put, del} from './api'
+import {del, get, post, put} from './api'
 import Pops from "../utils/pops";
+import {WiseBoardListResult} from "../type/wiseBoard/WiseBoardListResult";
 
 type ResultType<T> = { error: number, msg: string, data: T };
 
 //统一处理http&业务response
-async function responseHandler<T>(response: Promise<ResultType<T>>, showToast: boolean = false): Promise<T> {
+async function responseHandler<T>(response: Promise<ResultType<any>>, showToast: boolean = false): Promise<T> {
     //HTTP请求层response统一处理
     let res: ResultType<T> | null = null
     try {
@@ -72,3 +73,5 @@ export const delModules = (params: any) => del('wxSystemModule', params)
 
 //学校档案-编辑学校子模块列表
 export const putWxSchoolModule = (data: any) => put('wxSchoolModule', data)
+
+export const getWiseBoardList = (pageSize: number, pageNum: number) => responseHandler<WiseBoardListResult>(get('/wiseboard/list/page', {pageSize, pageNum}), true)

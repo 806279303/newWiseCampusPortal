@@ -7,5 +7,5 @@ export type WiseBoardTableDataDescribe = LgSimpleTableDataDescribe<WiseBoardTabl
 export interface WiseBoardProps {
   loading: boolean
   dataArray: WiseBoardTableData[]
-  fetchWiseBoardListAction: (page: number, limit: number) => void
+  fetchWiseBoardListAction: (page: number) => void
 }
