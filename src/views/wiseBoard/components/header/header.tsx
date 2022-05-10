@@ -11,7 +11,6 @@ import {FunctionProperties, NonFunctionProperties} from "../../../../type/util";
 import {bindActionCreators, Dispatch} from "redux";
 import {WiseBoardAction} from "../../../../type/wiseBoard/WiseBoardAction";
 import {WiseBoardActionType} from "../../../../type/wiseBoard/WiseBoardActionType";
-import {BaseProps} from "../../../../type/BaseProps";
 import {onSelectedServiceTypeChange, wiseBoardSearchAction} from "../../../../redux/wiseBoard/action";
 import {ServiceType, serviceTypeOptions} from "../../../../type/wiseBoard/WiseBoardTableData";
 
@@ -22,6 +21,7 @@ export interface WiseBoardHeaderProps {
   searchWordChange(schoolName: string): void
   search(): void
   total: number
+  openAddLayer(): void
 }
 
 
@@ -55,7 +55,7 @@ export class WiseBoardHeader extends BaseComponent<WiseBoardHeaderProps> {
         <Search onSearch={this.props.search} onChange={this.props.searchWordChange}
                 onClear={() => this.props.searchWordChange("")} className={this.class("search")} placeholder="请输入学校名称"
                 value={this.props.searchWord}/>
-        <AddBtn text="添加音视频通话"/>
+        <AddBtn handClick={this.props.openAddLayer} text="添加音视频通话"/>
       </div>
     );
   }
@@ -76,6 +76,10 @@ const mapStateToProps: MapStateToProps<NonFunctionProperties<WiseBoardHeaderProp
 const mapDispatchToProps: MapDispatchToProps<FunctionProperties<WiseBoardHeaderProps>, any> = (dispatch: Dispatch<WiseBoardAction>) => {
   return {
     searchWordChange: (word) => dispatch({type: WiseBoardActionType.CHANGE_SEARCH_SCHOOL_NAME, searchSchoolName: word}),
+    openAddLayer: () => {
+      dispatch({type: WiseBoardActionType.CLEAR_ADD_LAYER})
+      dispatch({type: WiseBoardActionType.OPEN_ADD_LAYER})
+    },
     ...bindActionCreators({search: wiseBoardSearchAction, onSelectedServiceTypeChange}, dispatch)
   }
 }

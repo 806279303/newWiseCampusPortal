@@ -41,6 +41,7 @@ export const serviceTypeOptionMap = serviceTypeOptions.reduce((map, item) => {
   return map
 }, new Map<ServiceType, string>());
 
+
 export interface WiseBoardTableData extends LgSimpleTableData{
   id: number
   schoolId: string,

@@ -1,0 +1,35 @@
+$classNamePrefix: lg-wise-board-body;
+
+.#{$classNamePrefix}-root{
+  .#{$classNamePrefix}-operation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #09f;
+    font-size: 14px;
+
+
+    @mixin buttonStyle{
+      transition: opacity 0.25s;
+      &:hover {
+        cursor: pointer;
+        opacity: 0.8;
+      }
+    }
+
+    .#{$classNamePrefix}-recharge {
+      @include buttonStyle;
+    }
+
+    .#{$classNamePrefix}-split {
+      width: 1px;
+      height: 10px;
+      background-color: #bad3ea;
+      margin: 0 10px;
+    }
+
+    .#{$classNamePrefix}-recharge-record {
+      @include buttonStyle;
+    }
+  }
+}

@@ -2,6 +2,8 @@ import {del, get, post, put} from './api'
 import Pops from "../utils/pops";
 import {WiseBoardListResult} from "../type/wiseBoard/WiseBoardListResult";
 import {ServiceType} from "../type/wiseBoard/WiseBoardTableData";
+import {WxSchoolSimpleInfo} from "../type/WxSchoolSimpleInfo";
+import {AddWiseBoardCallParams} from "../type/wiseBoard/addWiseBoardCallParams";
 
 type ResultType<T> = { error: number, msg: string, data: T };
 
@@ -23,7 +25,7 @@ async function responseHandler<T>(response: Promise<ResultType<any>>, showToast:
     if (res.error === 0 || res.error === 1) {
         return res.data
     }
-    let message = res.msg || "服务器异常";
+    let message = typeof res.data === "string" ? res.data: res.msg || "服务器异常";
     if (showToast) {
         Pops.showError(message)
     }
@@ -75,4 +77,11 @@ export const delModules = (params: any) => del('wxSystemModule', params)
 //学校档案-编辑学校子模块列表
 export const putWxSchoolModule = (data: any) => put('wxSchoolModule', data)
 
+//获取学校简要信息
+export const getWxSchoolSimpleInfo = () => responseHandler<WxSchoolSimpleInfo[]>(get('/wxSchoolInfo/simple'), true)
+
+//获取班牌视频通话列表，分页查询
 export const getWiseBoardList = (pageNum: number, pageSize: number,  serviceType?: ServiceType, schoolName?: string) => responseHandler<WiseBoardListResult>(get('/wiseboard/list/page', {pageSize, pageNum, serviceType, schoolName}), true)
+
+//添加班牌视频通话
+export const addWiseBoardCall = (params: AddWiseBoardCallParams) => responseHandler<string>(post("/wiseboard/addWiseBoardCall", {...params}))

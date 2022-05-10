@@ -70,7 +70,7 @@ instance.interceptors.response.use(response => {
 })
 
 /* 统一封装get请求 */
-export const get = (url:string, params:object, config = {}) => {
+export const get = (url:string, params?:object, config = {}) => {
     return new Promise<any>((resolve, reject) => {
         instance({
             method: 'get',
@@ -87,7 +87,7 @@ export const get = (url:string, params:object, config = {}) => {
 
 /* 统一封装post请求  */
 export const post = (url:string, data:object = {}, config = {}) => {
-    return new Promise((resolve, reject) => {
+    return new Promise<any>((resolve, reject) => {
         instance({
             method: 'post',
             url,

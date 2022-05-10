@@ -8,4 +8,8 @@ export interface WiseBoardState{
   searchSchoolName: string
   tableData: WiseBoardTableData[]
   total: number
+  showAddWiseBoardLayer: boolean
+  addWiseBoardSchoolId: number
+  addWiseBoardServiceType: ServiceType
+  addWiseBoardBuyCallTime: number
 }
