@@ -98,14 +98,14 @@ export class LgSimpleTable<DataType extends LgSimpleTableData> extends BaseCompo
       return
     }
 
-    let rowItem = this.props.dataDescribe.map(item => ({key: item.field, width: item.width, render: item.render}))
+    let rowItem = this.props.dataDescribe.map(item => ({key: item.field, width: item.width, render: item.render, color: item.color}))
     let rowKey = this.getRowKey(data);
     return (
       <LgSimpleTable.Row key={rowKey}>
         {
-          rowItem.map(item => {
-            return item.render ? item.render(data) : (
-              <LgSimpleTable.Column width={item.width} key={item.key}>
+          rowItem.map((item, index) => {
+            return item.render ? item.render(data, index) : (
+              <LgSimpleTable.Column width={item.width} key={item.key} color={item.color}>
                 {
                   item.key && data.hasOwnProperty(item.key) ? data[item.key] : ""
                 }

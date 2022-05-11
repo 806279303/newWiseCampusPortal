@@ -1,5 +1,34 @@
 $classNamePrefix: lg-recharge-record-layer;
 
-.#{$classNamePrefix}-root{
+.lg_popLayer_big_container {
+  .#{$classNamePrefix}-root.lg_popLayer_container .lg_popLayer_main {
+    padding: 0;
+    height: calc(100% - 48px);
+  }
+}
 
+.#{$classNamePrefix}-root{
+  .#{$classNamePrefix}-tips{
+    padding: 21px 0 21px 30px;
+    box-sizing: border-box;
+    display: flex;
+    font-size: 14px;
+    color: #999999;
+    .#{$classNamePrefix}-tips-count{
+      color: #ff0000;
+    }
+  }
+  .#{$classNamePrefix}-table{
+    width: 100%;
+    height: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+  .#{$classNamePrefix}-footer{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px 10px;
+    box-sizing: border-box;
+  }
 }

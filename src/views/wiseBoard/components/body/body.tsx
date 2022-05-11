@@ -1,7 +1,7 @@
 import "./body.scss"
 import {BaseComponent} from "../../../../type/BaseComponent";
-import {WiseBoardProps, WiseBoardTable, WiseBoardTableDataDescribe} from "@/views/wiseBoard/type";
-import {serviceTypeOptionMap, WiseBoardTableData} from "../../../../type/wiseBoard/WiseBoardTableData";
+import {WiseBoardTable, WiseBoardTableDataDescribe} from "@/views/wiseBoard/type";
+import {ServiceType, serviceTypeOptionMap, WiseBoardTableData} from "../../../../type/wiseBoard/WiseBoardTableData";
 import {ReactNode} from "react";
 import {connect, MapDispatchToProps, MapStateToProps} from "react-redux";
 import {FunctionProperties, NonFunctionProperties} from "../../../../type/util";
@@ -11,6 +11,7 @@ import {fetchWiseBoardListAction} from "../../../../redux/wiseBoard/action";
 import {BaseProps} from "../../../../type/BaseProps";
 import {WiseBoardAction} from "../../../../type/wiseBoard/WiseBoardAction";
 import {RechargeLayerActionType} from "../../../../type/wiseBoard/rechargeLayer/rechargeLayerActionType";
+import {RechargeRecordActionType} from "../../../../type/wiseBoard/rechargeRecordLayer/rechargeRecordActionType";
 
 export interface WiseBoardBodyProps {
   loading: boolean
@@ -19,6 +20,8 @@ export interface WiseBoardBodyProps {
   fetchWiseBoardListAction(page: number): void
 
   showRechargeLayer(data: WiseBoardTableData): void
+
+  showRechargeRecordLayer(data: WiseBoardTableData): void
 }
 
 export class WiseBoardBody extends BaseComponent<WiseBoardBodyProps> {
@@ -39,7 +42,6 @@ export class WiseBoardBody extends BaseComponent<WiseBoardBodyProps> {
         isId: true,
         field: "schoolId",
         headName: "学校ID",
-        width: "7%",
       },
       {
         field: "schoolName",
@@ -48,6 +50,7 @@ export class WiseBoardBody extends BaseComponent<WiseBoardBodyProps> {
       {
         field: "usedCallTime",
         headName: "已使用总时长(分钟)",
+        color: "#999"
       },
       {
         field: "restCallTime",
@@ -56,9 +59,12 @@ export class WiseBoardBody extends BaseComponent<WiseBoardBodyProps> {
       {
         field: "serviceType",
         headName: "状态",
-        render(data: WiseBoardTableData): ReactNode {
+        render: (data: WiseBoardTableData) =>  {
           return (
-            <WiseBoardTable.Column key={"serviceType"}>
+            <WiseBoardTable.Column className={this.class("service-type", {
+              "service-type-trial": data.serviceType === ServiceType.TRIAL,
+              "service-type-purchased": data.serviceType === ServiceType.PURCHASED,
+            })} key={"serviceType"}>
               {
                 serviceTypeOptionMap.get(data.serviceType)
               }
@@ -69,6 +75,7 @@ export class WiseBoardBody extends BaseComponent<WiseBoardBodyProps> {
       {
         field: "createTime",
         headName: "创建时间",
+        color: "#999"
       },
       {
         field: "",
@@ -85,7 +92,8 @@ export class WiseBoardBody extends BaseComponent<WiseBoardBodyProps> {
         <div className={this.class("operation")}>
           <div className={this.class("recharge")} onClick={() => this.props.showRechargeLayer(data)}>充值</div>
           <div className={this.class("split")}/>
-          <div className={this.class("recharge-record")} onClick={() => alert("充值记录:" + data.schoolId)}>充值记录</div>
+          <div className={this.class("recharge-record")} onClick={() => this.props.showRechargeRecordLayer(data)}>充值记录
+          </div>
         </div>
       </WiseBoardTable.Column>
     )
@@ -117,6 +125,7 @@ const mapDispatchToProps: MapDispatchToProps<FunctionProperties<WiseBoardBodyPro
       dispatch({type: RechargeLayerActionType.CLEAR_RECHARGE_LAYER})
       dispatch({type: RechargeLayerActionType.OPEN_RECHARGE_LAYER, rechargeSchool: data})
     },
+    showRechargeRecordLayer: (data) => dispatch({type: RechargeRecordActionType.OPEN_LAYER, querySchool: data}),
     ...bindActionCreators({fetchWiseBoardListAction}, dispatch)
   }
 }

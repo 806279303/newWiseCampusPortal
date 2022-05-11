@@ -21,7 +21,6 @@ export const fetchAllSchoolSimpleInfo = () => {
 }
 
 export const fetchUnpurchasedSchoolSimpleInfos = () => {
-  console.log("fetchUnpurchasedSchoolSimpleInfos")
   return async (dispatch: Dispatch<AppAction>, getState: () => RootState) => {
     try{
       let wxSchoolSimpleInfo = await getWxSchoolSimpleInfo({

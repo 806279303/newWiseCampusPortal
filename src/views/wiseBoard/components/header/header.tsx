@@ -59,7 +59,7 @@ export class WiseBoardHeader extends BaseComponent<WiseBoardHeaderProps> {
       <div className={this.class("left")}>
         <Select value={this.props.selectedServiceType} onChange={this.handleServiceTypeChange}>
           {
-            serviceTypeOptions.map(item => <Select.Option key={item.value} label={item.name} value={item.value}/>)
+            serviceTypeOptions.filter(item => item.value !== ServiceType.NOT_PURCHASED && item.value !== ServiceType.EXCEED).map(item => <Select.Option key={item.value} label={item.name} value={item.value}/>)
           }
         </Select>
         <div className={this.class("left-tip")}>

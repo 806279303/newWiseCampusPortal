@@ -1,7 +1,7 @@
-import {WiseBoardListState} from "../../../type/wiseBoard/WiseBoardState";
 import {ServiceType} from "../../../type/wiseBoard/WiseBoardTableData";
 import {WiseBoardListAction} from "../../../type/wiseBoard/wiseBoardList/WiseBoardListAction";
 import {WiseBoardListActionType} from "../../../type/wiseBoard/wiseBoardList/WiseBoardListActionType";
+import {WiseBoardListState} from "../../../type/wiseBoard/wiseBoardList/WiseBoardListState";
 
 const initialState: WiseBoardListState = {
   loading: true,

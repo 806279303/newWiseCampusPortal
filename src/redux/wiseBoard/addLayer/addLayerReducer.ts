@@ -1,7 +1,7 @@
-import {AddWiseBoardLayerState} from "../../../type/wiseBoard/WiseBoardState";
 import {AddLayerAction} from "../../../type/wiseBoard/AddLayer/AddLayerAction";
 import {ServiceType} from "../../../type/wiseBoard/WiseBoardTableData";
 import {AddLayerActionType} from "../../../type/wiseBoard/AddLayer/AddLayerActionType";
+import {AddWiseBoardLayerState} from "../../../type/wiseBoard/AddLayer/AddWiseBoardLayerState";
 
 const initialState: AddWiseBoardLayerState = {
   showAddWiseBoardLayer: false,

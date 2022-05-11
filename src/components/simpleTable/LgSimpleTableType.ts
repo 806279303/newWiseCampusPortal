@@ -5,7 +5,8 @@ export interface LgSimpleTableDataDescribe<DataType> {
   headName: string
   isId?: boolean
   width?: string
-  render?(data: DataType): ReactNode
+  color?: string
+  render?(data: DataType, index: number): ReactNode
   headRender?(): ReactNode
 }
 

@@ -6,62 +6,70 @@ import {WxSchoolSimpleInfo} from "../type/WxSchoolSimpleInfo";
 import {AddWiseBoardCallParams} from "../type/wiseBoard/addWiseBoardCallParams";
 import {WxSchoolSimpleInfoParam} from "../type/app/WxSchoolSimpleInfoParam";
 import {RechargeParam} from "../type/wiseBoard/rechargeLayer/rechargeParam";
+import {RechargeRecordParam} from "../type/wiseBoard/rechargeRecordLayer/RechargeRecordParam";
+import {RechargeRecordResult} from "../type/wiseBoard/rechargeRecordLayer/rechargeRecordResult";
 
 type ResultType<T> = { error: number, msg: string, data: T };
 
 //统一处理http&业务response
 async function responseHandler<T>(response: Promise<ResultType<any>>, showToast: boolean = false): Promise<T> {
-    //HTTP请求层response统一处理
-    let res: ResultType<T> | null = null
-    try {
-        res = await response;
-    } catch (err) {
-        //默认无异常弹窗提示
-        if (showToast) {
-            Pops.showError('网络错误')
-        }
-        throw new Error("网络错误")//与业务（接口）层统一catch处理异常
-    }
-
-    //业务（接口）层result返回统一处理
-    if (res.error === 0 || res.error === 1) {
-        return res.data
-    }
-    let message = typeof res.data === "string" ? res.data: res.msg || "服务器异常";
+  //HTTP请求层response统一处理
+  let res: ResultType<T> | null = null
+  try {
+    res = await response;
+  } catch (err) {
+    //默认无异常弹窗提示
     if (showToast) {
-        Pops.showError(message)
+      Pops.showError('网络错误')
     }
-    throw new Error(message)//与http层统一catch处理异常
+    throw new Error("网络错误")//与业务（接口）层统一catch处理异常
+  }
+
+  //业务（接口）层result返回统一处理
+  if (res.error === 0 || res.error === 1) {
+    return res.data
+  }
+  let message = typeof res.data === "string" ? res.data : res.msg || "服务器异常";
+  if (showToast) {
+    Pops.showError(message)
+  }
+  throw new Error(message)//与http层统一catch处理异常
 }
 
 export const getWxSchoolSystem = (params: any) => {
-    return get('wxSchoolSystem', params).then((res: any) => {
-        return res.data
-    })
+  return get('wxSchoolSystem', params).then((res: any) => {
+    return res.data
+  })
 }
 export const getSchoolInfo = (params: any) => {
-    return get('wxSchoolInfo', params).then((res: any) => {
-        return res.data
-    })
+  return get('wxSchoolInfo', params).then((res: any) => {
+    return res.data
+  })
 }
 
 //同步学校信息（仅仅同步学校）
-export const synSchoolInfo = () => post('wxSchoolInfo/synSchoolInfo', {secret:'lancoo'})
+export const synSchoolInfo = () => post('wxSchoolInfo/synSchoolInfo', {secret: 'lancoo'})
 //同步校园通和各个学校移动端的模块
-export const synchronization = () => post('wxSchoolInfo/synchronization', {secret:'lancoo'})
+export const synchronization = () => post('wxSchoolInfo/synchronization', {secret: 'lancoo'})
 
 //根据学校ID同步系统
-export const synSchoolSystem = ({ schoolId } : any) => post('wxSchoolInfo/synSchoolSystem', {secret:'lancoo', schoolId})
+export const synSchoolSystem = ({schoolId}: any) => post('wxSchoolInfo/synSchoolSystem', {secret: 'lancoo', schoolId})
 //根据学校ID同步系统和模块
-export const synSchoolSystemAndModule = ({ schoolId } : any) => post('wxSchoolInfo/synSchoolSystemAndModule', {secret:'lancoo', schoolId})
+export const synSchoolSystemAndModule = ({schoolId}: any) => post('wxSchoolInfo/synSchoolSystemAndModule', {
+  secret: 'lancoo',
+  schoolId
+})
 //根据学校ID同步模块
-export const synSchoolSystemModule = ({ schoolId } : any) => post('wxSchoolInfo/synSchoolSystemModule', {secret:'lancoo', schoolId})
+export const synSchoolSystemModule = ({schoolId}: any) => post('wxSchoolInfo/synSchoolSystemModule', {
+  secret: 'lancoo',
+  schoolId
+})
 
 //获取小程序子系统
 export const getWeapp = (params: any) => {
-    return get('wxSystem', params).then((res: any) => {
-        return res.data
-    })
+  return get('wxSystem', params).then((res: any) => {
+    return res.data
+  })
 }
 //添加小程序子系统
 export const addWeapp = (data: any) => post('wxSystem', data)
@@ -83,9 +91,16 @@ export const putWxSchoolModule = (data: any) => put('wxSchoolModule', data)
 export const getWxSchoolSimpleInfo = (param?: WxSchoolSimpleInfoParam) => responseHandler<WxSchoolSimpleInfo[]>(get('/wxSchoolInfo/simple', param), true)
 
 //获取班牌视频通话列表，分页查询
-export const getWiseBoardList = (pageNum: number, pageSize: number,  serviceType?: ServiceType, schoolName?: string) => responseHandler<WiseBoardListResult>(get('/wiseboard/list/page', {pageSize, pageNum, serviceType, schoolName}), true)
+export const getWiseBoardList = (pageNum: number, pageSize: number, serviceType?: ServiceType, schoolName?: string) => responseHandler<WiseBoardListResult>(get('/wiseboard/list/page', {
+  pageSize,
+  pageNum,
+  serviceType,
+  schoolName
+}), true)
 
 //添加班牌视频通话
 export const addWiseBoardCall = (params: AddWiseBoardCallParams) => responseHandler<string>(post("/wiseboard/addWiseBoardCall", {...params}))
 
 export const rechargeWiseBoardCall = (param: RechargeParam) => responseHandler<string>(put("/wiseboard/addCallTime", param))
+
+export const getRechargeRecord = (param: RechargeRecordParam) => responseHandler<RechargeRecordResult>(get("wiseboard/page/getRecords", param), true)

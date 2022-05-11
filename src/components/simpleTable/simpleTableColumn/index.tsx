@@ -4,6 +4,7 @@ import {CSSProperties} from "react";
 
 export interface SimpleTableColumnProps {
   width?: string
+  color?: string
 }
 
 export class SimpleTableColumn extends BaseComponent<SimpleTableColumnProps> {
@@ -13,6 +14,10 @@ export class SimpleTableColumn extends BaseComponent<SimpleTableColumnProps> {
     if(this.props.width){
       style.width = this.props.width
       style.flex = "none"
+    }
+
+    if(this.props.color){
+      style.color = this.props.color
     }
 
     let title = ""

@@ -1,6 +1,6 @@
 $classNamePrefix: lg-wise-board-body;
 
-.#{$classNamePrefix}-root{
+.#{$classNamePrefix}-root {
   .#{$classNamePrefix}-operation {
     display: flex;
     align-items: center;
@@ -9,7 +9,7 @@ $classNamePrefix: lg-wise-board-body;
     font-size: 14px;
 
 
-    @mixin buttonStyle{
+    @mixin buttonStyle {
       transition: opacity 0.25s;
       &:hover {
         cursor: pointer;
@@ -30,6 +30,18 @@ $classNamePrefix: lg-wise-board-body;
 
     .#{$classNamePrefix}-recharge-record {
       @include buttonStyle;
+    }
+  }
+
+  .#{$classNamePrefix}-service-type {
+    color: #999999;
+
+    &.#{$classNamePrefix}-service-type-trial {
+      color: #ff6600;
+    }
+
+    &.#{$classNamePrefix}-service-type-purchased {
+      color: #009900;
     }
   }
 }

@@ -5,4 +5,6 @@ $classNamePrefix: lg-simple-table-column;
   justify-content: center;
   align-items: center;
   flex: 1;
+  box-sizing: border-box;
+  padding: 10px;
 }

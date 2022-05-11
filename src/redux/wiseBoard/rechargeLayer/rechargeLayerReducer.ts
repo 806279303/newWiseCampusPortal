@@ -1,6 +1,6 @@
-import {RechargeLayerState} from "../../../type/wiseBoard/WiseBoardState";
 import {RechargeLayerAction} from "../../../type/wiseBoard/rechargeLayer/rechargeLayerAction";
 import {RechargeLayerActionType} from "../../../type/wiseBoard/rechargeLayer/rechargeLayerActionType";
+import {RechargeLayerState} from "../../../type/wiseBoard/rechargeLayer/RechargeLayerState";
 
 const initialState: RechargeLayerState = {
   showRechargeLayer: false,
