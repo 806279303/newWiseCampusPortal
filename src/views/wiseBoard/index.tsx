@@ -6,6 +6,7 @@ import {WiseBoardProps} from "./type";
 import {WiseBoardFooterComponent} from "@/views/wiseBoard/components/footer/footer";
 import {WiseBoardBodyComponent} from "@/views/wiseBoard/components/body/body";
 import {AddWiseBoardLayerComponent} from "@/views/wiseBoard/components/AddWiseBoardLayer/addWiseBoardLayer";
+import {RechargeLayerComponent} from "@/views/wiseBoard/components/rechargeLayer/rechargeLayer";
 
 
 class WiseBoard extends BaseComponent<WiseBoardProps> {
@@ -16,6 +17,7 @@ class WiseBoard extends BaseComponent<WiseBoardProps> {
                        footer={<WiseBoardFooterComponent/>}>
         <WiseBoardBodyComponent/>
         <AddWiseBoardLayerComponent />
+        <RechargeLayerComponent />
       </MainContentView>
     );
   }

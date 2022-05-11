@@ -5,7 +5,7 @@
  * @LastEditors  : super-J
 * @Description  : 弹窗组件
 */
-import React, { Component } from 'react'
+import React, {Component, ReactNode} from 'react'
 import ReactDOM from 'react-dom';
 import "./index.scss";
 let popLayerCreateNumIndex = 0;//创建弹窗实例的次数
@@ -42,7 +42,7 @@ export interface PopLayerProps {
     // customHtml
     customOfHeader?: (React.ReactDOM | React.ReactChild | React.ReactElement) | (() => React.ReactElement);//弹窗头部添加的自定义Dom | 默认值：————
     headerClassName?: string;//弹窗头部添加的自定义Dom容器的类名 | 默认值：————
-    children?: (React.ReactDOM | React.ReactChild | React.ReactElement) | (() => React.ReactElement);// 弹窗中部添加的自定义Dom | 默认值：————
+    children?: ReactNode// 弹窗中部添加的自定义Dom | 默认值：————
     childClassName?: string;//自定义弹窗容器的类名 | 默认值：————
     customOfBottom?: (React.ReactDOM | React.ReactChild | React.ReactElement) | (() => React.ReactElement);//弹窗低部添加的自定义Dom | 默认值：————
     bottomClassName?: string;//弹窗低部添加的自定义Dom的类名 | 默认值：————

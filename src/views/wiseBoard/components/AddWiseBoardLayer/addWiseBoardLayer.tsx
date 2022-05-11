@@ -6,14 +6,15 @@ import {FunctionProperties, NonFunctionProperties} from "../../../../type/util";
 import {RootState} from "../../../../redux/rootReducer";
 import {WiseBoardAction} from "../../../../type/wiseBoard/WiseBoardAction";
 import {bindActionCreators, Dispatch} from "redux";
-import {WiseBoardActionType} from "../../../../type/wiseBoard/WiseBoardActionType";
 import {Select} from "element-react";
 import {ServiceType, serviceTypeOptions} from "../../../../type/wiseBoard/WiseBoardTableData";
 import React, {FormEvent} from "react";
 import {WxSchoolSimpleInfo} from "../../../../type/WxSchoolSimpleInfo";
-import {fetchSchoolSimpleInfo} from "../../../../redux/app/action";
+import {fetchUnpurchasedSchoolSimpleInfos} from "../../../../redux/app/action";
 import {CommonInput} from "@/components/CommonInput";
-import {submitAddWiseBoardCall} from "../../../../redux/wiseBoard/action";
+import {submitAddWiseBoardCall} from "../../../../redux/wiseBoard/addLayer/addLayerAction";
+import {AddLayerActionType} from "../../../../type/wiseBoard/AddLayer/AddLayerActionType";
+import {BaseProps} from "../../../../type/BaseProps";
 
 export interface AddWiseBoardLayerProps {
   isOpen: boolean
@@ -31,19 +32,26 @@ export interface AddWiseBoardLayerProps {
 
 export class AddWiseBoardLayer extends BaseComponent<AddWiseBoardLayerProps> {
 
+  constructor(props: AddWiseBoardLayerProps & BaseProps) {
+    super(props);
+    this.handleBuyCallTimeChange = this.handleBuyCallTimeChange.bind(this)
+  }
+
   componentDidMount() {
     super.componentDidMount();
     this.props.loadSchool()
-    this.handleBuyCallTimeChange = this.handleBuyCallTimeChange.bind(this)
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps: Readonly<AddWiseBoardLayerProps & BaseProps>, nextContext: any) {
+    if(this.props.isOpen !== nextProps.isOpen && nextProps.isOpen){
+      this.props.loadSchool()
+    }
   }
 
   handleBuyCallTimeChange(e: FormEvent<HTMLInputElement>){
     let buyCallTime = 0
     if(e.currentTarget.value){
       buyCallTime = Number(e.currentTarget.value)
-    }
-    if(buyCallTime < 1){
-      buyCallTime = 1
     }
     if(buyCallTime > 10000000){
       buyCallTime = 10000000
@@ -69,7 +77,7 @@ export class AddWiseBoardLayer extends BaseComponent<AddWiseBoardLayerProps> {
           <div className={this.class("form-item")}>
             <div className={this.class("form-item-tips")}>购买时长：</div>
             <div className={this.class("form-item-content")}>
-              <CommonInput value={this.props.buyCallTime.toString()} onInput={this.handleBuyCallTimeChange} inputFilter="numberOnly" className={this.class("number-input")} type="number" maxLength={9} min={1000} max={10000000} />
+              <CommonInput value={this.props.buyCallTime === 0? "": this.props.buyCallTime.toString()} onInput={this.handleBuyCallTimeChange} inputFilter="numberOnly" className={this.class("number-input")} type="number" maxLength={9} min={1} max={10000000} />
             </div>
             <div className={this.class("form-item-tail")}>分钟</div>
           </div>
@@ -99,21 +107,21 @@ export class AddWiseBoardLayer extends BaseComponent<AddWiseBoardLayerProps> {
 
 const mapStateToProps: MapStateToProps<NonFunctionProperties<AddWiseBoardLayerProps>, any, RootState> = (state) => {
   return {
-    isOpen: state.wiseBoardReducer.showAddWiseBoardLayer,
-    schoolInfos: state.appReducer.schoolSimpleInfos,
-    selectedSchoolId: state.wiseBoardReducer.addWiseBoardSchoolId,
-    selectedServiceType: state.wiseBoardReducer.addWiseBoardServiceType,
-    buyCallTime: state.wiseBoardReducer.addWiseBoardBuyCallTime
+    isOpen: state.wiseBoardState.addLayerState.showAddWiseBoardLayer,
+    schoolInfos: state.appReducer.unpurchasedSchoolSimpleInfos,
+    selectedSchoolId: state.wiseBoardState.addLayerState.addWiseBoardSchoolId,
+    selectedServiceType: state.wiseBoardState.addLayerState.addWiseBoardServiceType,
+    buyCallTime: state.wiseBoardState.addLayerState.addWiseBoardBuyCallTime
   }
 }
 
 const mapDispatchToProps: MapDispatchToProps<FunctionProperties<AddWiseBoardLayerProps>, any> = (dispatch: Dispatch<WiseBoardAction>) => {
   return {
-    onClose: () => dispatch({type: WiseBoardActionType.CLOSE_ADD_LAYER}),
-    onChangeSchoolChange: (schoolId) => dispatch({type: WiseBoardActionType.ADD_WISE_BOARD_SCHOOL_ID_CHANGE, schoolId}),
-    onServiceTypeChange: (serviceType) => dispatch({type: WiseBoardActionType.ADD_WISE_BOARD_SERVICE_TYPE_CHANGE, serviceType: serviceType}),
-    buyCallTimeChange: (buyCallTime) => dispatch({type: WiseBoardActionType.ADD_WISE_BOARD_BUY_CALL_TIME_CHANGE, buyCallTime}),
-    ...bindActionCreators({loadSchool: fetchSchoolSimpleInfo, onSubmit: submitAddWiseBoardCall}, dispatch)
+    onClose: () => dispatch({type: AddLayerActionType.CLOSE_ADD_LAYER}),
+    onChangeSchoolChange: (schoolId) => dispatch({type: AddLayerActionType.ADD_WISE_BOARD_SCHOOL_ID_CHANGE, schoolId}),
+    onServiceTypeChange: (serviceType) => dispatch({type: AddLayerActionType.ADD_WISE_BOARD_SERVICE_TYPE_CHANGE, serviceType: serviceType}),
+    buyCallTimeChange: (buyCallTime) => dispatch({type: AddLayerActionType.ADD_WISE_BOARD_BUY_CALL_TIME_CHANGE, buyCallTime}),
+    ...bindActionCreators({loadSchool: fetchUnpurchasedSchoolSimpleInfos, onSubmit: submitAddWiseBoardCall}, dispatch)
   }
 }
 

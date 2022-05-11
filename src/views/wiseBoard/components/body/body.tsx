@@ -6,14 +6,19 @@ import {ReactNode} from "react";
 import {connect, MapDispatchToProps, MapStateToProps} from "react-redux";
 import {FunctionProperties, NonFunctionProperties} from "../../../../type/util";
 import {RootState} from "../../../../redux/rootReducer";
-import {bindActionCreators} from "redux";
+import {bindActionCreators, Dispatch} from "redux";
 import {fetchWiseBoardListAction} from "../../../../redux/wiseBoard/action";
-import { BaseProps } from "../../../../type/BaseProps";
+import {BaseProps} from "../../../../type/BaseProps";
+import {WiseBoardAction} from "../../../../type/wiseBoard/WiseBoardAction";
+import {RechargeLayerActionType} from "../../../../type/wiseBoard/rechargeLayer/rechargeLayerActionType";
 
 export interface WiseBoardBodyProps {
   loading: boolean
   dataArray: WiseBoardTableData[]
-  fetchWiseBoardListAction: (page: number) => void
+
+  fetchWiseBoardListAction(page: number): void
+
+  showRechargeLayer(data: WiseBoardTableData): void
 }
 
 export class WiseBoardBody extends BaseComponent<WiseBoardBodyProps> {
@@ -78,7 +83,7 @@ export class WiseBoardBody extends BaseComponent<WiseBoardBodyProps> {
     return (
       <WiseBoardTable.Column key={"operation"}>
         <div className={this.class("operation")}>
-          <div className={this.class("recharge")} onClick={() => alert("充值:" + data.schoolId)}>充值</div>
+          <div className={this.class("recharge")} onClick={() => this.props.showRechargeLayer(data)}>充值</div>
           <div className={this.class("split")}/>
           <div className={this.class("recharge-record")} onClick={() => alert("充值记录:" + data.schoolId)}>充值记录</div>
         </div>
@@ -88,7 +93,8 @@ export class WiseBoardBody extends BaseComponent<WiseBoardBodyProps> {
 
   render() {
     return (
-      <WiseBoardTable className={this.rootClass()} dataDescribe={this.getDataDescribe()} dataArray={this.props.dataArray}
+      <WiseBoardTable className={this.rootClass()} dataDescribe={this.getDataDescribe()}
+                      dataArray={this.props.dataArray}
                       loading={this.props.loading}/>
     )
   }
@@ -98,15 +104,21 @@ export class WiseBoardBody extends BaseComponent<WiseBoardBodyProps> {
   }
 }
 
-const mapStateToProps: MapStateToProps<NonFunctionProperties<WiseBoardProps>, WiseBoardProps, RootState> = (state) => {
+const mapStateToProps: MapStateToProps<NonFunctionProperties<WiseBoardBodyProps>, WiseBoardBodyProps, RootState> = (state) => {
   return {
-    loading: state.wiseBoardReducer.loading,
-    dataArray: state.wiseBoardReducer.tableData
+    loading: state.wiseBoardState.listState.loading,
+    dataArray: state.wiseBoardState.listState.tableData
   }
 }
 
-const mapDispatchToProps: MapDispatchToProps<FunctionProperties<WiseBoardProps>, any> = (dispatch) => {
-  return bindActionCreators({fetchWiseBoardListAction}, dispatch)
+const mapDispatchToProps: MapDispatchToProps<FunctionProperties<WiseBoardBodyProps>, any> = (dispatch: Dispatch<WiseBoardAction>) => {
+  return {
+    showRechargeLayer: (data) => {
+      dispatch({type: RechargeLayerActionType.CLEAR_RECHARGE_LAYER})
+      dispatch({type: RechargeLayerActionType.OPEN_RECHARGE_LAYER, rechargeSchool: data})
+    },
+    ...bindActionCreators({fetchWiseBoardListAction}, dispatch)
+  }
 }
 
-export const WiseBoardBodyComponent =  connect(mapStateToProps, mapDispatchToProps)(WiseBoardBody);
+export const WiseBoardBodyComponent = connect(mapStateToProps, mapDispatchToProps)(WiseBoardBody);

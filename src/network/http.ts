@@ -4,6 +4,8 @@ import {WiseBoardListResult} from "../type/wiseBoard/WiseBoardListResult";
 import {ServiceType} from "../type/wiseBoard/WiseBoardTableData";
 import {WxSchoolSimpleInfo} from "../type/WxSchoolSimpleInfo";
 import {AddWiseBoardCallParams} from "../type/wiseBoard/addWiseBoardCallParams";
+import {WxSchoolSimpleInfoParam} from "../type/app/WxSchoolSimpleInfoParam";
+import {RechargeParam} from "../type/wiseBoard/rechargeLayer/rechargeParam";
 
 type ResultType<T> = { error: number, msg: string, data: T };
 
@@ -78,10 +80,12 @@ export const delModules = (params: any) => del('wxSystemModule', params)
 export const putWxSchoolModule = (data: any) => put('wxSchoolModule', data)
 
 //获取学校简要信息
-export const getWxSchoolSimpleInfo = () => responseHandler<WxSchoolSimpleInfo[]>(get('/wxSchoolInfo/simple'), true)
+export const getWxSchoolSimpleInfo = (param?: WxSchoolSimpleInfoParam) => responseHandler<WxSchoolSimpleInfo[]>(get('/wxSchoolInfo/simple', param), true)
 
 //获取班牌视频通话列表，分页查询
 export const getWiseBoardList = (pageNum: number, pageSize: number,  serviceType?: ServiceType, schoolName?: string) => responseHandler<WiseBoardListResult>(get('/wiseboard/list/page', {pageSize, pageNum, serviceType, schoolName}), true)
 
 //添加班牌视频通话
 export const addWiseBoardCall = (params: AddWiseBoardCallParams) => responseHandler<string>(post("/wiseboard/addWiseBoardCall", {...params}))
+
+export const rechargeWiseBoardCall = (param: RechargeParam) => responseHandler<string>(put("/wiseboard/addCallTime", param))

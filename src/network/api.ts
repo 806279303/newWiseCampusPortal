@@ -102,7 +102,7 @@ export const post = (url:string, data:object = {}, config = {}) => {
 }
 /* 统一封装delete请求  */
 export const put = (url:string, data:object = {}, config = {}) => {
-    return new Promise((resolve, reject) => {
+    return new Promise<any>((resolve, reject) => {
         instance({
             method: 'put',
             url,

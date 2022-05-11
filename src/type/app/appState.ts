@@ -1,5 +1,6 @@
 import {WxSchoolSimpleInfo} from "../WxSchoolSimpleInfo";
 
 export interface AppState{
-  schoolSimpleInfos: WxSchoolSimpleInfo[]
+  allSchoolSimpleInfos: WxSchoolSimpleInfo[]
+  unpurchasedSchoolSimpleInfos: WxSchoolSimpleInfo[]
 }

@@ -1,15 +1,26 @@
 import {AppActionType} from "./appActionType";
 import {WxSchoolSimpleInfo} from "../WxSchoolSimpleInfo";
 
-interface FetchSchoolSimpleInfo{
-  type: AppActionType.FETCH_SCHOOL_SIMPLE_INFO
+interface FetchAllSchoolSimpleInfo {
+  type: AppActionType.FETCH_ALL_SCHOOL_SIMPLE_INFO
 }
 
-interface FetchSchoolSimpleInfoSuccess{
-  type: AppActionType.FETCH_SCHOOL_SIMPLE_INFO_SUCCESS
-  schoolSimpleInfos: WxSchoolSimpleInfo[]
+interface FetchALLSchoolSimpleInfoSuccess {
+  type: AppActionType.FETCH_ALL_SCHOOL_SIMPLE_INFO_SUCCESS
+  allSchoolSimpleInfos: WxSchoolSimpleInfo[]
+}
+
+interface FetchUnpurchasedSchoolSimpleInfo {
+  type: AppActionType.FETCH_UNPURCHASED_SCHOOL_SIMPLE_INFO
+}
+
+interface FetchUnpurchasedSchoolSimpleInfoSuccess {
+  type: AppActionType.FETCH_UNPURCHASED_SCHOOL_SIMPLE_INFO_SUCCESS
+  unpurchasedSchoolSimpleInfos: WxSchoolSimpleInfo[]
 }
 
 export type AppAction =
-  | FetchSchoolSimpleInfo
-  | FetchSchoolSimpleInfoSuccess
+  | FetchAllSchoolSimpleInfo
+  | FetchALLSchoolSimpleInfoSuccess
+  | FetchUnpurchasedSchoolSimpleInfo
+  | FetchUnpurchasedSchoolSimpleInfoSuccess

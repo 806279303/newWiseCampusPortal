@@ -5,7 +5,7 @@ import {appReducer} from "./app/reducer";
 // 拿到单个模块的reducer 进行合并 传给store
 export const rootReducer = combineReducers({
   weappReducer,
-  wiseBoardReducer,
+  wiseBoardState: wiseBoardReducer,
   appReducer
 });
 

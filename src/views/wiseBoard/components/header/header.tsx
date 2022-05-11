@@ -10,22 +10,36 @@ import {RootState} from "../../../../redux/rootReducer";
 import {FunctionProperties, NonFunctionProperties} from "../../../../type/util";
 import {bindActionCreators, Dispatch} from "redux";
 import {WiseBoardAction} from "../../../../type/wiseBoard/WiseBoardAction";
-import {WiseBoardActionType} from "../../../../type/wiseBoard/WiseBoardActionType";
 import {onSelectedServiceTypeChange, wiseBoardSearchAction} from "../../../../redux/wiseBoard/action";
 import {ServiceType, serviceTypeOptions} from "../../../../type/wiseBoard/WiseBoardTableData";
+import {WiseBoardListActionType} from "../../../../type/wiseBoard/wiseBoardList/WiseBoardListActionType";
+import {AddLayerActionType} from "../../../../type/wiseBoard/AddLayer/AddLayerActionType";
+import { BaseProps } from "../../../../type/BaseProps";
 
 export interface WiseBoardHeaderProps {
   selectedServiceType: ServiceType
+
   onSelectedServiceTypeChange(serviceType: ServiceType): void
+
   searchWord: string
+
   searchWordChange(schoolName: string): void
+
   search(): void
+
   total: number
+
   openAddLayer(): void
 }
 
 
 export class WiseBoardHeader extends BaseComponent<WiseBoardHeaderProps> {
+
+  constructor(props: WiseBoardHeaderProps & BaseProps) {
+    super(props);
+    this.handleServiceTypeChange = this.handleServiceTypeChange.bind(this)
+  }
+
 
   render() {
     return (
@@ -34,10 +48,16 @@ export class WiseBoardHeader extends BaseComponent<WiseBoardHeaderProps> {
     )
   }
 
+  handleServiceTypeChange(value: ServiceType){
+    if(value !== this.props.selectedServiceType){
+      this.props.onSelectedServiceTypeChange(value)
+    }
+  }
+
   private renderLeft() {
     return (
       <div className={this.class("left")}>
-        <Select value={this.props.selectedServiceType} onChange={this.props.onSelectedServiceTypeChange}>
+        <Select value={this.props.selectedServiceType} onChange={this.handleServiceTypeChange}>
           {
             serviceTypeOptions.map(item => <Select.Option key={item.value} label={item.name} value={item.value}/>)
           }
@@ -67,18 +87,18 @@ export class WiseBoardHeader extends BaseComponent<WiseBoardHeaderProps> {
 
 const mapStateToProps: MapStateToProps<NonFunctionProperties<WiseBoardHeaderProps>, any, RootState> = (state) => {
   return {
-    searchWord: state.wiseBoardReducer.searchSchoolName,
-    selectedServiceType: state.wiseBoardReducer.serviceType,
-    total: state.wiseBoardReducer.total
+    searchWord: state.wiseBoardState.listState.searchSchoolName,
+    selectedServiceType: state.wiseBoardState.listState.serviceType,
+    total: state.wiseBoardState.listState.total
   }
 }
 
 const mapDispatchToProps: MapDispatchToProps<FunctionProperties<WiseBoardHeaderProps>, any> = (dispatch: Dispatch<WiseBoardAction>) => {
   return {
-    searchWordChange: (word) => dispatch({type: WiseBoardActionType.CHANGE_SEARCH_SCHOOL_NAME, searchSchoolName: word}),
+    searchWordChange: (word) => dispatch({type: WiseBoardListActionType.CHANGE_SEARCH_SCHOOL_NAME, searchSchoolName: word}),
     openAddLayer: () => {
-      dispatch({type: WiseBoardActionType.CLEAR_ADD_LAYER})
-      dispatch({type: WiseBoardActionType.OPEN_ADD_LAYER})
+      dispatch({type: AddLayerActionType.CLEAR_ADD_LAYER})
+      dispatch({type: AddLayerActionType.OPEN_ADD_LAYER})
     },
     ...bindActionCreators({search: wiseBoardSearchAction, onSelectedServiceTypeChange}, dispatch)
   }

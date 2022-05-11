@@ -2,7 +2,7 @@ import "./footer.scss"
 import {BaseComponent} from "../../../../type/BaseComponent";
 import {connect, MapDispatchToProps, MapStateToProps} from "react-redux";
 import Pagination from "@/components/pagination";
-import { BaseProps } from "../../../../type/BaseProps";
+import {BaseProps} from "../../../../type/BaseProps";
 import {FunctionProperties, NonFunctionProperties} from "../../../../type/util";
 import {RootState} from "../../../../redux/rootReducer";
 import {fetchWiseBoardListAction} from "../../../../redux/wiseBoard/action";
@@ -45,8 +45,8 @@ export class WiseBoardFooter extends BaseComponent<WiseBoardFooterProps> {
 
 const mapStateToProps: MapStateToProps<NonFunctionProperties<WiseBoardFooterProps>, any, RootState> = (state) => {
   return {
-    currentPage: state.wiseBoardReducer.currentPage,
-    totalPage: state.wiseBoardReducer.totalPage
+    currentPage: state.wiseBoardState.listState.currentPage,
+    totalPage: state.wiseBoardState.listState.totalPage
   }
 }
 
