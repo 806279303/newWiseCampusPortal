@@ -1,25 +1,81 @@
-import React, {Component} from 'react';
-import { LgTabs } from "@/components/tabs";
-
+import React from 'react';
+import {LgTabs} from "@/components/tabs";
 import './index.scss'
-class Index extends Component {
-    render() {
-        return (
-            <div className="tabs-root">
-                <LgTabs
-                    type="card"
-                    closable
-                    activeName="1"
-                    onTabRemove={(tab: any) => console.log(tab.props.name)}
-                >
-                    <LgTabs.LgPane label="用户管理" name="1"></LgTabs.LgPane>
-                    <LgTabs.LgPane label="配置管理" name="2"></LgTabs.LgPane>
-                    <LgTabs.LgPane label="角色管理" name="3"></LgTabs.LgPane>
-                    <LgTabs.LgPane label="定时补偿任务" name="4"></LgTabs.LgPane>
-                </LgTabs>
-            </div>
-        );
-    }
+import {connect, MapDispatchToProps, MapStateToProps} from "react-redux";
+import {FunctionProperties, NonFunctionProperties} from "../../type/util";
+import {RootState} from "../../redux/rootReducer";
+import {BaseComponent} from "../../type/BaseComponent";
+import {TabItem} from "../../type/navTabs/TabItem";
+import {NavTabsAction} from "../../type/navTabs/navTabsAction";
+import {Dispatch} from "redux";
+import {SideBarAction} from "../../type/sideBar/SideBarAction";
+import {NavTabsActionType} from "../../type/navTabs/navTabsActionType";
+import {namePathMap, pathNameMap} from "../../routers/routers";
+import {history} from "../../redux/router/history";
+import {SideBarActionType} from "../../type/sideBar/SideBarActionType";
+import {delay} from "../../utils/delay";
+
+interface NavTabsProps {
+  currentPath: string
+  tabList: TabItem[]
+
+  onRemoveTab(name: string): void
+
+  onSelectChange(name: string): void
 }
 
-export default Index;
+class NavTabs extends BaseComponent<NavTabsProps> {
+  render() {
+    let tabItem = this.props.tabList.find(item => item.selected);
+    let activeName = "-1"
+    if (tabItem) {
+      activeName = tabItem.name
+    }
+    return (
+      <div className="tabs-root">
+        <LgTabs
+          type="card"
+          closable={this.props.tabList.length > 1}
+          activeName={activeName}
+          onTabRemove={(tab: any) => this.props.onRemoveTab(tab.props.name)}
+          onTabClick={e => this.props.onSelectChange(e.props.name)}
+        >
+          {
+            this.props.tabList.map(item =>
+              <LgTabs.LgPane key={item.name} label={item.name} name={item.name}/>
+            )
+          }
+        </LgTabs>
+      </div>
+    );
+  }
+
+  getClassNamePrefix(): string {
+    return "NavTabs";
+  }
+}
+
+const mapStateToProps: MapStateToProps<NonFunctionProperties<NavTabsProps>, any, RootState> = (state) => {
+  console.log(state.navTabsState.tabs)
+  return {
+    currentPath: state.router.location.pathname,
+    tabList: state.navTabsState.tabs
+  }
+}
+
+const mapDispatchToProps: MapDispatchToProps<FunctionProperties<NavTabsProps>, any> = (dispatch: Dispatch<NavTabsAction | SideBarAction>) => {
+  return {
+    onRemoveTab(name: string) {
+      dispatch({type: NavTabsActionType.REMOVE_TAB, name})
+      history.goBack()
+    },
+    onSelectChange(name: string) {
+      let path = namePathMap.get(name);
+      if (path) {
+        history.push(path)
+      }
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavTabs);

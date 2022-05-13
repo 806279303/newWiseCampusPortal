@@ -1,0 +1,4 @@
+export enum SideBarActionType{
+  CHANGE_SELECT = "SIDE_BAR_CHANGE_SELECT",
+  EXPAND = "SIDE_BAR_CHANGE",
+}

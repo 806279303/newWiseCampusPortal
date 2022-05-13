@@ -19,12 +19,12 @@ $textHoverColor: #fff;
 }
 
 .lg_left_tab_List {
-  height: 50px;
+  //height: fit-content;
   overflow: hidden;
-  transition: height 0.2s;
-  -moz-transition: height 0.2s; /* Firefox 4 */
-  -webkit-transition: height 0.2s; /* Safari 和 Chrome */
-  -o-transition: height 0.2s; /* Opera */
+  //transition: height 0.2s;
+  //-moz-transition: height 0.2s; /* Firefox 4 */
+  //-webkit-transition: height 0.2s; /* Safari 和 Chrome */
+  //-o-transition: height 0.2s; /* Opera */
 }
 
 .lg_left_tab_name {
@@ -61,13 +61,24 @@ $textHoverColor: #fff;
   display: none;
 }
 
-.lg_left_tab_List_show .lg_left_show_btn {
+.lg_left_tab_List_show .lg_left_show_btn{
+  display: inline-block;
+}
+
+.lg_left_tab_List_expand .lg_left_show_btn {
   transform: rotate(90deg);
   -ms-transform: rotate(90deg);
 }
 
-.lg_left_tab_List_sub .lg_left_show_btn {
-  display: block;
+.lg_left_tab_sub_item{
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 1s;
+}
+
+.lg_left_tab_List_expand .lg_left_tab_sub_item{
+  max-height: 1000px;
+  transition: max-height 1s;
 }
 
 .lg_left_tab_itam {

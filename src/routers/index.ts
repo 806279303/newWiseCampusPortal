@@ -1,5 +1,5 @@
 import { lazy } from 'react'
-import RouterPath from './routers'
+import {allPath} from "./routers";
 
 export type RouterType = {
     path: string,
@@ -11,39 +11,39 @@ export type RouterType = {
 // 总路由
 const Routers: RouterType[] = ([
     {
-        path: RouterPath.HOME,
+        path: allPath.HOME,
         component: lazy(() => import('../views/home')),
         root: []
     },{
-        path: RouterPath.WEAPP,
+        path: allPath.WEAPP,
         component: lazy(() => import('../views/weappMg')),
         root: []
     },{
-        path: RouterPath.MESSAGE_RECORD,
+        path: allPath.MESSAGE_RECORD,
         component: lazy(() => import('../views/messageRecord')),
         root: []
     },{
-        path: RouterPath.MESSAGE_MODEL,
+        path: allPath.MESSAGE_MODEL,
         component: lazy(() => import('../views/messageModel')),
         root: []
     },{
-        path: RouterPath.SCHOOL_INFO,
+        path: allPath.SCHOOL_INFO,
         component: lazy(() => import('../views/schoolInfo')),
         root: []
     },{
-        path: RouterPath.SCHOOL_SYSTEM,
+        path: allPath.SCHOOL_SYSTEM,
         component: lazy(() => import('../views/schoolSystem')),
         root: []
     },{
-        path: RouterPath.WISEBOARD,
+        path: allPath.WISEBOARD,
         component: lazy(() => import('@/views/wiseBoard')),
         root: []
     },{
-        path: RouterPath.LOG_MANAGEMENT,
+        path: allPath.LOG_MANAGEMENT,
         component: lazy(() => import('../views/logMg')),
         root: []
     },{
-        path: RouterPath.USER_MANAGEMENT,
+        path: allPath.USER_MANAGEMENT,
         component: lazy(() => import('../views/userMg')),
         root: []
     },

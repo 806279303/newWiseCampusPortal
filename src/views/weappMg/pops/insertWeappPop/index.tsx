@@ -119,7 +119,6 @@ export class InsertWeappPop extends BaseComponent<insideWeappPopProps, insideWea
     render() {
         const data: any = this.state.data || {}
         const identityCells = data.identityCells || []
-        console.log(data)
         return (
             <div className={`${this.CNP}`}>
                 <div className={`${this.CNP}-uploadImg`}>

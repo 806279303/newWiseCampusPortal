@@ -1,0 +1,5 @@
+export enum NavTabsActionType{
+  CHANGE_TAB = "NAV_TABS_CHANGE_TAB",
+  ADD_TAB = "NAV_TABS_ADD_TAB",
+  REMOVE_TAB = "NAV_TABS_REMOVE_TAB",
+}

@@ -1,123 +1,157 @@
-import React, {Component, useState} from 'react';
-import {withRouter, RouteComponentProps, useLocation} from "react-router-dom";
 import {Scrollbars} from 'react-custom-scrollbars-2';
-
+import {history} from "../../redux/router/history";
+import classnames from "classnames";
+import {connect, MapDispatchToProps, MapStateToProps} from "react-redux";
+import {SideBarParentItem} from "../../type/sideBar/SideBarParentItem";
+import {SideBarItem} from "../../type/sideBar/SideBarItem";
+import {BaseComponent} from "../../type/BaseComponent";
 import './index.scss'
+import {RootState} from "../../redux/rootReducer";
+import {FunctionProperties, NonFunctionProperties} from "../../type/util";
+import {SideBarAction} from "../../type/sideBar/SideBarAction";
+import {Dispatch} from "redux";
+import {SideBarActionType} from "../../type/sideBar/SideBarActionType";
+import {NavTabsAction} from "../../type/navTabs/navTabsAction";
+import {NavTabsActionType} from "../../type/navTabs/navTabsActionType";
+import {namePathMap} from "../../routers/routers";
 
-interface SlideBarState {
-    routerPath: string
+interface SideBarProps {
+  sideBarParentItems: SideBarParentItem[]
+
+  onExpand(sideBarParentItem: SideBarParentItem): void
+
+  onSelected(parentName: string, sideBarItem: SideBarItem): void
 }
 
-type SlideBarProps = {
-    slideInfo: Array<any>
-} & RouteComponentProps
+class SideBar extends BaseComponent<SideBarProps> {
+  constructor(props: SideBarProps) {
+    super(props);
+    this.addTab = this.addTab.bind(this)
+  }
 
-class Index extends Component<SlideBarProps, SlideBarState> {
-    constructor(props: SlideBarProps) {
-        super(props);
-        this.state = {
-            routerPath: '/'
-        }
-        this.addTab = this.addTab.bind(this)
-    }
+  componentDidMount() {
+    this.setState({routerPath: history.location.pathname})
+  }
 
-    componentDidMount() {
-        this.setState({routerPath: this.props.history.location.pathname})
-    }
+  addTab(routerPath: string) {
+    history.push(routerPath);
+    this.setState({routerPath: routerPath})
+  }
 
-    static getDerivedStateFromProps(props: any) {
-        return {routerPath: props.history.location.pathname};
+  handleSideBarParentItemClick(sideBarParentItem: SideBarParentItem) {
+    if (sideBarParentItem.subItem?.length) {
+      this.props.onExpand(sideBarParentItem)
+    } else {
+      this.props.onSelected("", sideBarParentItem)
     }
+  }
 
-    addTab(routerPath:string) {
-        this.props.history.push(routerPath);
-        this.setState({routerPath: routerPath})
-    }
-
-    render() {
-        return (
-            <div className="side-bar">
-                <Scrollbars className="lg_page_left_content">
-                    <div>
-                        {
-                            this.props.slideInfo.map((o: any, i: number) => {
-                                return <LeftTabWarp data={o} index={i} key={"man_t_w" + i} choTab={this.addTab}
-                                                    routerPath={this.state.routerPath}/>
-                            })
-                        }
-                    </div>
-                </Scrollbars>
-            </div>
-        );
-    }
-}
-
-
-const LeftTabWarp = (props: any) => {
-    let o = props.data, codePath = o.routerPath, hasCho = "", style = {}, index = props.index, routerPath = props.routerPath
-    let btns = o.btns || [];
-    const [isHide, setIsHide] = useState(false);
-    const openSideBar = () => {
-        if (props.data.btns) {
-            setIsHide(!isHide);
-        } else {
-            props.choTab(props.data.routerPath)
-        }
-    }
-    let hasOpen = ""
-    if (btns.length) {//含二级
-        hasOpen = " lg_left_tab_List_sub"
-        if(!isHide){
-            style = {height: 50 + btns.length * 42};
-            hasOpen += " lg_left_tab_List_show"
-        }
-        //有二级，二级包含路由也cho
-        const isBtnsContainRouterPath = btns.some((item:any, index:number)=>{
-            return item.routerPath === routerPath
-        })
-        if(isBtnsContainRouterPath){
-            hasCho = " lg_left_tab_List_cho";
-        }
-    } else {//只有一级
-        if (codePath === routerPath) {
-            hasCho += " lg_left_tab_List_cho";
-        }
-    }
+  render() {
     return (
-        <div className={"lg_left_tab_List" + hasOpen + hasCho} style={style}>
-            <div className="lg_left_tab_name" onClick={openSideBar} style={{backgroundImage: "url('" + o.icon + "')"}}>
-                <RedNode hasNode={o.redNode}>{o.name}</RedNode>
-                <b className="lg_left_show_btn">{">"}</b>
-            </div>
+      <div className="side-bar">
+        <Scrollbars className="lg_page_left_content">
+          <div>
             {
-                btns.map((o: any, i: number) => {
-                    return <LeftTabItem data={o} index={index} key={"man_t_i" + i} choTab={props.choTab}
-                                        routerPath={routerPath}/>
-                })
+              this.props.sideBarParentItems.map((item) => {
+                return <LeftTabWarp onClickSubItem={subItem => this.props.onSelected(item.name, subItem)}
+                                    onClick={() => this.handleSideBarParentItemClick(item)} {...item} key={item.name}/>
+              })
             }
-        </div>
-    )
-}
-const LeftTabItem = (props: any) => {
-    const o = props.data;
-    let hasChoSub = (o.routerPath === props.routerPath) ? " lg_left_tab_i_cho" : "";
-    const choTab = ()=>{
-        props.choTab(o.routerPath)
-    }
-    return (
-        <div className={"lg_left_tab_itam clear " + hasChoSub} onClick={choTab}>
-            <div className="lg_left_tab_i_node left"/>
-            <div className="lg_left_tab_text left"><RedNode hasNode={o.redNode}>{o.name}</RedNode></div>
-        </div>
-    )
-}
-const RedNode = (props: { hasNode?: boolean, children: string, className?: string }) => {
-    return (
-        <span className={`lg_red_node ${props.className || ""}`}>
-            {props.children}
-            {props.hasNode ? <b className="lg_red_node_show"/> : null}
-        </span>
-    )
+          </div>
+        </Scrollbars>
+      </div>
+    );
+  }
+
+  getClassNamePrefix(): string {
+    return "SideBar";
+  }
 }
 
-export default withRouter(Index);
+
+interface LeftTabWarpProps extends SideBarParentItem {
+  onClick?(): void
+
+  onClickSubItem?(sideBarItem: SideBarItem): void
+}
+
+const LeftTabWarp = (props: LeftTabWarpProps) => {
+
+  const className = classnames(
+    "lg_left_tab_List",
+    {
+      "lg_left_tab_List_show": props.subItem?.length,
+      "lg_left_tab_List_expand": props.expand,
+      "lg_left_tab_List_cho": props.selected
+    }
+  )
+
+  return (
+    <div className={className}>
+      <div className="lg_left_tab_name" onClick={props.onClick} style={{backgroundImage: "url('" + props.icon + "')"}}>
+        <RedNode hasNode={props.redPoint}>{props.name}</RedNode>
+        <b className="lg_left_show_btn">{">"}</b>
+      </div>
+      <div className={"lg_left_tab_sub_item"}>
+        {
+          props.subItem?.map((item) => {
+            return <LeftTabItem {...item} key={item.name}
+                                onClick={() => props.onClickSubItem && props.onClickSubItem(item)}/>
+          })
+        }
+      </div>
+    </div>
+  )
+}
+
+interface LeftTabItemProps extends SideBarItem {
+  onClick?(): void
+}
+
+const LeftTabItem = (props: LeftTabItemProps) => {
+  const classNames = classnames(
+    "lg_left_tab_itam",
+    "clear",
+    {
+      "lg_left_tab_i_cho": props.selected
+    }
+  )
+  return (
+    <div className={classNames} onClick={props.onClick}>
+      <div className={"lg_left_tab_i_node left"}/>
+      <div className="lg_left_tab_text left"><RedNode hasNode={props.redPoint}>{props.name}</RedNode></div>
+    </div>
+  )
+}
+
+const RedNode = (props: { hasNode?: boolean, children: string, className?: string }) => {
+  return (
+    <span className={`lg_red_node ${props.className || ""}`}>
+            {props.children}
+      {props.hasNode ? <b className="lg_red_node_show"/> : null}
+        </span>
+  )
+}
+
+const mapStateToProps: MapStateToProps<NonFunctionProperties<SideBarProps>, any, RootState> = (state) => {
+
+  return {
+    sideBarParentItems: state.sideBarState.sideBarParentItems
+  }
+}
+
+const mapDispatchToProps: MapDispatchToProps<FunctionProperties<SideBarProps>, any> = (dispatch: Dispatch<SideBarAction | NavTabsAction>) => {
+  return {
+    onExpand(sideBarParentItem: SideBarParentItem) {
+      dispatch({type: SideBarActionType.EXPAND, sideBarParentItem})
+    },
+    onSelected(parentName: string, sideBarItem: SideBarItem) {
+      let path = namePathMap.get(sideBarItem.name);
+      if (path) {
+        history.push(path)
+      }
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SideBar);
