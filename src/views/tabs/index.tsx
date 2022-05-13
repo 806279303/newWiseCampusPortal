@@ -10,16 +10,14 @@ import {NavTabsAction} from "../../type/navTabs/navTabsAction";
 import {Dispatch} from "redux";
 import {SideBarAction} from "../../type/sideBar/SideBarAction";
 import {NavTabsActionType} from "../../type/navTabs/navTabsActionType";
-import {namePathMap, pathNameMap} from "../../routers/routers";
+import {namePathMap} from "../../routers/routers";
 import {history} from "../../redux/router/history";
-import {SideBarActionType} from "../../type/sideBar/SideBarActionType";
-import {delay} from "../../utils/delay";
 
 interface NavTabsProps {
   currentPath: string
   tabList: TabItem[]
 
-  onRemoveTab(name: string): void
+  onRemoveTab(name: string, isSelected: boolean): void
 
   onSelectChange(name: string): void
 }
@@ -37,7 +35,7 @@ class NavTabs extends BaseComponent<NavTabsProps> {
           type="card"
           closable={this.props.tabList.length > 1}
           activeName={activeName}
-          onTabRemove={(tab: any) => this.props.onRemoveTab(tab.props.name)}
+          onTabRemove={(tab: any) => this.props.onRemoveTab(tab.props.name, tab.props.name === activeName)}
           onTabClick={e => this.props.onSelectChange(e.props.name)}
         >
           {
@@ -65,9 +63,11 @@ const mapStateToProps: MapStateToProps<NonFunctionProperties<NavTabsProps>, any,
 
 const mapDispatchToProps: MapDispatchToProps<FunctionProperties<NavTabsProps>, any> = (dispatch: Dispatch<NavTabsAction | SideBarAction>) => {
   return {
-    onRemoveTab(name: string) {
+    onRemoveTab(name, isSelected) {
       dispatch({type: NavTabsActionType.REMOVE_TAB, name})
-      history.goBack()
+      if(isSelected){
+        history.goBack()
+      }
     },
     onSelectChange(name: string) {
       let path = namePathMap.get(name);

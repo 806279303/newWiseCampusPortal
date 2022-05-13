@@ -6,6 +6,7 @@ import {history} from "./router/history";
 import {NavTabsActionType} from "../type/navTabs/navTabsActionType";
 import {pathNameMap} from "../routers/routers";
 import {SideBarActionType} from "../type/sideBar/SideBarActionType";
+import {Location} from "history";
 
 
 // 引入后的reducer store是唯一的
@@ -14,7 +15,7 @@ const store = createStore(rootReducer, applyMiddleware(thunk, routerMiddleware(h
 export default store;
 
 
-function dispatchRouterAction(location: any) {
+function dispatchRouterAction(location: Location) {
   let path = location.pathname
   let nextName = pathNameMap.get(path)
   store.dispatch({
@@ -27,7 +28,7 @@ function dispatchRouterAction(location: any) {
 }
 
 //监听路由变化
-history.listen((location, action) => {
+history.listen((location) => {
   dispatchRouterAction(location);
 })
 
