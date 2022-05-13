@@ -12,7 +12,6 @@ import {SideBarAction} from "../../type/sideBar/SideBarAction";
 import {Dispatch} from "redux";
 import {SideBarActionType} from "../../type/sideBar/SideBarActionType";
 import {NavTabsAction} from "../../type/navTabs/navTabsAction";
-import {NavTabsActionType} from "../../type/navTabs/navTabsActionType";
 import {namePathMap} from "../../routers/routers";
 
 interface SideBarProps {

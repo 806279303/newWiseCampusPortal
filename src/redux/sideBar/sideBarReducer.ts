@@ -3,6 +3,7 @@ import {SideBarAction} from "../../type/sideBar/SideBarAction";
 import icon from "../../images/default_icon.png"
 import {SideBarActionType} from "../../type/sideBar/SideBarActionType";
 import {SideBarItem} from "../../type/sideBar/SideBarItem";
+import {SideBarParentItem} from "../../type/sideBar/SideBarParentItem";
 
 const initialState: SideBarState = {
   sideBarParentItems: [
@@ -70,16 +71,26 @@ export const SideBarReducer = (state: SideBarState = initialState, action: SideB
         }
       }else{
         //处理子节点
-        let allSideBarItems = state.sideBarParentItems.reduce((array, item) => {
-          if(item.subItem){
-            array = array.concat(item.subItem)
+        let targetSideBarParentItem: SideBarParentItem | null = null
+        let targetSideBarItem: SideBarItem | null = null
+        for (let sideBarParentItem of state.sideBarParentItems) {
+          if(sideBarParentItem.subItem?.length){
+            for (let sideBarItem of sideBarParentItem.subItem) {
+              if(sideBarItem.name === action.sideBarItemName){
+                targetSideBarParentItem = sideBarParentItem
+                targetSideBarItem = sideBarItem
+                break
+              }
+            }
+            if(targetSideBarParentItem){
+              break
+            }
           }
-          return array
-        }, new Array<SideBarItem>());
-        let selectedItem = allSideBarItems.find(item => item.name === action.sideBarItemName);
-        if (selectedItem) {
+        }
+        if (targetSideBarParentItem && targetSideBarItem) {
           const newSideBarParentItems = clearSelected(state);
-          selectedItem.selected = true
+          targetSideBarItem.selected = true
+          targetSideBarParentItem.selected = true
           return {...state, sideBarParentItems: newSideBarParentItems}
         }
       }
