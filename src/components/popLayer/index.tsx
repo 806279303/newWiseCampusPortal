@@ -92,7 +92,6 @@ export class LgPopLayer extends Component<PopLayerProps, PopLayerState, { isOpen
      * @return        { type * } 
      */
     closePopLayer(type: number = 0, fun?: (isOpen?: boolean) => any) {
-        console.log('关闭页面');
         document.documentElement.style.overflow = 'auto';
         this.setState({
             isOpen: false

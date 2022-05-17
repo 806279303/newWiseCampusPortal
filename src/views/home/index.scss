@@ -1,0 +1,14 @@
+$classNamePrefix: lg-home-page;
+
+.#{$classNamePrefix}-root{
+  background-color: #f5f5f5;
+  .#{$classNamePrefix}-footer{
+    width: 100%;
+    padding: 12px 0;
+    box-sizing: border-box;
+    color: #b8b8b8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

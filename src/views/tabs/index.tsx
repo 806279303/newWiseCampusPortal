@@ -54,7 +54,6 @@ class NavTabs extends BaseComponent<NavTabsProps> {
 }
 
 const mapStateToProps: MapStateToProps<NonFunctionProperties<NavTabsProps>, any, RootState> = (state) => {
-  console.log(state.navTabsState.tabs)
   return {
     currentPath: state.router.location.pathname,
     tabList: state.navTabsState.tabs

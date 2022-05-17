@@ -130,7 +130,6 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
     }
 
     openIndexChange(activeNames: string) {
-        console.log(activeNames)
         this.openIndex = activeNames
     }
 

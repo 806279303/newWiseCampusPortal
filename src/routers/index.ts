@@ -12,7 +12,7 @@ export type RouterType = {
 const Routers: RouterType[] = ([
     {
         path: allPath.HOME,
-        component: lazy(() => import('../views/home')),
+        component: lazy(() => import('@/views/home')),
         root: []
     },{
         path: allPath.WEAPP,
