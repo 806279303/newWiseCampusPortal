@@ -3,6 +3,8 @@ import {BaseComponent} from "../../type/BaseComponent";
 import {BaseProps} from "../../type/BaseProps";
 import {DatePicker, DateRangePicker, TimeSelect} from "element-react"
 
+export type SelectionMode = 'year' | 'month' | 'week' | 'day'
+
 export interface LgDatePickerProps extends DatePickerProps, TimeSelectProps{
   type?: "A" | "B" | "C" | "D"
 }
