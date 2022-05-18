@@ -2,6 +2,7 @@ import "./index.scss"
 import {BaseComponent} from "../../type/BaseComponent";
 import {FlexFillViewFrame} from "../flexFillViewFrame"
 import {ReactNode} from "react";
+import {Scrollbars} from "react-custom-scrollbars-2";
 
 export interface MainContentViewProps {
   header?: ReactNode
@@ -16,17 +17,22 @@ export class MainContentView extends BaseComponent<MainContentViewProps> {
   render() {
     return (
       <div className={this.rootClass()}>
-        <FlexFillViewFrame flexFillViewClassName={this.props.bodyClassName} flexStart={this.renderHeader()} flexEnd={this.renderFooter()} orientation="vertical">
-          {
-            this.props.children
-          }
+        <FlexFillViewFrame flexFillViewClassName={this.props.bodyClassName} flexStart={this.renderHeader()}
+                           flexEnd={this.renderFooter()} orientation="vertical">
+          <Scrollbars>
+            <div className={this.class("body")}>
+              {
+                this.props.children
+              }
+            </div>
+          </Scrollbars>
         </FlexFillViewFrame>
       </div>
     )
   }
 
   renderHeader() {
-    if(!this.props.header){
+    if (!this.props.header) {
       return ""
     }
 
@@ -40,7 +46,7 @@ export class MainContentView extends BaseComponent<MainContentViewProps> {
   }
 
   renderFooter() {
-    if(!this.props.footer){
+    if (!this.props.footer) {
       return ""
     }
     return (

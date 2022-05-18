@@ -7,22 +7,19 @@ import {VisitsStatistical, VisitsStatisticalItem} from "@/views/home/component/V
 import {MiniProgramStatistical, MiniProgramStatisticalItem} from "@/views/home/component/MiniProgramStatistical";
 import {ExceptionTable, ExceptionTableItem} from "@/views/home/component/ExceptionTable";
 import {RealtimePushTable, RealtimePushTableItem} from "@/views/home/component/RealtimePushTable";
-import {Scrollbars} from "react-custom-scrollbars-2";
 
 class HomePage extends BaseComponent {
   render() {
     return (
       <MainContentView className={this.rootClass()} footer={this.renderFooter()}>
-        <Scrollbars>
-          <div className={this.class("body")}>
-            {
-              this.renderHeader()
-            }
-            {
-              this.renderBody()
-            }
-          </div>
-        </Scrollbars>
+        <div className={this.class("body")}>
+          {
+            this.renderHeader()
+          }
+          {
+            this.renderBody()
+          }
+        </div>
       </MainContentView>
     );
   }
