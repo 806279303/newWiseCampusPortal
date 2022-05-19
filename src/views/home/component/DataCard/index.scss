@@ -35,11 +35,12 @@ $classNamePrefix: lg-data-card;
       }
     }
     .#{$classNamePrefix}-action{
-      margin-right: 10px;
+      margin-right: 16px;
     }
   }
 
   .#{$classNamePrefix}-body{
     height: calc(100% - #{$headerHeight});
+    overflow: hidden;
   }
 }

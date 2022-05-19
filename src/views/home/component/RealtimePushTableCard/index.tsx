@@ -10,6 +10,9 @@ import {RootState} from "../../../../redux/rootReducer";
 import {bindActionCreators, Dispatch} from "redux";
 import {RealtimePushTableCardAction} from "../../../../type/home/realtimePushTableCard/RealtimePushTableCardAction";
 import {loadData} from "../../../../redux/home/realtimePushTableCard/RealtimePushTableCardAction";
+import "./index.scss"
+import {history} from "../../../../redux/router/history";
+import {allPath} from "../../../../routers/routers";
 
 const RealtimePushTable = createTableClass<RealtimePushTableItem>()
 type RealtimePushTableDescribe = LgSimpleTableDataDescribe<RealtimePushTableItem>
@@ -19,6 +22,7 @@ export interface RealtimePushTableCardProps {
   loading: boolean
   items: RealtimePushTableItem[]
   loadData(): void
+  gotoDetail(): void
 }
 
 export class RealtimePushTableCard extends BaseComponent<RealtimePushTableCardProps>{
@@ -31,13 +35,21 @@ export class RealtimePushTableCard extends BaseComponent<RealtimePushTableCardPr
 
   render() {
     return(
-      <DataCard title="即时推送" className={this.rootClass()}>
+      <DataCard title="即时推送" className={this.rootClass()} action={this.renderAction()}>
         <RealtimePushTable
           dataArray={this.props.items}
           dataDescribe={this.getDataDescribe()}
           loading={this.props.loading}
         />
       </DataCard>
+    )
+  }
+
+  renderAction(){
+    return(
+      <div onClick={this.props.gotoDetail} className={this.class("goto-detail")}>
+        more
+      </div>
     )
   }
 
@@ -84,7 +96,10 @@ const mapStateToProps: MapStateToProps<NonFunctionProperties<RealtimePushTableCa
 
 const mapDispatchToProps: MapDispatchToProps<FunctionProperties<RealtimePushTableCardProps>, RealtimePushTableCardProps> = (dispatch: Dispatch<RealtimePushTableCardAction>) => {
   return{
-    ...bindActionCreators({loadData}, dispatch)
+    ...bindActionCreators({loadData}, dispatch),
+    gotoDetail: () => {
+      history.push(allPath.MESSAGE_RECORD)
+    }
   }
 }
 

@@ -1,0 +1,17 @@
+$classNamePrefix: lg-realtime-push-table-card;
+
+.#{$classNamePrefix}-root{
+  .#{$classNamePrefix}-goto-detail{
+    height: 35px;
+    width: 40px;
+    font-size: 14px;
+    color: #09f;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    &:hover{
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+}
