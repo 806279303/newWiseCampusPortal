@@ -1,0 +1,9 @@
+@import "src/css/mixin";
+
+$classNamePrefix: lg-fill-flex-container;
+
+.#{$classNamePrefix}-root{
+  height: 100%;
+  width: 100%;
+  @include flexCenter();
+}

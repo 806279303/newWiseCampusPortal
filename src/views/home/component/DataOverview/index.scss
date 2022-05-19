@@ -1,3 +1,5 @@
+@import "src/css/mixin";
+
 $classNamePrefix: lg-data-overview;
 
 .#{$classNamePrefix}-root {
@@ -6,6 +8,12 @@ $classNamePrefix: lg-data-overview;
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    .#{$classNamePrefix}-loading{
+      height: 107px;
+      @include flexCenter();
+    }
+
     .#{$classNamePrefix}-list-data {
       display: flex;
       justify-content: space-between;
@@ -60,7 +68,7 @@ $classNamePrefix: lg-data-overview;
     }
 
     .#{$classNamePrefix}-footer-tips {
-      margin-top: 24px;
+      margin-top: 12px;
       width: 100%;
       color: #999;
       font-size: 14px;

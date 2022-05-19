@@ -6,6 +6,7 @@ import { connectRouter } from 'connected-react-router'
 import {history} from "./router/history";
 import {navTabsReducer} from "./navTabs/navTabsReducer";
 import {SideBarReducer} from "./sideBar/sideBarReducer";
+import {HomeReducer} from "./home/HomeReducer";
 
 // 拿到单个模块的reducer 进行合并 传给store
 export const rootReducer = combineReducers({
@@ -14,7 +15,8 @@ export const rootReducer = combineReducers({
   appReducer,
   router:connectRouter(history),
   navTabsState: navTabsReducer,
-  sideBarState: SideBarReducer
+  sideBarState: SideBarReducer,
+  homeState: HomeReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>

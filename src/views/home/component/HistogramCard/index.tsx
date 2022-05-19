@@ -3,13 +3,17 @@ import {LgCharts} from "@/components/charts";
 import {DataCard} from "@/views/home/component/DataCard";
 import {EChartsOption} from "echarts-for-react/lib/types";
 import {graphic} from "echarts";
+import {ReactNode} from "react";
+import {LgLoading} from "@/components/loading";
+import {FillFlexContainer} from "@/components/fillFlexContainer";
+import {LgEmpty} from "@/components/empty";
 
-export interface HistogramCardItem{
+export interface HistogramCardItem {
   name: string
   num: number
 }
 
-export interface HistogramCardProps{
+export interface HistogramCardProps {
   title: string
   items: HistogramCardItem[]
   color: {
@@ -17,12 +21,45 @@ export interface HistogramCardProps{
     end: string
   },
   fontColor: string
+  action?: ReactNode
+  loading?: boolean
 }
 
-export class HistogramCard extends BaseComponent<HistogramCardProps>{
+export class HistogramCard extends BaseComponent<HistogramCardProps> {
 
 
   render() {
+
+
+    return (
+      <DataCard title={this.props.title} className={this.rootClass()} action={this.props.action}>
+
+        {
+          this.props.loading ?
+            this.renderLoading() :
+            this.renderCharts()
+        }
+
+      </DataCard>
+    )
+  }
+
+  renderLoading() {
+    return (
+      <FillFlexContainer>
+        <LgLoading/>
+      </FillFlexContainer>
+    )
+  }
+
+  renderCharts() {
+    if (this.props.items.length <= 0) {
+      return (
+        <FillFlexContainer>
+          <LgEmpty/>
+        </FillFlexContainer>
+      )
+    }
 
     const options: EChartsOption = {
       xAxis: {
@@ -64,11 +101,8 @@ export class HistogramCard extends BaseComponent<HistogramCardProps>{
         },
       ],
     };
-
-    return(
-      <DataCard title={this.props.title} className={this.rootClass()}>
-        <LgCharts option={options} notMerge={true} lazyUpdate={true} style={{height: "220px"}}/>
-      </DataCard>
+    return (
+      <LgCharts option={options} notMerge={true} lazyUpdate={true} style={{height: "220px"}}/>
     )
   }
 

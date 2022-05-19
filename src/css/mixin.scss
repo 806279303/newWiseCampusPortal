@@ -1,3 +1,9 @@
+@mixin flexCenter{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @mixin scrollStyle($prefix){
   /*滚动条bai整体*/
   #{$prefix}::-webkit-scrollbar{
