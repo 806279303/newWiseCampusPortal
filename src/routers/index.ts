@@ -40,7 +40,7 @@ const Routers: RouterType[] = ([
         root: []
     },{
         path: allPath.LOG_MANAGEMENT,
-        component: lazy(() => import('../views/logMg')),
+        component: lazy(() => import('@/views/logMg')),
         root: []
     },{
         path: allPath.USER_MANAGEMENT,

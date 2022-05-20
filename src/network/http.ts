@@ -8,6 +8,9 @@ import {WxSchoolSimpleInfoParam} from "../type/app/WxSchoolSimpleInfoParam";
 import {RechargeParam} from "../type/wiseBoard/rechargeLayer/rechargeParam";
 import {RechargeRecordParam} from "../type/wiseBoard/rechargeRecordLayer/RechargeRecordParam";
 import {RechargeRecordResult} from "../type/wiseBoard/rechargeRecordLayer/rechargeRecordResult";
+import {OperationLogParam} from "../type/logMg/operationLogParam";
+import {PageResult} from "../type/pageResult";
+import {OperationLogItem} from "../type/logMg/OperationLogItem";
 
 type ResultType<T> = { error: number, msg: string, data: T };
 
@@ -104,3 +107,5 @@ export const addWiseBoardCall = (params: AddWiseBoardCallParams) => responseHand
 export const rechargeWiseBoardCall = (param: RechargeParam) => responseHandler<string>(put("/wiseboard/addCallTime", param))
 
 export const getRechargeRecord = (param: RechargeRecordParam) => responseHandler<RechargeRecordResult>(get("wiseboard/page/getRecords", param), true)
+
+export const getOperationLog = (param: OperationLogParam) => responseHandler<PageResult<OperationLogItem>>(get("/manage/log/list/page", param), true)

@@ -7,6 +7,7 @@ import {history} from "./router/history";
 import {navTabsReducer} from "./navTabs/navTabsReducer";
 import {SideBarReducer} from "./sideBar/sideBarReducer";
 import {HomeReducer} from "./home/HomeReducer";
+import {logMgReducer} from "./logMg/LogMgReducer";
 
 // 拿到单个模块的reducer 进行合并 传给store
 export const rootReducer = combineReducers({
@@ -16,7 +17,8 @@ export const rootReducer = combineReducers({
   router:connectRouter(history),
   navTabsState: navTabsReducer,
   sideBarState: SideBarReducer,
-  homeState: HomeReducer
+  homeState: HomeReducer,
+  logMgState: logMgReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>

@@ -7,4 +7,6 @@ $classNamePrefix: lg-simple-table-column;
   flex: 1;
   box-sizing: border-box;
   padding: 10px;
+  overflow: hidden;
+  word-break: break-all;
 }
