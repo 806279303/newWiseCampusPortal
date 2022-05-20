@@ -27,8 +27,8 @@ export class MiniProgramStatistical extends BaseComponent<MiniProgramStatistical
 
   render() {
     const items: HistogramCardItem[] = this.props.items.map(item => ({
-      name: item.miniProgramName,
-      num: item.num
+      name: item.systemName,
+      num: item.viewedNumber
     }))
     return (
       <HistogramCard loading={this.props.loading}

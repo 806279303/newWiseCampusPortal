@@ -1,4 +1,5 @@
 export interface ExceptionStatisticalItem {
+  schoolId: string
   schoolName: string
-  num: number
+  exceptionNumber: number
 }

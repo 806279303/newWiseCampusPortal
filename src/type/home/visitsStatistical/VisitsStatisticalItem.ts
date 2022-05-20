@@ -1,4 +1,5 @@
 export interface VisitsStatisticalItem {
+  schoolId: string
   schoolName: string
-  num: number
+  visitedNumber: number
 }

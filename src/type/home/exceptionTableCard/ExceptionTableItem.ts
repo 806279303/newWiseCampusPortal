@@ -1,7 +1,7 @@
 export interface ExceptionTableItem {
   schoolId: string
   schoolName: string
-  exceptionPath: string
+  requestUrl: string
   ip: string
   date: string
 }

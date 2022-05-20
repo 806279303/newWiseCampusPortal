@@ -65,15 +65,15 @@ export class RealtimePushTableCard extends BaseComponent<RealtimePushTableCardPr
         headName: "学校名称",
       },
       {
-        field: "sysId",
+        field: "systemId",
         headName: "系统ID",
       },
       {
-        field: "sysName",
+        field: "systemName",
         headName: "系统名称",
       },
       {
-        field: "date",
+        field: "createTime",
         headName: "时间",
         width: "150px",
         color: "#999"
