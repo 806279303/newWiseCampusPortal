@@ -10,7 +10,6 @@ import {RootState} from "../../redux/rootReducer";
 import {LeftRightLayout} from "@/components/LeftRightLayout";
 import {Search} from "@/components/search";
 import {LogMgFooter} from "@/views/logMg/component/footer/footer";
-import {bindActionCreators, Dispatch} from "redux";
 import {loadData} from "../../redux/logMg/LogMgAction";
 import {LogMgAction} from "../../type/logMg/LogMgAction";
 import {LogMgActionType} from "../../type/logMg/LogMgActionType";
@@ -42,7 +41,7 @@ class LogMg extends BaseComponent<LogMgProps> {
   render() {
     return (
       <MainContentView className={this.rootClass()} header={this.renderHeader()} footer={this.renderFooter()}>
-        <OperationLogTable dataArray={this.props.operationLogItems} dataDescribe={this.getDataDescribe()}/>
+        <OperationLogTable loading={this.props.loading} dataArray={this.props.operationLogItems} dataDescribe={this.getDataDescribe()}/>
       </MainContentView>
     );
   }
@@ -88,7 +87,7 @@ class LogMg extends BaseComponent<LogMgProps> {
         headName: "用户角色",
         render: (data: OperationLogItem, index: number): ReactNode => {
           return (
-            <OperationLogTable.Column key="userName">
+            <OperationLogTable.Column key="userType">
               {
                 nameMap.get(data.userType)
               }
