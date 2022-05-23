@@ -52,15 +52,15 @@ export class ExceptionTableCard extends BaseComponent<ExceptionTableCardProps>{
         headName: "学校名称",
       },
       {
-        field: "exceptionPath",
+        field: "requestUrl",
         headName: "异常路径",
       },
       {
-        field: "exceptionPath",
+        field: "ip",
         headName: "IP",
       },
       {
-        field: "date",
+        field: "createTime",
         headName: "时间",
         width: "150px",
         color: "#999"

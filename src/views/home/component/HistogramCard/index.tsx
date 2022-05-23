@@ -63,6 +63,16 @@ export class HistogramCard extends BaseComponent<HistogramCardProps> {
 
     const options: EChartsOption = {
       xAxis: {
+        axisLabel: {
+          // ellipse: '...'
+          // rotate: 45
+          formatter: function (params: string) {
+            if (params.length > 4) {
+              return params.substring(0, 4) + "..."
+            } else
+              return params
+          }
+        },
         type: "category",
         data: this.props.items.map(item => item.name),
       },
@@ -100,9 +110,20 @@ export class HistogramCard extends BaseComponent<HistogramCardProps> {
           type: "bar",
         },
       ],
+      tooltip: {
+        position: function (point: any) {
+          // 固定在顶部
+          return [point[0] - 10, point[1] - 20];
+        },
+        formatter: function (params: any) {
+          return `
+            ${params.name}
+          `
+        }
+      }
     };
     return (
-      <LgCharts option={options} notMerge={true} lazyUpdate={true} style={{height: "220px"}}/>
+      <LgCharts option={options} notMerge={true} lazyUpdate={true} style={{height: "120%", width: "100%"}}/>
     )
   }
 

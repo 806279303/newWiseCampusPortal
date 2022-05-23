@@ -11,6 +11,11 @@ import {RechargeRecordResult} from "../type/wiseBoard/rechargeRecordLayer/rechar
 import {OperationLogParam} from "../type/logMg/operationLogParam";
 import {PageResult} from "../type/pageResult";
 import {OperationLogItem} from "../type/logMg/OperationLogItem";
+import {ExceptionStatisticalItem} from "../type/home/exceptionStatistical/ExceptionStatisticalItem";
+import {VisitsStatisticalItem} from "../type/home/visitsStatistical/VisitsStatisticalItem";
+import {MiniProgramStatisticalItem} from "../type/home/miniProgramStatistical/MiniProgramStatisticalItem";
+import {ExceptionTableItem} from "../type/home/exceptionTableCard/ExceptionTableItem";
+import {RealtimePushTableItem} from "../type/home/realtimePushTableCard/RealtimePushTableItem";
 
 type ResultType<T> = { error: number, msg: string, data: T };
 
@@ -109,3 +114,15 @@ export const rechargeWiseBoardCall = (param: RechargeParam) => responseHandler<s
 export const getRechargeRecord = (param: RechargeRecordParam) => responseHandler<RechargeRecordResult>(get("wiseboard/page/getRecords", param), true)
 
 export const getOperationLog = (param: OperationLogParam) => responseHandler<PageResult<OperationLogItem>>(get("/manage/log/list/page", param), true)
+
+export const getDataOverview = (date: string) => responseHandler<{viewNumber: number, pushMessageNumber: number, exceptionNumber: number}>(get("/wxManage/getDataOverview", {secret: "lancoo", date}))
+
+export const getSchoolExceptionStatics = (date: string, limit: number) => responseHandler<ExceptionStatisticalItem[]>(get("/wxManage/getSchoolExceptionStatics", {secret: "lancoo", date, limit}))
+
+export const getSchoolViewStatics = (date: string, limit: number) => responseHandler<VisitsStatisticalItem[]>(get("/wxManage/getSchoolViewStatics", {secret: "lancoo", date, limit}))
+
+export const getMostUsedWxApplet = (date: string, limit: number) => responseHandler<MiniProgramStatisticalItem[]>(get("/wxManage/getMostUsedWxApplet", {secret: "lancoo", date, limit}))
+
+export const getRealTimeExceptions = (limit: number) => responseHandler<ExceptionTableItem[]>(get("/wxManage/getRealTimeExceptions", {secret: "lancoo", limit}))
+
+export const getRealTimeWxPushRecord = (limit: number) => responseHandler<RealtimePushTableItem[]>(get("/wxManage/getRealTimeWxPushRecord", {secret: "lancoo", limit}))

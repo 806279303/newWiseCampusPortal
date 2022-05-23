@@ -1,4 +1,5 @@
 export interface MiniProgramStatisticalItem {
-  miniProgramName: string
-  num: number
+  systemId: string
+  systemName: string
+  viewedNumber: number
 }

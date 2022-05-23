@@ -28,7 +28,7 @@ export class VisitsStatistical extends BaseComponent<VisitsStatisticalProps> {
   render() {
     const items: HistogramCardItem[] = this.props.items.map(item => ({
       name: item.schoolName,
-      num: item.num
+      num: item.visitedNumber
     }))
     return (
       <HistogramCard loading={this.props.loading}

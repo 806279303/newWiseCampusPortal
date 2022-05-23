@@ -4,6 +4,7 @@ import {DataOverviewAction} from "../../../type/home/dataOverview/DataOverviewAc
 import {DataOverviewActionType} from "../../../type/home/dataOverview/DataOverviewActionType";
 import {delay} from "../../../utils/delay";
 import dayjs from "dayjs";
+import {getDataOverview} from "../../../network/http";
 
 export const loadData = (searchDate: Date) => {
   return async (dispatch: Dispatch<DataOverviewAction>, getState: () => RootState) => {
@@ -14,14 +15,23 @@ export const loadData = (searchDate: Date) => {
 
     const newDate = dayjs(searchDate);
     const oldDate = dayjs(oldSearchDate);
-    if(newDate.format("YYYY-MM") === oldDate.format("YYYY-MM")
-      && (dataOverviewState.loginNumber || dataOverviewState.exceptionNumber || dataOverviewState.pushNumber)){
+    if (newDate.format("YYYY-MM") === oldDate.format("YYYY-MM")
+      && (dataOverviewState.loginNumber || dataOverviewState.exceptionNumber || dataOverviewState.pushNumber)) {
       return
     }
 
     dispatch({type: DataOverviewActionType.CHANGE_SEARCH_DATE, searchDate})
     dispatch({type: DataOverviewActionType.LOAD_DATA})
-    await delay(1000)
-    dispatch({type: DataOverviewActionType.LOAD_DATA_SUCCESS, loginNumber: 20, pushNumber: 30, exceptionNumber: 40})
+    try {
+      const result = await getDataOverview(dayjs(searchDate).format("YYYY-MM"));
+      dispatch({
+        type: DataOverviewActionType.LOAD_DATA_SUCCESS,
+        loginNumber: result.viewNumber,
+        pushNumber: result.pushMessageNumber,
+        exceptionNumber: result.exceptionNumber
+      })
+    } catch {
+      dispatch({type: DataOverviewActionType.LOAD_DATA_ERROR})
+    }
   }
 }

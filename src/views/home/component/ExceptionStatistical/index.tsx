@@ -28,7 +28,7 @@ export class ExceptionStatistical extends BaseComponent<ExceptionStatisticalProp
   render() {
     const items: HistogramCardItem[] = this.props.items.map(item => ({
       name: item.schoolName,
-      num: item.num
+      num: item.exceptionNumber
     }))
     return (
       <HistogramCard loading={this.props.loading} action={this.renderAction()} fontColor='#1da4fe' color={{start: '#1da4fe', end: '#7ecbff'}} className={this.rootClass()} title="学校异常统计" items={items}/>
