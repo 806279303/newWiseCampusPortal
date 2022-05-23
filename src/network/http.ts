@@ -16,6 +16,9 @@ import {VisitsStatisticalItem} from "../type/home/visitsStatistical/VisitsStatis
 import {MiniProgramStatisticalItem} from "../type/home/miniProgramStatistical/MiniProgramStatisticalItem";
 import {ExceptionTableItem} from "../type/home/exceptionTableCard/ExceptionTableItem";
 import {RealtimePushTableItem} from "../type/home/realtimePushTableCard/RealtimePushTableItem";
+import {UserMgListParam} from "../type/userMg/UserMgListParam";
+import {UserMgTableItem} from "../type/userMg/UserMgTableItem";
+import {MessageRecordTableItem} from "../type/messageRecord/MessageRecordTableItem";
 
 type ResultType<T> = { error: number, msg: string, data: T };
 
@@ -126,3 +129,9 @@ export const getMostUsedWxApplet = (date: string, limit: number) => responseHand
 export const getRealTimeExceptions = (limit: number) => responseHandler<ExceptionTableItem[]>(get("/wxManage/getRealTimeExceptions", {secret: "lancoo", limit}))
 
 export const getRealTimeWxPushRecord = (limit: number) => responseHandler<RealtimePushTableItem[]>(get("/wxManage/getRealTimeWxPushRecord", {secret: "lancoo", limit}))
+
+export const getWxUserList = (param: UserMgListParam) => responseHandler<PageResult<UserMgTableItem>>(get("/manage/wxUser/list/page", param), true)
+
+export const wxUnbindUser = (id: number) => responseHandler<{success: boolean, content: string}>(del("/manage/wxUser/unNewbind", {id}), true)
+
+export const getWxPushRecord = (pageNum: number, pageSize: number) => responseHandler<PageResult<MessageRecordTableItem>>(get("/wxPushRecord/list/page", {pageNum, pageSize}), true)

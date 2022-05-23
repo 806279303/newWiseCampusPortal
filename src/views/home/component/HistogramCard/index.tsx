@@ -112,7 +112,7 @@ export class HistogramCard extends BaseComponent<HistogramCardProps> {
       ],
       tooltip: {
         position: function (point: any) {
-          // 固定在顶部
+          //
           return [point[0] - 10, point[1] - 20];
         },
         formatter: function (params: any) {

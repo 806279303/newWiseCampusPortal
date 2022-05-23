@@ -54,7 +54,7 @@ export class WiseBoardBody extends BaseComponent<WiseBoardBodyProps> {
       },
       {
         field: "restCallTime",
-        headName: "剩余通话试剂盒",
+        headName: "剩余通话时长（分钟）",
       },
       {
         field: "serviceType",

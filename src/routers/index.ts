@@ -44,7 +44,7 @@ const Routers: RouterType[] = ([
         root: []
     },{
         path: allPath.USER_MANAGEMENT,
-        component: lazy(() => import('../views/userMg')),
+        component: lazy(() => import('@/views/userMg')),
         root: []
     },
 ])

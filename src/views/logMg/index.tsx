@@ -3,7 +3,7 @@ import {BaseComponent} from "../../type/BaseComponent";
 import {createTableClass, LgSimpleTableDataDescribe} from "@/components/simpleTable";
 import {OperationLogItem} from "../../type/logMg/OperationLogItem";
 import React, {ReactNode} from "react";
-import {nameMap} from "../../type/UserType";
+import {nameMap} from "../../type/logMg/UserType";
 import {connect, MapDispatchToProps, MapStateToProps} from "react-redux";
 import {FunctionProperties, NonFunctionProperties} from "../../type/util";
 import {RootState} from "../../redux/rootReducer";

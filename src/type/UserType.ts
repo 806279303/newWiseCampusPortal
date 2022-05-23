@@ -1,10 +1,12 @@
 export enum UserType{
-  SCHOOL_ADMIN = 0,
-  EDUCATION_BUREAU_ADMIN = 6,
+  ADMIN,
+  TEACHER,
+  STUDENT,
+  PARENTS
 }
 
-
-export const nameMap: Map<UserType, string> = new Map()
-
-nameMap.set(UserType.SCHOOL_ADMIN, "学校管理员")
-nameMap.set(UserType.EDUCATION_BUREAU_ADMIN, "教育局管理员")
+export const userTypeNameMap: Map<UserType, string> = new Map<UserType, string>()
+userTypeNameMap.set(UserType.ADMIN, "学校管理员")
+userTypeNameMap.set(UserType.TEACHER, "教师")
+userTypeNameMap.set(UserType.ADMIN, "学生")
+userTypeNameMap.set(UserType.ADMIN, "家长")
