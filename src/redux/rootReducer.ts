@@ -8,6 +8,8 @@ import {navTabsReducer} from "./navTabs/navTabsReducer";
 import {SideBarReducer} from "./sideBar/sideBarReducer";
 import {HomeReducer} from "./home/HomeReducer";
 import {logMgReducer} from "./logMg/LogMgReducer";
+import {userMgReducer} from "./userMg/UserMgReducer";
+import {messageRecordReducer} from "./messageRecord/MessageRecordReducer";
 
 // 拿到单个模块的reducer 进行合并 传给store
 export const rootReducer = combineReducers({
@@ -18,7 +20,9 @@ export const rootReducer = combineReducers({
   navTabsState: navTabsReducer,
   sideBarState: SideBarReducer,
   homeState: HomeReducer,
-  logMgState: logMgReducer
+  logMgState: logMgReducer,
+  userMgState: userMgReducer,
+  messageRecordState: messageRecordReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>

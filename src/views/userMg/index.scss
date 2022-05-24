@@ -1,0 +1,25 @@
+@import "src/css/mixin";
+
+$classNamePrefix: lg-user-mg;
+
+.#{$classNamePrefix}-root {
+
+  .#{$classNamePrefix}-operation {
+    .#{$classNamePrefix}-operation-unbind {
+      color: #09f;
+
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .#{$classNamePrefix}-header-left {
+    @include flexCenter;
+
+    .#{$classNamePrefix}-header-tips {
+      margin-left: 12px;
+    }
+  }
+}

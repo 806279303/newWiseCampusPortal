@@ -12,6 +12,7 @@ import {SideBarAction} from "../../type/sideBar/SideBarAction";
 import {NavTabsActionType} from "../../type/navTabs/navTabsActionType";
 import {namePathMap} from "../../routers/routers";
 import {history} from "../../redux/router/history";
+import store from "../../redux/store";
 
 interface NavTabsProps {
   currentPath: string
@@ -64,14 +65,25 @@ const mapDispatchToProps: MapDispatchToProps<FunctionProperties<NavTabsProps>, a
   return {
     onRemoveTab(name, isSelected) {
       dispatch({type: NavTabsActionType.REMOVE_TAB, name})
-      if(isSelected){
-        history.goBack()
+      if (isSelected) {
+        const state = store.getState();
+        const tabs = state.navTabsState.tabs;
+        //跳转最后一个tab所对应的路径
+        let gotoPath;
+        if (tabs[tabs.length - 1].name === name) {
+          gotoPath = namePathMap.get(tabs[tabs.length - 2].name)
+        } else {
+          gotoPath = namePathMap.get(tabs[tabs.length - 1].name)
+        }
+        if (gotoPath) {
+          history.replace(gotoPath)
+        }
       }
     },
     onSelectChange(name: string) {
       let path = namePathMap.get(name);
       if (path) {
-        history.push(path)
+        history.replace(path)
       }
     }
   }

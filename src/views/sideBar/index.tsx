@@ -147,7 +147,7 @@ const mapDispatchToProps: MapDispatchToProps<FunctionProperties<SideBarProps>, a
     onSelected(parentName: string, sideBarItem: SideBarItem) {
       let path = namePathMap.get(sideBarItem.name);
       if (path) {
-        history.push(path)
+        history.replace(path)
       }
     }
   }

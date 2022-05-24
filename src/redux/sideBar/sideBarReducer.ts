@@ -16,19 +16,23 @@ const initialState: SideBarState = {
       name: "小程序管理",
       icon: icon,
     },
+    // {
+    //   name: "消息推送管理",
+    //   icon: icon,
+    //   subItem: [
+    //     {
+    //       name: "推送记录管理",
+    //       icon: icon,
+    //     },
+    //     {
+    //       name: "推送模板",
+    //       icon: icon,
+    //     }
+    //   ]
+    // },
     {
-      name: "消息推送管理",
+      name: "推送记录管理",
       icon: icon,
-      subItem: [
-        {
-          name: "推送记录管理",
-          icon: icon,
-        },
-        {
-          name: "推送模板",
-          icon: icon,
-        }
-      ]
     },
     {
       name: "学校档案管理",
@@ -62,27 +66,27 @@ export const SideBarReducer = (state: SideBarState = initialState, action: SideB
   switch (action.type) {
     case SideBarActionType.CHANGE_SELECT: {
       let sideBarParentStateItem = state.sideBarParentItems.find(item => item.name === action.sideBarItemName);
-      if(sideBarParentStateItem){
+      if (sideBarParentStateItem) {
         //处理父节点
         if (sideBarParentStateItem) {
           const newSideBarParentItems = clearSelected(state)
           sideBarParentStateItem.selected = true
           return {...state, sideBarParentItems: newSideBarParentItems}
         }
-      }else{
+      } else {
         //处理子节点
         let targetSideBarParentItem: SideBarParentItem | null = null
         let targetSideBarItem: SideBarItem | null = null
         for (let sideBarParentItem of state.sideBarParentItems) {
-          if(sideBarParentItem.subItem?.length){
+          if (sideBarParentItem.subItem?.length) {
             for (let sideBarItem of sideBarParentItem.subItem) {
-              if(sideBarItem.name === action.sideBarItemName){
+              if (sideBarItem.name === action.sideBarItemName) {
                 targetSideBarParentItem = sideBarParentItem
                 targetSideBarItem = sideBarItem
                 break
               }
             }
-            if(targetSideBarParentItem){
+            if (targetSideBarParentItem) {
               break
             }
           }

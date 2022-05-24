@@ -117,7 +117,7 @@ export const put = (url:string, data:object = {}, config = {}) => {
 }
 /* 统一封装post请求  */
 export const del = (url:string, params:object, config = {}) => {
-    return new Promise((resolve, reject) => {
+    return new Promise<any>((resolve, reject) => {
         instance({
             method: 'delete',
             url,
