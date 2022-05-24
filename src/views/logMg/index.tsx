@@ -5,6 +5,7 @@ import {OperationLogItem} from "../../type/logMg/OperationLogItem";
 import React, {ReactNode} from "react";
 import {nameMap} from "../../type/UserType";
 import {connect, MapDispatchToProps, MapStateToProps} from "react-redux";
+import {bindActionCreators, Dispatch} from 'redux'
 import {FunctionProperties, NonFunctionProperties} from "../../type/util";
 import {RootState} from "../../redux/rootReducer";
 import {LeftRightLayout} from "@/components/LeftRightLayout";
