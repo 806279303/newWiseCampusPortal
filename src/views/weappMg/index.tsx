@@ -275,6 +275,7 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
 
     //insert弹窗-结束
     render() {
+        const data = this.state.data
         const widthsMatch = Index.WIDTH_MATCHES
         return (
             <div className="common-page common-page1">
@@ -289,7 +290,7 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
                         </Select>
                     </div>
                     <div className="left header-seach-total">
-                        共624个小程序
+                        共{data.length}个小程序
                     </div>
                     <div className="right">
                         <AddBtn text="添加小程序" handClick={() => {
@@ -313,7 +314,7 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
                     <Scrollbars className="common-page-content">
                         <Collapse accordion value={this.openIndex} onChange={this.openIndexChange}>
                             {
-                                this.state.data.map((o: any, i: number) => {
+                                data.map((o: any, i: number) => {
                                     const LgTrDom = (
                                         <LgTr key={`system-list-${i}`}>
                                             <LgTd width={widthsMatch.id}>{i + 1}</LgTd>

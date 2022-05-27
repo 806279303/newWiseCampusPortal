@@ -5,6 +5,8 @@ import myEvent from "../../type/event";
 import './index.scss'
 import {setGlobalSKin, toNextSkin} from "../../utils/skin";
 
+import IconLogo from '@/images/logo.png'
+
 interface IHeaderState {
     myprops:any
 }
@@ -16,8 +18,8 @@ class Index extends Component<{}, IHeaderState> {
         })
         this.state = {
             myprops : {
-                logoStyle: {background: `url(${require('./images/web_logo.png')}) center center`, width: 313, height: 64, marginRight: -20 },
-                version: "蓝鸽中学定制版",
+                logoStyle: {background: `url(${IconLogo}) center center no-repeat`, width: 40, height: 36, marginTop: 4},
+                logoName: "智慧校园通后台管理",
                 homeUrl: "http://www.baidu.com",
                 helpUrl: "http://www.baidu.com",
                 onNotice: () => { console.log(1111) },
@@ -28,7 +30,7 @@ class Index extends Component<{}, IHeaderState> {
                 onQuitPage: () => { console.log(2222) },
                 otherBtn: [{
                     iconUrl: require("./images/top_help.png"),
-                    btnName: "另外的按钮",
+                    btnName: "换肤",
                     onBtn: () => {
                         toNextSkin()
                     }

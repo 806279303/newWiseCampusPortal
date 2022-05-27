@@ -40,8 +40,8 @@ class NavTabs extends BaseComponent<NavTabsProps> {
           onTabClick={e => this.props.onSelectChange(e.props.name)}
         >
           {
-            this.props.tabList.map(item =>
-              <LgTabs.LgPane key={item.name} label={item.name} name={item.name}/>
+            this.props.tabList.map((item, index) =>
+              <LgTabs.LgPane key={item.name+index} label={item.name} name={item.name}/>
             )
           }
         </LgTabs>

@@ -23,11 +23,14 @@ import {_concatIdentityStr} from "../../utils/common";
 import Pops from "../../utils/pops";
 import {editIcon as Edit} from "@/components/button/img";
 import {LgButton} from "@/components/button";
+import EditModuleLayer from "@/views/schoolSystem/components/editModuleLayer/editModuleLayer";
 
 interface IWeappMgState {
     systemSearch: string
     thColumns: Array<any>
     data: Array<ISystemInfo>
+    showModuleLayer:boolean
+    currentModuleLayerData:IModuleInfo|{}
 }
 
 class Index extends Component<RouteComponentProps, IWeappMgState> {
@@ -63,6 +66,9 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
                 {value: '操作', width: widthsMatch.handles},
             ],
             data: [],
+
+            showModuleLayer:false,
+            currentModuleLayerData:{}
         }
         this.handChangeSysData = this.handChangeSysData.bind(this)
         this.openIndexChange = this.openIndexChange.bind(this);
@@ -72,6 +78,7 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
         this.syncSchoolModules = this.syncSchoolModules.bind(this);
         this.syncSchoolModules = this.syncSchoolModules.bind(this);
         this.synSchoolSystemAndModule = this.synSchoolSystemAndModule.bind(this);
+        this.openModulePop = this.openModulePop.bind(this);
         this.openIndex = "1"
         this.currentSchoolInfo = ''
     }
@@ -188,12 +195,20 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
 
     }
 
-    openModulePop(moduleInfo:any){
-
+    openModulePop(moduleInfo:IModuleInfo){
+        this.triggerModulePop(1, moduleInfo)
+    }
+    triggerModulePop(type:0|1, moduleInfo:IModuleInfo){
+        if(type == 0){//关闭
+            this.setState({ currentModuleLayerData: {}, showModuleLayer:false })
+        }else{//打开
+            this.setState({ currentModuleLayerData:moduleInfo, showModuleLayer:true })
+        }
     }
 
     render() {
         const widthsMatch = Index.WIDTH_MATCHES
+        const { showModuleLayer, currentModuleLayerData } = this.state
         return (
             <div className="common-page common-page1">
                 <div className="common-page-header clear">
@@ -264,6 +279,8 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
                         </Collapse>
                     </Scrollbars>
                 </div>
+
+                <EditModuleLayer showLayer={showModuleLayer} data={currentModuleLayerData}></EditModuleLayer>
             </div>
         );
     }

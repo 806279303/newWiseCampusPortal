@@ -19,6 +19,14 @@ import {RealtimePushTableItem} from "../type/home/realtimePushTableCard/Realtime
 import {UserMgListParam} from "../type/userMg/UserMgListParam";
 import {UserMgTableItem} from "../type/userMg/UserMgTableItem";
 import {MessageRecordTableItem} from "../type/messageRecord/MessageRecordTableItem";
+import {
+  GetMainAddress,
+  LogoutParams, LogoutResult,
+  TokenCheckParams,
+  TokenCheckResult,
+  UserInfoParams,
+  UserInfoResult
+} from "../type/main";
 
 type ResultType<T> = { error: number, msg: string, data: T };
 
@@ -108,6 +116,16 @@ export const getWiseBoardList = (pageNum: number, pageSize: number, serviceType?
   serviceType,
   schoolName
 }), true)
+
+
+export const getBaseAddr =()=> responseHandler<GetMainAddress>(get("manage/education/address"))
+
+export const checkToken = (params : TokenCheckParams)=> responseHandler<TokenCheckResult>(post("manage/education/tokenCheck", params))
+
+export const getUserInfo = (params : UserInfoParams)=> responseHandler<UserInfoResult>(get("manage/education/userInfo", params))
+
+export const logout = (params : LogoutParams)=> responseHandler<LogoutResult>(post("manage/education/logout", params))
+
 
 //添加班牌视频通话
 export const addWiseBoardCall = (params: AddWiseBoardCallParams) => responseHandler<string>(post("/wiseboard/addWiseBoardCall", {...params}))

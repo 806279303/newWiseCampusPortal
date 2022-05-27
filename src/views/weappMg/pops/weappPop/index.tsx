@@ -1,22 +1,22 @@
 import {BaseComponent} from "../../../../type/BaseComponent";
 import {LgInput} from "@/components/input";
 import {LgSwitch} from "@/components/switch";
-import {Select} from "element-react";
+import {Select, Upload} from "element-react";
 import React from "react";
 import {
+    defaultProps,
     SystemPopProps,
     SystemPopState,
-    PropsData,
-    defaultProps,
-    WIDTH_MATCHES, uploadImgTypes,
+    uploadImgTypes,
+    WIDTH_MATCHES,
 } from "@/views/weappMg/pops/weappPop/model";
-import {Upload} from "element-react";
 
 import '../../../../css/common.scss'
 import '../../../../css/common.pop.scss'
 import './index.scss'
 import {lgAlert} from "@/components/alert";
 import {uploadLogoUrl} from "../../../../network/apiURL";
+import {CommonPopCell} from "@/components/wiseCampusCommonPopCell/wiseCampusCommonPopCell";
 
 class WeappPop extends BaseComponent<SystemPopProps, SystemPopState> {
     static defaultProps = defaultProps
@@ -236,31 +236,6 @@ class WeappPop extends BaseComponent<SystemPopProps, SystemPopState> {
 
     getClassNamePrefix(): string {
       return "WeappPop";
-    }
-}
-
-interface CommonPopCellProps {
-    label: string
-}
-
-class CommonPopCell extends BaseComponent<CommonPopCellProps> {
-    constructor(props: CommonPopCellProps, context: any) {
-        super(props, context);
-    }
-
-    render() {
-        return (
-            <div className="common-pop-cell" style={this.props.style || {}}>
-                <div className="common-pop-cell-label">{this.props.label}</div>
-                <div className="common-pop-cell-content">
-                    {this.props.children}
-                </div>
-            </div>
-        );
-    }
-
-    getClassNamePrefix(): string {
-      return "CommonPopCell";
     }
 }
 

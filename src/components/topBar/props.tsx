@@ -1,5 +1,6 @@
 export default interface TopBarProps {
     logoStyle: object,
+    logoName?: string,
     version?: string,
     homeUrl: string,
     helpUrl: string,

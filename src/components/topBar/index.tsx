@@ -28,6 +28,7 @@ export default class TopBar extends Component<TopBarProps> {
             <div className={`lg_top_bar clear ${o.className || ""}`} style={o.style || {}}>
                 <div className='lg_logo_warp left'>
                     <div className='lg_logo left' style={o.logoStyle} />
+                    {o.logoName ? <div className='lg_logo_name left'>{o.logoName}</div> : null}
                     {o.version ? <div className='lg_version left'>{o.version}</div> : ""}
                 </div>
                 <div className="lg_top_content_u right">

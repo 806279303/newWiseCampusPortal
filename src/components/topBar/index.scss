@@ -11,10 +11,23 @@
     z-index: 9;
     box-sizing: border-box;
 }
+.lg_logo_warp{
+  display: flex;
+  height: 64px;
+  align-items: center;
+  line-height: 64px;
+  padding-left: 18px;
+}
 .lg_logo {
 	height: 60px;
 	width: 49px;
 	// background: url("../images/logo.png") left bottom no-repeat;
+}
+.lg_logo_name{
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  margin-left: 8px;
 }
 .lg_version {
     height: 20px;
