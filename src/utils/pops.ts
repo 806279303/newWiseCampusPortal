@@ -1,6 +1,6 @@
 import {lgAlert} from "@/components/alert";
 
- class Pops {
+class Pops {
     showLoading(text?:string) {
         lgAlert.show({content: text||'请稍后', tipType: 'loading', position: {xAxis: 'center', yAxis: 'center'}, duration: 0});
     }

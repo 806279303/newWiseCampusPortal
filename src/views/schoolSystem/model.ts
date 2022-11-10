@@ -2,6 +2,10 @@ export const MODULE_STATE = {
 
 }
 
+export enum SystemState {
+
+}
+
 export interface ISystemInfo {
     baseWebUrl: string;
     baseWsUrl: string;
@@ -22,9 +26,14 @@ export interface ISystemInfo {
     webSvrAddr: string;
     wsSvrAddr: string;
     wxSchoolSystemModuleList: Array<IModuleInfo>;
+    hasWxApplet:number
 }
 
+
 export interface IModuleInfo {
+    adminModuleDesc: string;
+    adminModuleName: string;
+    adminModuleUrl: string;
     appId: string;
     appUrl: string;
     belongAdmin: number;
@@ -35,12 +44,22 @@ export interface IModuleInfo {
     id: number;
     logoUrl: string;
     mobileAppState: number;
+    moduleDesc: string;
     moduleId: string;
     moduleName: string;
     moduleState: number;
+    parentModuleDesc: string;
+    parentModuleName: string;
+    parentModuleUrl: string;
     schoolId: string;
     sort: number;
+    studentModuleDesc: string;
+    studentModuleName: string;
+    studentModuleUrl: string;
     systemId: string;
+    teacherModuleDesc: string;
+    teacherModuleName: string;
+    teacherModuleUrl: string;
     updateTime: string;
     version: string;
 }

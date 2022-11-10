@@ -3,6 +3,7 @@ export default interface TopBarProps {
     logoName?: string,
     version?: string,
     homeUrl: string,
+    toBasePage: () => void,
     helpUrl: string,
     onNotice: () => void,
     hasNotice?: boolean,

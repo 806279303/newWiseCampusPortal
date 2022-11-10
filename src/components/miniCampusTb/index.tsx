@@ -86,7 +86,7 @@ export class LgTr extends BaseComponent<ILgTrProps, {}> {
     }
     render() {
         return (
-            <div className="lg-common-tr" onClick={this.handClick}>
+            <div className={this.classnames('lg-common-tr', this.props.className||'')} onClick={this.handClick}>
                 {
                     this.props.children
                 }

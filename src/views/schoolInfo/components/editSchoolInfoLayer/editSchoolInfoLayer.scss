@@ -1,0 +1,15 @@
+$classNamePrefix: lg-edit-school-info-layer;
+.#{$classNamePrefix}-root{
+  &-url{
+    flex: 1;
+    width: auto;
+
+    &-value{
+      font-size: 15px;
+      color: #000;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}

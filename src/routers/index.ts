@@ -1,4 +1,4 @@
-import { lazy } from 'react'
+  import { lazy } from 'react'
 import {allPath} from "./routers";
 
 export type RouterType = {
@@ -33,6 +33,10 @@ const Routers: RouterType[] = ([
     },{
         path: allPath.SCHOOL_SYSTEM,
         component: lazy(() => import('../views/schoolSystem')),
+        root: []
+    },{
+        path: allPath.SCHOOL_OLD_SYSTEM,
+        component: lazy(() => import('../views/schoolOldSystem')),
         root: []
     },{
         path: allPath.WISEBOARD,

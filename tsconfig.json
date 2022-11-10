@@ -26,6 +26,8 @@
       "@/css/*":["./src/css/*"],
       "@/utils/*":["./src/css/*"],
       "@/routes/*":["./src/routes/*"],
+      "@/network/*":["./src/network/*"],
+      "@/type/*":["./src/type/*"]
     }
   },
   "include": [

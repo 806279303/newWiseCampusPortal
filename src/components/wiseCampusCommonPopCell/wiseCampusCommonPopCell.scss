@@ -1,0 +1,28 @@
+.common-pop-cell {
+  display: flex;
+  align-items: center;
+  margin: 0 10px 20px;
+
+  &-label {
+    width: 120px;
+    text-align: right;
+    font-size: 18px;
+    color: #6b6b6b;
+  }
+
+  &-content {
+    margin-left: 10px;
+    flex: 1;
+
+    &-img {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+    }
+
+    &-value {
+      font-size: 18px;
+      color: #000;
+    }
+  }
+}

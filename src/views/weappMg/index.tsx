@@ -19,7 +19,7 @@ import {defaultInsideWeappProps} from "@/views/weappMg/pops/insertWeappPop/model
 import {lgAlert} from "@/components/alert";
 import {InsertWeappPop} from "@/views/weappMg/pops/insertWeappPop";
 import Pops from "../../utils/pops";
-import {_concatIdentityFromType, _handleHttpResponse} from "../../utils/common";
+import {_concatIdentityFromType, _handleHttpResponse, _showSchoolTypeTxt} from "../../utils/common";
 
 interface IWeappMgState {
     selectedState: number | ''
@@ -318,7 +318,10 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
                                     const LgTrDom = (
                                         <LgTr key={`system-list-${i}`}>
                                             <LgTd width={widthsMatch.id}>{i + 1}</LgTd>
-                                            <LgTd width={widthsMatch.systemName}>{o.systemName}</LgTd>
+                                            <LgTd width={widthsMatch.systemName}>
+                                                <img className="lg-common-tb-img" src={o.systemLogoUrl} alt=""/>
+                                                <div>{o.systemName}</div>
+                                            </LgTd>
                                             <LgTd width={widthsMatch.systemId}>{o.systemId}</LgTd>
                                             <LgTd width={widthsMatch.primaryAppId}>{o.primaryAppId}</LgTd>
                                             <LgTd width={widthsMatch.universityAppId}>{o.universityAppId}</LgTd>
@@ -446,10 +449,13 @@ class ModuleLists extends Component<IModuleListsProps, IModuleListsState> {
                     this.props.data.map((o: any, i: number) => {
                         return (
                             <LgTr key={`module-list-${i}`}>
-                                <LgTd width={widthsMatch.moduleName}>{o.moduleName}</LgTd>
+                                <LgTd width={widthsMatch.moduleName}>
+                                    <img className="lg-common-tb-img" src={o.moduleLogoUrl} alt=""/>
+                                    <div>{o.moduleName}</div>
+                                </LgTd>
                                 <LgTd width={widthsMatch.defaultVersion}>{o.defaultVersion}</LgTd>
                                 <LgTd width={widthsMatch.defaultAppUrl}>{o.defaultAppUrl}</LgTd>
-                                <LgTd width={widthsMatch.schoolType}>{o.schoolType}</LgTd>
+                                <LgTd width={widthsMatch.schoolType}>{_showSchoolTypeTxt(o.schoolType)}</LgTd>
                                 <LgTd width={widthsMatch.belong}>{_concatIdentityFromType(o)}</LgTd>
 
                                 <LgTd className="flex-center" width={widthsMatch.handles}>

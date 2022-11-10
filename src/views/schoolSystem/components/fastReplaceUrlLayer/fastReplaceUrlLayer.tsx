@@ -4,31 +4,32 @@ import {LgPopLayer} from "@/components/popLayer";
 import {BaseComponent} from "../../../../type/BaseComponent";
 
 import '@/css/common.pop.scss'
-import './editSystemLayer.scss'
+import './fastReplaceUrlLayer.scss'
 import {LgInput} from "@/components/input";
 import {CommonPopCell} from "@/components/wiseCampusCommonPopCell/wiseCampusCommonPopCell";
 import {IModuleInfo, ISystemInfo} from "@/views/schoolSystem/model";
 import {_concatIdentityStr} from "../../../../utils/common";
 import {LgSwitch} from "@/components/switch";
 import Pops from "../../../../utils/pops";
-import {putWxSchoolModule, putWxSchoolSystem} from "../../../../network/http";
+import {fastReplaceAddress, putWxSchoolModule, putWxSchoolSystem} from "../../../../network/http";
+import {FastReplaceUrlData} from "@/type/schoolSystem/SchoolSystemState";
 
-interface EditWeappLayerProps {
+interface FastReplaceLayerProps {
     showLayer: boolean
     data: ISystemInfo | object
     refreshList: () => void
 }
 
-interface EditWeappLayerState {
-    data: ISystemInfo | object
+interface FastReplaceLayerState {
+    data: FastReplaceUrlData | object
 }
 
-class EditWeappLayer extends BaseComponent<EditWeappLayerProps, EditWeappLayerState> {
+class FastReplaceUrlLayer extends BaseComponent<FastReplaceLayerProps, FastReplaceLayerState> {
     protected getClassNamePrefix(): string {
-        return "edit-system-layer";
+        return "fastReplaceUrlLayer";
     }
 
-    constructor(props: EditWeappLayerProps, context: any) {
+    constructor(props: FastReplaceLayerProps, context: any) {
         super(props, context);
         this.state = {
             data: {}
@@ -42,7 +43,7 @@ class EditWeappLayer extends BaseComponent<EditWeappLayerProps, EditWeappLayerSt
         this.setState({data: {...this.props.data}})
     }
 
-    UNSAFE_componentWillReceiveProps(nextProps: EditWeappLayerProps) {
+    UNSAFE_componentWillReceiveProps(nextProps: FastReplaceLayerProps) {
         if (nextProps.showLayer !== this.props.showLayer && nextProps.showLayer === true) {
             const data = {...nextProps.data}
             this.setState({data})
@@ -64,16 +65,9 @@ class EditWeappLayer extends BaseComponent<EditWeappLayerProps, EditWeappLayerSt
     }
 
     async handChangeSystem() {
-        let data = this.state.data as ISystemInfo
-        console.log(data)
+        let { beforeReplaceUrl, afterReplaceUrl } = this.state.data as FastReplaceUrlData
         try {
-            await putWxSchoolSystem({
-                id: data.id,
-                webSvrAddr: data.webSvrAddr,
-                wsSvrAddr: data.wsSvrAddr,
-                systemState: data.systemState,
-                version: data.version
-            })
+            await fastReplaceAddress(beforeReplaceUrl, afterReplaceUrl)
             Pops.showSuccess('操作成功')
             this.props.refreshList()
         } catch (err: any) {
@@ -82,44 +76,30 @@ class EditWeappLayer extends BaseComponent<EditWeappLayerProps, EditWeappLayerSt
     }
 
     render() {
-        const data = this.state.data as ISystemInfo
+        const data = this.state.data as FastReplaceUrlData
         return (
             <LgPopLayer
                 width={540}
-                height={650}
+                height={250}
                 coverLayerClass={'true'}
                 isOpen={this.props.showLayer}
                 onShowLayer={() => {
                 }}
-                title="编辑小程序"
+                title="快速替换地址"
                 onClose={this.onLayerClose}
                 onConfirm={this.onLayerConfirm}
                 onIconClose={this.onLayerClose}
             >
                 <div className={`${this.CNP}-root`}>
-                    <CommonPopCell label="系统ID:" value={data.systemId}/>
-                    <CommonPopCell label="系统ID:"value={data.systemName}/>
-                    <CommonPopCell label="系统图标:" imageUrl={data.logoUrl}/>
-                    <CommonPopCell label="参照web地址:" className={`${this.CNP}-root-url`}>
-                        <div className={`${this.CNP}-root-url-value`}>{data.baseWebUrl}</div>
-                    </CommonPopCell>
-                    <CommonPopCell label="参照ws地址:" className={`${this.CNP}-root-url`}>
-                        <div className={`${this.CNP}-root-url-value`}>{data.baseWsUrl}</div>
-                    </CommonPopCell>
-                    <CommonPopCell label="实际web地址:">
+                    <CommonPopCell label="替换前地址:">
                         <LgInput type="text" onChange={(value) => {
-                            this.onChange(value, 'webSvrAddr')
-                        }} value={data.webSvrAddr}/>
+                            this.onChange(value, 'beforeReplaceUrl')
+                        }} value={data.beforeReplaceUrl}/>
                     </CommonPopCell>
-                    <CommonPopCell label="实际ws地址:">
+                    <CommonPopCell label="替换后地址:">
                         <LgInput type="text" onChange={(value) => {
-                            this.onChange(value, 'wsSvrAddr')
-                        }} value={data.wsSvrAddr}/>
-                    </CommonPopCell>
-                    <CommonPopCell label="版本号:">
-                        <LgInput type="text" onChange={(value) => {
-                            this.onChange(value, 'version')
-                        }} value={data.version}/>
+                            this.onChange(value, 'afterReplaceUrl')
+                        }} value={data.afterReplaceUrl}/>
                     </CommonPopCell>
                 </div>
             </LgPopLayer>
@@ -127,4 +107,4 @@ class EditWeappLayer extends BaseComponent<EditWeappLayerProps, EditWeappLayerSt
     }
 }
 
-export default EditWeappLayer;
+export default FastReplaceUrlLayer;

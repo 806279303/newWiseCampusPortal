@@ -16,10 +16,10 @@ export default class TopBar extends Component<TopBarProps> {
         window.open(this.props.helpUrl)
     }
     openPersonPage() {
-        window.open(this.props.homeUrl + "/html/personalMgr/");
+        this.props.toBasePage && this.props.toBasePage()
     }
     toBasePage() {
-        window.open(this.props.homeUrl);
+        this.props.toBasePage && this.props.toBasePage()
     }
     render() {
         var o = this.props;
@@ -38,7 +38,7 @@ export default class TopBar extends Component<TopBarProps> {
                             return <div className={`lg_top_help ${obj.hasNode ? "lg_top_node" : ""}`} style={{backgroundImage: `url(${obj.iconUrl})`}} onClick={obj.onBtn} key={"lg_top_b" + i}>{obj.btnName}</div>
                         })
                     }
-                    <div className="lg_top_help lg_top_main_page" onClick={this.toBasePage}>返回办公平台</div>
+                    <div className="lg_top_help lg_top_main_page" onClick={this.toBasePage}>教育局官网</div>
                     <div className="lg_top_content_split" />
                     <div className={`lg_top_help lg_top_notice ${o.hasNotice ? "lg_top_node" : ""}`} onClick={o.onNotice}>消息</div>
                     <div className="lg_top_help" onClick={this.openHelp}>帮助</div>

@@ -4,12 +4,53 @@
 }
 
 .school-list{
+  &-tr-overflow{
+    overflow:visible;
+  }
   &-name{
     font-weight: bold;
     cursor: pointer;
+    position: relative;
+    &-sales{
+      padding: 1px 3px;
+      border-radius: 4px;
+      color: #ffffff;
+      font-size: 12px;
+      position: absolute;
+      top: -10px;
+      right: -30px;
+      background-color: #b91b1b;
+    }
   }
   &-url{
     text-decoration: underline;
     color: rgb(153,153,153);
   }
+}
+
+$classNamePrefix: lg-school-info;
+.#{$classNamePrefix}-root{
+    &-list-envState{
+      display: flex;
+      justify-content: center;
+      div{
+        padding: 1px 3px;
+        border-radius: 4px;
+        color: #ffffff;
+        font-size: 14px;
+        margin:0 5px;
+      }
+
+      &-0{
+        background-color: #555555;
+      }
+
+      &-1{
+        background-color: #b91b1b;
+      }
+
+      &-2{
+        background-color: #118f48;
+      }
+    }
 }

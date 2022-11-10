@@ -18,10 +18,10 @@ export class InsertWeappPop extends BaseComponent<insideWeappPopProps, insideWea
         super(props, context);
         this.state = {
             schoolTypes: [{
-                value: 2,
+                value: 1,
                 label: '中小学'
             }, {
-                value: 1,
+                value: 2,
                 label: '大学'
             }, {
                 value: 0,
@@ -33,6 +33,7 @@ export class InsertWeappPop extends BaseComponent<insideWeappPopProps, insideWea
         this.getHttpData = this.getHttpData.bind(this);
         this.addIdentity = this.addIdentity.bind(this);
         this.updateRoles = this.updateRoles.bind(this);
+        this.deleteRole = this.deleteRole.bind(this);
     }
 
     componentDidMount() {
@@ -116,6 +117,13 @@ export class InsertWeappPop extends BaseComponent<insideWeappPopProps, insideWea
         this.setState({data: data})
     }
 
+    deleteRole(item: any, index:number){
+        const data:any = this.state.data
+        const identityCells = data.identityCells
+        identityCells.splice(index, 1)
+        this.setState({data: data})
+    }
+
     render() {
         const data: any = this.state.data || {}
         const identityCells = data.identityCells || []
@@ -174,7 +182,8 @@ export class InsertWeappPop extends BaseComponent<insideWeappPopProps, insideWea
                         {
                             identityCells.map((item: any, index: number) => (
                                 <IdentityCell key={'lg-identity-cell' + index} data={item} index={index}
-                                              updateRoles={this.updateRoles}/>
+                                              updateRoles={this.updateRoles}
+                                              deleteRole={this.deleteRole}/>
                             ))
                         }
                         <div className={`${this.CNP}-systemContent-add`}>
@@ -195,6 +204,7 @@ interface IdentityCellProps {
     data: any[]
     index: number
     updateRoles: (data: any, index: number) => void
+    deleteRole: (data: any, index: number) => void
 }
 
 interface IdentityCellState {
@@ -222,6 +232,7 @@ class IdentityCell extends Component<IdentityCellProps, IdentityCellState> {
             }],
         }
         this.onChange = this.onChange.bind(this);
+        this.delCurrentModule = this.delCurrentModule.bind(this);
     }
 
     onChange(value: any, attr: string) {
@@ -231,12 +242,16 @@ class IdentityCell extends Component<IdentityCellProps, IdentityCellState> {
         this.props.updateRoles(data, this.props.index)
     }
 
+    delCurrentModule(data:any, index:number){
+        this.props.deleteRole(data, index)
+    }
+
     render() {
         const data: any = this.props.data
+        const index: number = this.props.index
         return (
             <div className={`${this.CNP}-systemContent-cell`}>
                 <div className={`${this.CNP}-systemContent-cell-label`}>添加角色:</div>
-
                 <div className={`${this.CNP}-systemContent-cell-identity`}>
                     <Select value={data.type} placeholder="请选择角色" onChange={(value) => {
                         this.onChange(value, 'type')
@@ -263,6 +278,7 @@ class IdentityCell extends Component<IdentityCellProps, IdentityCellState> {
                         this.onChange(value, 'moduleDefaultUrl')
                     }} value={data.moduleDefaultUrl} placeholder="请输入模块角色默认路径"/>
                 </div>
+                <span onClick={()=>{this.delCurrentModule(data, index)}}>-</span>
             </div>
         );
     }

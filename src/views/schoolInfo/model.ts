@@ -1,4 +1,5 @@
 export interface ISchoolInfo {
+    version: string;
     cityId: string;
     cityName: string;
     countryId: string;
@@ -20,4 +21,7 @@ export interface ISchoolInfo {
     startDate: string;
     state: number;
     updateTime: string;
+    gzhAppId:string
+    gzhSecret:string
+    appMgrAddr:string
 }

@@ -1,7 +1,7 @@
 /*
  * @Author       : super-J
  * @Date         : 2021-12-31 16:25:37
- * @LastEditTime : 2022-03-25 15:38:28
+ * @LastEditTime : 2022-07-27 14:40:26
  * @LastEditors  : super-J
  * @Description  : Alert组件的封装
  */
@@ -9,7 +9,6 @@ import './index.scss';
 import { Alert } from 'element-react';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import * as svgIcon from './images/index'
 import { initAlertParams, initAlertParamsA, initContainerPosition, initLgAlertTypeAClass, initTipType } from './util';
 // lgAlert使用的工具
 let globalState: (state: any, callback?: () => void) => void;// 将tip的容器的setState转变到外部函数
@@ -180,6 +179,7 @@ export const lgAlert: lgAlert = {
      * @return        { type * } 
      */
     show: (e?: LgAlertShowProps, showIdIndex?: string) => {
+        initDom();
         let alertPositionStylePosition: React.CSSProperties[] = mapList.get('alertPositionStylePosition') || mapList.set('alertPositionStylePosition', [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]).get('alertPositionStylePosition');
         let alertMessageListPosition: LgAlertShowProps[][] = mapList.get('alertMessageListPosition') || mapList.set('alertMessageListPosition', [[], [], [], [], [], [], [], [], [], []]).get('alertMessageListPosition');
         let containerClassName: string[] = mapList.get('containerClassName') || mapList.set('containerClassName', ['', '', '', '', '', '', '', '', '', '']).get('containerClassName');
@@ -271,7 +271,6 @@ export const lgAlert: lgAlert = {
                     }
                     if (spliceIndex == null) return;
                     alertMessageListPosition[positionIndex].splice(spliceIndex, 1);
-                    console.log(alertMessageListPosition)
                     globalState({ alertMessageListPosition }, () => {
                         mapList.set('alertMessageListPosition', alertMessageListPosition);
                     })
@@ -531,137 +530,18 @@ let popLayerCreateIndex = 0;
  * @param         { type *} popLayerCreateIndex 创建的根节点的次数
  * @return        { type *} 
  */
-; (() => { if (popLayerCreateIndex) return; let alert = document.getElementById('Lg_alert_root'); let root = document.getElementById('root'); if (alert) { document.removeChild(alert) }; let popLayerDom = document.createElement('div'); popLayerDom.setAttribute('id', 'Lg_alert_root'); popLayerDom.style.position = 'absolute'; root?.appendChild(popLayerDom); ++popLayerCreateIndex; ReactDOM.render(<LgAlertContainer ref={e => instance = e} />, document.getElementById('Lg_alert_root')) })();
+ let initDom = () => {
+    let alert = document.getElementById('Lg_alert_root');
+    if (alert&&popLayerCreateIndex) return;
+    let root = document.getElementById('root');
+    if (alert) { document.removeChild(alert) };
+    let popLayerDom = document.createElement('div');
+    popLayerDom.setAttribute('id', 'Lg_alert_root');
+    popLayerDom.style.position = 'absolute';
+    root?.appendChild(popLayerDom);
+    ++popLayerCreateIndex; 
+    ReactDOM.render(<LgAlertContainer ref={e => instance = e} />, document.getElementById('Lg_alert_root'))
+}
+; (initDom)();
 
 
-let LgPopLayerCreatCount: number = 0;
-// class LgPopLayer {
-//     private lgAlertInstance!: LgAlertContainer | null;
-//     private popLayerCreateIndex: number
-//     constructor(_options?: any) {
-//         this.popLayerCreateIndex = popLayerCreateIndex
-//         this.initRootEle()
-//     }
-//     initRootEle() {
-//         this.popLayerCreateIndex = ++LgPopLayerCreatCount;
-//         let alert = document.getElementById('Lg_alert_root' + this.popLayerCreateIndex);
-//         let root = document.getElementById('root');
-//         if (alert) { document.removeChild(alert) };
-//         let popLayerDom = document.createElement('div');
-//         popLayerDom.setAttribute('id', 'Lg_alert_root' + this.popLayerCreateIndex);
-//         popLayerDom.style.position = 'absolute';
-//         root?.appendChild(popLayerDom);
-//         ReactDOM.render(<LgAlertContainer ref={e => this.lgAlertInstance = e} />, document.getElementById('Lg_alert_root' + this.popLayerCreateIndex));
-//     }
-
-//     show(e?: LgAlertShowProps, showIdIndex?: string) {
-//         let alertPositionStylePosition: React.CSSProperties[] = mapList.get('alertPositionStylePosition') || mapList.set('alertPositionStylePosition', [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]).get('alertPositionStylePosition');
-//         let alertMessageListPosition: LgAlertShowProps[][] = mapList.get('alertMessageListPosition') || mapList.set('alertMessageListPosition', [[], [], [], [], [], [], [], [], [], []]).get('alertMessageListPosition');
-//         let containerClassName: string[] = mapList.get('containerClassName') || mapList.set('containerClassName', ['', '', '', '', '', '', '', '', '', '']).get('containerClassName');
-//         let containerStyle: React.CSSProperties[] = mapList.get('containerStyle') || mapList.set('containerStyle', [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]).get('containerStyle');
-//         let closeTimeoutMap: NodeJS.Timeout[] = timeoutMap.get('closeTimeoutMap') || timeoutMap.set('closeTimeoutMap', []).get('closeTimeoutMap');
-//         let positionIndex: number = 0;// 弹窗的位置
-//         let showIdNumber: number = 0;// 弹窗的位置上的第几条数据
-//         let tipItemOption: LgAlertShowProps = e as LgAlertShowProps;
-//         // 设置对象的默认值
-//         let initOptions: LgAlertShowProps = { tipType: "info", isShow: true, duration: 3000, isShowIcon: true, content: 'lgAlert~', tipMouldType: undefined, position: { xAxis: '50%', yAxis: 32, showDirection: 'center', xOffset: '-50%' }, tipSize: 'small', containerClassName: '', description: '' };
-//         tipItemOption = Object.assign(initOptions, tipItemOption);
-//         let returnOptionsIndex: string = (showIdNumber + '-' + positionIndex).toString();
-//         // 关闭所有的
-//         if (e?.tipType == 'closeAll') {
-//             lgAlert.closeAll();
-//             closeTimeoutMap.forEach((o, i) => { clearTimeout(o); })
-//             mapList.set('closeTimeoutMap', [])
-//             alertMessageListPosition = [[], [], [], [], [], [], [], [], [], []]
-//             this.lgAlertInstance?.setState({ alertMessageListPosition })
-//             return { index: null as any, options: null as any };
-//         }
-
-//         if (showIdIndex) {
-//             // 去修改指定下标上lgAlert的属性值
-//             clearTimeout(timeoutMap.get(showIdIndex));
-//             let positionIndexClose: number = parseInt(showIdIndex.split('-')[1]);// 关闭弹窗的位置
-//             let showIdNumberClose: number = parseInt(showIdIndex.split('-')[0]);// 关闭弹窗的位置上的第几条数据
-//             let replaceIndex: number | null = null;
-//             if (alertMessageListPosition[positionIndexClose] && alertMessageListPosition[positionIndexClose].length) {
-//                 alertMessageListPosition[positionIndexClose].forEach((o, i) => {
-//                     if (o.showIdNumber == showIdNumberClose) { tipItemOption = Object.assign(initOptions, tipItemOption); o = Object.assign(o, tipItemOption); tipItemOption = o; replaceIndex = i; }
-//                 })
-//             };
-//             this.lgAlertInstance?.setState({ alertMessageListPosition }, () => {
-//                 if (tipItemOption?.duration == 0) return;
-//                 let timeOutIndex = setTimeout(() => {
-//                     let spliceIndexClose = null;
-//                     alertMessageListPosition[positionIndexClose] = alertMessageListPosition[positionIndexClose] || []
-//                     if (alertMessageListPosition[positionIndexClose].length) {
-//                         alertMessageListPosition[positionIndexClose].forEach((o, i) => {
-//                             let item: LgAlertShowProps = o; if (item.showIdNumber == showIdNumberClose && item.duration != 0) { spliceIndexClose = i; }
-//                         })
-//                     }
-//                     if (spliceIndexClose == null) { return }
-//                     else if (alertMessageListPosition[positionIndexClose]) {
-//                         alertMessageListPosition[positionIndexClose]?.splice(spliceIndexClose, 1)
-//                     };
-//                     this.lgAlertInstance?.setState({ alertMessageListPosition }, () => {
-//                         mapList.set('alertMessagesListPosition', alertMessageListPosition)
-//                     })
-
-//                 }, tipItemOption.duration);
-//                 timeoutMap.set('afterReplace' + returnOptionsIndex, timeOutIndex)
-//             });
-//         } else {
-//             // 创建一个lgAlert
-//             tipItemOption.showIdName = 'lg_alert_number';
-//             showIdNumber = parseInt((++lgAlert.showIdNumber).toString());
-//             tipItemOption.showIdNumber = showIdNumber;
-//             let alertPositionOptions = initContainerPosition(tipItemOption.position, ++zIndexNumber);
-//             positionIndex = alertPositionOptions.positionType;
-//             tipItemOption.positionIndex = positionIndex
-//             if (tipItemOption.isShow) {
-//                 (alertMessageListPosition[positionIndex] as LgAlertShowProps[]).push(tipItemOption);
-//                 alertMessageListPosition = alertMessageListPosition as LgAlertShowProps[][];
-//                 alertPositionStylePosition[positionIndex] = alertPositionOptions.style;
-//             }
-//             if (initTipType(tipItemOption.tipType, tipItemOption.tipMouldType) == 4) {
-//                 tipItemOption.duration = 0;
-//             }
-//             let positionIndexPosition: number = parseInt(positionIndex as any)
-//             containerClassName[positionIndexPosition] = tipItemOption.containerClassName as string;
-//             containerStyle[positionIndexPosition] = tipItemOption.containerStyle as React.CSSProperties;
-//             returnOptionsIndex = showIdNumber + '-' + alertPositionOptions.positionType
-//             this.lgAlertInstance?.setState({ alertMessageListPosition, alertPositionStylePosition, containerClassName, containerStyle }, () => {
-//                 if (tipItemOption?.duration == 0) return;
-//                 let timeoutId = setTimeout(() => {
-//                     timeoutMap.delete(returnOptionsIndex)
-//                     let spliceIndex = null;
-//                     if (alertMessageListPosition[positionIndex].length) {
-//                         alertMessageListPosition[positionIndex].forEach((o, i) => {
-//                             let item: LgAlertShowProps = o; if (item.showIdNumber == showIdNumber && item.duration != 0) { spliceIndex = i }
-//                         })
-//                     }
-//                     if (spliceIndex == null) return;
-//                     alertMessageListPosition[positionIndex].splice(spliceIndex, 1);
-//                     console.log(alertMessageListPosition)
-//                     this.lgAlertInstance?.setState({ alertMessageListPosition }, () => {
-//                         mapList.set('alertMessageListPosition', alertMessageListPosition);
-//                     })
-//                 }, tipItemOption?.duration);
-//                 timeoutMap.set(returnOptionsIndex, timeoutId);
-//                 closeTimeoutMap.push(timeoutId);
-//             })
-//         };
-
-//         if (showIdIndex) { returnOptionsIndex = showIdIndex };
-//         let option: { index: string, options: LgAlertShowProps } = { index: returnOptionsIndex, options: tipItemOption };
-//         return option;
-//     }
-// }
-// let superJ = new LgPopLayer();
-// let superJ1 = new LgPopLayer();
-// let superJ2 = new LgPopLayer();
-// console.log(superJ.show({
-//     duration: 0
-// }))
-// console.log(superJ1.show({
-//     duration: 0, content: 'superJ1~~~', position: { xAxis: 'center', yAxis: 'center', }
-// }))

@@ -1,8 +1,10 @@
-import axios, {AxiosInstance} from "axios";
+import axios, {AxiosInstance, AxiosRequestConfig} from "axios";
 import {publicIp} from './apiURL'
 import {LOGIN} from './apiURL'
 import {Message as message} from 'element-react'
 import {lgAlert} from "@/components/alert";
+import Pops from "../utils/pops";
+import {getCookie} from "../utils/cookie";
 
 let tipIndex:any
 const instance = axios.create({    //创建axios实例，在这里可以设置请求的默认配置
@@ -25,7 +27,10 @@ let httpCode:any = {        //这里我简单列出一些常见的http状态码�
 
 /** 添加请求拦截器 **/
 instance.interceptors.request.use(config => {
-    // // config.headers['token'] = sessionStorage.getItem('token') || ''
+    if(!config.headers){
+        config.headers = {}
+    }
+     config.headers['token'] = getCookie("lg_tk")
     // // hide = message.loading({content: 'Loading...', duration: 0});
     // tipIndex = lgAlert.show({ content: '数据加载中', tipType: 'loading', position: { xAxis: 'center', yAxis: 'center' } });
     // // 在这里：可以根据业务需求可以在发送请求之前做些什么:例如我这个是导出文件的接口，因为返回的是二进制流，所以需要设置请求响应类型为blob，就可以在此处设置。
@@ -69,64 +74,65 @@ instance.interceptors.response.use(response => {
     }
 })
 
-/* 统一封装get请求 */
-export const get = (url:string, params?:object, config = {}) => {
+interface BaseOptions {
+    method:string
+    url:string
+    loading?:any
+    [propName: string]: any;
+}
+export function baseOptions(options:BaseOptions & AxiosRequestConfig){
     return new Promise<any>((resolve, reject) => {
-        instance({
-            method: 'get',
-            url,
-            params,
-            ...config
-        }).then(response => {
+        const { loading } = options
+        if(loading)Pops.showLoading(loading.length?loading:'请稍后')
+        instance(options).then(response => {
+            if(loading)Pops.hideLoading()
             resolve(response)
         }).catch(error => {
+            if(loading)Pops.hideLoading()
             reject(error)
         })
     })
 }
 
+
+/* 统一封装get请求 */
+export const get = (url:string, params:object={}, config = {}, loading:any = false) => {
+    return baseOptions({
+        method: 'get',
+        url,
+        params,
+        ...config,
+        loading
+    })
+}
+
 /* 统一封装post请求  */
-export const post = (url:string, data:object = {}, config = {}) => {
-    return new Promise<any>((resolve, reject) => {
-        instance({
-            method: 'post',
-            url,
-            data,
-            ...config
-        }).then(response => {
-            resolve(response)
-        }).catch(error => {
-            reject(error)
-        })
+export const post = (url:string, data:object = {}, config = {}, loading:any = false) => {
+    return baseOptions({
+        method: 'post',
+        url,
+        data,
+        ...config,
+        loading
     })
 }
 /* 统一封装delete请求  */
-export const put = (url:string, data:object = {}, config = {}) => {
-    return new Promise<any>((resolve, reject) => {
-        instance({
-            method: 'put',
-            url,
-            data,
-            ...config
-        }).then(response => {
-            resolve(response)
-        }).catch(error => {
-            reject(error)
-        })
+export const put = (url:string, data:object = {}, config = {}, loading:any = false) => {
+    return baseOptions({
+        method: 'put',
+        url,
+        data,
+        ...config,
+        loading
     })
 }
 /* 统一封装post请求  */
-export const del = (url:string, params:object, config = {}) => {
-    return new Promise<any>((resolve, reject) => {
-        instance({
-            method: 'delete',
-            url,
-            params,
-            ...config
-        }).then(response => {
-            resolve(response)
-        }).catch(error => {
-            reject(error)
-        })
+export const del = (url:string, params:object, config = {}, loading:any = false) => {
+    return baseOptions({
+        method: 'delete',
+        url,
+        params,
+        ...config,
+        loading
     })
 }
