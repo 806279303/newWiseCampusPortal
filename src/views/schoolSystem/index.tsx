@@ -404,8 +404,8 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
                                                 <img className="lg-common-tb-img" src={o.logoUrl} alt=""/>
                                                 <div>{o.systemName}</div>
                                             </LgTd>
-                                            <LgTd width={widthsMatch.baseWebUrl}>{o.baseWebUrl}</LgTd>
-                                            <LgTd width={widthsMatch.webSvrAddr}>{o.webSvrAddr}</LgTd>
+                                            <LgTd width={widthsMatch.baseWebUrl} style={{ fontSize:12 }}>{o.baseWebUrl}</LgTd>
+                                            <LgTd width={widthsMatch.webSvrAddr} style={{ fontSize:12 }}>{o.webSvrAddr}</LgTd>
                                             <LgTd
                                                 width={widthsMatch.lockState}>{_showSystemLockStateTxt(o.lockState)}</LgTd>
                                             <LgTd
@@ -473,7 +473,7 @@ class ModuleLists extends Component<IModuleListsProps, IModuleListsState> {
         appId: '20%',
         appUrl: '20%',
         moduleState: '10%',
-        mobileAppState: '10%',
+        trialShow: '10%',
         handles: '10%',
     }
 
@@ -488,16 +488,16 @@ class ModuleLists extends Component<IModuleListsProps, IModuleListsState> {
                 {value: '小程序appId', props: 'appId', width: widthsMatch.appId},
                 {value: '初始路径', props: 'appUrl', width: widthsMatch.appUrl},
                 {value: '小程序显示', props: 'wxAppState', width: widthsMatch.moduleState},
-                {value: 'h5显示', props: 'mobileAppState', width: widthsMatch.mobileAppState},
+                {value: '体验版开放', props: 'trialShow', width: widthsMatch.trialShow},
                 {value: '编辑', props: '', width: widthsMatch.handles},
             ],
         }
         this.handWxState = this.handWxState.bind(this)
     }
 
-    handWxState(index: number, checked: boolean) {
+    handWxState(index: number, attr: 'trialShow'|'moduleState', checked: boolean) {
         let moduleInfo: IModuleInfo = this.props.data[index]
-        moduleInfo.moduleState = checked ? 1 : 0
+        moduleInfo[attr] = checked ? 1 : 0
         this.props.handChangeSysData && this.props.handChangeSysData(moduleInfo, index)
     }
 
@@ -528,12 +528,18 @@ class ModuleLists extends Component<IModuleListsProps, IModuleListsState> {
                                         hasWeapp ? (
                                             <LgSwitch size="small" disabled={o.moduleState === 2}
                                                       checked={o.moduleState === 1}
-                                                      onClick={(checked) => this.handWxState(i, checked)}/>
+                                                      onClick={(checked) => this.handWxState(i, 'moduleState', checked)}/>
                                         ) : '-'
                                     }
                                 </LgTd>
-                                <LgTd className="flex-row-center" width={widthsMatch.mobileAppState}>
-                                    {!!o.mobileAppState ? '开' : '关'}
+                                <LgTd className="flex-row-center" width={widthsMatch.trialShow}>
+                                    {
+                                        hasWeapp ? (
+                                            <LgSwitch size="small" disabled={o.moduleState === 2}
+                                                      checked={o.trialShow === 1}
+                                                      onClick={(checked) => this.handWxState(i, 'trialShow', checked)}/>
+                                        ) : '-'
+                                    }
                                 </LgTd>
                                 <LgTd className="flex-center" width={widthsMatch.handles}>
                                     <LgButton

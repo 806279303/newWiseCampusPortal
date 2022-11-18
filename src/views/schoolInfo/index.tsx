@@ -185,11 +185,18 @@ class Index extends BaseComponent<RouteComponentProps, IWeappMgState> {
         })
     }
 
+    handSimpleOpenEditPoplayer(isOpen:boolean){
+        console.log('handSimpleOpenEditPoplayer,',isOpen)
+        this.setState({ showSchoolLayer:isOpen })
+    }
+
     triggerSchoolInfoPop(type: 0 | 1, schoolInfo?: ISchoolInfo) {
         if (type == 0) {//关闭
-            this.setState({currentSchoolLayerData: {}, showSchoolLayer: false})
+            this.setState({currentSchoolLayerData: {}})
+            this.handSimpleOpenEditPoplayer(false)
         } else {//打开
             this.setState({currentSchoolLayerData: schoolInfo || {}, showSchoolLayer: true})
+            this.handSimpleOpenEditPoplayer(true)
         }
     }
 
@@ -197,7 +204,6 @@ class Index extends BaseComponent<RouteComponentProps, IWeappMgState> {
         this.triggerSchoolInfoPop(1, data)
     }
     async afterEditSchoolInfo() {
-        console.log('结束了')
         this.triggerSchoolInfoPop(0)
         await this.loadSchoolInfo()
     }
@@ -302,7 +308,7 @@ class Index extends BaseComponent<RouteComponentProps, IWeappMgState> {
                 </div>
 
 
-                <EditSchoolInfoLayer showLayer={showSchoolLayer} data={currentSchoolLayerData}
+                <EditSchoolInfoLayer showLayer={showSchoolLayer} data={currentSchoolLayerData} onShowLayer={this.handSimpleOpenEditPoplayer}
                                  refreshList={this.afterEditSchoolInfo} closeLayer={()=>{this.triggerSchoolInfoPop(0)}}/>
             </div>
         );

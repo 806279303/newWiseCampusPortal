@@ -12,7 +12,7 @@ import {checkToken, getBaseAddr, getUserInfo, logout} from "./network/http";
 import Pops from "./utils/pops";
 import {GetMainAddress, UserInfoResult} from "@/type/main";
 import pops from "./utils/pops";
-
+import 'lancoo-web-ui/style'
 interface IState {
     baseUrl: string
     userInfo: UserInfoResult|{}

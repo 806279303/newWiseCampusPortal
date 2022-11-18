@@ -62,4 +62,5 @@ export interface IModuleInfo {
     teacherModuleUrl: string;
     updateTime: string;
     version: string;
+    trialShow:0|1
 }

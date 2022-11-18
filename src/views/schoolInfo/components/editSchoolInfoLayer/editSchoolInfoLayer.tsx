@@ -1,15 +1,11 @@
 import React, {Component} from 'react';
-import WeappPop from "@/views/weappMg/pops/weappPop";
-import {LgPopLayer} from "@/components/popLayer";
+import {LgPopLayer} from "lancoo-web-ui";
 import {BaseComponent} from "../../../../type/BaseComponent";
 
 import '@/css/common.pop.scss'
 import './editSchoolInfoLayer.scss'
 import {LgInput} from "@/components/input";
 import {CommonPopCell} from "@/components/wiseCampusCommonPopCell/wiseCampusCommonPopCell";
-import {IModuleInfo, ISystemInfo} from "@/views/schoolSystem/model";
-import {_concatIdentityStr, _showSchoolStateTxt} from "../../../../utils/common";
-import {LgSwitch} from "@/components/switch";
 import Pops from "../../../../utils/pops";
 import {editSchoolInfo, putWxSchoolModule, putWxSchoolSystem} from "../../../../network/http";
 import {ISchoolInfo} from "@/views/schoolInfo/model";
@@ -20,6 +16,7 @@ import { Select } from 'element-react';
 interface EditSchoolInfoLayerProps {
     showLayer: boolean
     data: ISchoolInfo | object
+    onShowLayer: (isOpen:boolean) => void
     refreshList: () => void
     closeLayer: () => void
 }
@@ -166,13 +163,15 @@ class EditSchoolInfoLayer extends BaseComponent<EditSchoolInfoLayerProps, EditWe
     render() {
         const data = this.state.data as ISchoolInfo
         const times:any = [dayjs(data.startDate).toDate(), dayjs(data.endDate).toDate()]
+        console.log(this.props.showLayer)
         return (
             <LgPopLayer
                 width={540}
                 height={720}
                 coverLayerClass={'true'}
                 isOpen={this.props.showLayer}
-                onShowLayer={() => {
+                onShowLayer={()=>{
+                    this.props.onShowLayer(!this.props.showLayer)
                 }}
                 title="编辑小程序"
                 onClose={this.onLayerClose}
