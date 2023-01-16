@@ -9,6 +9,9 @@ export const allPath = {
   WISEBOARD: '/wiseBoard',
   LOG_MANAGEMENT: '/logMg',
   USER_MANAGEMENT: '/userMg',
+  THIRD_PUSH_MANAGEMENT: '/thirdPushMg',
+  ADVERTISES: '/advertises',
+  SCHOOL_GZH_MG: '/schoolGzhMg',
 }
 
 export interface NameAndPath {
@@ -48,7 +51,19 @@ export const namePathArray: NameAndPath[] = [
   {
     name: "日志管理",
     path: allPath.LOG_MANAGEMENT
-  }
+  },
+  {
+    name: "第三方推送管理",
+    path: allPath.THIRD_PUSH_MANAGEMENT
+  },
+  {
+    name: "广告轮播管理",
+    path: allPath.ADVERTISES
+  },
+  {
+    name: "学校公众号模板管理",
+    path: allPath.SCHOOL_GZH_MG
+  },
 ]
 
 export const namePathMap = namePathArray.reduce((map, item) => {

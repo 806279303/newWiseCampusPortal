@@ -49,6 +49,18 @@ const initialState: SideBarState = {
     {
       name: "日志管理",
       icon: icon
+    },
+    {
+      name: "第三方推送管理",
+      icon: icon
+    },
+    {
+      name: "广告轮播管理",
+      icon: icon
+    },
+    {
+      name: "学校公众号模板管理",
+      icon: icon
     }
   ]
 }

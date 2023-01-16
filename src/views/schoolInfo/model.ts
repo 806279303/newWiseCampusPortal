@@ -24,4 +24,5 @@ export interface ISchoolInfo {
     gzhAppId:string
     gzhSecret:string
     appMgrAddr:string
+    havingMultipleIdentity:0|1//多子女多家长
 }

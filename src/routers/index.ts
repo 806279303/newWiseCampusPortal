@@ -50,6 +50,18 @@ const Routers: RouterType[] = ([
         path: allPath.USER_MANAGEMENT,
         component: lazy(() => import('@/views/userMg')),
         root: []
+    },{
+        path: allPath.THIRD_PUSH_MANAGEMENT,
+        component: lazy(() => import('@/views/thirdPushMg')),
+        root: []
+    },{
+        path: allPath.ADVERTISES,
+        component: lazy(() => import('@/views/advertises')),
+        root: []
+    },{
+        path: allPath.SCHOOL_GZH_MG,
+        component: lazy(() => import('@/views/pushModelMg')),
+        root: []
     },
 ])
 export {

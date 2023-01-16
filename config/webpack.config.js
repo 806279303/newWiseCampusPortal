@@ -325,6 +325,7 @@ module.exports = function (webpackEnv) {
         '@/routers': path.resolve(__dirname, '..', 'src/routers'),
         '@/network': path.resolve(__dirname, '..', 'src/network'),
         '@/type': path.resolve(__dirname, '..', 'src/type'),
+        '@/redux': path.resolve(__dirname, '..', 'src/redux'),
       },
       plugins: [
         // Prevents users from importing files from outside of src/ (or node_modules/).

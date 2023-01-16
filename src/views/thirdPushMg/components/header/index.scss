@@ -1,0 +1,11 @@
+$classNamePrefix: third-push-mg-header;
+.#{$classNamePrefix}-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .#{$classNamePrefix}-wrapper-left{}
+    .#{$classNamePrefix}-wrapper-right{
+
+    }
+}

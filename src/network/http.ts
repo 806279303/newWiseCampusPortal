@@ -32,6 +32,9 @@ import {PutSchoolOldSystem, SchoolOldSystem, SchoolOldSystemDetail} from "@/type
 import {ISystemInfo} from "@/views/schoolSystem/model";
 import {OldFastReplaceUrlData, OldFastReplaceUrParams} from "@/type/schoolSystem/SchoolSystemState";
 import { publicIp } from './apiURL';
+import {DelThirdPushParams, RegisteThirdPushParams, ThirdPushList} from "@/type/thirdPushMg/thirdPushState";
+import {DelModelListParams, PushModelList, PushModelListParam} from "@/type/pushModel/PushModelState";
+import {ISchoolInfo} from "@/views/schoolInfo/model";
 
 export type ResultType<T> = { error: number, msg: string, data: T };
 export type ResultDataType = {
@@ -94,10 +97,36 @@ async function handleResponseHandler(response: Promise<ResultType<any>>, showToa
     throw new Error(message)//与http层统一catch处理异常
 }
 
+async function handleIllegalResponseHandler(response: Promise<ResultType<any>>, showToast: boolean = false): Promise<ResultDataType> {
+    //HTTP请求层response统一处理
+    let res: ResultType<ResultDataType> | null = null
+    try {
+        res = await response;
+    } catch (err) {
+        //默认无异常弹窗提示
+        if (showToast) {
+            Pops.showError('网络错误')
+        }
+        throw new Error("网络错误")//与业务（接口）层统一catch处理异常
+    }
+
+    //业务（接口）层result返回统一处理
+    let message: string
+    if (res.error === 0) {
+        return res.data
+    } else {
+        message = typeof res.data === "string" ? res.data : res.msg || "服务器异常";
+    }
+    if (showToast) {
+        Pops.showError(message)
+    }
+    throw new Error(message)//与http层统一catch处理异常
+}
+
 //获取 教育局官网
 export const getEduInfo = () => responseHandler<{ address:string }>(get('manage/education/address', {}, {}, true), true)
 //获取 学校聊表
-export const getSchoolInfo = (params: any) => responseHandler(get('wxSchoolInfo', params, {}, true), true)
+export const getSchoolInfo = (params: any) => responseHandler<ISchoolInfo[]>(get('wxSchoolInfo', params, {}, true), true)
 //修改 学校信息
 export const editSchoolInfo = (params: EditSchoolInfo) => handleResponseHandler(put('wxSchoolInfo', params, {}, true), true)
 
@@ -135,13 +164,13 @@ export const addWeapp = (data: any) => post('wxSystem', data)
 //编辑小程序子系统
 export const putWeapp = (data: any) => put('wxSystem', data)
 //删除小程序子系统
-export const delWeapp = (params: any) => del('wxSystem', params)
+export const delWeapp = (params: any) => del('wxSystem', params, {})
 //添加小程序内置子模块
 export const addModule = (data: any) => post('wxSystemModule', data)
 //编辑小程序内置子模块
 export const putModule = (data: any) => put('wxSystemModule', data)
 //删除小程序内置子模块
-export const delModules = (params: any) => del('wxSystemModule', params)
+export const delModules = (params: any) => del('wxSystemModule', params, {})
 //学校档案-获取学校内子系统-旧版
 export const getWxSchoolSystemFromOld = (schoolId:string) => responseHandler<SchoolOldSystem[]>(get('manage/subsystem/list', {schoolId:schoolId}, {}, true), true)
 //学校档案-获取学校内子系统详情-旧版
@@ -220,7 +249,7 @@ export const getRealTimeWxPushRecord = (limit: number) => responseHandler<Realti
 
 export const getWxUserList = (param: UserMgListParam) => responseHandler<PageResult<UserMgTableItem>>(get("/manage/wxUser/list/page", param), true)
 
-export const wxUnbindUser = (id: number) => responseHandler<{ success: boolean, content: string }>(del("/manage/wxUser/unNewbind", {id}), true)
+export const wxUnbindUser = (id: number) => responseHandler<{ success: boolean, content: string }>(del("/manage/wxUser/unNewbind", {id}, {}), true)
 
 export const getWxPushRecord = (pageNum: number, pageSize: number) => responseHandler<PageResult<MessageRecordTableItem>>(get("/wxPushRecord/list/page", {
     pageNum,
@@ -230,3 +259,10 @@ export const getWxPushRecord = (pageNum: number, pageSize: number) => responseHa
 export const fastReplaceAddress = (intranetAddress: string, internetAddress: string) => responseHandler<{ success: boolean, msg: string }>(put(`/wxSchoolSystem/updateAddress?intranetAddress=${intranetAddress}&internetAddress=${internetAddress}`), true)
 
 export const oldFastReplaceAddress = (params:OldFastReplaceUrParams[]) => handleResponseHandler(put(`/manage/subsystem/url`, params), true)
+
+export const loadThirdPushLists = () => responseHandler<ThirdPushList>(get(`/third/getThirdCompanyInfo`), true)
+export const newThirdPushLists = (params: RegisteThirdPushParams[]) => handleIllegalResponseHandler(post(`/third/registerThirdCompany`, params), true)
+export const delThirdPushLists = (data: DelThirdPushParams) => handleIllegalResponseHandler(del(`/third/deleteThirdCompanyInfo`, {}, data), true)
+
+export const loadPushModelLists = (params: PushModelListParam) => responseHandler<PageResult<PushModelList>>(get(`/wxTemplate`, params), true)
+export const delPushModeLists = (params: DelModelListParams) => handleIllegalResponseHandler(del(`/wxTemplate`, params), true)

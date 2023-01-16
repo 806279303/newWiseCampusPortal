@@ -62,5 +62,6 @@ export interface IModuleInfo {
     teacherModuleUrl: string;
     updateTime: string;
     version: string;
-    trialShow:0|1
+    trialShow:0|1//是否支持体验版
+    pageVersion:0|1//0小程序 1H5
 }

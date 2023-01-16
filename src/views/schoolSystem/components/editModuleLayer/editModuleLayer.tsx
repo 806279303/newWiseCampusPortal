@@ -78,7 +78,8 @@ class EditModuleLayer extends BaseComponent<EditModuleLayerProps, EditModuleLaye
                 appId: data.appId,
                 appUrl: data.appUrl,
                 moduleState: data.moduleState ? 1 : 0,
-                trialShow: 1
+                trialShow: 1,
+                pageVersion: 0,
             })
             Pops.showSuccess('操作成功')
             this.props.refreshList()

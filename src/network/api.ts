@@ -127,10 +127,11 @@ export const put = (url:string, data:object = {}, config = {}, loading:any = fal
     })
 }
 /* 统一封装post请求  */
-export const del = (url:string, params:object, config = {}, loading:any = false) => {
+export const del = (url:string, params:object, data:object = {}, config = {}, loading:any = false) => {
     return baseOptions({
         method: 'delete',
         url,
+        data,
         params,
         ...config,
         loading

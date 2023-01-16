@@ -35,6 +35,10 @@ interface EditWeappLayerState {
         label:string
         value:string
     }[]
+    identityVersions:{
+        label:string
+        value:number
+    }[]
 }
 
 class EditSchoolInfoLayer extends BaseComponent<EditSchoolInfoLayerProps, EditWeappLayerState> {
@@ -60,6 +64,10 @@ class EditSchoolInfoLayer extends BaseComponent<EditSchoolInfoLayerProps, EditWe
                 {label:'新版', value:'2.0'},
                 {label:'旧版', value:'1.0'},
             ],
+            identityVersions:[
+                {label:'大身份', value:1},
+                {label:'小身份', value:0},
+            ]
         }
         this.onLayerClose = this.onLayerClose.bind(this);
         this.onLayerConfirm = this.onLayerConfirm.bind(this);
@@ -68,6 +76,7 @@ class EditSchoolInfoLayer extends BaseComponent<EditSchoolInfoLayerProps, EditWe
         this.onSchoolStateChanged = this.onSchoolStateChanged.bind(this);
         this.onEnvStateChanged = this.onEnvStateChanged.bind(this);
         this.onVersionChanged = this.onVersionChanged.bind(this);
+        this.onIdentityVersionChanged = this.onIdentityVersionChanged.bind(this);
     }
 
     componentDidMount() {
@@ -109,7 +118,8 @@ class EditSchoolInfoLayer extends BaseComponent<EditSchoolInfoLayerProps, EditWe
                 endDate: data.endDate,
                 gzhAppId:data.gzhAppId,
                 gzhSecret:data.gzhSecret,
-                appMgrAddr:data.appMgrAddr
+                appMgrAddr:data.appMgrAddr,
+                havingMultipleIdentity:data.havingMultipleIdentity
             })
             Pops.showSuccess('操作成功')
             this.props.refreshList()
@@ -160,6 +170,12 @@ class EditSchoolInfoLayer extends BaseComponent<EditSchoolInfoLayerProps, EditWe
         this.setState({data: data})
     }
 
+    onIdentityVersionChanged(version:number){
+        const data: any = this.state.data
+        data['havingMultipleIdentity'] = version
+        this.setState({data: data})
+    }
+
     render() {
         const data = this.state.data as ISchoolInfo
         const times:any = [dayjs(data.startDate).toDate(), dayjs(data.endDate).toDate()]
@@ -179,8 +195,7 @@ class EditSchoolInfoLayer extends BaseComponent<EditSchoolInfoLayerProps, EditWe
                 onIconClose={this.onLayerClose}
             >
                 <div className={`${this.CNP}-root`}>
-                    <CommonPopCell label="学校名称:" value={data.schoolName}/>
-                    <CommonPopCell label="学校ID:"value={data.schoolId}/>
+                    <CommonPopCell label="学校信息:" value={`${data.schoolName}（${data.schoolId}）`}/>
                     <CommonPopCell label="学校图标:" imageUrl={data.schoolLogoUrl}/>
                     <CommonPopCell label="基础平台:" value={data.hostServerUrl}/>
                     <CommonPopCell label="appId:">
@@ -207,7 +222,7 @@ class EditSchoolInfoLayer extends BaseComponent<EditSchoolInfoLayerProps, EditWe
                             }
                         </Select>
                     </CommonPopCell>
-                    <CommonPopCell label="所处环境:">
+                    <CommonPopCell label="运行环境:">
                         <Select value={data.envState} onChange={this.onEnvStateChanged} placeholder="请选择">
                             {
                                 this.state.schoolEnvStates.map(el => {
@@ -216,10 +231,20 @@ class EditSchoolInfoLayer extends BaseComponent<EditSchoolInfoLayerProps, EditWe
                             }
                         </Select>
                     </CommonPopCell>
-                    <CommonPopCell label="学校版本:">
+                    <CommonPopCell label="校园通版本:">
                         <Select value={data.version} onChange={this.onVersionChanged} placeholder="请选择">
                             {
                                 this.state.schoolVersions.map(el => {
+                                    return <Select.Option key={el.value} label={el.label} value={el.value}/>
+                                })
+                            }
+                        </Select>
+                    </CommonPopCell>
+
+                    <CommonPopCell label="多身份版本:">
+                        <Select value={data.havingMultipleIdentity} onChange={this.onIdentityVersionChanged} placeholder="请选择">
+                            {
+                                this.state.identityVersions.map(el => {
                                     return <Select.Option key={el.value} label={el.label} value={el.value}/>
                                 })
                             }

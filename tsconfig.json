@@ -24,10 +24,11 @@
       "@/views/*":["./src/views/*"],
       "@/images/*":["./src/images/*"],
       "@/css/*":["./src/css/*"],
-      "@/utils/*":["./src/css/*"],
+      "@/utils/*":["./src/utils/*"],
       "@/routes/*":["./src/routes/*"],
       "@/network/*":["./src/network/*"],
-      "@/type/*":["./src/type/*"]
+      "@/type/*":["./src/type/*"],
+      "@/redux/*":["./src/redux/*"],
     }
   },
   "include": [

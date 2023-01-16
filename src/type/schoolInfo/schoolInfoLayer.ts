@@ -8,4 +8,5 @@ export interface EditSchoolInfo{
     gzhAppId:string
     gzhSecret:string
     appMgrAddr:string
+    havingMultipleIdentity:number
 }

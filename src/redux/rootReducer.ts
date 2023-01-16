@@ -10,6 +10,8 @@ import {HomeReducer} from "./home/HomeReducer";
 import {logMgReducer} from "./logMg/LogMgReducer";
 import {userMgReducer} from "./userMg/UserMgReducer";
 import {messageRecordReducer} from "./messageRecord/MessageRecordReducer";
+import {thirdPushReducer} from "./thirdPushMg/reducer";
+import {pushModelReducer} from "@/redux/pushModelMg/reducer";
 
 // 拿到单个模块的reducer 进行合并 传给store
 export const rootReducer = combineReducers({
@@ -22,7 +24,9 @@ export const rootReducer = combineReducers({
   homeState: HomeReducer,
   logMgState: logMgReducer,
   userMgState: userMgReducer,
-  messageRecordState: messageRecordReducer
+  messageRecordState: messageRecordReducer,
+  thirdPushMg: thirdPushReducer,
+  pushModelMg: pushModelReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>

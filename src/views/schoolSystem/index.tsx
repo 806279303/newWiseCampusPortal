@@ -145,7 +145,8 @@ class Index extends Component<RouteComponentProps, IWeappMgState> {
                 appId: moduleInfo.appId,
                 appUrl: moduleInfo.appUrl,
                 moduleState: moduleInfo.moduleState ? 1 : 0,
-                trialShow: 1
+                trialShow: moduleInfo.trialShow ? 1 : 0,
+                pageVersion: moduleInfo.pageVersion ? 1 : 0,
             })
             Pops.showSuccess('操作成功')
             data[index].wxSchoolSystemModuleList[moduleIndex].moduleState = moduleInfo.moduleState ? 1 : 0
@@ -468,10 +469,11 @@ interface IModuleListsState {
 class ModuleLists extends Component<IModuleListsProps, IModuleListsState> {
     private static readonly WIDTH_MATCHES = {
         moduleId: '10%',
-        moduleName: '25%',
+        moduleName: '17%',
         // belongAdmin: '17%',
-        appId: '20%',
+        appId: '18%',
         appUrl: '20%',
+        pageVersion: '10%',
         moduleState: '10%',
         trialShow: '10%',
         handles: '10%',
@@ -487,15 +489,16 @@ class ModuleLists extends Component<IModuleListsProps, IModuleListsState> {
                 // {value: '支持角色', props: 'belongAdmin', width: widthsMatch.belongAdmin},
                 {value: '小程序appId', props: 'appId', width: widthsMatch.appId},
                 {value: '初始路径', props: 'appUrl', width: widthsMatch.appUrl},
-                {value: '小程序显示', props: 'wxAppState', width: widthsMatch.moduleState},
-                {value: '体验版开放', props: 'trialShow', width: widthsMatch.trialShow},
+                {value: '启动h5', props: 'pageVersion', width: widthsMatch.pageVersion},
+                {value: '入口开放', props: 'wxAppState', width: widthsMatch.moduleState},
+                {value: '体验版入口开放', props: 'trialShow', width: widthsMatch.trialShow},
                 {value: '编辑', props: '', width: widthsMatch.handles},
             ],
         }
         this.handWxState = this.handWxState.bind(this)
     }
 
-    handWxState(index: number, attr: 'trialShow'|'moduleState', checked: boolean) {
+    handWxState(index: number, attr: 'trialShow'|'moduleState'|'pageVersion', checked: boolean) {
         let moduleInfo: IModuleInfo = this.props.data[index]
         moduleInfo[attr] = checked ? 1 : 0
         this.props.handChangeSysData && this.props.handChangeSysData(moduleInfo, index)
@@ -523,6 +526,15 @@ class ModuleLists extends Component<IModuleListsProps, IModuleListsState> {
                                 {/*</LgTd>*/}
                                 <LgTd width={widthsMatch.appId}>{o.appId || '-'}</LgTd>
                                 <LgTd width={widthsMatch.appUrl}>{o.appUrl || '-'}</LgTd>
+                                <LgTd className="flex-row-center" width={widthsMatch.pageVersion}>
+                                    {
+                                        hasWeapp ? (
+                                            <LgSwitch size="small" disabled={o.moduleState === 2}
+                                                      checked={o.pageVersion === 1}
+                                                      onClick={(checked) => this.handWxState(i, 'pageVersion', checked)}/>
+                                        ) : '-'
+                                    }
+                                </LgTd>
                                 <LgTd className="flex-row-center" width={widthsMatch.moduleState}>
                                     {
                                         hasWeapp ? (
